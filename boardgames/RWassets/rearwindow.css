@@ -16,7 +16,6 @@ figcaption {
   margin-left: auto;
   margin-right: auto;
   width: 70%;
-  font-size: 1.9em;
 }
 .comments {
   display: block;
@@ -30,7 +29,7 @@ h2 {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-  font-size: 2em;
+  font-size: 1em;
 }
 .bigtext {
   font-size: 2.5em;
@@ -82,10 +81,13 @@ li {
   margin-top: 3em;
 }
 body {
-  font-family: "VT323", monospace;
-  font-weight: 400;
+  font-family: "Merriweather", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
   font-style: normal;
-}
+  font-variation-settings:
+    "wdth" 100;
+  }
 .browsecard {
   font-size: 5em;
   width: 70%;
