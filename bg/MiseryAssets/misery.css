@@ -1,8 +1,6 @@
-html {
-  background-image: url("redsilk.jpg");
-  background-repeat: repeat;
-}
 body {
+  background-image: url("backgrnd.gif");
+  background-repeat: repeat;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -16,6 +14,7 @@ figcaption {
   margin-left: auto;
   margin-right: auto;
   width: 70%;
+  font-size: 1em;
 }
 .comments {
   display: block;
