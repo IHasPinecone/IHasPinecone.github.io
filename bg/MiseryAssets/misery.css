@@ -1,0 +1,128 @@
+body {
+  background-image: url("backgrnd.gif");
+  background-repeat: repeat;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  color: white;
+}
+p,
+ul,
+figcaption {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  font-size: 1em;
+}
+.comments {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  font-size: 1.4em;
+}
+h2 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  font-size: 1em;
+}
+.bigtext {
+  font-size: 2.5em;
+}
+/* Make full width on small screens */
+@media (max-width: 500px) {
+  p,
+  ul,
+  h2 {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+.centertext {
+  text-align: center;
+}
+.returnhome {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  text-align: center;
+  font-size: 2.5em;
+}
+.centerimage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.inlinecenterimage {
+  display: inline-block;
+}
+.floatright {
+  float: right;
+}
+.floatleft {
+  float: left;
+}
+li {
+  padding: 5px;
+}
+.topmargin {
+  margin-top: 3em;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.browsecard {
+  font-size: 5em;
+  width: 70%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.showstable {
+  font-size: 3em;
+  border-collapse: collapse;
+  width: 80%;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0.5rem;
+  text-align: center;
+}
+li {
+  margin: 1rem;
+  display: inline;
+  text-align: center;
+}
+@media screen and (min-width: 1000px) {
+  .inlineimage {
+    width: 30%;
+  }
+  .inlineimagewide {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 999px) {
+  .inlineimage {
+    width: 90%;
+  }
+  .inlineimagewide {
+    width: 90%;
+  }
+}
