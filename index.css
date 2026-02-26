@@ -42,6 +42,12 @@ body {
         text-decoration: underline;
       }
 
+      .righttable {
+        position: fixed;
+        top: 30vh;
+        right: 10vw;
+      }
+
       table {
         margin-left: auto;
         margin-right: auto;
