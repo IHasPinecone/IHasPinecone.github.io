@@ -39,13 +39,14 @@ body {
         display: inline;
       }
       .navitem a {
-        width: 150px;
-        height: 190px;
-
         text-align: center;
         display: flex;
         flex-direction: column-reverse;
         padding: 9px;
+
+        width: 150px;
+        min-height: 180px;
+        height: auto;
 
         border: 7px solid white;
         border-radius: 5px;
