@@ -15,8 +15,9 @@ figcaption {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
   font-size: 1.3em;
+  min-width: 40wv;
+  max-width: 600px;
 }
 .comments {
   display: block;
@@ -51,6 +52,10 @@ h2 {
   margin-right: auto;
   width: 70%;
 }
+.nav {
+  width:86px;
+}
+
 .centertext {
   text-align: center;
 }
@@ -65,6 +70,7 @@ h2 {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  max-width: 300px;
 }
 .inlinecenterimage {
   display: inline-block;
