@@ -23,6 +23,7 @@ body {
         right: 5vw;
         max-width: 15vw;
         text-align: left;
+        display: inline;
       }
 
       .rightindex a {
@@ -44,8 +45,7 @@ body {
         flex-direction: column-reverse;
         padding: 9px;
 
-        width: 150px;
-        min-height: 180px;
+        max-width: 150px;
         height: auto;
 
         border: 7px solid white;
