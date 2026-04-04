@@ -1,0 +1,54 @@
+html {
+  background-color: #00885c;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  color: white;
+
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+p {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.3em;
+  max-width: 50vw;
+  min-width: 500px;
+}
+
+h2 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 2em;
+}
+
+.superspace {
+    margin: 30px 0;
+    border: none;
+}
+
+.centertext {
+  text-align: center;
+}
+
+.lefttext {
+  text-align: left;
+}
+
+.centerimage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+}
+
