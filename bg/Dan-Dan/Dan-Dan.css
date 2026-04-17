@@ -1,26 +1,24 @@
 html {
-  background-color: #006873;
+  background-image: url("puzzle-bg.gif");
+  background-repeat: repeat;
 }
 body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  color: white;
+  color: black;
 
-  font-family: "Open Sans", sans-serif;
+  font-family: "Walter Turncoat", cursive;
   font-optical-sizing: auto;
   font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
 }
 
 p {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  font-size: 1.3em;
+  font-size: 1.2em;
   max-width: 50vw;
   min-width: 500px;
 }
@@ -50,5 +48,6 @@ h2 {
   margin-left: auto;
   margin-right: auto;
   max-width: 600px;
+  max-height: 400px;
 }
 
