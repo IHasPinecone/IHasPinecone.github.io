@@ -38,6 +38,14 @@ h2 {
 
 .centertext {
   text-align: center;
+  margin-top: 10px;
+}
+
+.caption {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .lefttext {
@@ -52,3 +60,21 @@ h2 {
   max-height: 400px;
 }
 
+.centerbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  flex-wrap: wrap;
+}
+
+.rowimage {
+  max-width: 200px;
+}
+
+.image-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
