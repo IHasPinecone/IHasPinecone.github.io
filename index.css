@@ -3,8 +3,12 @@ body {
       }
       .centertext {
         text-align: center;
-        margin-right: 12vw;
       }
+
+.main {
+        margin-right: 18vw; /* space for sidebar*/
+}
+
       .centerimage {
         display: block;
         
