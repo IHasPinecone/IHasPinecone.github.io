@@ -4,10 +4,9 @@ body {
       .centertext {
         text-align: center;
       }
-
-.main {
-        margin-right: 18vw; /* space for sidebar*/
-}
+        .main {
+                margin-right: 18vw; /* space for sidebar*/
+        }
 
       .centerimage {
         display: block;
