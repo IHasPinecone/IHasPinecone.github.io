@@ -10,9 +10,11 @@ body {
   width: 100%;
   color: black;
 
-  font-family: "Walter Turncoat", cursive;
-  font-optical-sizing: auto;
+  font-family: "Schoolbell", cursive;
   font-weight: 400;
+  font-style: normal;
+}
+
 }
 
 .content {
