@@ -10,9 +10,11 @@ body {
   width: 100%;
   color: black;
 
-  font-family: "Schoolbell", cursive;
-  font-weight: 400;
+  font-family: "SN Pro", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <200>;
   font-style: normal;
+}
 
 }
 
