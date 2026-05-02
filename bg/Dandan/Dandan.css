@@ -16,8 +16,6 @@ body {
   font-style: normal;
 }
 
-}
-
 .content {
   background-color: rgba(235, 235, 235, 0.5);
   max-width: 1000px;     /* controls width of the white strip */
