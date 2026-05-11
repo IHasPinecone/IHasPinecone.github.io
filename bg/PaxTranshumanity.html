@@ -315,37 +315,37 @@
         </p>
 
         <script>
-  const themeLink = document.getElementById("theme");
-  const button = document.getElementById("styleToggle");
-  const params = new URLSearchParams(window.location.search);
-
-  const FANCY_CSS = "PaxTranshumanity/PT.css";
-  const READABLE_CSS = "readable.css";
-
-  // Determine initial mode
-  let style = params.get("style") === "readable" ? "readable" : "fancy";
-
-  function applyStyle() {
-    if (style === "readable") {
-      themeLink.href = READABLE_CSS;
-      button.textContent = "Accessibilityy Toggle";
-    } else {
-      themeLink.href = FANCY_CSS;
-      button.textContent = "Accessibility Toggle";
-    }
-  }
-
-  // Initial load
-  applyStyle();
-
-  // Toggle behavior
-  button.addEventListener("click", () => {
-    style = (style === "readable") ? "fancy" : "readable";
-    params.set("style", style);
-    window.history.replaceState({}, "", "?" + params.toString());
-    applyStyle();
-  });
-</script>
+            const themeLink = document.getElementById("theme");
+            const button = document.getElementById("styleToggle");
+            const params = new URLSearchParams(window.location.search);
+            
+            const NORMAL_CSS = "PaxTranshumanity/PT.css";
+            const READABLE_CSS = "readable.css";
+            
+            // Determine initial mode
+            let style = params.get("style") === "normal" ? "accessibility" : "normal";
+            
+            function applyStyle() {
+                if (style === "normal") {
+                    themeLink.href = NORMAL_CSS;
+                    button.textContent = "Accessibility Toggle";
+                } else {
+                    themeLink.href = REABABLE_CSS;
+                    button.textContent = "Accessibility Toggle";
+                }
+            }
+            
+            // Initial load
+            applyStyle();
+            
+            // Toggle behavior
+            button.addEventListener("click", () => {
+                style = (style === "accessibility") ? "normal" : "Accessibility";
+                params.set("style", style);
+                window.history.replaceState({}, "", "?" + params.toString());
+                applyStyle();
+            });
+        </script>
         
     </body>
 
