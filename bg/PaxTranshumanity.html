@@ -17,11 +17,11 @@
         <meta name="twitter:card" content="summary_large_image">
 
         <script>
-            const params= newURLSearchParams(window.location.search);
-            const style - params.get("style");
+            const params= new URLSearchParams(window.location.search);
+            const style = params.get("style");
 
             if (style === "readable") {
-                document.getElementsbyID("theme").href = "readable.css";
+                document.getElementbyID("theme").href = "readable.css";
             }
         </script>
 
