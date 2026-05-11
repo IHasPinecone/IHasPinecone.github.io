@@ -26,6 +26,10 @@
         <p class="centertext">
             (10 min. read)
         </p>
+        <button id="styleToggle"
+            style="position:fixed; top:10px; right:10px; z-index:1000;">
+            Accessibility Toggle
+        </button>
         <figure>
             <img class="centerimage" src="PaxTranshumanity/SteveJobs.jpg">
             <figcaption class="centertext">
@@ -311,13 +315,37 @@
         </p>
 
         <script>
-            const params = new URLSearchParams(window.location.search);
-            const style = params.get("style");
+  const themeLink = document.getElementById("theme");
+  const button = document.getElementById("styleToggle");
+  const params = new URLSearchParams(window.location.search);
 
-            if (style === "readable") {
-                document.getElementById("theme").href = "readable.css";
-            }
-        </script>
+  const FANCY_CSS = "PaxTranshumanity/PT.css";
+  const READABLE_CSS = "readable.css";
+
+  // Determine initial mode
+  let style = params.get("style") === "readable" ? "readable" : "fancy";
+
+  function applyStyle() {
+    if (style === "readable") {
+      themeLink.href = READABLE_CSS;
+      button.textContent = "Switch to normal";
+    } else {
+      themeLink.href = FANCY_CSS;
+      button.textContent = "Switch to readable";
+    }
+  }
+
+  // Initial load
+  applyStyle();
+
+  // Toggle behavior
+  button.addEventListener("click", () => {
+    style = (style === "readable") ? "fancy" : "readable";
+    params.set("style", style);
+    window.history.replaceState({}, "", "?" + params.toString());
+    applyStyle();
+  });
+</script>
         
     </body>
 
