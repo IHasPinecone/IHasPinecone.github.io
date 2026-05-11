@@ -5,7 +5,7 @@
         <link
         href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
         rel="stylesheet" />
-        <link rel="stylesheet" href="PaxTranshumanity/PT.css" />
+        <link id="theme" rel="stylesheet" href="PaxTranshumanity/PT.css" />
         <title>
             Get Excited About Pax Transhumanity!
         </title>
@@ -15,6 +15,15 @@
         <meta content="https://ihaspinecone.github.io/bg/PaxTranshumanity/SteveJobs.jpg" property="og:image" />
         <meta content="15844367" data-react-helmet="true" name="theme-color" />
         <meta name="twitter:card" content="summary_large_image">
+
+        <script>
+            const params= newURLSearchParams(window.location.search);
+            const style - params.get("style");
+
+            if (style === "readable") {
+                document.getElementsbyID("theme").href = "readable.css";
+            }
+        </script>
 
     </head>
 
