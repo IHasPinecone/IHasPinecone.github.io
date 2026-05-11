@@ -17,7 +17,7 @@
     </head>
 
     <body>
-        <div class="content">
+    <div class="content">
         <hr class="superspace"/>
         <h2 class="centertext">
             Dandan Inspired Formats
@@ -270,6 +270,15 @@
             </a>
         </p>
     </div>
+
+    <script>
+            const params = new URLSearchParams(window.location.search);
+            const style = params.get("style");
+
+            if (style === "readable") {
+                document.getElementById("theme").href = "readable.css";
+            }
+    </script>
     </body>
 
 </html>
