@@ -15,16 +15,6 @@
         <meta content="https://ihaspinecone.github.io/bg/PaxTranshumanity/SteveJobs.jpg" property="og:image" />
         <meta content="15844367" data-react-helmet="true" name="theme-color" />
         <meta name="twitter:card" content="summary_large_image">
-
-        <script>
-            const params= new URLSearchParams(window.location.search);
-            const style = params.get("style");
-
-            if (style === "readable") {
-                document.getElementbyID("theme").href = "readable.css";
-            }
-        </script>
-
     </head>
 
     <body>
@@ -320,6 +310,15 @@
             </a>
         </p>
 
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const style = params.get("style");
+
+            if (style === "readable") {
+                document.getElementbyID("theme").href = "readable.css";
+            }
+        </script>
+        
     </body>
 
 </html>
