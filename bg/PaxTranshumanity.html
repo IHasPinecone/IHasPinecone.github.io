@@ -333,10 +333,10 @@
   function applyStyle() {
     if (style === "accessible") {
       themeLink.href = ACCESSIBLE_CSS;
-      button.textContent = "Switch to normal";
+      button.textContent = "Toggle Accessibility Mode";
     } else {
       themeLink.href = NORMAL_CSS;
-      button.textContent = "Switch to accessible";
+      button.textContent = "Toggle Accessibility Mode";
     }
 
     localStorage.setItem(STORAGE_KEY, style);
