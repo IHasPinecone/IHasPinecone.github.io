@@ -128,16 +128,13 @@ button {
   height: 260px;
 }
 
-/* hide additional books in review mode */
-.bookshelf.review-mode .book:not(:first-child) {
-  display: none;
-}
 
   /* ---------- METADATA ---------- */
 .meta {
   text-align: center;
   margin-top: 8px;
   font-size: 14px;
+  display: none;
 }
 
 .title {
@@ -163,6 +160,7 @@ button {
 .bookshelf.review-mode .meta {
   text-align: left;
   margin-top: 0;
+  display: block;
 }
 
 .bookshelf.review-mode .tag {
@@ -173,7 +171,7 @@ button {
 
 <body>
 
-  <header class="description">
+<header class="description">
   <p>
     The thing that was holding me back from donating all my old books was that I liked seeming them on my bookshelf. Having them here digitally isn't quite the same but it's enough. I've also jotted down a short review for each one.
   </p>
