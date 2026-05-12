@@ -259,9 +259,37 @@ button {
 </div>
 
 <script>
+const bookshelf = document.getElementById("bookshelf");
+
+// Save original structure
+const originalShelves = [...bookshelf.children].map(shelf => shelf.cloneNode(true));
+
+let reviewMode = false;
+
 function toggleMode() {
-  document.getElementById("bookshelf")
-    .classList.toggle("review-mode");
+  reviewMode = !reviewMode;
+
+  bookshelf.classList.toggle("review-mode", reviewMode);
+
+  // Clear bookshelf
+  bookshelf.innerHTML = "";
+
+  if (reviewMode) {
+    // REVIEW MODE: one book per shelf
+    originalShelves.forEach(shelf => {
+      shelf.querySelectorAll(".book").forEach(book => {
+        const newShelf = document.createElement("div");
+        newShelf.className = "shelf";
+        newShelf.appendChild(book.cloneNode(true));
+        bookshelf.appendChild(newShelf);
+      });
+    });
+  } else {
+    // SHELF MODE: restore original shelves
+    originalShelves.forEach(shelf => {
+      bookshelf.appendChild(shelf.cloneNode(true));
+    });
+  }
 }
 </script>
 
