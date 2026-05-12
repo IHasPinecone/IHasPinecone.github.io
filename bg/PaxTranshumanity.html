@@ -324,11 +324,8 @@
   const ACCESSIBLE_CSS = "readable.css";
   const STORAGE_KEY = "siteStyle";
 
-  // Determine initial style priority:
-  // 1) URL parameter
-  // 2) localStorage
-  // 3) default = normal
-  let style =
+  // Initialize style: URL → localStorage → default
+ let style =
     params.get("style") ||
     localStorage.getItem(STORAGE_KEY) ||
     "normal";
@@ -336,13 +333,12 @@
   function applyStyle() {
     if (style === "accessible") {
       themeLink.href = ACCESSIBLE_CSS;
-      button.textContent = "Accessibility Toggle";
+      button.textContent = "Switch to normal";
     } else {
       themeLink.href = NORMAL_CSS;
-      button.textContent = "Accessibility Toggle";
+      button.textContent = "Switch to accessible";
     }
 
-    // Persist choice
     localStorage.setItem(STORAGE_KEY, style);
   }
 
@@ -351,8 +347,22 @@
   button.addEventListener("click", () => {
     style = (style === "normal") ? "accessible" : "normal";
 
-    params.set("style", style);
-    window.history.replaceState({}, "", "?" + params.toString());
+    if (style === "accessible") {
+      // Keep URL parameter for accessible mode
+      params.set("style", "accessible");
+      window.history.replaceState(
+        {},
+        "",
+        "?" + params.toString()
+      );
+    } else {
+      // Remove query string entirely for normal mode
+      window.history.replaceState(
+        {},
+        "",
+        window.location.pathname
+      );
+    }
 
     applyStyle();
   });
