@@ -48,8 +48,8 @@ body {
         flex-direction: column-reverse;
         padding: 9px;
 
-        max-width: 150px;
-        height: auto;
+        width: 150px;
+        min-height: 150px;
 
         border: 7px solid white;
         border-radius: 5px;
