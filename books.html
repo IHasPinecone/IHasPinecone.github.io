@@ -127,6 +127,49 @@ button {
 }
 
 
+/* ---------- MODAL ---------- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  max-width: 800px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.modal-cover {
+  width: 180px;
+  float: left;
+  margin-right: 20px;
+}
+
+.modal-meta {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.modal-review {
+  clear: both;
+  line-height: 1.6;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+
   /* ---------- METADATA ---------- */
 .meta {
   text-align: center;
@@ -344,8 +387,60 @@ function toggleMode() {
       bookshelf.appendChild(shelf.cloneNode(true));
     });
   }
+  refreshClicks();
 }
 </script>
+
+<script>
+function attachBookClicks() {
+  document.querySelectorAll(".book").forEach(book => {
+    book.onclick = () => openModal(book);
+  });
+}
+
+function openModal(book) {
+  const modal = document.getElementById("bookModal");
+
+  const cover = book.querySelector(".cover").src;
+  const meta = book.querySelector(".meta").innerHTML;
+  const review = book.querySelector(".review").innerHTML;
+
+  document.getElementById("modalCover").src = cover;
+  document.getElementById("modalMeta").innerHTML = meta;
+  document.getElementById("modalReview").innerHTML = review;
+
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("bookModal").style.display = "none";
+}
+
+// close when clicking outside
+window.onclick = function(e) {
+  const modal = document.getElementById("bookModal");
+  if (e.target === modal) {
+    closeModal();
+  }
+};
+
+// IMPORTANT: reattach after layout rebuild
+function refreshClicks() {
+  attachBookClicks();
+}
+
+// run initially
+attachBookClicks();
+</script>
+
+<div id="bookModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <img id="modalCover" class="modal-cover">
+    <div id="modalMeta" class="modal-meta"></div>
+    <div id="modalReview" class="modal-review"></div>
+  </div>
+</div>
 
 </body>
 </html>
