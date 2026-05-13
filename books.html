@@ -138,11 +138,14 @@ button {
 
 .modal-content {
   max-width: 800px;
+  max-height: 85vh;
   margin: 60px auto;
   background: #fff;
   padding: 20px;
   border-radius: 8px;
   position: relative;
+
+  overflow-y: auto;
 }
 
 .modal-cover {
@@ -162,11 +165,13 @@ button {
 }
 
 .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
+  position: sticky;
+  top: 0;
+  float: right;
   font-size: 26px;
   cursor: pointer;
+  background: #fff;
+  padding: 4px 8px;
 }
 
 
@@ -410,10 +415,12 @@ function openModal(book) {
   document.getElementById("modalReview").innerHTML = review;
 
   modal.style.display = "block";
+  document.body.style.overflow = "hidden";
 }
 
 function closeModal() {
   document.getElementById("bookModal").style.display = "none";
+  document.body.style.overflow = "";
 }
 
 // close when clicking outside
