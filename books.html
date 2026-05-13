@@ -54,6 +54,13 @@ button {
   padding: 20px;
 }
 
+bookshelf.addEventListener("click", (e) => {
+  const book = e.target.closest(".book");
+  if (!book || !bookshelf.contains(book)) return;
+
+  openModal(book);
+});
+
 .shelf {
   position: relative;
   margin-bottom: 60px;
@@ -408,12 +415,6 @@ function toggleMode() {
 </script>
 
 <script>
-function attachBookClicks() {
-  document.querySelectorAll(".book").forEach(book => {
-    book.onclick = () => openModal(book);
-  });
-}
-
 function openModal(book) {
   const modal = document.getElementById("bookModal");
 
@@ -443,13 +444,6 @@ window.onclick = function(e) {
   }
 };
 
-// IMPORTANT: reattach after layout rebuild
-function refreshClicks() {
-  attachBookClicks();
-}
-
-// run initially
-attachBookClicks();
 </script>
 
 <div id="bookModal" class="modal">
