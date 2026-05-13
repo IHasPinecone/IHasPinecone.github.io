@@ -139,39 +139,50 @@ button {
 .modal-content {
   max-width: 800px;
   max-height: 85vh;
-  margin: 60px auto;
+  margin: 5vh auto;
   background: #fff;
-  padding: 20px;
+  padding: 24px;
   border-radius: 8px;
-  position: relative;
-
   overflow-y: auto;
+  position: relative;
 }
 
+/* ---------- HEADER ---------- */
+.modal-header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+  z-index: 1;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-family: Georgia, serif;
+}
+
+/* ---------- COVER + TEXT FLOW ---------- */
 .modal-cover {
   width: 180px;
-  float: left;
-  margin-right: 20px;
-}
-
-.modal-meta {
-  font-weight: bold;
-  margin-bottom: 10px;
+  float: left;   
+  margin: 0 20px 12px 0;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.4);
 }
 
 .modal-review {
-  clear: both;
   line-height: 1.6;
+  font-size: 15px;
 }
 
+/* close button */
 .close-btn {
-  position: sticky;
-  top: 0;
-  float: right;
+  position: absolute;
+  top: 18px;
+  right: 20px;
   font-size: 26px;
   cursor: pointer;
-  background: #fff;
-  padding: 4px 8px;
 }
 
 
@@ -406,18 +417,19 @@ function attachBookClicks() {
 function openModal(book) {
   const modal = document.getElementById("bookModal");
 
-  const cover = book.querySelector(".cover").src;
-  const meta = book.querySelector(".meta").innerHTML;
-  const review = book.querySelector(".review").innerHTML;
+  document.getElementById("modalCover").src =
+    book.querySelector(".cover").src;
 
-  document.getElementById("modalCover").src = cover;
-  document.getElementById("modalMeta").innerHTML = meta;
-  document.getElementById("modalReview").innerHTML = review;
+  document.getElementById("modalTitle").textContent =
+    book.querySelector(".title").textContent;
+
+  document.getElementById("modalReview").innerHTML =
+    book.querySelector(".review").innerHTML;
 
   modal.style.display = "block";
   document.body.style.overflow = "hidden";
 }
-
+  
 function closeModal() {
   document.getElementById("bookModal").style.display = "none";
   document.body.style.overflow = "";
@@ -442,9 +454,13 @@ attachBookClicks();
 
 <div id="bookModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div class="modal-header">
+      <h2 id="modalTitle"></h2>
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+    </div>
+
     <img id="modalCover" class="modal-cover">
-    <div id="modalMeta" class="modal-meta"></div>
+
     <div id="modalReview" class="modal-review"></div>
   </div>
 </div>
