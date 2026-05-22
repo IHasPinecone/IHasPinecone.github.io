@@ -1,0 +1,40 @@
+
+<script type="module">
+  import { generatePhrases } from "updates/generatePhrases.js";
+
+  let result = generatePhrases("2026-05-22");
+  console.log(result);
+</script>
+
+
+<h1>
+  What I'm doing right now
+</h1>
+<p>
+  Real-time updates on my wild and exiciting life.
+</p>
+
+
+<p id="output"></p>
+
+let current = { date: 5};
+let date = new Date().toISOString().split("T")[0];
+let time = nwe Date().toLocaleTimeString();
+
+<script>
+  let baseDate = newDate();
+
+  for (let i = current.date - 1; i >=0; i--) {
+    let d = new Date();
+    d.setDate(baseDate.getDate() - i);
+
+    let dateStr = d.toISOString().split("T")[0];
+    let timeStr = d.toLocaleTimeString();
+    
+    document.getElementByID("output").innnerHTML +=
+      "Date: " + dateStr + "<br>" +
+      "Time: " + timeStr + "<br>" +
+      generatePhrases(dateStr)
+      + "<br><br>";
+  }
+</script>
