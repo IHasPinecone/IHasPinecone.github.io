@@ -33,7 +33,7 @@
     let dateStr = d.toISOString().split("T")[0];
     let timeStr = d.toLocaleTimeString();
     
-    document.getElementByID("output").innerHTML +=
+    document.getElementById("output").innerHTML +=
       "Date: " + dateStr + "<br>" +
       "Time: " + timeStr + "<br>" +
       generatePhrases(dateStr)
