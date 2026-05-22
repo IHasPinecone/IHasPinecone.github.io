@@ -6,6 +6,6 @@ export function generatePhrases(inputDate) {
 
   const diffDays = Math.floor((givenDate - startDate) / (1000 * 60 * 60 * 24));
 
-  
+  return diffDays;
   
 }
