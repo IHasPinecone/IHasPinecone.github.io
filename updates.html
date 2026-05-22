@@ -19,7 +19,7 @@
   console.log(result);
 
   
-  const startDate = new Date("2025-05-01");
+  const startDate = new Date("2026-05-01");
   const today = new Date();
   // Difference in milliseconds
   const diffTime = today - startDate;
@@ -33,7 +33,7 @@
   
   let baseDate = new Date();
 
-  for (let i = 0; i < diffDays - 1; i++) {
+  for (let i = 0; i < diffDays; i++) {
     let d = new Date();
     d.setDate(baseDate.getDate() - i);
 
