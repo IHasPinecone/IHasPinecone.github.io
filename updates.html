@@ -19,7 +19,13 @@
   console.log(result);
 
   
-  let current = { date: 5};
+  const startDate = new Date("2025-05-01");
+  const today = new Date();
+  // Difference in milliseconds
+  const diffTime = today - startDate;
+  // Convert to days
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  
   let date = new Date().toISOString().split("T")[0];
   let time = new Date().toLocaleTimeString();
 
@@ -27,7 +33,7 @@
   
   let baseDate = new Date();
 
-  for (let i = 0; i < current.date - 1; i++) {
+  for (let i = 0; i < diffDays - 1; i++) {
     let d = new Date();
     d.setDate(baseDate.getDate() - i);
 
