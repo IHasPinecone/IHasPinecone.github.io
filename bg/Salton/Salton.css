@@ -11,10 +11,10 @@ body {
   width: 100%;
   color: white;
 
-  font-family: "SN Pro", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 900;
-  font-style: normal;
+  font-family: "Open Sans", "SN Pro", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .content {
