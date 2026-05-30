@@ -2,14 +2,14 @@
     <head>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-        <link id="theme" rel="stylesheet" href="Dandan/Dandan.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+        <link id="theme" rel="stylesheet" href="Salton/Salton.css" />
         <title>
             Salton Sea and Agony in Games
         </title>
         <meta content="Dandan Style Formats" property="og:title" />
         <meta content="Help! Can anyone hear me! Help! (A meditation on painful board games and Salton Sea)" property="og:description" />
-        <meta content="https://ihaspinecone.github.io/bg/Dandan.html" property="og:url" />
+        <meta content="https://ihaspinecone.github.io/bg/salton.html" property="og:url" />
         <meta content="https://ihaspinecone.github.io/bg/Salton/salton-dark.jpg" property="og:image" />
         <meta content="15844367" data-react-helmet="true" name="theme-color" />
         <meta name="twitter:card" content="summary_large_image">
@@ -25,6 +25,12 @@
         <p class="centertext">
             (10 min. read)
         </p>
+
+        <div class="style-toggle-wrapper">
+            <button id="styleToggle">
+                Accessibility Toggle
+            </button>
+        </div>
 
         <figure class="centerbox">
             <div class="image-row">
@@ -210,6 +216,59 @@
             </a>
         </p>
     </div>
+
+    <script>
+  const themeLink = document.getElementById("theme");
+  const button = document.getElementById("styleToggle");
+  const params = new URLSearchParams(window.location.search);
+
+  const NORMAL_CSS = "salton/Salton.css";
+  const ACCESSIBLE_CSS = "readable.css";
+  const STORAGE_KEY = "siteStyle";
+
+  // Initialize style: URL → localStorage → default
+ let style =
+    params.get("style") ||
+    localStorage.getItem(STORAGE_KEY) ||
+    "normal";
+
+  function applyStyle() {
+    if (style === "accessible") {
+      themeLink.href = ACCESSIBLE_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    } else {
+      themeLink.href = NORMAL_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    }
+
+    localStorage.setItem(STORAGE_KEY, style);
+  }
+
+  applyStyle();
+
+  button.addEventListener("click", () => {
+    style = (style === "normal") ? "accessible" : "normal";
+
+    if (style === "accessible") {
+      // Keep URL parameter for accessible mode
+      params.set("style", "accessible");
+      window.history.replaceState(
+        {},
+        "",
+        "?" + params.toString()
+      );
+    } else {
+      // Remove query string entirely for normal mode
+      window.history.replaceState(
+        {},
+        "",
+        window.location.pathname
+      );
+    }
+
+    applyStyle();
+  });
+</script>
 
     <script>
             const params = new URLSearchParams(window.location.search);

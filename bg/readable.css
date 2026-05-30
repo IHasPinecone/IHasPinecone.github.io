@@ -167,3 +167,9 @@ h2 {
 .d20-table td:first-child {
     width: 50px;
 }
+
+
+.style-toggle-wrapper {
+    text-align: center;
+    margin: 20px 0;
+}

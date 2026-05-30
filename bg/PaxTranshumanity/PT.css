@@ -51,3 +51,8 @@ h2 {
   margin-right: auto;
   max-width: 600px;
 }
+
+.style-toggle-wrapper {
+    text-align: center;
+    margin: 20px 0;
+}
