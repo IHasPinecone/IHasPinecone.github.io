@@ -3,7 +3,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-        <link id="theme" rel="stylesheet" href="Salton/Salton.css" />
+        <link id="theme" rel="stylesheet" href="salton/Salton.css" />
         <title>
             Salton Sea and Agony in Games
         </title>
@@ -200,6 +200,7 @@
 
         <figure class="centerbox">
             <img class="centerimage" src="Salton/field salton2.jpg">
+        </figure>
 
         <figure class="centerbox">
             <img class="centerimage" src="Salton/field salton1.jpg">
@@ -216,13 +217,13 @@
     </div>
 
     <script>
-  const themeLink = document.getElementById("theme");
-  const button = document.getElementById("styleToggle");
-  const params = new URLSearchParams(window.location.search);
-
-  const NORMAL_CSS = "salton/Salton.css";
-  const ACCESSIBLE_CSS = "readable.css";
-  const STORAGE_KEY = "siteStyle";
+    const themeLink = document.getElementById("theme");
+    const button = document.getElementById("styleToggle");
+    const params = new URLSearchParams(window.location.search);
+    
+    const NORMAL_CSS = "salton/Salton.css";
+    const ACCESSIBLE_CSS = "readable.css";
+    const STORAGE_KEY = "siteStyle";
 
   // Initialize style: URL → localStorage → default
  let style =
@@ -268,14 +269,6 @@
   });
 </script>
 
-    <script>
-            const params = new URLSearchParams(window.location.search);
-            const style = params.get("style");
-
-            if (style === "readable") {
-                document.getElementById("theme").href = "readable.css";
-            }
-    </script>
     </body>
 
 </html>
