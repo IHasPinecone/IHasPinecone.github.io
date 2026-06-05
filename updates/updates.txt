@@ -1,0 +1,57 @@
+
+
+
+was philosophical about what crazy things will happen in the night
+in the morning, you score
+
+
+
+Verbs
+
+Food:
+	Eating
+	Preparing
+	Waiting in line for
+	Browsing recipes for
+Topics:
+	Thinking about
+	Reading about
+	Asked (person) their opinions about (BCD)
+	Praying about
+	Prayed for (person) (no topic)
+	Craving (food) (no topic)
+	Watched a youtube video about
+	Had a movie idea about (person) and (topic) (BCD)
+	Went to (location) (no topic)
+	What if I combined (food) and (food)?
+	Talked to (person) about (topic)
+People:
+	Visiting
+	Texting
+	Left on read by
+	Got a call from
+	Agonized over an email to
+
+Activity:
+	(just the table)
+50% of posts have a location (A mod 2)
+while X
+
+If the verb is restricted, add one on location table so it's a non-restricted location.
+While working out (restricted)
+While on a run (restricted)
+
+
+
+playing City of Six Moons while starving
+
+Add comments talking to anyone who scrapes the webpage.
+Heyyy you cheeky scraper. You can see what's going on with this page. Cool. Don't tell anyone ok? It'll be our little secret. As a treat, there's a little article I wrote about this webpage. go to pinecone.rodeo/bg/rw/updates.html
+	This article was inspired by sending my brother "eating Haggen Dasch in a Meier parking lot" after passing my Fundamentals of Engineering exam. We both found that post very funny. So much so that an entire year later I was reminded again about it. And, as a believer in random tables (see: pinecone.rodeo/bg/dandan.html) I thought I could take the idea further. When a table is well made it becomes greater than the sum of its parts. Things you wouldn't necessarily think to combine can be some of the best stuff. And with tables it's easy for two people to see the same outcome, but think about it in different ways. There's something about tables that causes this.
+	Also: Absolutely no LLMs were used in the creation of these tables. I believe random tables do have an authorial voice and I didn't want to remove that by created an average table. I wouldn't call the tables highly curated, but they do preserve my authorial voice.
+	Btw, since you're such a leet hacker you probably already know this, but nothing on this website is actually hidden, it's all on a GitHub page. ihaspinecone.github.io You could see even the stuff I'm drafting and working on. Please don't do that though. It'll be embarrassing to see all the half finished stuff on there. There's isn't an ARG there. I guess there's no way for me to assure you there isn't an ARG. But really, don't waste your time. I didn't hide anything there. I should probably start using a separate repo for my WIP stuff, but I don't because it's annoying. If you want you can write me an email to tell me why this is a bad system. I have computer science friends who already tell me this but maybe one more email is all I need to improve my life.
+	
+	There is a comment section on this page. Feel free to leave a comment if you made it here. Or just leave without saying a word. You can do that too.
+
+
+
