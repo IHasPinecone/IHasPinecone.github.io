@@ -1,49 +1,177 @@
+<html>
+<head>
 
+</head>
 
+<body>
+  
 <h1>
   What I'm doing right now
 </h1>
-<p>
+
+<h2>
   Real-time updates on my wild and exiciting life.
-</p>
+</h2>
+
+<input id="seed" placeholder="May 2026">
+<button onclick="runMany()">Generate 30 results</button>
 
 
-<p id="output"></p>
+<div id="result"></div>
 
+<script src="updates/dailyUpdates.js"> </script>
 
+<script>
+  function runMany() {
+    const seed = document.getElementById("seed").value;
 
-<script type="module">
-  import { generatePhrases } from "/updates/generatePhrases.js";
+    // creates only one generator
+    const generator = createGenerator(seed);
 
-  let result = generatePhrases("2026-05-22");
-  console.log(result);
+    // separate RNG for different dates
+    const rng = mulberry32(hashSeed(seed + "-dates"));
 
+    // chronological math
+    const [monthName, yearString] = seed.trim().split(/\s+/);
+    const year = parseInt(yearString, 10);
+
+    const monthMap = {
+      January: 0,
+      February: 1,
+      March: 2,
+      April: 3,
+      May: 4,
+      June: 5,
+      July: 6,
+      August: 7,
+      September: 8,
+      October: 9,
+      November: 10,
+      December: 11,
+    }
+
+    const month = monthMap[monthName];
+
+    if (month === undefined || isNaN(year)) {
+      document.getElementbyId("result").innerHTML = "Seed must be in the form of 'May 2026'";
+      return;
+    }
+
+    const selectedMonth = new Date(year, month, 1);
+
+    const currentEastern = new Date(
+      new Date().toLocaleString("en-US", {
+      timeZone: "America/New_York"
+    })
+  );
   
-  const startDate = new Date("2026-05-01");
-  const today = new Date();
-  // Difference in milliseconds
-  const diffTime = today - startDate;
-  // Convert to days
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  
-  let date = new Date().toISOString().split("T")[0];
-  let time = new Date().toLocaleTimeString();
+  const currentMonth = new Date(
+    currentEastern.getFullYear(),
+    currentEastern.getMonth(),
+    1
+  );
 
-  
-  
-  let baseDate = new Date();
-
-  for (let i = 0; i < diffDays; i++) {
-    let d = new Date();
-    d.setDate(baseDate.getDate() - i);
-
-    let dateStr = d.toISOString().split("T")[0];
-    let timeStr = d.toLocaleTimeString();
-    
-    document.getElementById("output").innerHTML +=
-      "Date: " + dateStr + "<br>" +
-      "Time: " + timeStr + "<br>" +
-      generatePhrases(dateStr)
-      + "<br><br>";
+  if (selectedMonth > currentMonth) {
+    document.getElementById("result").innerHTML = "That month is in the future.";
+    return;
   }
-</script>
+
+    // convert to Eastern
+    const easternNow = new Date(
+      new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York"
+      })
+    );
+
+    // Last day of selected month
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Determine latest allowable timestamp
+    const monthStart = new Date(year, month, 1, 0, 0, 0);
+    const monthEnd = new Date(year, month + 1, 0, 23, 59, 59);
+    
+    //if this is the current month, stop at current eastern time.
+    let rangeEnd = monthEnd;
+    if (
+      year === currentEastern.getFullYear() &&
+      month === currentEastern.getMonth()
+    ) {
+      rangeEnd = currentEastern;
+    }
+
+    // timestamp generation loop
+    // generates full 30. will remove any past current time later
+    const entries = [];
+
+    // generates between 25 and 40 entires per month
+    const entryCount = 25 + Math.floor(rng() * 16);
+    for (let i = 0; i < entryCount; i++) {
+      let timestamp;
+
+      while (true) {
+        const randomTime =
+        monthStart.getTime() +
+        Math.floor(
+          rng() * (monthEnd.getTime() - monthStart.getTime())
+        );
+
+        const d = new Date(randomTime);
+
+        const hour = d.getHours();
+
+        // valid times is 6AM through 12:59AM
+        if (hour >= 6 || hour === 0) {
+          timestamp = d;
+          break;
+        }
+      }
+
+      entries.push({
+        timestamp,
+        text: generator()
+      });
+    }
+
+    // sort chronologically
+    entries.sort((a, b) => a.timestamp - b.timestamp);
+
+    // if it's the current month, remove future entries
+    if (
+      year === currentEastern.getFullYear() &&
+      month === currentEastern.getMonth()
+    ) {
+      entries.splice(
+        0,
+        entries.length,
+        ...entries.filter(
+          entry => entry.timestamp <= currentEastern
+        )
+      );
+    }
+
+
+    let output = "";
+
+    for (const entry of entries) {
+      const stamp = entry.timestamp.toLocaleString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+      });
+
+      output += `
+      <div class="update">
+        <strong>${stamp}</strong><br>
+        ${entry.text}
+      </div>
+      `;
+    }
+
+    document.getElementById("result").innerHTML = output;
+  }
+  </script>
+</body>
+</html>

@@ -8,34 +8,35 @@ in the morning, you score
 
 Verbs
 
-Food:
-	Eating
-	Preparing
-	Waiting in line for
-	Browsing recipes for
-Topics:
-	Thinking about
-	Reading about
-	Asked (person) their opinions about (BCD)
-	Praying about
-	Prayed for (person) (no topic)
-	Craving (food) (no topic)
-	Watched a youtube video about
-	Had a movie idea about (person) and (topic) (BCD)
-	Went to (location) (no topic)
+	Eating (food)
+	Eating (food) with (person)
+	Eating (food) at (location)
+	Preparing (food)
+	Waiting in line for (food)
+	Browsing recipes for (food)
+
+	Thinking about (topic)
+	Thinking about (topic) at (location)
+	Reading about (topic)
+	Reading about (topic) at (location)
+	Asked (person) their opinions about (topic)
+	Praying about (topic)
+	Prayed for (person)
+	Craving (food)
+	Watched a youtube video about (topic)
+	Had a movie idea involving (person) and (topic)
+	Went to (location)
 	What if I combined (food) and (food)?
 	Talked to (person) about (topic)
-People:
-	Visiting
-	Texting
-	Left on read by
-	Got a call from
-	Agonized over an email to
 
-Activity:
-	(just the table)
-50% of posts have a location (A mod 2)
-while X
+	Visiting (person)
+	Went to (location) with (person)
+	Texting (person)
+	Left on read by (person)
+	Got a call from (person)
+	Agonized over an email to (person)
+
+	(Activity)
 
 If the verb is restricted, add one on location table so it's a non-restricted location.
 While working out (restricted)
