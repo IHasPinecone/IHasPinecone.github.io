@@ -178,7 +178,7 @@ const tables = {
   "tea strainers",
   "Joe Abercrombie",
   "The Sengoku Jidai",
-  "metric vs imperial unis",
+  "metric vs imperial units",
   "The Gospel of Thomas",
   "the best books of all time",
   "Arianism",
