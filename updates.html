@@ -119,8 +119,8 @@
 
         const hour = d.getHours();
 
-        // valid times is 6AM through 12:59AM
-        if (hour >= 5 || hour === 0) {
+        // valid times is 5AM through 10pm. or Midnight to 1AM
+        if ((hour >= 5 && hour <= 22) || hour === 0) {
           timestamp = d;
           break;
         }
