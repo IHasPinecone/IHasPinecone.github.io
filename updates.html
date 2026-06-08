@@ -170,8 +170,12 @@
 
       output += `
       <div class="update">
-        <strong>${stamp}</strong><br>
-        ${entry.text}
+        <div class="post-header">
+          <span class=post-date">${stamp}</span>
+        </div>
+        <div class="post text">
+          ${entry.text}
+        </div>
       </div>
       `;
     }
