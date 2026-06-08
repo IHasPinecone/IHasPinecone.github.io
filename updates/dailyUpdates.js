@@ -180,7 +180,7 @@ const cases = [
   { text: "Watched (person) order (food)" },
   { text: "Dreamed about (place) and (topic)" },
   { text: "Helped (person) with (topic)" },
-  { text: "Found place with (food)" },
+  { text: "Found (place) with (food)" },
   { text: "Argued with (person) about (topic)" },
   { text: "Shared (food) with (person)" },
   { text: "Explored (place) with (person)" },
