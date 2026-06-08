@@ -231,7 +231,7 @@ const tables = {
   "vaping",
   "9/11",
   "The Ohio State University",
-  "",
+  "Little Kuriboh's Spoof Series Show (https://youtu.be/N17SGtrhQtQ?si=86LxXxKKwIA0_A80)",
   "",
   "",
   "",
