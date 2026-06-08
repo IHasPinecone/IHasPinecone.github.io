@@ -14,7 +14,7 @@
 </h2>
 
 <input id="seed" placeholder="May 2026">
-<button onclick="runMany()">Generate 30 results</button>
+<button onclick="runMany()">Generate results</button>
 
 
 <div id="result"></div>
@@ -103,7 +103,7 @@
     // generates full 30. will remove any past current time later
     const entries = [];
 
-    // generates between 25 and 40 entires per month
+    // generates between 20-40 entires per month
     const entryCount = 25 + Math.floor(rng() * 16);
     for (let i = 0; i < entryCount; i++) {
       let timestamp;
