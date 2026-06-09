@@ -1,0 +1,35 @@
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f7f7f7;
+  color: #222;
+  max-width: 700px;
+  margin: 40px auto;
+  line-height: 1.6;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.update {
+  background: white;
+  padding: 16px;
+  margin: 12px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.post-header {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 6px;
+}
+
+.post-date {
+  font-style: italic;
+}
+
+.post-text {
+  font-size: 1rem;
+}
+``
