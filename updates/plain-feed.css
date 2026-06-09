@@ -1,0 +1,21 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #ffffff;
+  color: #111;
+  max-width: 600px;
+  margin: auto;
+}
+
+.update {
+  padding: 14px 0;
+  border-bottom: 1px solid #efefef;
+}
+
+.post-header {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.post-text {
+  margin-top: 3px;
+}
