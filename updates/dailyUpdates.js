@@ -321,7 +321,7 @@ const cases = [
   { text: "Doordashed (food)." },
   { text: "Accidently dropped (food) on the ground (place)." },
   { text: "Helped (person) learn about (topic)." },
-  { text: "Introduced (person) to (person). (They thought it was funny too) }
+  { text: "Introduced (person) to (person). (They thought it was funny too)" }
 ];
 
 // Precompile templates 
