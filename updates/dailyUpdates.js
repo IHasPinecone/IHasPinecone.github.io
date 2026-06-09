@@ -89,7 +89,7 @@ const tables = {
     "a red delicious apple (gross)",
     "Haggen-Dazs",
     "steak",
-    "steak (as a reference to Earthbound",
+    "steak (as a reference to Earthbound)",
     "cannellini beans (pinecone.rodeo/updates/cannellini-beans.html)",
     "Chipotle",
     "McDonalds",
