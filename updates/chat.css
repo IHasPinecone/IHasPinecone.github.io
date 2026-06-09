@@ -1,0 +1,30 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #e5ddd5;
+  max-width: 600px;
+  margin: auto;
+}
+
+.update {
+  background: #dcf8c6;
+  margin: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  max-width: 75%;
+  position: relative;
+}
+
+.update:nth-child(even) {
+  background: #fff;
+  margin-left: auto;
+}
+
+.post-header {
+  font-size: 0.7rem;
+  color: #666;
+  text-align: right;
+}
+
+.post-text {
+  font-size: 0.95rem;
+}
