@@ -285,6 +285,10 @@ const tables = {
 
 /* ---------- Helper ---------- */
 function pick(arr, rng) {
+  if (!arr || !arr.length) {
+    console.error("pick() received invalid input:", arr);
+    return null;
+  }
   return arr[Math.floor(rng() * arr.length)];
 }
 
