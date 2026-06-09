@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link id="themeStylesheet" rel="stylesheet" href="updates/minimal.css">
 <title>
   What I'm doing right now
 </title>
@@ -17,6 +18,14 @@
 <h2>
   Real-time updates on my wild and exciiting life.
 </h2>
+
+<select id="themeSelector">
+  <option value="minimal.css">Minimal</option>
+  <option value="terminal.css">Terminal</option>
+  <option value="newspaper.css">Newspaper</option>
+  <option value="chat.css">Chat</option>
+  <option value="aesthetic.css">Aesthetic</option>
+</select>
 
 <div id="result"></div>
 
@@ -182,5 +191,27 @@
     document.getElementById("result").innerHTML = output;
   }
   </script>
+
+  <script>
+  const themeSelector = document.getElementById("themeSelector");
+  const themeLink = document.getElementById("themeStylesheet");
+
+  // Load saved theme (if user picked one before)
+  const savedTheme = localStorage.getItem("selectedTheme");
+  if (savedTheme) {
+    themeLink.href = "updates/" + savedTheme;
+    themeSelector.value = savedTheme;
+  }
+
+  themeSelector.addEventListener("change", function () {
+    const selected = themeSelector.value;
+    themeLink.href = "updates/" + selected;
+
+    // save preference
+    localStorage.setItem("selectedTheme", selected);
+  });
+</script>
+
+  
 </body>
 </html>
