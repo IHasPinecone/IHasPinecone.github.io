@@ -72,7 +72,7 @@
     const month = monthMap[monthName];
 
     if (month === undefined || isNaN(year)) {
-      document.getElementbyId("result").innerHTML = "Seed must be in the form of 'May 2026'";
+      document.getElementById("result").innerHTML = "Seed must be in the form of 'May 2026'";
       return;
     }
 
@@ -186,7 +186,7 @@
         <div class="post-header">
           <span class="post-date"">${stamp}</span>
         </div>
-        <div class="post text">
+        <div class="post-text">
           ${entry.text}
         </div>
       </div>
