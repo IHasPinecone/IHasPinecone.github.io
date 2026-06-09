@@ -1,0 +1,21 @@
+body {
+  background: #1e1f21;
+  color: #d4d4d4;
+  font-family: system-ui, sans-serif;
+  max-width: 700px;
+  margin: 40px auto;
+}
+
+.update {
+  padding: 12px 0;
+  border-bottom: 1px solid #2c2d30;
+}
+
+.post-header {
+  font-size: 0.8rem;
+  color: #8b8d91;
+}
+
+.post-text {
+  margin-top: 4px;
+}
