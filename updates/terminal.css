@@ -1,0 +1,34 @@
+body {
+  background: #0d0d0d;
+  color: #33ff33;
+  font-family: monospace;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+h1, h2 {
+  color: #00ffcc;
+}
+
+.update {
+  border-left: 3px solid #33ff33;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.post-header {
+  color: #00ffcc;
+  font-size: 0.8rem;
+}
+
+.post-date::before {
+  content: "[";
+}
+
+.post-date::after {
+  content: "]";
+}
+
+.post-text {
+  white-space: pre-wrap;
+}
