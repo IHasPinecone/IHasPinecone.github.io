@@ -248,6 +248,8 @@ button {
   <button onclick="toggleMode()">Toggle Reviews</button>
 </div>
 
+<div class="bookshelf" id=bookshelf"></div>
+
 <div class="bookshelf" id="bookshelf">
   
   <div class="shelf">
@@ -512,13 +514,6 @@ button {
 </div>
 
 <script>
-const bookshelf = document.getElementById("bookshelf");
-
-// Save original structure
-const originalShelves = [...bookshelf.children].map(shelf => shelf.cloneNode(true));
-
-let reviewMode = false;
-
 function toggleMode() {
   reviewMode = !reviewMode;
 
@@ -604,6 +599,57 @@ attachBookClicks();
     <div id="modalReview" class="modal-review"></div>
   </div>
 </div>
+
+<!-- CSV parser -->
+<script>
+const bookshelf = document.getElementById("bookshelf");
+
+let originalShelves = [];
+let reviewMode = false;
+
+// Load JSON and build shelves
+fetch("books.json")
+  .then(res => res.json())
+  .then(data => {
+    buildShelves(data);
+    attachBookClicks();
+  });
+
+function buildShelves(data) {
+  bookshelf.innerHTML = "";
+
+  const shelves = {};
+
+  data.forEach(book => {
+    if (!shelves[book.shelf]) {
+      shelves[book.shelf] = document.createElement("div");
+      shelves[book.shelf].className = "shelf";
+    }
+
+    const bookEl = document.createElement("div");
+    bookEl.className = "book";
+
+    bookEl.innerHTML = `
+      <img class="cover" srciv class="meta">
+        <div class="title">${book.title}</div>
+        <div class="date">${book.date}</div>
+      </div>
+      <div class="review">
+        <p>${book.review.replace(/\n/g, "</p><p>")}</p>
+      </div>
+    `;
+
+    shelves[book.shelf].appendChild(bookEl);
+  });
+
+  Object.values(shelves).forEach(shelf => {
+    bookshelf.appendChild(shelf);
+  });
+
+  // Save original structure for toggle
+  originalShelves = [...bookshelf.children].map(s => s.cloneNode(true));
+}
+</script>
 
 </body>
 </html>
