@@ -515,6 +515,13 @@ button {
 
 <script>
 function toggleMode() {
+  const bookshelf = document.getElementById("bookshelf");
+
+  // Save original structure
+  const originalShelves = [...bookshelf.children].map(shelf => shelf.cloneNode(true));
+
+  let reviewMode = false;
+  
   reviewMode = !reviewMode;
 
   bookshelf.classList.toggle("review-mode", reviewMode);
