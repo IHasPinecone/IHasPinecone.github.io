@@ -290,7 +290,7 @@ const cases = [
   { text: "Found (place)." },
   { text: "Ran into (person) (place)." },
   { text: "Doordashed (food)." },
-  { text: "Accidently dropped (food) on the ground (place)." },
+  { text: "Accidently dropped my (food) on the ground (place)." },
   { text: "Helped (person) learn about (topic)." },
   { text: "Introduced (person) to (person). (They thought it was funny too)" }
 ];
