@@ -103,7 +103,7 @@ const tables = {
     "dimethyl hexane",
     "vegetable soup",
     "mac & cheese with frozen peas in it",
-    "paprika on chicken",
+    "chicken seasoned with paprika",
     "chocolate",
     "gnocchi",
     "spaghetti with red sauce",
