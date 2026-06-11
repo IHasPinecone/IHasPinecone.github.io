@@ -247,7 +247,8 @@ const tables = {
   "Weezer",
   "Riverdale",
   "Dungeons and Dragons",
-  "Chess Boxing"]
+  "Chess Boxing",
+  "Cars"]
 };
 
 /* ---------- Helper ---------- */
