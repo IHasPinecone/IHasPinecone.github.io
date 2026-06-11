@@ -95,7 +95,7 @@ const tables = {
     "McDonalds",
     "Subway (against my better judgement)",
     "food from my local north African restaurant (It's so good)",
-    "Indian food.",
+    "Indian food",
     "authentic Ohio Chinese food",
     "food based on a friend's recommendation",
     "food from an anime-themed bar in Dayton Ohio",
