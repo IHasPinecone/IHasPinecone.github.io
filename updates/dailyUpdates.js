@@ -250,7 +250,8 @@ const tables = {
   "Chess Boxing",
   "Cars",
   "Clint Eastwood",
-  "comics"]
+  "comics",
+  "mounting a tv on the ceiling"]
 };
 
 /* ---------- Helper ---------- */
