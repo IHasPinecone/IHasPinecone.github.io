@@ -248,7 +248,9 @@ const tables = {
   "Riverdale",
   "Dungeons and Dragons",
   "Chess Boxing",
-  "Cars"]
+  "Cars",
+  "Clint Eastwood",
+  "comics"]
 };
 
 /* ---------- Helper ---------- */
