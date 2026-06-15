@@ -142,26 +142,14 @@ button {
   height: 200px;
   object-fit: cover;
 
-  transform: perspective(600px) rotateY(-6deg);
-  border-right: 8px solid #e8e1d6;
-  box-shadow:
-    6px 6px 10px rgba(0,0,0,0.6),   /* drop shadow */
-    inset -4px 0 6px rgba(0,0,0,0.4); /* dark inner edge */
-}
+  transform: none;
+  border: 1px solid rgba(255,255,255,0.2);
 
-.cover::before {
-  content: "";
-  position: absolute;
-  left: -6px;
-  top: 0;
-  width: 6px;
-  height: 100%;
-
-  background: linear-gradient(to right, #5a3a26, #2f1b12);
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.6);
 }
 
 .book:hover .cover {
-  transform: perspective(600px) rotateY(-2deg) scale(1.05);
+  transform: scale(1.03);
 }
 
 .book:nth-of-type(odd) .cover {
