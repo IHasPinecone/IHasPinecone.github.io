@@ -357,27 +357,49 @@ fetch("books.json")
   });
 
 function buildShelves(data) {
-  const bookshelf = document.getElementByID("bookshelf");
   bookshelf.innerHTML = "";
 
   const shelves = {};
 
   data.forEach(book => {
+    if (!shelves[book.shelf]) {
+      const shelf = document.createElement("div");
+      shelf.className = "shelf";
+
+      // label
+      const label = document.createElement("div");
+      label.className = "shelf-label";
+      label.textContent = "Shelf " + book.shelf;
+
+      shelf.appendChild(label);
+      shelves[book.shelf] = shelf;
+    }
+
+    // create book
     const bookEl = document.createElement("div");
-    bookEl.classname = "book";
-    
+    bookEl.className = "book";
+
     bookEl.innerHTML = `
-      <img class="cover" src="${lass="meta">
+      <img class="cover" src="${book.cover}">
+      <div class="meta">
         <div class="title">${book.title}</div>
         <div class="date">${book.date}</div>
       </div>
       <div class="review">
         ${book.review}
       </div>
-      `;
+    `;
 
-    bookshelf.appendChild(bookE1);
+    shelves[book.shelf].appendChild(bookEl);
   });
+
+  // Add shelves to page
+  Object.values(shelves).forEach(shelf => {
+    bookshelf.appendChild(shelf);
+  });
+
+  // Save layout for toggle
+  originalShelves = [...bookshelf.children].map(s => s.cloneNode(true));
 }
   
 </script>
