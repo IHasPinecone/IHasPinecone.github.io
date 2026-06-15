@@ -399,7 +399,7 @@ function buildShelves(data) {
       // label
       const label = document.createElement("div");
       label.className = "shelf-label";
-      label.textContent = "Shelf " + book.shelf;
+      label.textContent = book.shelf;
 
       shelf.appendChild(label);
       shelves[book.shelf] = shelf;
