@@ -119,27 +119,6 @@
     "review": ""
   },
   {
-    "title": "Steelheart (Reckoners: Book 1)",
-    "date": "",
-    "shelf": "Brandon Sanderson",
-    "cover": "books/steelheart.jpg",
-    "review": ""
-  },
-  {
-    "title": "The Way of Kings (Stormlight Archives: Book 1)",
-    "date": "",
-    "shelf": "Brandon Sanderson",
-    "cover": "books/stormlight 1.jpg",
-    "review": ""
-  },
-  {
-    "title": "Words of Radiance (Stormlight Archives: Book 2)",
-    "date": "",
-    "shelf": "Brandon Sanderson",
-    "cover": "books/stormlight2.jpg",
-    "review": ""
-  },
-  {
     "title": "Mistborn (Mistborn: Book 1)",
     "date": "",
     "shelf": "Brandon Sanderson",
@@ -158,6 +137,27 @@
     "date": "",
     "shelf": "Brandon Sanderson",
     "cover": "books/mistborn3.jpg",
+    "review": ""
+  },
+  {
+    "title": "The Way of Kings (Stormlight Archives: Book 1)",
+    "date": "",
+    "shelf": "Brandon Sanderson",
+    "cover": "books/stormlight 1.jpg",
+    "review": ""
+  },
+  {
+    "title": "Words of Radiance (Stormlight Archives: Book 2)",
+    "date": "",
+    "shelf": "Brandon Sanderson",
+    "cover": "books/stormlight2.jpg",
+    "review": ""
+  },
+  {
+    "title": "Steelheart (Reckoners: Book 1)",
+    "date": "",
+    "shelf": "Brandon Sanderson",
+    "cover": "books/steelheart.jpg",
     "review": ""
   },
   {
