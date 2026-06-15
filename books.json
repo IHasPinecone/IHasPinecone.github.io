@@ -234,56 +234,7 @@
     "title": "",
     "date": "",
     "shelf": 0,
-    "cover": "",
-    "review": ""
-  },
-  {
-    "title": "",
-    "date": "",
-    "shelf": 0,
-    "cover": "",
-    "review": ""
-  },
-  {
-    "title": "",
-    "date": "",
-    "shelf": 0,
-    "cover": "",
-    "review": ""
-  },
-  {
-    "title": "",
-    "date": "",
-    "shelf": 0,
-    "cover": "",
-    "review": ""
-  },
-  {
-    "title": "",
-    "date": "",
-    "shelf": 0,
-    "cover": "",
-    "review": ""
-  },
-  {
-    "title": "",
-    "date": "",
-    "shelf": 0,
-    "cover": "",
-    "review": ""
-  },
-  {
-    "title": "",
-    "date": "",
-    "shelf": 0,
-    "cover": "",
-    "review": ""
-  },
-  {
-    "title": "",
-    "date": "",
-    "shelf": 0,
-    "cover": "",
+    "cover": "books/",
     "review": ""
   }
 ]
