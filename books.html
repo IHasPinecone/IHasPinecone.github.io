@@ -122,6 +122,7 @@ button {
   padding: 16px;
   line-height: 1.6;
   font-size: 15px;
+  margin-bottom: 12px;
 }
 
 /* ---------- MODES ---------- */
@@ -185,6 +186,15 @@ button {
   float: left;   
   margin: 0 20px 12px 0;
   box-shadow: 4px 4px 8px rgba(0,0,0,0.4);
+}
+
+.modal-date {
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+  margin-bottom: 10px;
 }
 
 .modal-review {
@@ -317,6 +327,9 @@ function openModal(book) {
   document.getElementById("modalTitle").textContent =
     book.querySelector(".title").textContent;
 
+  document.getElementById("modalDate").textContent =
+  book.querySelector(".date").textContent;
+
   document.getElementById("modalReview").innerHTML =
     book.querySelector(".review").innerHTML;
 
@@ -350,6 +363,7 @@ attachBookClicks();
   <div class="modal-content">
     <div class="modal-header">
       <h2 id="modalTitle"></h2>
+      <div id="modalDate" class="modal-date"></div>
       <span class="close-btn" onclick="closeModal()">&times;</span>
     </div>
 
@@ -402,7 +416,11 @@ function buildShelves(data) {
         <div class="date">${book.date}</div>
       </div>
       <div class="review">
-        ${book.review}
+        ${book.review
+          .split("\n\n")
+          .map(p => `<p>${p}</p>`)
+          .join("")
+        }
       </div>
     `;
 
