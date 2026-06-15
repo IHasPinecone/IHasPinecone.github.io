@@ -1,0 +1,16 @@
+[
+  {
+    "title": "The Galton Case",
+    "date": "April 10, 2026",
+    "shelf": 1,
+    "cover": "books/TheGaltonCase.jpg",
+    "review": "I paid $5 for this book at a thrift store..."
+  },
+  {
+    "title": "There is no Antimemetics Division",
+    "date": "March 17, 2026",
+    "shelf": 1,
+    "cover": "books/250px-There_Is_No_Antimemetics_Division.jpg",
+    "review": "This really shows the best parts of SCP..."
+  }
+]
