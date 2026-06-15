@@ -112,7 +112,7 @@ button {
   box-shadow: inset 0 -6px 12px var(--shelf-shadow);
   display: flex;
   gap: 24px;
-  align-itmes: flex-end;
+  align-items: flex-end;
 }
 
 /* shelf lip */
@@ -164,7 +164,7 @@ button {
   transform: perspective(600px) rotateY(-2deg) scale(1.05);
 }
 
-.book:nth-child(odd) .cover {
+.book:nth-of-type(odd) .cover {
   transform: perspective(600px) rotateY(-8deg);
 }
 
@@ -475,7 +475,7 @@ function buildShelves(data) {
 
     bookEl.innerHTML = `
       <div class="book-cover">
-        <img class="cover" src"${book.cover}">
+        <img class="cover" src="${book.cover}">
       </div>
       <div class="meta">
         <div class="title">${book.title}</div>
