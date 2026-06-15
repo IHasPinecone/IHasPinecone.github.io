@@ -94,6 +94,7 @@ button {
   box-shadow: inset 0 -6px 12px var(--shelf-shadow);
   display: flex;
   gap: 24px;
+  align-itmes: flex-end;
 }
 
 /* shelf lip */
@@ -122,8 +123,34 @@ button {
   width: 140px;
   height: 200px;
   object-fit: cover;
-  box-shadow: 4px 4px 8px rgba(0,0,0,0.6);
+
+  transform: perspective(600px) rotateY(-6deg);
+  border-right: 8px solid #e8e1d6;
+  box-shadow:
+    6px 6px 10px rgba(0,0,0,0.6),   /* drop shadow */
+    inset -4px 0 6px rgba(0,0,0,0.4); /* dark inner edge */
 }
+
+.cover::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 6px;
+  height: 100%;
+
+  background: linear-gradient(to right, #5a3a26, #2f1b12);
+}
+
+.book:hover .cover {
+  transform: perspective(600px) rotateY(-2deg) scale(1.05);
+}
+
+.book:nth-child(odd) .cover {
+  transform: perspective(600px) rotateY(-8deg);
+}
+
+
 
 /* ---------- REVIEW ---------- */
 .review {
@@ -429,7 +456,9 @@ function buildShelves(data) {
     bookEl.className = "book";
 
     bookEl.innerHTML = `
-      <img class="cover" src="${book.cover}">
+      <div class="book-cover">
+        <img class="cover" src"${book.cover}">
+      </div>
       <div class="meta">
         <div class="title">${book.title}</div>
         <div class="date">${book.date}</div>
