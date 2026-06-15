@@ -392,6 +392,13 @@ function buildShelves(data) {
   const shelves = {};
 
   data.forEach(book => {
+    // don't display template
+    if (!book.title) return;
+
+    if (!book.review) {
+        book.review = "(no review)";
+      }
+    
     if (!shelves[book.shelf]) {
       const shelf = document.createElement("div");
       shelf.className = "shelf";
