@@ -35,94 +35,199 @@
     "review": "This protagonist broke my heart. Stevens is a butler reflecting on his life, and his first person perspective gives the book such an irony. His life is so sad, but he doesn't see it that way. He's actually quite proud of his career, serving the great Lords and Ladies of Britain. But his employers never thank him, and he has paid such a price to do this job well. First off he has no friends. At one point he remarks 'a butler is only off-duty when they are alone.' And the person he most could've become friends with (Miss Kenton) he frequently hurts in unintentional ways because of his devotion to his job. So many times he leaves her in tears and he is wondering why she is so unprofessional. It hurts so much seeing how much he hurts her and he refuses to see he's even done it. The irony of Stevens's life is most obviously seen when we learn his Lord was a Nazi sympathizer in WWII. Stevens was at least taking consolation in serving a great man, except he wasn't. And he seems to have blocked from his mind him being a bad man.\n\nEvery time I picked up this book i'd read a section and think 'I have to mention this in the review.' The book is so dense with chapters i'll remember the rest of my life.\n\nThis book is so sad, but it doesn't get there by killing baby goats or blowing up orphanages. The painful sorrow is from one guy, talking about his sad life, and being proud of it. There's one heartaching moment near the end where it seems for a second Stevens will learn his lesson, but then he doesn't. This book was beautiful. I see why it won a Nobel Prize in literature."
   },
   {
-    "title": "",
+    "title": "The Blade Itself (The First Law: Book 1)",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/the blade itself.webp",
     "review": ""
   },
   {
-    "title": "",
+    "title": "Before They are Hanged (The First Law: Book 2)",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/before they are hanged.jpg",
     "review": ""
   },
   {
-    "title": "",
+    "title": "The Last Argument of Kings (The First Law: Book 3)",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/the last argument of kings.jpg",
     "review": ""
   },
   {
-    "title": "",
+    "title": "Best Served Cold (World of The First Law: Book 1)",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/best served cold.jpg",
     "review": ""
   },
   {
-    "title": "",
+    "title": "The Heroes (World of the First Law: Book 2)",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/the heroes.webp",
     "review": ""
   },
   {
-    "title": "",
+    "title": "Canticle for Leibowitz",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/canticle for leibowitz.jpg",
     "review": ""
   },
   {
-    "title": "",
+    "title": "Blessed Are You",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/blessed are you.jpg",
     "review": ""
   },
   {
-    "title": "",
+    "title": "Listening At Prayer",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/listening at prayer.webp",
     "review": ""
   },
   {
-    "title": "",
+    "title": "Happy Are You Poor",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/happy_are_you_poor_dubay__89493.jpg",
     "review": ""
   },
   {
-    "title": "",
+    "title": "The Fire Within",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/Fire Within.jpg",
     "review": ""
   },
   {
-    "title": "",
+    "title": "Batman: The Killing Joke",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/killing joke.jpg",
     "review": ""
   },
   {
-    "title": "",
+    "title": "Watchman",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/watchman.jpg",
     "review": ""
   },
   {
-    "title": "",
+    "title": "Steelheart (Reckoners: Book 1)",
     "date": "",
     "shelf": 0,
-    "cover": "",
+    "cover": "books/steelheart.jpg",
+    "review": ""
+  },
+  {
+    "title": "The Way of Kings (Stormlight Archives: Book 1)",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/stormlight 1.jpg",
+    "review": ""
+  },
+  {
+    "title": "Words of Radiance (Stormlight Archives: Book 2)",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/stormlight2.jpg",
+    "review": ""
+  },
+  {
+    "title": "Mistborn (Mistborn: Book 1)",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/mistborn1.jpg",
+    "review": ""
+  },
+  {
+    "title": "The Well of Ascension (Mistborn: Book 2)",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/mistborn2.jpg",
+    "review": ""
+  },
+  {
+    "title": "The Hero of Ages (Mistborn: Book 3)",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/mistborn3.jpg",
+    "review": ""
+  },
+  {
+    "title": "Ender's Game",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/ender's game.jpg",
+    "review": ""
+  },
+  {
+    "title": "Speaker for the Dead (technically the sequel to Ender's Game)",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/speaker for the dead.jpg",
+    "review": ""
+  },
+  {
+    "title": "The Slow Regard for Silent Things (Kingkiller Chronicles Novella)",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/slow regard for silent things.webp",
+    "review": ""
+  },
+  {
+    "title": "The Name of the Wind (Kingkiller Chronicles Book 1)",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/name of the wind.webp",
+    "review": ""
+  },
+  {
+    "title": "The Wise Man's Fear (Kingkiller Chronicles Book 2)",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/the wise man's fear.jpg",
+    "review": ""
+  },
+  {
+    "title": "A Wizard of Earthsea (Earthsea Book 1)",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/a wizard of earthsea.jpg",
+    "review": ""
+  },
+  {
+    "title": "Bugle Call: Song of War: Volume 1",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/bugle call1.jpg",
+    "review": ""
+  },
+  {
+    "title": "Bugle Call: Song of War: Volume 2",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/bugle call2.webp",
+    "review": ""
+  },
+  {
+    "title": "Bugle Call: Song of War: Volume 3",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/bugle call3.jpg",
+    "review": ""
+  },
+  {
+    "title": "Bugle Call: Song of War: Volume 4",
+    "date": "",
+    "shelf": 0,
+    "cover": "books/bugle call4.jpg",
     "review": ""
   },
   {
