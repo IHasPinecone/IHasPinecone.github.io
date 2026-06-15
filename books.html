@@ -35,15 +35,14 @@ body {
 /* Label */
 .shelf-label {
   position: absolute;
-  top: -28px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: -20px;
+  left: 16px;
 
   background: linear-gradient(to bottom, #d2a679, #8b5a3c);
   color: #2b1b12;
 
-  padding: 6px 18px;
-  font-size: 13px;
+  padding: 8px 22px;
+  font-size: 14px;
   font-weight: bold;
   letter-spacing: 0.5px;
 
@@ -57,6 +56,25 @@ body {
   border: 1px solid #5c3a27;
 
   text-align: center;
+}
+
+.shelf-label::before,
+.shelf-label::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  width: 6px;
+  height: 6px;
+  background: #3a2b23;
+  border-radius: 50%;
+}
+
+.shelf-label::before {
+  left: 8px;
+}
+
+.shelf-label::after {
+  right: 8px;
 }
 
 
