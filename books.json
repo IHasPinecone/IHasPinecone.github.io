@@ -112,7 +112,7 @@
     "review": ""
   },
   {
-    "title": "Watchman",
+    "title": "Watchmen",
     "date": "",
     "shelf": "Comics",
     "cover": "books/watchman.jpg",
@@ -164,7 +164,7 @@
     "title": "Ender's Game",
     "date": "",
     "shelf": "Ender's Game",
-    "cover": "books/ender's game.jpg",
+    "cover": "books/enders-game.jpg",
     "review": ""
   },
   {
@@ -233,7 +233,7 @@
   {
     "title": "",
     "date": "",
-    "shelf": 0,
+    "shelf": "",
     "cover": "books/",
     "review": ""
   }
