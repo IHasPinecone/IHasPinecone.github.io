@@ -1,6 +1,17 @@
 html {
-  background-color: white;
+  background-image: url("bluey.jpg");
+  background-repeat: repeat;
 }
+
+.content {
+    background-color: rgba(255, 255, 255, 0.4);
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+
 
 body {
   margin: 0;
@@ -22,6 +33,8 @@ body {
   padding: 20px;
   min-height: 100vh;    /* makes it stretch down the page */
 }
+
+
 
 p {
   display: block;
@@ -84,7 +97,7 @@ h2 {
 }
 
 .rowimage {
-  max-width: 200px;
+  max-width: 300px;
 }
 
 .image-row {
@@ -92,6 +105,7 @@ h2 {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+  max-width: 650px;
 }
 
 .hover-image {
