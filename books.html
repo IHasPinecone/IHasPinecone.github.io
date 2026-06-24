@@ -530,7 +530,7 @@ function buildShelves(data) {
           ${
             (book.review || "(no review)")
               .split("\n\n")
-              .map(p => '<p>${p}</p>`)
+              .map(p => `<p>${p}</p>`)
               .join("")
           }
         </div>
