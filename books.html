@@ -322,6 +322,7 @@ button {
 
 <div class="controls">
   <button onclick="toggleMode()">Toggle "See All Reviews"</button>
+  <button onclick="toggleChronological()">Toggle Chronological Mode</button>
 </div>
 
 <div class="bookshelf" id ="bookshelf"></div>
@@ -428,6 +429,7 @@ attachBookClicks();
 const bookshelf = document.getElementById("bookshelf");
 let originalShelves = [];
 let reviewMode = false;
+let chronologicalMode = false;
 
 fetch("books.json")
   .then(res => res.json())
@@ -494,6 +496,68 @@ function buildShelves(data) {
   // Save layout for toggle
   originalShelves = [...bookshelf.children].map(s => s.cloneNode(true));
 }
+
+  function buildChronologicalShelves(data) {
+    bookshelf.innerHTML = "";
+
+    // Remove empty items, then sort and group into shelves of 6
+    const books = data.filter(book => book.title);
+    books.sort((a,b) => new Date(b.date) - new Date(a.date));
+    for (let i = 0; i < books.length; i += 6) {
+      const shelf = document.createElement("div");
+      shelf.className = "shelf";
+
+      const label = document.createElement("div");
+      label.className = "shelf-label";
+      label.textContent = i === 0 ? "Most Recent" : `Older (${i + 1}+)`;
+      shelf.appendChild(label);
+
+      const chunk = books.slice(i, i + 6);
+
+      chunk.forEach(book => {
+        const bookEl = document.createElement("div");
+        bookEl.className = "book";
+
+        bookEl.innerHTML = `
+        <div class="book-cover">
+          <img class="cover" src="${book.cover}">
+        </div>
+        <div class="meta">
+          <div class="title">${book.title}</div>
+          <div class="date">${book.date}</div>
+        </div>
+        <div class="review">
+          ${
+            (book.review || "(no review)")
+              .split("\n\n")
+              .map(p => '<p>${p}</p>`
+              .join("")
+          }
+        </div>
+        `;
+
+        shelf.appendChild(bookEl);
+      });
+      bookshelf.appendChild(shelf);
+    }
+  }
+    
+
+  function toggleChronological() {
+  chronologicalMode = !chronologicalMode;
+
+  fetch("books.json")
+    .then(res => res.json())
+    .then(data => {
+      if (chronologicalMode) {
+        buildChronologicalShelves(data);
+      }
+      else {
+        buildShelves(data);
+      }
+      attachBookClicks();
+    });
+  }
   
 </script>
 
