@@ -252,7 +252,7 @@ const tables = {
   "Clint Eastwood",
   "comics",
   "mounting a tv on the ceiling",
-  "the pharyngeal wall]
+  "the pharyngeal wall"]
 };
 
 /* ---------- Helper ---------- */
