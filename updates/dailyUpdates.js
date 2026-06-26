@@ -251,7 +251,8 @@ const tables = {
   "Cars",
   "Clint Eastwood",
   "comics",
-  "mounting a tv on the ceiling"]
+  "mounting a tv on the ceiling",
+  "the pharyngeal wall]
 };
 
 /* ---------- Helper ---------- */
