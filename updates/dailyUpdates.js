@@ -269,7 +269,7 @@ const tables = {
   "Clint Eastwood",
   "comics",
   "mounting a tv on the ceiling",
-  "the pharyngeal wall"
+  "the pharyngeal wall",
   "floor time",
   "the moral decline of society",
   "the act of talking about the Roman Empire",
