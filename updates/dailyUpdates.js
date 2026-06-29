@@ -78,7 +78,10 @@ const tables = {
     "the friend that doesn't have a car",
     "my boss",
     "my AI girlfriend",
-    "a redditor"],
+    "a redditor",
+    "a professional singer",
+    "my old professor",
+    "God"],
   food: ["bagel and cream cheese",
     "eggs with chorizo and sourdough bread",
     "oatmeal (I love chia seeds)",
@@ -150,8 +153,8 @@ const tables = {
     "a one pot weeknight meal",
     "mac and cheese with all my leftovers on it",
     "buffalo sauce",
-    "",
-    "",
+    "donuts",
+    "vegan tacos",
     "",
     "",
     "",
@@ -318,12 +321,25 @@ const tables = {
   "my time in Italy",
   "hiking the Camino",
   "Golden Kamuy",
-  "",
-  "",
-  "",
-  "",
-  "",
-  ]
+  "analog synths",
+  "the perfect vacation",
+  "the biggest mistake I've ever made",
+  "the top Substack writers",
+  "the conflicts in Northern Ireland",
+  "my favorite Magic The Gathering Set",
+  "human cloning",
+  "Those Who Walk Away from Omelas",
+  "whether AI is 'creative'",
+  "867-5309",
+  "the smelliest mosh pit I've ever been in",
+  "forums vs discord servers",
+  "why cars are ugly now",
+  "why cars can't have good microphones",
+  "what it's like to accidently open the wrong 3D model in Revit",
+  "my cheap chinese plastic vertical mouse that feels better than every expensive one I've ever used",
+  "how dangerous wingsuits are",
+  "a potential new hobby",
+  "writing"]
 };
 
 /* ---------- Helper ---------- */
@@ -368,7 +384,8 @@ const cases = [
   { text: "Doordashed (food)." },
   { text: "Accidently dropped my (food) on the ground (place)." },
   { text: "Helped (person) learn about (topic)." },
-  { text: "Introduced (person) to (person). (They thought it was funny too)" }
+  { text: "Introduced (person) to (person)." },
+  { text: "Thought about the similarities between (topic) and (topic)." }
 ];
 
 // Precompile templates 
