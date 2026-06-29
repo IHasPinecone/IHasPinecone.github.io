@@ -148,7 +148,7 @@ const tables = {
     "pizza",
     "fajitas",
     "berocca",
-    "the secret to happiness"
+    "the secret to happiness",
     "carnitas",
     "a one pot weeknight meal",
     "mac and cheese with all my leftovers on it",
