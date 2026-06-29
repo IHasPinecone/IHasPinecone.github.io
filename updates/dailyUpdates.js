@@ -16,7 +16,7 @@ function hashSeed(str) {
   return h >>> 0;
 }
 
-/* ---------- Tables ---------- */
+/* ---------- Tbles ---------- */
 const tables = {
   person: ["my brother",
     "my sister",
@@ -101,7 +101,7 @@ const tables = {
     "a red delicious apple (gross)",
     "Haggen-Dazs",
     "steak",
-    "steak (as a reference to Earthbound)",
+    "steak (as reference to Earthbound)",
     "cannellini beans (pinecone.rodeo/updates/cannellini-beans.html)",
     "Chipotle",
     "McDonalds",
@@ -109,9 +109,9 @@ const tables = {
     "food from my local north African restaurant (It's so good)",
     "Indian food",
     "authentic Ohio Chinese food",
-    "food based on a friend's recommendation",
+    "food based on friend's recommendation",
     "food from an anime-themed bar in Dayton Ohio",
-    "a crunchwrap",
+    "crunchwrap",
     "dimethyl hexane",
     "vegetable soup",
     "mac & cheese with frozen peas in it",
@@ -140,11 +140,11 @@ const tables = {
     "chicken that was grilled over charcoal",
     "Top Ramen",
     "the worst burger I've ever had in my life",
-    "a burger",
+    "burger",
     "Armenian food",
     "homemade bread",
     "Thai food",
-    "the finest pizza the Midwest has to offer",
+    "the finest pizzthe Midwest has to offer",
     "pizza",
     "fajitas",
     "berocca",
@@ -328,7 +328,7 @@ const cases = [
   { text: "Watched a YouTube video about (topic)." },
   { text: "Ate (food)." },
   { text: "Looked up recipes for (food)." },
-  { text: "Looked up recipes for <i>authentic</i> (food)." },
+  { text: "Looked up recipes for the <i>authentic</i> version of (food)." },
   { text: "Ordered (food)." },
   { text: "Talked to (person) about (food)." },
   { text: "Ate (food) while thinking about (topic)." },
