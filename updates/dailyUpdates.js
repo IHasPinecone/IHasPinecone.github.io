@@ -311,7 +311,9 @@ const tables = {
   "my cheap chinese plastic vertical mouse that feels better than every expensive one I've ever used",
   "how dangerous wingsuits are",
   "a potential new hobby",
-  "writing"]
+  "writing",
+  "altnernate keyboard layouts to QWERTY",
+  "car names"]
 };
 
 /* ---------- Helper ---------- */
