@@ -5,51 +5,44 @@ html {
 }
 
 body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
     color: black;
 
     font-family: "Open Sans", "SN Pro", sans-serif;
-    font-size: clamp(16px, 1rem + 0.2vw, 19px);
-    line-height: 1.7;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .content {
     background-color: rgba(235, 235, 235, 0.5);
     max-width: 1000px;
     margin: 0 auto;
-    padding: clamp(16px, 4vw, 32px);
+    padding: 20px;
     min-height: 100vh;
-}
-
-@media (max-width: 768px) {
-    p,
-    .voice {
-        max-width: 100%
-    }
-
-    h2 {
-        font-size: 1.75rem;
-    }
-
-    .image-row {
-        flex-direction: column;
-        align-items: center;
-    }
 }
 
 /* ===== Text ===== */
 
 p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    max-width: 65ch;
-    margin: 0 auto 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.3em;
+    max-width: 50vw;
+    min-width: 500px;
 }
 
 .voice {
-    font-size: 1rem;
-    line-height: 1.8;
-    max-width: 55ch;
-    margin: 0 auto 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1em;
+    max-width: 40vw;
+    min-width: 400px;
     font-style: italic;
 }
 
@@ -87,10 +80,10 @@ h2 {
 
 .centerimage {
     display: block;
-    margin: 0 auto;
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 600px;
-    height: auto;
+    max-height: 400px;
 }
 
 .centerbox {
@@ -109,9 +102,7 @@ h2 {
 }
 
 .rowimage {
-    width: 100%;
     max-width: 300px;
-    height: auto;
 }
 
 /* ===== Hover Image ===== */
@@ -143,10 +134,8 @@ h2 {
 /* ===== Table Styling (D20 Table) ===== */
 
 .table-wrap {
-    width: 100%;
-    max-width: 500px;
+    width: 500px;
     margin: 40px auto;
-    overflow-x: auto;
     font-family: "Georgia", serif;
 }
 
