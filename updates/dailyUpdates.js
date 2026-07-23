@@ -314,7 +314,8 @@ const tables = {
   "a potential new hobby",
   "writing",
   "altnernate keyboard layouts to QWERTY",
-  "car names"]
+  "car names",
+  "the weirdo who gave my college commencement speech"]
 };
 
 /* ---------- Helper ---------- */
