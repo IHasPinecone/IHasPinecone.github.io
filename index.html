@@ -46,65 +46,58 @@
   </main>
     
   <script>
-fetch("posts.json")
-  .then(response => response.json())
-  .then(posts => {
-
-    // Sort newest first
-    posts.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
-
-    const recentPosts = document.getElementById("recent-posts");
-    const boardGames = document.getElementById("board-games");
-    const faith = document.getElementById("faith");
-    const misc = document.getElementById("misc");
-
-    // Sidebar
-    posts.slice(0, 10).forEach(post => {
-  const item = document.createElement("div");
-
-  item.innerHTML = `
-    <p>
-      <i>${new Date(post.datetime).toLocaleDateString()}</i><br>
-      ">${post.title}</a>
-      ${post.readTime ? `<br><i>(${post.readTime})</i>` : ""}
-    </p>
-  `;
-
-  recentPosts.appendChild(item);
-});
-
-    // Main cards
-    posts.forEach(post => {
-
-  // Skip posts without a cover image
-  if (!post.coverImage) return;
-
-  const li = document.createElement("li");
-  li.className = "navitem";
-
-  li.innerHTML = `
-    <apost.link}
-      ${post.readTime ? `<div>(${post.readTime})</div>` : ""}
-      <div>${post.title}</div>
-      ${post.coverImage} alt="${post.title}">
-    </a>
-  `;
-
-  switch(post.topic) {
-    case "Board Games":
-      boardGames.appendChild(li);
-      break;
-
-    case "Faith":
-      faith.appendChild(li);
-      break;
-
-    case "Misc":
-      misc.appendChild(li);
-      break;
-  }
-});
-  });
-</script>
+    fetch("posts.json")
+      .then(response => response.json())
+      .then(posts => {
+        
+        // Sort newest first
+        posts.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+        
+        const recentPosts = document.getElementById("recent-posts");
+        const boardGames = document.getElementById("board-games");
+        const faith = document.getElementById("faith");
+        const misc = document.getElementById("misc");
+        
+        // Sidebar
+        posts.slice(0, 10).forEach(post => {
+          const item = document.createElement("div");
+          item.innerHTML = `
+          <p>
+          <i>${new Date(post.datetime).toLocaleDateString()}</i><br>
+          ">${post.title}</a>
+          ${post.readTime ? `<br><i>(${post.readTime})</i>` : ""}
+          </p>
+          `;
+          recentPosts.appendChild(item);
+        });
+        
+        // Main cards
+        posts.forEach(post => {
+          // Skip posts without a cover image
+          if (!post.coverImage) return;
+          const li = document.createElement("li");
+          li.className = "navitem";
+          li.innerHTML = `
+          <apost.link}
+          ${post.readTime ? `<div>(${post.readTime})</div>` : ""}
+          <div>${post.title}</div>
+          ${post.coverImage} alt="${post.title}">
+          </a>
+          `;
+          
+          switch(post.topic) {
+            case "Board Games":
+              boardGames.appendChild(li);
+              break;
+            case "Faith":
+              faith.appendChild(li);
+              break;
+            case "Misc":
+              misc.appendChild(li);
+              break;
+          }
+        });
+      });
+  </script>
   </body>
 </html>
