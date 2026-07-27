@@ -7,139 +7,12 @@
   <body>
 
     <aside class="sidebar">
-    <ul class="rightindex">
-      <i>
-        Recent Posts
-      </i>
-      <p></p>
-
-      <p>
-      <li>
-        <i>
-          6/22/2026
-        </i>
-        <a href="bg/container.html">
-          <div>
-            REMEMBER WHAT THEY TOOK FROM YOU
-          </div>
-        </a>
-        <i>
-          (10 min read)
-        </i>
-      </li>
-      </p>
-
-      <p>
-      <li>
-        <i>
-          05/30/2026
-        </i>
-        <a href="bg/salton.html">
-          <div>
-            Salton Sea and Agony in Games
-          </div>
-        </a>
-        <i>
-          (10 min read)
-        </i>
-      </li>
-      </p>
-
-      <p>
-      <li>
-        <i>
-          05/12/2026
-        </i>
-        <a href="books.html">
-          <div>
-            Book Review page is now live
-          </div>
-        </a>
-      </li>
-      </p>
-      
-      <p>
-      <li>
-        <i>
-          04/26/2026
-        </i>
-        <a href="bg/Dandan.html">
-          <div>
-            Dandan Inspired Formats
-          </div>
-        </a>
-        <i>
-          (5 min read)
-        </i>
-      </li>
-      </p>
-    
-      <li>
-        <i>
-          04/04/2026
-        </i>
-        <a href="bg/PaxTranshumanity.html">
-          <div>
-            The Pax Transhumanity Keynote Address
-          </div>
-        </a>
-        <i>
-          (10 min read)
-        </i>
-      </li>
-      </p>
-
-      
-      <li>
-        <i>
-          03/14/2026
-        </i>
-        <a href="faith/tax.html">
-          <div>
-            The Tax
-          </div>
-        </a>
-        <i>
-          (10 min read)
-        </i>
-      </li>
-      </p>
-      
-      
-      <li>
-        <i>
-          03/06/2026
-        </i>
-        <a href="blog/Launch.html">
-          <div>
-            Site has been launched!
-          </div>
-        </a>
-        <i>
-          (2 min read)
-        </i>
-      </li>
-      </p>
-      
-      
-      <li>
-        <i>
-          03/06/2026
-        </i>
-        <a href="bg/rearwindow.html">
-          <div>
-            Rear Window Is a Movie.
-          </div>
-        </a>
-        <i>
-          (10 min read)
-        </i>
-      </li>
-      </p>
-      
-    </ul>
+      <div class="rightindex">
+        <i>Recent Posts</i>
+        <div id="recent-posts"></div>
+      </div>
     </aside>
-
+    
     <main class="main">
     <h1 class="centertext">
       Is it possible for a man to love board games and Jesus Christ?
@@ -155,118 +28,83 @@
     <h2 class="centertext">
       Board Games
     </h2>
-
-    <ul class="centernav">
-
-      <li class="navitem">
-        <a href="bg/container.html">
-          <div>
-            (10 min read)
-          </div>
-          <div>
-            REMEMBER WHAT THEY TOOK FROM YOU
-          </div>
-          <img src="bg/container/box.jpg">
-        </a>
-      </li>
-
-      <li class="navitem">
-        <a href="bg/salton.html">
-          <div>
-            (10 min read)
-          </div>
-          <div>
-            Salton Sea and Agony in Games
-          </div>
-          <img src="bg/Salton/salton-dark.jpg">
-        </a>
-      </li>
-      
-      <li class="navitem">
-        <a href="bg/Dandan.html">
-          <div>
-            (5 min read)
-          </div>
-          <div>
-            Dandan Inspired Formats
-          </div>
-          <img src="bg/Dandan/Skullbriar_poster_5000x.png">
-        </a>
-      </li>
-
-      <li class="navitem">
-        <a href="bg/PaxTranshumanity.html">
-          <div>
-            (10 min read)
-          </div>
-          <div>
-            The Pax Transhumanity Keynote Address
-          </div>
-          <img src="bg/PaxTranshumanity/SteveJobs.jpg">
-        </a>
-      </li>
-
-      <li class="navitem">
-        <a href="bg/rearwindow.html">
-          <div>
-            (10 min read)
-          </div>
-          <div>
-            Rear Window is a Movie
-          </div>
-          <img src="bg/RWAssets/projector.gif"/>
-        </a>
-      </li>
-
-    </ul>
-
+    <ul id="board-games" class="centernav"></ul>
     <hr class="superspace"/>
     
     <h2 class="centertext">
       Faith
     </h2>
-
-    <ul class ="centernav">
-      <li class="navitem">
-        <a href="faith/tax.html">
-          <div>
-            The Tax<br>
-            (10 min read)
-          </div>
-          <img src="faith/tax/burn barrel sky.webp"/>
-        </a>
-      </li>
-    </ul>
+    <ul id="faith" class="centernav"></ul>
     <hr class="superspace">
 
     <h2 class="centertext">
       Other
     </h2>
-
-    <ul class="centernav">
-
-      <li class="navitem">
-        <a href="dreams.html">
-          <div>
-            Dreams
-          </div>
-          <img src="m/dreamsAssets/sleeping-moon.gif"/>
-        </a>
-      </li>
-
-      <li class="navitem">
-        <a href="books.html">
-          <div>
-            Book Reviews
-          </div>
-          <img src="books/man-writing-book-reviews.gif"/>
-        </a>
-      </li>
-
-    </ul>
+    <ul id="misc" class="centernav"></ul>
     <hr class="superspace"/>
 
   </main>
     
+  <script>
+fetch("posts.json")
+  .then(response => response.json())
+  .then(posts => {
+
+    // Sort newest first
+    posts.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+
+    const recentPosts = document.getElementById("recent-posts");
+    const boardGames = document.getElementById("board-games");
+    const faith = document.getElementById("faith");
+    const misc = document.getElementById("misc");
+
+    // Sidebar
+    posts.slice(0, 10).forEach(post => {
+  const item = document.createElement("div");
+
+  item.innerHTML = `
+    <p>
+      <i>${new Date(post.datetime).toLocaleDateString()}</i><br>
+      ">${post.title}</a>
+      ${post.readTime ? `<br><i>(${post.readTime})</i>` : ""}
+    </p>
+  `;
+
+  recentPosts.appendChild(item);
+});
+
+    // Main cards
+    posts.forEach(post => {
+
+  // Skip posts without a cover image
+  if (!post.coverImage) return;
+
+  const li = document.createElement("li");
+  li.className = "navitem";
+
+  li.innerHTML = `
+    <apost.link}
+      ${post.readTime ? `<div>(${post.readTime})</div>` : ""}
+      <div>${post.title}</div>
+      ${post.coverImage} alt="${post.title}">
+    </a>
+  `;
+
+  switch(post.topic) {
+    case "Board Games":
+      boardGames.appendChild(li);
+      break;
+
+    case "Faith":
+      faith.appendChild(li);
+      break;
+
+    case "Misc":
+      misc.appendChild(li);
+      break;
+  }
+});
+  });
+</script>
   </body>
 </html>
