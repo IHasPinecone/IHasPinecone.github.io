@@ -40,6 +40,10 @@ body {
                 margin: 0;
         }
 
+        #recent-posts > div {
+                margin-bottom: 16px;
+        }
+
         .sidebar-link:hover {
                 text-decoration: underline;
         }
@@ -49,7 +53,7 @@ body {
         .sidebar-readtime {
                 display: block;
                 margin: 0;
-                padding: 0l
+                padding: 0;
                 line-height: 1.2;
         }
 
