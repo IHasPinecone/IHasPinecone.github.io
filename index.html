@@ -63,18 +63,20 @@
           const item = document.createElement("div");
           
           item.innerHTML = `
-            ${post.link}
-              ${post.title}
-            </a>
-            <div class="sidebar-date">
-              ${new Date(post.datetime).toLocaleDateString()}
-            </div>
-            ${
-              post.readTime
-              ? `<div class="sidebar-readtime">(${post.readTime})</div>`
-              : ''
-            }
-            `;
+  <a class="sidebar-link" href="${post.link}">
+    <span class="sidebar-title">${post.title}</span>
+  </a>
+
+  <div class="sidebar-date">
+    ${new Date(post.datetime).toLocaleDateString()}
+  </div>
+
+  ${
+    post.readTime
+      ? `<div class="sidebar-readtime">${post.readTime}</div>`
+      : ''
+  }
+`;
           
         recentPosts.appendChild(item);
         });
