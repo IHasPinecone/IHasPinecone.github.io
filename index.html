@@ -64,17 +64,16 @@
           
           item.innerHTML = `
             ${post.link}
-              <div class="sidebar-date">
-                ${new Date(post.datetime).toLocaleDateString()}
-              </div>
-              <div class=sidebar-title">
-                ${post.title}
-              </div>
-              ${
-                post.readTime
-                  ? `<div class="sidebar-readtime">(${post.readTime})</div>`
-                  : ''
-              }
+              ${post.title}
+            </a>
+            <div class="sidebar-date">
+              ${new Date(post.datetime).toLocaleDateString()}
+            </div>
+            ${
+              post.readTime
+              ? `<div class="sidebar-readtime">(${post.readTime})</div>`
+              : ''
+            }
             `;
           
         recentPosts.appendChild(item);
@@ -88,9 +87,12 @@
           li.className = "navitem";
           
           li.innerHTML = `
-          <a>
-            ${post.link}
-            ${post.coverImage}.title}">
+            <a hreflink}
+            }"
+              alt="${post.title}"
+              class="card-image"
+            >
+            <div class="card-title">${post.title}</div>
             ${
               post.readTime
                 ? `<div class="card-readtime">(${post.readTime})</div>`
