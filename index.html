@@ -61,28 +61,46 @@
         // Sidebar
         posts.slice(0, 10).forEach(post => {
           const item = document.createElement("div");
+          
           item.innerHTML = `
-          <p>
-          <i>${new Date(post.datetime).toLocaleDateString()}</i><br>
-          ">${post.title}</a>
-          ${post.readTime ? `<br><i>(${post.readTime})</i>` : ""}
-          </p>
-          `;
-          recentPosts.appendChild(item);
+          <div class="sidebar-date">
+            ${new Date(post.datetime).toLocaleDateString()}
+          </div>
+          
+          ${post.link}
+            ${post.title}
+          </a>
+          
+          ${post.readTime ? `
+            <div class="sidebar-readtime">
+              (${post.readTime})
+            </div>
+          ` : ""}
+        `;
+        recentPosts.appendChild(item);
         });
         
         // Main cards
         posts.forEach(post => {
-          // Skip posts without a cover image
           if (!post.coverImage) return;
+          
           const li = document.createElement("li");
           li.className = "navitem";
+          
           li.innerHTML = `
-          <apost.link}
-          ${post.readTime ? `<div>(${post.readTime})</div>` : ""}
-          <div>${post.title}</div>
-          ${post.coverImage} alt="${post.title}">
-          </a>
+            ${post.link}
+              ${post.coverImage}
+
+              <div class="card-title">
+                ${post.title}
+              </div>
+
+              ${
+                post.readTime
+                ? `<div class="card-readtime">${post.readTime}</div>`
+                : ''
+              }
+            </a>
           `;
           
           switch(post.topic) {
