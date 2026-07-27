@@ -63,14 +63,13 @@
           const item = document.createElement("div");
           
           item.innerHTML = `
+            }" class="sidebar-link"
             <div class="sidebar-date">
               ${new Date(post.datetime).toLocaleDateString()}
             </div>
-            
-            ${post.link}
+            <div class=sidebar-title">
               ${post.title}
-            </a>
-            
+            </div>
             ${
               post.readTime
                 ? `<div class="sidebar-readtime">(${post.readTime})</div>`
