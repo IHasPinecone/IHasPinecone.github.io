@@ -87,13 +87,13 @@
           li.className = "navitem";
           
           li.innerHTML = `
-            ${post.link|
-              Image}"
-                alt="${post.title}"
-                class="card-image"
-              >
-              <div class=card-title">${post.title}</div>
-              ${
+            <a hreflink}
+            }"
+              alt="${post.title}"
+              class="card-image"
+            >
+            <div class="card-title">${post.title}</div>
+            ${
               post.readTime
                 ? `<div class="card-readtime">(${post.readTime})</div>`
                 : ''
