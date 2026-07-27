@@ -88,18 +88,15 @@
           li.className = "navitem";
           
           li.innerHTML = `
-            <{post.link}
-              post.coverImage}">
-              <div class="card-title">
-                ${post.title}
-              </div>
-              
-              ${
-                post.readTime
+          <a>
+            ${post.link}
+            ${post.coverImage}.title}">
+            ${
+              post.readTime
                 ? `<div class="card-readtime">(${post.readTime})</div>`
                 : ''
-              }
-            </a>
+            }
+          </a>
           `;
           
           switch(post.topic) {
