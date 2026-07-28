@@ -65,60 +65,50 @@
         
         // Sort newest first
         posts.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
-        
+
         const recentPosts = document.getElementById("recent-posts");
         const boardGames = document.getElementById("board-games");
         const faith = document.getElementById("faith");
-        const misc = document.getElementById("misc");
         
         // Sidebar
         posts.slice(0, 10).forEach(post => {
-          const item = document.createElement("div");
-          
+          const item = document.createElement("div");  
           item.innerHTML = `
             <a class="sidebar-link" href="${post.link}">
               <span class="sidebar-title">${post.title}</span>
             </a>
-            
             <div class="sidebar-date">
               ${new Date(post.datetime).toLocaleDateString()}
             </div>
-            
             ${
               post.readTime
                 ? `<div class="sidebar-readtime">${post.readTime}</div>`
                 : ''
             }
           `;
-          
         recentPosts.appendChild(item);
         });
         
         // Main cards
         posts.forEach(post => {
           if (!post.coverImage) return;
-          
           const li = document.createElement("li");
           li.className = "navitem";
-          
-         li.innerHTML = `
-          <a href="${post.link}">
-            <img
-              src="${post.coverImage}"
-              alt="${post.title}"
-              class="card-image"
-            >
-            
-            <div class="card-title">${post.title}</div>
-              ${
-                post.readTime
-                  ? `<div class="card-readtime">${post.readTime}</div>`
-                  : ''
-              }
-          </a>
-        `;
-
-          
+          li.innerHTML = `
+            <a href="${post.link}">
+              <img
+                src="${post.coverImage}"
+                alt="${post.title}"
+                class="card-image"
+              >
+              <div class="card-title">${post.title}</div>
+                ${
+                  post.readTime
+                    ? `<div class="card-readtime">${post.readTime}</div>`
+                    : ''
+                }
+            </a>
+          `;
           switch(post.topic) {
             case "Board Games":
               boardGames.appendChild(li);
@@ -126,12 +116,9 @@
             case "Faith":
               faith.appendChild(li);
               break;
-            case "Misc":
-              misc.appendChild(li);
-              break;
-          }
+            }
+          });
         });
-      });
-  </script>
+    </script>
   </body>
 </html>
