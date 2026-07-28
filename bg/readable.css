@@ -8,7 +8,7 @@ body {
     color: black;
 
     font-family: "Open Sans", "SN Pro", sans-serif;
-    font-size: clamp(20px, 1rem + 0.2vw, 19px);
+    font-size: clamp(20px, 1rem + 0.2vw, 30px);
     line-height: 1.5;
 }
 
