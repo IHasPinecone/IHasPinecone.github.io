@@ -40,11 +40,11 @@
     "readTime": "(5 min read)"
   },
   {
-    "title": "Book Reviews",
+    "title": "Book Reviews page is now live",
     "datetime": "05/12/2026",
-    "coverImage": "books/man-writing-book-reviews.gif",
+    "coverImage": "",
     "link": "books.html",
-    "topic": "Misc",
+    "topic": "",
     "readTime": ""
   },
   {
@@ -64,11 +64,11 @@
     "readTime": "(10 min read)"
   },
   {
-    "title": "Dreams",
+    "title": "Dreams page is now live",
     "datetime": "03/06/2026",
-    "coverImage": "m/dreamsAssets/sleeping-moon.gif",
+    "coverImage": "",
     "link": "dreams.html",
-    "topic": "Misc",
+    "topic": "",
     "readTime": ""
   },
   {
