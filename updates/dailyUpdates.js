@@ -81,7 +81,7 @@ const tables = {
     "a redditor",
     "a professional singer",
     "my old professor",
-    "a guy at the gym","
+    "a guy at the gym",
     "God"],
   food: ["bagel and cream cheese",
     "eggs with chorizo and sourdough bread",
