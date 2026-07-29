@@ -8,70 +8,67 @@
 </head>
 <body>
 
-    <header class="hero">
-        <h1>All Posts</h1>
-        <p>Every article, update, and essay in one place.</p>
-    </header>
+    <div id="container">
 
-    <main class="container">
-        <div id="posts-grid" class="posts-grid"></div>
-    </main>
+        <header>
+            <h1>ALL POSTS</h1>
+            <p class="subtitle">the complete archive</p>
+            <hr>
+        </header>
+
+        <main id="posts-list"></main>
+
+    </div>
 
     <script>
         async function loadPosts() {
-            try {
-                const response = await fetch('posts.json');
-                const posts = await response.json();
+            const response = await fetch("posts.json");
+            const posts = await response.json();
 
-                posts.sort((a, b) => {
-                    const dateA = new Date(a.datetime);
-                    const dateB = new Date(b.datetime);
-                    return dateB - dateA;
-                });
+            posts.sort((a, b) => {
+                const dateA = new Date(a.datetime);
+                const dateB = new Date(b.datetime);
+                return dateB - dateA;
+            });
 
-                const container = document.getElementById('posts-grid');
+            const postList = document.getElementById("posts-list");
 
-                posts.forEach(post => {
-                    const card = document.createElement('a');
-                    card.className = 'post-card';
-                    card.href = post.link;
+            posts.forEach(post => {
 
-                    const imageSection = post.coverImage
-                        ? `
-                            <div class="post-image">
-                                <img src="${post.coverImage}" alt="${post.title}">
-                            </div>
-                          `
-                        : `
-                            <div class="post-image placeholder">
-                                <span>No Image</span>
-                            </div>
-                          `;
+                const image = post.coverImage && post.coverImage.trim() !== ""
+                    ? post.coverImage
+                    : "default.png";
 
-                    card.innerHTML = `
-                        ${imageSection}
+                const article = document.createElement("article");
+                article.className = "post";
 
-                        <div class="post-content">
-                            <div class="post-meta">
-                                ${post.topic ? `<span class="topic">${post.topic}</span>` : ''}
-                                <span class="date">${post.datetime}</span>
-                            </div>
+                article.innerHTML = `
+                    <a href="${post.link}" class="post-link">
 
+                        <img
+                            src="${image}"
+                            alt="${post.title}"
+                            class="thumbnail">
+
+                        <div class="content">
                             <h2>${post.title}</h2>
 
-                            ${
-                                post.readTime
-                                    ? `<p class="read-time">${post.readTime}</p>`
-                                    : ''
-                            }
-                        </div>
-                    `;
+                            <div class="meta">
+                                ${post.datetime}
+                                ${post.topic ? " | " + post.topic : ""}
+                                ${post.readTime ? " " + post.readTime : ""}
+                            </div>
 
-                    container.appendChild(card);
-                });
-            } catch (error) {
-                console.error(error);
-            }
+                            <div class="read-more">
+                                » Read Post
+                            </div>
+                        </div>
+
+                    </a>
+                `;
+
+                postList.appendChild(article);
+            });
         }
 
         loadPosts();
