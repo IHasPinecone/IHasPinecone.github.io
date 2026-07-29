@@ -76,7 +76,6 @@
           item.innerHTML = `
             <a class="sidebar-link" href="${post.link}">
               <span class="sidebar-title">${post.title}</span>
-            </a>
             <div class="sidebar-date">
               ${new Date(post.datetime).toLocaleDateString()}
             </div>
@@ -85,6 +84,7 @@
                 ? `<div class="sidebar-readtime">${post.readTime}</div>`
                 : ''
             }
+            </a>
           `;
         recentPosts.appendChild(item);
         });
