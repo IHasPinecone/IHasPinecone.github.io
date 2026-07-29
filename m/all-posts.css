@@ -94,7 +94,7 @@ a:visited {
 
 /* mobile */
 
-/*@media (max-width: 700px) {
+@media (max-width: 700px) {
 
     .post-link {
         flex-direction: column;
@@ -103,6 +103,6 @@ a:visited {
     .thumbnail {
         width: 100%;
         height: 180px;
-    }*/
+    }
 
 }
