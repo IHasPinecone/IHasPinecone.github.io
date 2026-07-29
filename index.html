@@ -71,7 +71,7 @@
         const faith = document.getElementById("faith");
         
         // Sidebar
-        posts.slice(0, 10).forEach(post => {
+        posts.slice(0, 3).forEach(post => {
           const item = document.createElement("div");  
           item.innerHTML = `
             <a class="sidebar-link" href="${post.link}">
@@ -88,6 +88,13 @@
           `;
         recentPosts.appendChild(item);
         });
+        const allPostsLink = document.createElement("div");
+        allPostsLink.innerHTML = `
+          <a class="sidebar-link all-posts-link" href="all-posts.html">
+            View All Posts
+          </a>
+        `;
+        recent.Posts.appendChild(allPostsLink);
         
         // Main cards
         posts.forEach(post => {
