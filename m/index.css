@@ -41,7 +41,8 @@ body {
         }
 
         #recent-posts > div {
-                margin-bottom: 16px;
+                margin-bottom: 8px;
+                margin-top: 8px;
         }
 
         .sidebar-link:hover {
