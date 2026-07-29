@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Posts</title>
+    all-posts.css
+</head>
+<body>
+
+    <header class="hero">
+        <h1>All Posts</h1>
+        <p>Every article, update, and essay in one place.</p>
+    </header>
+
+    <main class="container">
+        <div id="posts-grid" class="posts-grid"></div>
+    </main>
+
+    <script>
+        async function loadPosts() {
+            try {
+                const response = await fetch('posts.json');
+                const posts = await response.json();
+
+                posts.sort((a, b) => {
+                    const dateA = new Date(a.datetime);
+                    const dateB = new Date(b.datetime);
+                    return dateB - dateA;
+                });
+
+                const container = document.getElementById('posts-grid');
+
+                posts.forEach(post => {
+                    const card = document.createElement('a');
+                    card.className = 'post-card';
+                    card.href = post.link;
+
+                    const imageSection = post.coverImage
+                        ? `
+                            <div class="post-image">
+                                <img src="${post.coverImage}" alt="${post.title}">
+                            </div>
+                          `
+                        : `
+                            <div class="post-image placeholder">
+                                <span>No Image</span>
+                            </div>
+                          `;
+
+                    card.innerHTML = `
+                        ${imageSection}
+
+                        <div class="post-content">
+                            <div class="post-meta">
+                                ${post.topic ? `<span class="topic">${post.topic}</span>` : ''}
+                                <span class="date">${post.datetime}</span>
+                            </div>
+
+                            <h2>${post.title}</h2>
+
+                            ${
+                                post.readTime
+                                    ? `<p class="read-time">${post.readTime}</p>`
+                                    : ''
+                            }
+                        </div>
+                    `;
+
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        loadPosts();
+    </script>
+
+</body>
+</html>
