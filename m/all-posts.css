@@ -1,6 +1,6 @@
 body {
     background: powderblue;
-    color: #EEEEEE;
+    color: #000;
     font-family: Verdana, Arial, sans-serif;
     font-size: 14px;
     margin: 0;
@@ -10,7 +10,7 @@ body {
 #container {
     max-width: 850px;
     margin: 0 auto;
-    background: white;
+    background: #EEEEEE;
     border: 2px solid black;
     padding: 20px;
 }
