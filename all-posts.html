@@ -32,10 +32,6 @@
                 const container = document.getElementById('posts-grid');
 
                 posts.forEach(post => {
-                    const image = post.coverImage && post.coverImage.trim() !== ""
-                    ? post.coverImage
-                    : "bg/ph/ph1.webp";
-                    
                     const card = document.createElement('a');
                     card.className = 'post-card';
                     card.href = post.link;
