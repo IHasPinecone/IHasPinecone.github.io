@@ -56,8 +56,8 @@ hr {
 }
 
 .thumbnail {
-    width: 160px;
-    height: 100px;
+    width: 160px !important;
+    height: 100px !important;
     object-fit: cover;
     border: 1px solid #000;
     flex-shrink: 0;
