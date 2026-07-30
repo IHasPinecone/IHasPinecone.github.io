@@ -193,8 +193,14 @@ function formatSeed(date) {
   );
 }
 
-  const latest = entries[0];
-  return latest.text;
+function getLatestUpdate() {
+    const seed = getCurrentMonthSeed();
+
+    const generator = createGenerator(seed);
+    const rng = mulberry32(hashSeed(seed + "-dates"));
+
+    // Generate one update
+    return generator();
 }
 
 
