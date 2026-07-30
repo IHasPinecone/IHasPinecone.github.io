@@ -32,4 +32,8 @@ h1, h2 {
 .post-text {
   font-size: 1rem;
 }
+
+.controls {
+  margin: center;
+}
 ``
