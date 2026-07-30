@@ -439,7 +439,7 @@ const cases = [
   { text: "Helped (person) learn about (topic)." },
   { text: "Introduced (person) to (person)." },
   { text: "Thought about the similarities between (topic) and (topic)." },
-  { text: "Today, (person) convinced me about (topic)." }
+  { text: "Today, (person) convinced me about (topic)." },
 ];
 
 // Precompile templates 
