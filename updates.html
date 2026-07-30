@@ -37,17 +37,16 @@
 <div id="result"></div>
 
 <div class="controls">
-  <button id="firstBtn" onclick="goFirst()">⏮</button>
-  <button id="prevBtn" onclick="goPrevious()">◀</button>
-  <button id="nextBtn" onclick="goNext()">▶</button>
-  <button id="lastBtn" onclick="goLast()">⏭</button>
+  <button id="botfirstBtn" onclick="goFirst()">⏮</button>
+  <button id="botprevBtn" onclick="goPrevious()">◀</button>
+  <button id="botnextBtn" onclick="goNext()">▶</button>
+  <button id="botlastBtn" onclick="goLast()">⏭</button>
 </div>
 
 <script src="updates/dailyUpdates.js"> </script>
 
 <script>
   let currentSeed;
-  document.getElementById("monthDisplay").textContent = currentSeed;
   
   const FIRST_MONTH = new Date(2025, 7, 1); // August 2025
 
@@ -81,6 +80,8 @@ function formatSeed(date) {
   
   function runMany() {
     const seed = currentSeed;
+    document.getElementById("monthDisplay").textContent = seed;
+    
     // creates only one generator
     const generator = createGenerator(seed);
 
@@ -309,6 +310,18 @@ function updateButtons() {
     atLast ? "hidden" : "visible";
 
   document.getElementById("lastBtn").style.visibility =
+    atLast ? "hidden" : "visible";
+
+  document.getElementById("botfirstBtn").style.visibility =
+    atFirst ? "hidden" : "visible";
+
+  document.getElementById("botprevBtn").style.visibility =
+    atFirst ? "hidden" : "visible";
+
+  document.getElementById("botnextBtn").style.visibility =
+    atLast ? "hidden" : "visible";
+
+  document.getElementById("botlastBtn").style.visibility =
     atLast ? "hidden" : "visible";
 }
 
