@@ -395,7 +395,8 @@ const tables = {
   "America's role as the 'Arsenal of Democracy'",
   "Irish folk music",
   "Ed Sheeran",
-  "my second wife"]
+  "my second wife",
+  "the way electric guitar sounds"]
 };
 
 /* ---------- Helper ---------- */
