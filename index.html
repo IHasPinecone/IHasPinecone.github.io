@@ -8,6 +8,7 @@
 
     <aside class="sidebar">
       <div class="rightindex">
+        <p id="latestUpdate"></p>
         <i>Recent Posts</i>
         <div id="recent-posts"></div>
       </div>
@@ -127,5 +128,12 @@
           });
         });
     </script>
+    
+    <script src="updates/dailyUpdates.js"> </script>
+    <script src="updates/updates.js"> </script>
+    <script>
+      document.getElementById("latestUpdate").textContent = getLatestUpdate();
+    </script>
+  
   </body>
 </html>
