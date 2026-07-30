@@ -27,12 +27,11 @@
 
 <h2 id="monthDisplay"></h2>
 
-<div class="controls">
-  <button onclick="goFirst()">⏮</button>
-  <button onclick="goPrevious()">◀</button>
-  <button onclick="goNext()">▶</button>
-  <button onclick="goLast()">⏭</button>
-</div>
+<button id="firstBtn" onclick="goFirst()">⏮</button>
+<button id="prevBtn" onclick="goPrevious()">◀</button>
+<button id="nextBtn" onclick="goNext()">▶</button>
+<button id="lastBtn" onclick="goLast()">⏭</button>
+
   
 <div id="result"></div>
 
@@ -233,6 +232,7 @@ function formatSeed(date) {
     const latest = entries[entries.length - 1];
 
     document.getElementById("result").innerHTML = output;
+    updateButtons();
   }
 
   function getCurrentMonthSeed() {
@@ -288,6 +288,26 @@ function goFirst() {
 function goLast() {
   currentSeed = formatSeed(getCurrentMonth());
   runMany();
+}
+
+function updateButtons() {
+  const current = getCurrentMonth();
+  const viewed = parseSeed(currentSeed);
+
+  const atFirst = viewed.getTime() === FIRST_MONTH.getTime();
+  const atLast = viewed.getTime() === current.getTime();
+
+  document.getElementById("firstBtn").style.visibility =
+    atFirst ? "hidden" : "visible";
+
+  document.getElementById("prevBtn").style.visibility =
+    atFirst ? "hidden" : "visible";
+
+  document.getElementById("nextBtn").style.visibility =
+    atLast ? "hidden" : "visible";
+
+  document.getElementById("lastBtn").style.visibility =
+    atLast ? "hidden" : "visible";
 }
 
   currentSeed = getCurrentMonthSeed();
