@@ -35,8 +35,7 @@
 
 <script>
   function runMany() {
-    /*const seed = document.getElementById("seed").value;*/
-    const seed = "August 2026";
+    const seed = document.getElementById("seed").value;
     // creates only one generator
     const generator = createGenerator(seed);
 
@@ -83,10 +82,10 @@
     1
   );
 
-  if (selectedMonth > currentMonth) {
+  /*if (selectedMonth > currentMonth) {
     document.getElementById("result").innerHTML = "That month is in the future.";
     return;
-  }
+  }*/
 
     // convert to Eastern
     const easternNow = new Date(
