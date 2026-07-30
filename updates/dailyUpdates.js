@@ -393,7 +393,8 @@ const tables = {
   "how the 31st day of a month is actually a bonus day you can do whatever you want with",
   "Zero Punctuation",
   "America's role as the 'Arsenal of Democracy'",
-  "Irish folk music"]
+  "Irish folk music",
+  "Ed Sheeran"]
 };
 
 /* ---------- Helper ---------- */
