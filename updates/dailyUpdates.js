@@ -84,7 +84,7 @@ const tables = {
     "a guy at the gym",
     "the lead singer of Blue Traveler's wife",
     "the daughter of a Lutheran pastor",
-    "the worst enemy",
+    "my worst enemy",
     "God"],
   food: ["bagel and cream cheese",
     "eggs with chorizo and sourdough bread",
