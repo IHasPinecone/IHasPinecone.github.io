@@ -25,6 +25,8 @@
   Real-time updates on my wild and exciting life.
 </h2>
 
+<h3 id="monthDisplay"></h3>
+  
 <div id="result"></div>
 
 <button onclick="goFirst()">⏮ First</button>
@@ -36,6 +38,9 @@
 <script src="updates/dailyUpdates.js"> </script>
 
 <script>
+  let currentSeed;
+  document.getElementById("monthDisplay").textContent = currentSeed;
+  
   const FIRST_MONTH = new Date(2025, 7, 1); // August 2025
 
 function parseSeed(seed) {
@@ -65,52 +70,9 @@ function formatSeed(date) {
     year: "numeric"
   });
 }
-
-function getCurrentMonth() {
-  const now = new Date(
-    new Date().toLocaleString("en-US", {
-      timeZone: "America/New_York"
-    })
-  );
-
-  return new Date(now.getFullYear(), now.getMonth(), 1);
-}
-
-function changeMonth(offset) {
-  const input = document.getElementById("seed");
-
-  let d = parseSeed(input.value);
-  d.setMonth(d.getMonth() + offset);
-
-  const current = getCurrentMonth();
-
-  if (d < FIRST_MONTH) d = new Date(FIRST_MONTH);
-  if (d > current) d = new Date(current);
-
-  input.value = formatSeed(d);
-  runMany();
-}
-
-function goPrevious() {
-  changeMonth(-1);
-}
-
-function goNext() {
-  changeMonth(1);
-}
-
-function goFirst() {
-  document.getElementById("seed").value = formatSeed(FIRST_MONTH);
-  runMany();
-}
-
-function goLast() {
-  document.getElementById("seed").value = formatSeed(getCurrentMonth());
-  runMany();
-}
   
   function runMany() {
-    const seed = document.getElementById("seed").value;
+    const seed = currentSeed;
     // creates only one generator
     const generator = createGenerator(seed);
 
@@ -279,7 +241,49 @@ function goLast() {
     });
   }
 
-  document.getElementById("seed").value = getCurrentMonthSeed();
+  function getCurrentMonth() {
+  const now = new Date(
+    new Date().toLocaleString("en-US", {
+      timeZone: "America/New_York"
+    })
+  );
+
+  return new Date(now.getFullYear(), now.getMonth(), 1);
+}
+
+function changeMonth(offset) {
+  let d = parseSeed(currentSeed);
+  
+  d.setMonth(d.getMonth() + offset);
+
+  const current = getCurrentMonth();
+
+  if (d < FIRST_MONTH) d = new Date(FIRST_MONTH);
+  if (d > current) d = new Date(current);
+
+  currentSeed = formatSeed(d);
+  runMany();
+}
+
+function goPrevious() {
+  changeMonth(-1);
+}
+
+function goNext() {
+  changeMonth(1);
+}
+
+function goFirst() {
+  currentSeed = formatSeed(FIRST_MONTH);
+  runMany();
+}
+
+function goLast() {
+  currentSeed = formatSeed(getCurrentMonth());
+  runMany();
+}
+
+  currentSeed = getCurrentMonthSeed();
   runMany();
   
   </script>
