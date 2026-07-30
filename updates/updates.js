@@ -195,12 +195,14 @@ function formatSeed(date) {
 
 function getLatestUpdate() {
     const seed = getCurrentMonthSeed();
-
     const generator = createGenerator(seed);
     const rng = mulberry32(hashSeed(seed + "-dates"));
 
     // Generate one update
-    return generator();
+    return {
+      timestamp: new Date(),
+      text: generator()
+    }
 }
 
 
