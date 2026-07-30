@@ -394,7 +394,8 @@ const tables = {
   "Zero Punctuation",
   "America's role as the 'Arsenal of Democracy'",
   "Irish folk music",
-  "Ed Sheeran"]
+  "Ed Sheeran",
+  "my second wife"]
 };
 
 /* ---------- Helper ---------- */
