@@ -240,10 +240,9 @@ function formatSeed(date) {
 
   function linkify(text) {
   return text.replace(
-    /(https?:\/\/[^\s).,!?]+)/g,
-    '$1 target="_blank">$1</a>'
-  );
-}
+    /(https?:\/\/[^\s.,!?]+)([.,!?]?)/g,
+    '<a href );
+  }
 
 
   function getCurrentMonthSeed() {
