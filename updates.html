@@ -109,10 +109,10 @@ function formatSeed(date) {
 
     const month = monthMap[monthName];
 
-    if (month === undefined || isNaN(year)) {
+    /*if (month === undefined || isNaN(year)) {
       document.getElementById("result").innerHTML = "Seed must be in the form of 'May 2026'";
       return;
-    }
+    }*/
 
     const selectedMonth = new Date(year, month, 1);
 
@@ -240,8 +240,8 @@ function formatSeed(date) {
 
   function linkify(text) {
   return text.replace(
-    /(https?:\/\/[^\s)]+)/g,
-    '$1="_blank">link</a>'
+    /(https?:\/\/[^\s).,!?]+)/g,
+    '$1 target="_blank">$1</a>'
   );
 }
 
