@@ -193,10 +193,6 @@ function formatSeed(date) {
   );
 }
 
-  function getLatestUpdate() {
-  currentSeed = getCurrentMonthSeed();
-  runMany();
-
   const latest = entries[0];
   return latest.text;
 }
