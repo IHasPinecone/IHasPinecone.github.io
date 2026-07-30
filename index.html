@@ -132,7 +132,12 @@
     <script src="updates/dailyUpdates.js"> </script>
     <script src="updates/updates.js"> </script>
     <script>
-      latestUpdate.textContent = getLatestUpdate();
+      const update = getLatestUpdate();
+
+      document.getElementById("latestUpdate").innerHTML = `
+        <div>${update.timestamp.toLocaleString()}</div>
+        <div>${update.text}</div>
+      `;
     </script>
   
   </body>
