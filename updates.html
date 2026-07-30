@@ -28,15 +28,15 @@
 <div id="result"></div>
 
 <input id="seed" placeholder="May 2026">
-<button onclick="runMany()">Generate results</button>
+<button onclick="runMany()">See Updates</button>
 
 
 <script src="updates/dailyUpdates.js"> </script>
 
 <script>
   function runMany() {
-    const seed = document.getElementById("seed").value;
-
+    /*const seed = document.getElementById("seed").value;*/
+    const seed = "August 2026";
     // creates only one generator
     const generator = createGenerator(seed);
 
