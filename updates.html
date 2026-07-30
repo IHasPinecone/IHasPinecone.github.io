@@ -241,9 +241,10 @@ function formatSeed(date) {
   function linkify(text) {
   return text.replace(
     /(https?:\/\/[^\s)]+)/g,
-    '$1$1</a>'
+    '$1="_blank">link</a>'
   );
 }
+
 
   function getCurrentMonthSeed() {
     const now = new Date(
