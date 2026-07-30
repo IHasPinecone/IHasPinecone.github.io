@@ -27,13 +27,88 @@
 
 <div id="result"></div>
 
-<input id="seed" placeholder="May 2026">
-<button onclick="runMany()">See Updates</button>
+<button onclick="goFirst()">⏮ First</button>
+<button onclick="goPrevious()">◀ Previous</button>
+<button onclick="goNext()">Next ▶</button>
+<button onclick="goLast()">Last ⏭</button>
 
 
 <script src="updates/dailyUpdates.js"> </script>
 
 <script>
+  const FIRST_MONTH = new Date(2025, 7, 1); // August 2025
+
+function parseSeed(seed) {
+  const [monthName, yearString] = seed.trim().split(/\s+/);
+
+  const monthMap = {
+    January: 0,
+    February: 1,
+    March: 2,
+    April: 3,
+    May: 4,
+    June: 5,
+    July: 6,
+    August: 7,
+    September: 8,
+    October: 9,
+    November: 10,
+    December: 11
+  };
+
+  return new Date(parseInt(yearString, 10), monthMap[monthName], 1);
+}
+
+function formatSeed(date) {
+  return date.toLocaleString("en-US", {
+    month: "long",
+    year: "numeric"
+  });
+}
+
+function getCurrentMonth() {
+  const now = new Date(
+    new Date().toLocaleString("en-US", {
+      timeZone: "America/New_York"
+    })
+  );
+
+  return new Date(now.getFullYear(), now.getMonth(), 1);
+}
+
+function changeMonth(offset) {
+  const input = document.getElementById("seed");
+
+  let d = parseSeed(input.value);
+  d.setMonth(d.getMonth() + offset);
+
+  const current = getCurrentMonth();
+
+  if (d < FIRST_MONTH) d = new Date(FIRST_MONTH);
+  if (d > current) d = new Date(current);
+
+  input.value = formatSeed(d);
+  runMany();
+}
+
+function goPrevious() {
+  changeMonth(-1);
+}
+
+function goNext() {
+  changeMonth(1);
+}
+
+function goFirst() {
+  document.getElementById("seed").value = formatSeed(FIRST_MONTH);
+  runMany();
+}
+
+function goLast() {
+  document.getElementById("seed").value = formatSeed(getCurrentMonth());
+  runMany();
+}
+  
   function runMany() {
     const seed = document.getElementById("seed").value;
     // creates only one generator
@@ -190,6 +265,23 @@
 
     document.getElementById("result").innerHTML = output;
   }
+
+  function getCurrentMonthSeed() {
+    const now = new Date(
+      new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York"
+      })
+    );
+
+    return now.toLocaleString("en-US", {
+      month: "long",
+     year: "numeric"
+    });
+  }
+
+  document.getElementById("seed").value = getCurrentMonthSeed();
+  runMany();
+  
   </script>
   
 </body>
