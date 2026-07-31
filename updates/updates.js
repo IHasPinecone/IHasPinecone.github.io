@@ -273,7 +273,7 @@ function getLatestUpdate() {
     // const latest = entries[0];
     return {
       timestamp: new Date(),
-      text: entries[0];
+      text: entries[0]
     }
   }
 
