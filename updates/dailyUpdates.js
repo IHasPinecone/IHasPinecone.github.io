@@ -445,7 +445,6 @@ const cases = [
   { text: "Well, (person) convinced me about (topic)." },
 ];
 
-// Precompile templates 
 const compiledCases = cases.map(c => {
   const parts = c.text.split(/(\(.*?\))/g);
 
@@ -456,7 +455,6 @@ const compiledCases = cases.map(c => {
   });
 });
 
-// Generator Factory
 function createGenerator(seedInput) {
   const seed = hashSeed(seedInput);
   const rng = mulberry32(seed);
