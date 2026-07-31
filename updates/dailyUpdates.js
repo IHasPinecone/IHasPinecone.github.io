@@ -443,6 +443,7 @@ const cases = [
   { text: "Today (person) talked to (person)." },
   { text: "Thought about the similarities between (topic) and (topic)." },
   { text: "Well, (person) convinced me about (topic)." },
+  { text: "Played chess with (person)." },
 ];
 
 const compiledCases = cases.map(c => {
