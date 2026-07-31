@@ -161,7 +161,7 @@ function formatSeed(date) {
     }
 
     // identify most recent
-    const latest = entries[entries.length - 1];
+    const latest = entries[0];
 
     document.getElementById("result").innerHTML = output;
     updateButtons();
