@@ -272,9 +272,9 @@ function getLatestUpdate() {
     // return most recent + date
     // const latest = entries[0];
     return {
-      timestamp: new Date(),
-      text: entries[0]
-    }
+      timestamp: entries[0].timestamp,
+      text: entries[0].text
+    };
   }
 
 /*function getLatestUpdate() {
