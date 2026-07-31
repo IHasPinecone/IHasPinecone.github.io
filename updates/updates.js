@@ -1,69 +1,44 @@
 function parseSeed(seed) {
-  const [monthName, yearString] = seed.trim().split(/\s+/);
+  const seedStr = seed.toString();
 
-  const monthMap = {
-    January: 0,
-    February: 1,
-    March: 2,
-    April: 3,
-    May: 4,
-    June: 5,
-    July: 6,
-    August: 7,
-    September: 8,
-    October: 9,
-    November: 10,
-    December: 11
-  };
+  const yearNum = parseInt(seedStr.slice(0, 4), 10);
+  const monthNum = parseInt(seedStr.slice(4, 6), 10);
 
-  return new Date(parseInt(yearString, 10), monthMap[monthName], 1);
+  return { yearNum, monthNum };
 }
 
-function formatSeed(date) {
+function seedToString(seed) {
+  const seedStr = seed.toString();
+
+  const yearNum = parseInt(seedStr.slice(0, 4), 10);
+  const monthNum = parseInt(seedStr.slice(4, 6), 10);
+
+  const monthNames = [
+    "January", "February", "March", "April",
+    "May", "June", "July", "August",
+    "September", "October", "November", "December"
+  ];
+  return `${monthNames[monthNum - 1]} ${yearNum}`;
+}
+
+/*function formatSeed(date) {
   return date.toLocaleString("en-US", {
     month: "long",
     year: "numeric"
   });
-}
+}*/
   
   function runMany() {
     const seed = currentSeed;
-    document.getElementById("monthDisplay").textContent = seed;
+    document.getElementById("monthDisplay").textContent = seedToString(seed);
     
-    // creates only one generator
     const generator = createGenerator(seed);
-
-    // separate RNG for different dates
     const rng = mulberry32(hashSeed(seed + "-dates"));
+    
+    const { yearNum, monthNum } = parseSeed(seed);
 
-    // chronological math
-    const [monthName, yearString] = seed.trim().split(/\s+/);
-    const year = parseInt(yearString, 10);
-
-    const monthMap = {
-      January: 0,
-      February: 1,
-      March: 2,
-      April: 3,
-      May: 4,
-      June: 5,
-      July: 6,
-      August: 7,
-      September: 8,
-      October: 9,
-      November: 10,
-      December: 11,
-    }
-
-    const month = monthMap[monthName];
-
-    /*if (month === undefined || isNaN(year)) {
-      document.getElementById("result").innerHTML = "Seed must be in the form of 'May 2026'";
-      return;
-    }*/
-
-    const selectedMonth = new Date(year, month, 1);
-
+    const selectedMonth = new Date(yearNum, monthNum, 1);
+    
     const currentEastern = new Date(
       new Date().toLocaleString("en-US", {
       timeZone: "America/New_York"
@@ -76,22 +51,14 @@ function formatSeed(date) {
     1
   );
 
-  /*if (selectedMonth > currentMonth) {
-    document.getElementById("result").innerHTML = "That month is in the future.";
-    return;
-  }*/
-
-    // convert to Eastern
     const easternNow = new Date(
       new Date().toLocaleString("en-US", {
         timeZone: "America/New_York"
       })
     );
 
-    // Last day of selected month
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
     // Determine latest allowable timestamp
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
     const monthStart = new Date(year, month, 1, 0, 0, 0);
     const monthEnd = new Date(year, month + 1, 0, 23, 59, 59);
     
@@ -105,10 +72,9 @@ function formatSeed(date) {
     }
 
     // timestamp generation loop
-    // generates full 30. will remove any past current time later
     const entries = [];
 
-    // generates between 20-40 entires per month
+    // generates between 25-40 entires per month
     const entryCount = 25 + Math.floor(rng() * 16);
     for (let i = 0; i < entryCount; i++) {
       let timestamp;
@@ -213,20 +179,22 @@ function getLatestUpdate() {
       })
     );
 
-    return now.toLocaleString("en-US", {
+    return `${now.getMonth() + 1}/${now.getFullYear()}`;
+      
+    now.toLocaleString("en-US", {
       month: "long",
      year: "numeric"
     });
   }
 
+  // form of YYYYMM
   function getCurrentMonth() {
   const now = new Date(
     new Date().toLocaleString("en-US", {
       timeZone: "America/New_York"
     })
   );
-
-  return new Date(now.getFullYear(), now.getMonth(), 1);
+  return now.getFullYear() * 100 + (now.getMonth() + 1);
 }
 
 function changeMonth(offset) {
