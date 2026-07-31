@@ -170,7 +170,7 @@ function formatSeed(date) {
   function linkify(text) {
   return text.replace(
     /(https?:\/\/[^\s]+)/g,
-    url => `<a href=${url}>${url}</a>`
+    url => `<a href=${url}>link</a>`
   );
 }
 
