@@ -11,6 +11,11 @@ h1, h2 {
   text-align: center;
 }
 
+p {
+  line-height: 1.4;
+  max-width: 65ch;
+}
+
 .update {
   background: white;
   padding: 16px;
