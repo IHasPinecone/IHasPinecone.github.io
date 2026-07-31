@@ -175,6 +175,109 @@ function formatSeed(date) {
 }
 
 function getLatestUpdate() {
+    const seed = getCurrentMonthSeed();;
+    const generator = createGenerator(seed);
+    const rng = mulberry32(hashSeed(seed + "-dates"));
+    const { yearNum, monthNum } = parseSeed(seed);
+    const [monthName, yearString] = seed.trim().split(/\s+/);
+    const year = parseInt(yearString, 10);
+    const monthMap = { January: 0, February: 1, March: 2, April: 3, May: 4, June: 5, July: 6, August: 7, September: 8, October: 9, November: 10, December: 11,}
+    const month = monthMap[monthName];
+    const selectedMonth = new Date(year, month, 1);
+    const currentEastern = new Date(
+      new Date().toLocaleString("en-US", {
+      timeZone: "America/New_York"
+        })
+      );
+    const currentMonth = new Date(
+      currentEastern.getFullYear(), currentEastern.getMonth(), 1);
+    const easternNow = new Date(
+      new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York"
+        })
+      );
+    // Determine latest allowable timestamp
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const monthStart = new Date(year, month, 1, 0, 0, 0);
+    const monthEnd = new Date(year, month + 1, 0, 23, 59, 59);
+    //if this is the current month, stop at current eastern time.
+    let rangeEnd = monthEnd;
+    if (
+      year === currentEastern.getFullYear() &&
+      month === currentEastern.getMonth()
+    ) {
+      rangeEnd = currentEastern;
+    }
+    // timestamp generation loop
+    const entries = [];
+    // generates between 25-40 entires per month
+    const entryCount = 25 + Math.floor(rng() * 16);
+    for (let i = 0; i < entryCount; i++) {
+      let timestamp;
+      while (true) {
+        const randomTime =
+        monthStart.getTime() +
+        Math.floor(
+          rng() * (monthEnd.getTime() - monthStart.getTime())
+        );
+        const d = new Date(randomTime);
+        const hour = d.getHours();
+        // valid times is 5AM through 10pm. or Midnight to 1AM
+        if ((hour >= 5 && hour <= 22) || hour === 0) {
+          timestamp = d;
+          break;
+        }
+      }
+      entries.push({
+        timestamp,
+        text: generator()
+      });
+    }
+    // sort chronologically
+    entries.sort((a, b) => b.timestamp - a.timestamp);
+    // if it's the current month, remove future entries
+    if (
+      year === currentEastern.getFullYear() &&
+      month === currentEastern.getMonth()
+    ) {
+      entries.splice(
+        0,
+        entries.length,
+        ...entries.filter(
+          entry => entry.timestamp <= currentEastern
+        )
+      );
+    }
+    let output = "";
+    for (const entry of entries) {
+      const stamp = entry.timestamp.toLocaleString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+      });
+      output += `
+      <div class="update">
+        <div class="post-header">
+          <span class="post-date"">${stamp}</span>
+        </div>
+        <div class="post-text">
+          ${linkify(entry.text)}
+        </div>
+      </div>
+      `;
+    }
+    // return most recent + date
+    // const latest = entries[0];
+    return {
+      timestamp: new Date(),
+      text: entries[0];
+    }
+  }
+
+/*function getLatestUpdate() {
     const seed = getCurrentMonthSeed();
     const generator = createGenerator(seed);
     const rng = mulberry32(hashSeed(seed + "-dates"));
@@ -183,7 +286,7 @@ function getLatestUpdate() {
       timestamp: new Date(),
       text: generator()
     }
-}
+}*/
 
 function getSeedFromUrl() {
   const params = new URLSearchParams(window.location.search);
