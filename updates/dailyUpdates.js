@@ -417,7 +417,7 @@ const cases = [
   { text: "Ordered (food)." },
   { text: "Talked to (person) about (food)." },
   { text: "Ate (food) while thinking about (topic)." },
-  { text: "Met (person) (place)." },
+  { text: "Ran into (person) (place)." },
   { text: "Learned about (topic) from (person)." },
   { text: "Tried making (food) for (person)." },
   { text: "Went (place) to study (topic)." },
