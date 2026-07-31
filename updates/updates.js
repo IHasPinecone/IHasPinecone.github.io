@@ -186,6 +186,34 @@ function getLatestUpdate() {
     }
 }
 
+function getSeedFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const value = params.get("month");
+
+  if (!value) return null;
+
+  const match = value.match(/^(\d{4})-(\d{2})$/);
+  if (!match) return null;
+
+  const year = parseInt(match[1], 10);
+  const month = parseInt(match[2], 10) - 1;
+
+  return formatSeed(new Date(year, month, 1));
+}
+
+function updateUrlFromSeed(seed) {
+  const d = parseSeed(seed);
+
+  const month =
+    String(d.getMonth() + 1).padStart(2, "0");
+
+  const value = `${d.getFullYear()}-${month}`;
+
+  const url = new URL(window.location);
+  url.searchParams.set("month", value);
+
+  history.replaceState({}, "", url);
+}
 
   function getCurrentMonthSeed() {
     const now = new Date(
@@ -211,7 +239,7 @@ function getLatestUpdate() {
 
 function changeMonth(offset) {
   let d = parseSeed(currentSeed);
-  
+
   d.setMonth(d.getMonth() + offset);
 
   const current = getCurrentMonth();
@@ -220,6 +248,9 @@ function changeMonth(offset) {
   if (d > current) d = new Date(current);
 
   currentSeed = formatSeed(d);
+
+  updateUrlFromSeed(currentSeed);
+
   runMany();
 }
 
@@ -233,11 +264,13 @@ function goNext() {
 
 function goFirst() {
   currentSeed = formatSeed(FIRST_MONTH);
+  updateUrlFromSeed(currentSeed);
   runMany();
 }
 
 function goLast() {
   currentSeed = formatSeed(getCurrentMonth());
+  updateUrlFromSeed(currentSeed);
   runMany();
 }
 
