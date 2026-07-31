@@ -27,21 +27,25 @@
 
 <h3 id="monthDisplay"></h3>
 
+<!--
 <div class="controls">
   <button id="firstBtn" onclick="goFirst()">⏮</button>
   <button id="prevBtn" onclick="goPrevious()">◀</button>
   <button id="nextBtn" onclick="goNext()">▶</button>
   <button id="lastBtn" onclick="goLast()">⏭</button>
 </div>
+-->
   
 <div id="result"></div>
 
+<!--
 <div class="controls">
   <button id="botfirstBtn" onclick="goFirst()">⏮</button>
   <button id="botprevBtn" onclick="goPrevious()">◀</button>
   <button id="botnextBtn" onclick="goNext()">▶</button>
   <button id="botlastBtn" onclick="goLast()">⏭</button>
 </div>
+-->
 
 <script src="updates/dailyUpdates.js"> </script>
 
@@ -50,7 +54,7 @@
 <script>
   let currentSeed;
   
-  const FIRST_MONTH = new Date(2024, 7, 25); // August 2025
+  const FIRST_MONTH = new Date(2026, 7, 1); // July 2026
 
   currentSeed = getSeedFromUrl() || getCurrentMonthSeed();
   runMany();
