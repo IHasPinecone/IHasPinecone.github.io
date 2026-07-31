@@ -22,7 +22,7 @@ body {
 
       .rightindex {
         position: fixed;
-        top: 25vh;
+        top: 100px;
         right: 5vw;
         max-width: 15vw;
         text-align: left;
@@ -47,9 +47,9 @@ body {
 
         #latestUpdate {
                 display: block;
+                margin-bottom: 40px;
         }
 
-        #latestUpdate,
         #recent-posts > div {
             display: block;
             margin-bottom: 10px;
