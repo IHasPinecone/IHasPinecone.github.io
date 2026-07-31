@@ -139,15 +139,18 @@ function formatSeed(date) {
     let output = "";
 
     for (const entry of entries) {
-      const stamp = entry.timestamp.toLocaleString("en-US", {
+      const datePart = entry.timestamp.toLocaleDateString("en-US", {
         month: "long",
         day: "numeric",
-        year: "numeric",
+        year: "numeric"
+      });
+
+      const timePart = entry.timestamp.toLocaleTimeString("en-US", {
         hour: "numeric",
         minute: "2-digit",
         hour12: true
       });
-
+      const stamp = `${datePart}, ${timePart}`;
       output += `
       <div class="update">
         <div class="post-header">
