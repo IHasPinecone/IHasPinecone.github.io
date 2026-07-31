@@ -41,8 +41,7 @@ body {
         }
 
         #recent-posts > div {
-                margin-bottom: 8px;
-                margin-top: 8px;
+                
         }
 
         #latestUpdate {
@@ -51,8 +50,9 @@ body {
         }
 
         #recent-posts > div {
-            display: block;
-            margin-bottom: 10px;
+                display: block;
+                margin-bottom: 16px;
+                margin-top: 16px;
         }
 
         #latestUpdate,
