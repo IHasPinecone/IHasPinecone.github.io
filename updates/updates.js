@@ -1,24 +1,20 @@
 function parseSeed(seed) {
-  const seedStr = seed.toString();
-
-  const yearNum = parseInt(seedStr.slice(0, 4), 10);
-  const monthNum = parseInt(seedStr.slice(4, 6), 10);
-
-  return { yearNum, monthNum };
-}
-
-function seedToString(seed) {
-  const seedStr = seed.toString();
-
-  const yearNum = parseInt(seedStr.slice(0, 4), 10);
-  const monthNum = parseInt(seedStr.slice(4, 6), 10);
-
-  const monthNames = [
-    "January", "February", "March", "April",
-    "May", "June", "July", "August",
-    "September", "October", "November", "December"
-  ];
-  return `${monthNames[monthNum - 1]} ${yearNum}`;
+  const [monthName, yearString] = seed.trim().split(/\s+/);
+  const monthMap = {
+    January: 0,
+    February: 1,
+    March: 2,
+    April: 3,
+    May: 4,
+    June: 5,
+    July: 6,
+    August: 7,
+    September: 8,
+    October: 9,
+    November: 10,
+    December: 11
+  };
+  return new Date(parseInt(yearString, 10), monthMap[monthName], 1);
 }
 
 /*function formatSeed(date) {
@@ -30,14 +26,33 @@ function seedToString(seed) {
   
   function runMany() {
     const seed = currentSeed;
-    document.getElementById("monthDisplay").textContent = seedToString(seed);
+    document.getElementById("monthDisplay").textContent = seed;
     
     const generator = createGenerator(seed);
     const rng = mulberry32(hashSeed(seed + "-dates"));
     
     const { yearNum, monthNum } = parseSeed(seed);
 
-    const selectedMonth = new Date(yearNum, monthNum, 1);
+    const [monthName, yearString] = seed.trim().split(/\s+/);
+    const year = parseInt(yearString, 10);
+
+    const monthMap = {
+      January: 0,
+      February: 1,
+      March: 2,
+      April: 3,
+      May: 4,
+      June: 5,
+      July: 6,
+      August: 7,
+      September: 8,
+      October: 9,
+      November: 10,
+      December: 11,
+    }
+
+    const month = monthMap[monthName];
+    const selectedMonth = new Date(year, month, 1);
     
     const currentEastern = new Date(
       new Date().toLocaleString("en-US", {
@@ -179,22 +194,19 @@ function getLatestUpdate() {
       })
     );
 
-    return `${now.getMonth() + 1}/${now.getFullYear()}`;
-      
-    now.toLocaleString("en-US", {
+    return now.toLocaleString("en-US", {
       month: "long",
      year: "numeric"
     });
   }
 
-  // form of YYYYMM
   function getCurrentMonth() {
   const now = new Date(
     new Date().toLocaleString("en-US", {
       timeZone: "America/New_York"
     })
   );
-  return now.getFullYear() * 100 + (now.getMonth() + 1);
+  return new Date(now.getFullYear(), now.getMonth(), 1);
 }
 
 function changeMonth(offset) {
