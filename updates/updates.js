@@ -188,7 +188,7 @@ function getLatestUpdate() {
 
 function getSeedFromUrl() {
   const params = new URLSearchParams(window.location.search);
-  const value = params.get("month");
+  const value = params.get("date");
 
   if (!value) return null;
 
@@ -210,7 +210,7 @@ function updateUrlFromSeed(seed) {
   const value = `${d.getFullYear()}-${month}`;
 
   const url = new URL(window.location);
-  url.searchParams.set("month", value);
+  url.searchParams.set("date", value);
 
   history.replaceState({}, "", url);
 }
