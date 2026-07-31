@@ -169,8 +169,8 @@ function formatSeed(date) {
 
   function linkify(text) {
   return text.replace(
-    /(https?:\/\/[^\s.,!?;:]+(?:\/[^\s]*)?)/g,
-    '<a href="$1" target="_blank" rel="noopener
+    /(https?:\/\/[^\s]+)/g,
+    url => `<a href{url}</a>`
   );
 }
 
