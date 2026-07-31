@@ -435,7 +435,6 @@ const cases = [
   { text: "Recorded a vlog about (topic) with (person)." },
   { text: "Walked around (place)." },
   { text: "Doordashed (food)." },
-  { text: "Accidently dropped my (food) on the ground (place)." },
   { text: "I was there when (person) learned about (topic)." },
   { text: "Thought about the similarities between (topic) and (topic)." },
   { text: "Well, (person) convinced me about (topic)." },
