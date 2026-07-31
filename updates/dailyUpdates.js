@@ -469,8 +469,7 @@ function createGenerator(seedInput) {
   };
 }
 
-// UI Hook
-function runGenerator() {
+/*function runGenerator() {
   const seed = document.getElementById("seed").value;
   const generator = createGenerator(seed);
 
@@ -480,4 +479,4 @@ function runGenerator() {
   }
 
   document.getElementById("result").innerHTML = results.join("<br>");
-}
+}*/
