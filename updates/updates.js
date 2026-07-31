@@ -17,12 +17,12 @@ function parseSeed(seed) {
   return new Date(parseInt(yearString, 10), monthMap[monthName], 1);
 }
 
-/*function formatSeed(date) {
+function formatSeed(date) {
   return date.toLocaleString("en-US", {
     month: "long",
     year: "numeric"
   });
-}*/
+}
   
   function runMany() {
     const seed = currentSeed;
