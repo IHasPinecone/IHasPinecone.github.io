@@ -45,6 +45,10 @@ body {
                 margin-top: 8px;
         }
 
+        #latestUpdate {
+                display: block;
+        }
+
         #latestUpdate,
         #recent-posts > div {
             display: block;
