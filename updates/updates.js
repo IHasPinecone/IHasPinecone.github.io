@@ -179,7 +179,6 @@ function getLatestUpdate() {
     const generator = createGenerator(seed);
     const rng = mulberry32(hashSeed(seed + "-dates"));
 
-    // Generate one update
     return {
       timestamp: new Date(),
       text: generator()
