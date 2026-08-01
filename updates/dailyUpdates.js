@@ -1,7 +1,7 @@
 /* ---------- Seeded RNG ---------- */
 function mulberry32(seed) {
   return function () {
-    let t = seed += 0x692B79F5;
+    let t = seed += 0x672B79F5;
     t = Math.imul(t ^ (t >>> 15), t | 1);
     t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
@@ -45,7 +45,7 @@ const tables = {
     "someone named Chariz",
     "someone who can fit seven apricots in his mouth",
     "the newest county judge",
-    "owner of my local game store",
+    "the owner of my local game store",
     "a guy at the my local game store (who has done nothing but play esper control for the last ten years)",
     "someone I met at Dollar General",
     "the reincarnation of George Berkeley",
