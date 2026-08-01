@@ -243,12 +243,12 @@ function getLatestUpdate() {
       year === currentEastern.getFullYear() &&
       month === currentEastern.getMonth()
     ) {
-      /*entries.splice(
+      entries.splice(
         0,
         entries.length,
         ...entries.filter(
           entry => entry.timestamp <= currentEastern
-        )*/
+        )
       );
     }
     let output = "";
