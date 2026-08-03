@@ -294,7 +294,6 @@ function getLatestUpdate() {
 function getSeedFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const value = params.get("date");
-
   if (!value) return null;
 
   const match = value.match(/^(\d{4})-(\d{2})$/);
@@ -303,7 +302,26 @@ function getSeedFromUrl() {
   const year = parseInt(match[1], 10);
   const month = parseInt(match[2], 10) - 1;
 
-  return formatSeed(new Date(year, month, 1));
+  let date = new Date(year, month, 1);
+  const current = getCurrentMonth();
+
+  // Clamp to valid range
+  if (date < FIRST_MONTH) {
+    date = new Date(FIRST_MONTH);
+  } else if (date > current) {
+    date = new Date(current);
+  }
+
+  const seed = formatSeed(date);
+
+  // If clamped, update the URL to match
+  const correctedValue =
+    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+  
+  if (correctedValue !== value) {
+    updateUrlFromSeed(seed);
+  }
+  return seed;
 }
 
 function updateUrlFromSeed(seed) {
