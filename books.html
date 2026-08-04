@@ -381,11 +381,12 @@ function openModal(book) {
   document.getElementById("modalDate").textContent =
   "Date Read: " +
   book.querySelector(".raw-date").textContent;
+  
   const reviewed = book.querySelector(".reviewed-date");
-
-document.getElementById("modalReviewedDate").textContent =
-  reviewed ? "Date Reviewed: " + reviewed.textContent : "";
-
+  const reviewedText = reviewed?.textContent?.trim();
+  document.getElementById("modalReviewedDate").textContent =
+  reviewedText ? `Date Reviewed: ${reviewedText}` : "";
+  
   document.getElementById("modalReview").innerHTML =
     book.querySelector(".review").innerHTML;
 
@@ -539,14 +540,18 @@ function buildShelves(data) {
   return new Date(0);
 }
 
+  function getSortDate(book) {
+  return parseBookDate(book.dateReviewed || book.date);
+}
+
   function buildChronologicalShelves(data) {
     bookshelf.innerHTML = "";
 
     // Remove empty items, then sort and group into shelves of 6
     const books = data.filter(book => book.title);
     books.sort(
-      (a, b) => parseBookDate(b.date) - parseBookDate(a.date)
-              );
+      (a, b) => getSortDate(b) - getSortDate(a)
+      );
     for (let i = 0; i < books.length; i += 6) {
       const shelf = document.createElement("div");
       shelf.className = "shelf";
