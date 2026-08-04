@@ -53,6 +53,15 @@ body {
                 display: block;
                 margin-bottom: 40px;
         }
+.latest-book-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.latest-book-preview {
+  font-size: 0.9em;
+  color: #666;
+}
 
         #recent-posts > div {
                 display: block;
