@@ -72,8 +72,6 @@
   </main>
 
 <script>
-const link = document.getElementById("latestBookReview");
-link.href = `books.html?book=${encodeURIComponent(latest.title)}`;
 
 async function populateLatestBookReview(elementId) {
   const response = await fetch("books.json");
@@ -92,6 +90,8 @@ async function populateLatestBookReview(elementId) {
     el.textContent = latest.title;
     el.href = `books.html?book=${encodeURIComponent(latest.title)}`;
   }
+  const link = document.getElementById("latestBookReview");
+  link.href = `books.html?book=${encodeURIComponent(latest.title)}`;
 }
 
 window.addEventListener("DOMContentLoaded", populateLatestBookReview);
