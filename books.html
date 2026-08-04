@@ -336,6 +336,26 @@ button {
 </div>
 
 <script>
+
+window.addEventListener("popstate", loadBookFromUrl);
+
+async function loadBookFromUrl() {
+  const response = await fetch("books.json");
+  const books = await response.json();
+
+  const bookParam = new URLSearchParams(window.location.search)
+    .get("book");
+
+  if (!bookParam) return;
+
+  const book = books.find(b => b.title === bookParam);
+
+  if (book) {
+    showBook(book);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", loadBookFromUrl);
   
 function toggleMode() {
   reviewMode = !reviewMode;
@@ -400,6 +420,14 @@ if (reviewed) {
 
   modal.style.display = "block";
   document.body.style.overflow = "hidden";
+  
+  // update page content
+  document.getElementById("title").textContent = book.title;
+  document.getElementById("review").innerHTML = book.review;
+  // update URL
+  const url = new URL(window.location);
+  url.searchParams.set("book", book.title);
+  history.pushState({}, "", url);
 }
   
 function closeModal() {
