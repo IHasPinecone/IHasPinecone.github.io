@@ -72,37 +72,26 @@
   </main>
 
 <script>
-async function populateLatestBookReview() {
+async function populateLatestBookReview(elementId) {
   const response = await fetch("books.json");
   const books = await response.json();
 
-  const validBooks = books.filter(book =>
-    book.title &&
-    book.review
-  );
+  const latest = books
+    .filter(b => b.title && b.review)
+    .sort((a, b) =>
+      new Date(b.dateReviewed || b.date) -
+      new Date(a.dateReviewed || a.date)
+    )[0];
 
-  // Sort by review date if available, otherwise read date
-  validBooks.sort((a, b) => {
-    const aDate = new Date(a.dateReviewed || a.date || 0);
-    const bDate = new Date(b.dateReviewed || b.date || 0);
-    return bDate - aDate;
-  });
+  const el = document.getElementById(elementId);
 
-  const latest = validBooks[0];
-
-  const link = document.getElementById("latestBookReview");
-
-  if (!latest) {
-    link.textContent = "No reviews available";
-    return;
+  if (latest) {
+    el.textContent = latest.title;
+    el.href = `books.html?book=${encodeURIComponent(latest.title)}`;
   }
-
-  link.textContent = latest.title;
-  link.href = "books.html";
-  link.title = latest.review;
 }
 
-populateLatestBookReview();
+window.addEventListener("DOMContentLoaded", populateLatestBookReview);
 </script>
     
   <script>
