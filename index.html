@@ -11,7 +11,9 @@
       
         <p class="asideTitle">Latest Update</p>
         <a id="latestUpdate" href="updates.html"></a>
-      
+
+        <p class="asideTitle">Latest Book Review</p>
+        <a id="latestBookReview" href="books.html"></a>
         
         <p class="aside Title">Recent Posts</p>
         <div id="recent-posts"></div>
@@ -68,6 +70,40 @@
     <hr class="superspace"/>
 
   </main>
+
+<script>
+async function populateLatestBookReview() {
+  const response = await fetch("books.json");
+  const books = await response.json();
+
+  const validBooks = books.filter(book =>
+    book.title &&
+    book.review
+  );
+
+  // Sort by review date if available, otherwise read date
+  validBooks.sort((a, b) => {
+    const aDate = new Date(a.dateReviewed || a.date || 0);
+    const bDate = new Date(b.dateReviewed || b.date || 0);
+    return bDate - aDate;
+  });
+
+  const latest = validBooks[0];
+
+  const link = document.getElementById("latestBookReview");
+
+  if (!latest) {
+    link.textContent = "No reviews available";
+    return;
+  }
+
+  link.textContent = latest.title;
+  link.href = "books.html";
+  link.title = latest.review;
+}
+
+populateLatestBookReview();
+</script>
     
   <script>
     fetch("posts.json")
