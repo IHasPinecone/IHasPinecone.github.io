@@ -450,18 +450,13 @@ function buildShelves(data) {
   const shelves = {};
 
   data.forEach(book => {
-    // don't display template
     if (!book.title) return;
-
     if (!book.review) {
         book.review = "(no review)";
       }
-    
     if (!shelves[book.shelf]) {
       const shelf = document.createElement("div");
       shelf.className = "shelf";
-
-      // label
       const label = document.createElement("div");
       label.className = "shelf-label";
       label.textContent = book.shelf;
@@ -480,9 +475,8 @@ function buildShelves(data) {
       </div>
       <div class="meta">
   <div class="title">${book.title}</div>
-
-  <div class="date">Read: ${book.date}</div>
   <div class="raw-date" style="display:none">${book.date}</div>
+  <div class="reviewed-date" style="display:none">${book.dateReviewed}</div>
 
   ${
     book.dateReviewed
@@ -574,12 +568,8 @@ function buildShelves(data) {
         </div>
         <div class="meta">
           <div class="title">${book.title}</div>
-          <div class="date">${book.date}</div>
-          ${
-            book.dateReviewed
-            ? `<div class="reviewed-date" style="display:none">${book.dateReviewed}</div>`
-            : ""
-          }
+          <div class="raw-date" style="display:none">${book.date}</div>
+          <div class="reviewed-date" style="display:none">${book.dateReviewed}</div>
         </div>
         <div class="review">
           ${
