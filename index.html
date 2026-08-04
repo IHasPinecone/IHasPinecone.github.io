@@ -84,14 +84,12 @@ async function populateLatestBookReview(elementId) {
       new Date(a.dateReviewed || a.date)
     )[0];
 
-  const el = document.getElementById(elementId);
+  const el = document.getElementById("latestBookReview");
 
-  if (latest) {
-    el.textContent = latest.title;
-    el.href = `books.html?book=${encodeURIComponent(latest.title)}`;
-  }
-  const link = document.getElementById("latestBookReview");
-  link.href = `books.html?book=${encodeURIComponent(latest.title)}`;
+if (latest && el) {
+  el.textContent = latest.title;
+  el.href = `books.html?book=${encodeURIComponent(latest.title)}`;
+}
 }
 
 window.addEventListener("DOMContentLoaded", populateLatestBookReview);
