@@ -336,6 +336,7 @@ button {
 </div>
 
 <script>
+  
 function toggleMode() {
   reviewMode = !reviewMode;
 
@@ -443,6 +444,17 @@ fetch("books.json")
   .then(data => {
     buildShelves(data);
     attachBookClicks();
+    const params = new URLSearchParams(window.location.search);
+    const bookTitle = params.get("book");
+    if (bookTitle) {
+      const bookEl = [...document.querySelectorAll(".book")]
+        .find(book =>
+          book.querySelector(".title")?.textContent === bookTitle
+        );
+      if (bookEl) {
+        openModal(bookEl);
+      }
+    }
   });
 
 function buildShelves(data) {
