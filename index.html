@@ -73,7 +73,7 @@
 
 <script>
 
-async function populateLatestBookReview(elementId) {
+async function populateLatestBookReview() {
   const response = await fetch("books.json");
   const books = await response.json();
 
@@ -86,11 +86,23 @@ async function populateLatestBookReview(elementId) {
 
   const el = document.getElementById("latestBookReview");
 
-if (latest && el) {
-  el.textContent = latest.title;
-  el.href = `books.html?book=${encodeURIComponent(latest.title)}`;
+  if (latest && el) {
+    const plainText = latest.review.replace(/<[^>]*>/g, "");
+
+const preview = plainText
+  .split(/\s+/)
+  .slice(0, 20)
+  .join(" ") + "...";
+
+    el.href = `books.html?book=${encodeURIComponent(latest.title)}`;
+    el.innerHTML = `
+      <div class="latest-book-title">${latest.title}</div>
+      <div class="latest-book-preview">${preview}</div>
+    `;
+  }
 }
-}
+
+window.addEventListener("DOMContentLoaded", populateLatestBookReview);
 
 window.addEventListener("DOMContentLoaded", populateLatestBookReview);
 </script>
