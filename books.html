@@ -379,7 +379,8 @@ function openModal(book) {
     book.querySelector(".title").textContent;
 
   document.getElementById("modalDate").textContent =
-  book.querySelector(".date").textContent;
+  "Date Read: " +
+  book.querySelector(".raw-date").textContent;
   const reviewed = book.querySelector(".reviewed-date");
 
 document.getElementById("modalReviewedDate").textContent =
@@ -478,14 +479,22 @@ function buildShelves(data) {
         <img class="cover" src="${book.cover}">
       </div>
       <div class="meta">
-        <div class="title">${book.title}</div>
-        <div class="date">Read: ${book.date}</div>
-        ${
-          book.dateReviewed
-          ? `<div class="date">Reviewed: ${book.dateReviewed}</div>`
-          : ""
-        }
-        </div>
+  <div class="title">${book.title}</div>
+
+  <div class="date">Read: ${book.date}</div>
+  <div class="raw-date" style="display:none">${book.date}</div>
+
+  ${
+    book.dateReviewed
+      ? `
+      <div class="date">Reviewed: ${book.dateReviewed}</div>
+      <div class="raw-reviewed-date" style="display:none">
+        ${book.dateReviewed}
+      </div>
+      `
+      : ""
+  }
+</div>
       <div class="review">
         ${book.review
           .split("\n\n")
