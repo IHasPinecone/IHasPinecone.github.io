@@ -379,7 +379,7 @@ function openModal(book) {
     book.querySelector(".title").textContent;
 
   document.getElementById("modalDate").textContent =
-  "Date Read: " + book.querySelector(".date").textContent;
+  book.querySelector(".date").textContent;
   const reviewed = book.querySelector(".reviewed-date");
 
 document.getElementById("modalReviewedDate").textContent =
