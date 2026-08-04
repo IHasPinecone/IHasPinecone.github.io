@@ -384,9 +384,16 @@ function openModal(book) {
   book.querySelector(".raw-date").textContent;
   
   const reviewed = book.querySelector(".reviewed-date");
-  const reviewedText = reviewed?.textContent?.trim();
-  document.getElementById("modalReviewedDate").textContent =
-  reviewedText ? `Date Reviewed: ${reviewedText}` : "";
+const reviewedElement = document.getElementById("modalReviewedDate");
+
+if (reviewed) {
+  reviewedElement.textContent =
+    `Date Reviewed: ${reviewed.textContent.trim()}`;
+  reviewedElement.style.display = "block";
+} else {
+  reviewedElement.textContent = "";
+  reviewedElement.style.display = "none";
+}
   
   document.getElementById("modalReview").innerHTML =
     book.querySelector(".review").innerHTML;
@@ -489,18 +496,21 @@ function buildShelves(data) {
       <div class="meta">
   <div class="title">${book.title}</div>
   <div class="raw-date" style="display:none">${book.date}</div>
-  <div class="reviewed-date" style="display:none">${book.dateReviewed}</div>
-
-  ${
-    book.dateReviewed
-      ? `
-      <div class="date">Reviewed: ${book.dateReviewed}</div>
+ ${
+  book.dateReviewed
+    ? `
+      <div class="reviewed-date" style="display:none">
+        ${book.dateReviewed}
+      </div>
+      <div class="date">
+        Reviewed: ${book.dateReviewed}
+      </div>
       <div class="raw-reviewed-date" style="display:none">
         ${book.dateReviewed}
       </div>
       `
-      : ""
-  }
+    : ""
+}
 </div>
       <div class="review">
         ${book.review
