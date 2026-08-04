@@ -13,7 +13,7 @@
         <a id="latestUpdate" href="updates.html"></a>
 
         <p class="asideTitle">Latest Book Review</p>
-        <a id="latestBookReview" link.href = `books.html?book=${encodeURIComponent(latest.title)}`;"></a>
+        <a id="latestBookReview"></a>
         
         <p class="aside Title">Recent Posts</p>
         <div id="recent-posts"></div>
@@ -72,6 +72,9 @@
   </main>
 
 <script>
+const link = document.getElementById("latestBookReview");
+link.href = `books.html?book=${encodeURIComponent(latest.title)}`;
+
 async function populateLatestBookReview(elementId) {
   const response = await fetch("books.json");
   const books = await response.json();
