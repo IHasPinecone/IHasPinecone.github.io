@@ -49,6 +49,11 @@ body {
                 margin-bottom: 40px;
         }
 
+        #latestBookReview {
+                display: block;
+                margin-bottom: 40px;
+        }
+
         #recent-posts > div {
                 display: block;
                 margin-bottom: 16px;
