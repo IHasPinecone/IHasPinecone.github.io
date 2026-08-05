@@ -397,7 +397,7 @@ if (reviewed) {
   
   document.getElementById("modalReview").innerHTML =
     book.querySelector(".review").innerHTML;
-g
+
   modal.style.display = "block";
   document.body.style.overflow = "hidden";
   
@@ -418,6 +418,8 @@ g
 function closeModal() {
   document.getElementById("bookModal").style.display = "none";
   document.body.style.overflow = "";
+
+  history.pushState({}, "", window.location.pathname);
 }
 
 // close when clicking outside
