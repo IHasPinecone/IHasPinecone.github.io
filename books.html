@@ -336,11 +336,6 @@ button {
 </div>
 
 <script>
-
-window.addEventListener("popstate", loadBookFromUrl);
-
-
-window.addEventListener("DOMContentLoaded", loadBookFromUrl);
   
 function toggleMode() {
   reviewMode = !reviewMode;
@@ -402,13 +397,10 @@ if (reviewed) {
   
   document.getElementById("modalReview").innerHTML =
     book.querySelector(".review").innerHTML;
-
+g
   modal.style.display = "block";
   document.body.style.overflow = "hidden";
   
-  // update page content
-  document.getElementById("title").textContent = book.title;
-  document.getElementById("review").innerHTML = book.review;
   // update URL
   history.pushState(
   {},
