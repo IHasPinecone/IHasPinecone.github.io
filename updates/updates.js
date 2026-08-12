@@ -1,3 +1,19 @@
+// this first function is for bug testing
+const RealDate = Date;
+window.Date = class extends RealDate {
+  constructor(...args) {
+    if (args.length === 0) {
+      return new RealDate("2026-11-15T12:00:00");
+    }
+    return new RealDate(...args);
+  }
+  static now() {
+    return new RealDate("2026-11-15T12:00:00").getTime();
+  }
+  static parse = RealDate.parse;
+  static UTC = RealDate.UTC;
+};
+
 function parseSeed(seed) {
   const [monthName, yearString] = seed.trim().split(/\s+/);
   const monthMap = {
