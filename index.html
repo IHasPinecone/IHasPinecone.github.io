@@ -76,34 +76,28 @@
 async function populateLatestBookReview() {
   const response = await fetch("books.json");
   const books = await response.json();
-
   const latest = books
     .filter(b => b.title && b.review)
     .sort((a, b) =>
       new Date(b.dateReviewed || b.date) -
       new Date(a.dateReviewed || a.date)
     )[0];
-
   const el = document.getElementById("latestBookReview");
-
   if (latest && el) {
     const plainText = latest.review.replace(/<[^>]*>/g, "");
-
 const preview = plainText
   .split(/\s+/)
   .slice(0, 20)
   .join(" ") + "...";
-
     el.href = `books.html?book=${encodeURIComponent(latest.title)}`;
     el.innerHTML = `
       <div class="latest-book-title">${latest.title}</div>
+      <div class="latest-book-title">${latest.dateReviewed}</div>
       <div class="latest-book-preview">${preview}</div>
     `;
   }
 }
-
 window.addEventListener("DOMContentLoaded", populateLatestBookReview);
-
 window.addEventListener("DOMContentLoaded", populateLatestBookReview);
 </script>
     
