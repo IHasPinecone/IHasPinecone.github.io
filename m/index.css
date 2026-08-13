@@ -66,7 +66,10 @@ body {
   font-weight: bold;
   margin-bottom: 4px;
 }
-
+.latest-book-date {
+        margin-bottom: 4px;
+        font-size: 0.9em;
+}
 .latest-book-preview {
   font-size: 0.9em;
 }
