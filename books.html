@@ -446,7 +446,7 @@ fetch("books.json")
     }
   });
   
-  function createBookElement(book) {
+function createBookElement(book) {
   const bookEl = document.createElement("div");
   bookEl.className = "book";
   bookEl.innerHTML = `
@@ -461,15 +461,10 @@ fetch("books.json")
       <div class="reviewed-date" style="display:none">
         ${book.dateReviewed || ""}
       </div>
-      ${
-        book.dateReviewed
-          ? `<div class="date">Reviewed: ${book.dateReviewed}</div>`
-          : ""
-      }
     </div>
     <div class="review">
       ${(book.review || "(no review)")
-        .split("\n\n")
+        .split("\\n\\n")
         .map(p => `<p>${p}</p>`)
         .join("")}
     </div>
