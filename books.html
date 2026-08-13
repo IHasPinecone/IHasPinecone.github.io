@@ -449,26 +449,11 @@ fetch("books.json")
 function createBookElement(book) {
   const bookEl = document.createElement("div");
   bookEl.className = "book";
+
   bookEl.innerHTML = `
-  <div class="book-cover">
-    <img class="cover" src="${book.cover}" alt="${book.title}">
-  </div>
-  <div class="meta">
-    <div class="title">${book.title}</div>
-    <div class="raw-date" style="display:none">
-      ${book.date || ""}
+    <div class="book-cover">
+      ${book.cover}
     </div>
-    <div class="reviewed-date" style="display:none">
-      ${book.dateReviewed || ""}
-    </div>
-  </div>
-  <div class="review">
-    ${(book.review || "(no review)")
-      .split("\\n\\n")
-      .map(p => `<p>${p}</p>`)
-      .join("")}
-  </div>
-`;
     <div class="meta">
       <div class="title">${book.title}</div>
       <div class="raw-date" style="display:none">
@@ -480,11 +465,12 @@ function createBookElement(book) {
     </div>
     <div class="review">
       ${(book.review || "(no review)")
-        .split("\\n\\n")
+        .split("\n\n")
         .map(p => `<p>${p}</p>`)
         .join("")}
     </div>
   `;
+
   return bookEl;
 }
 
