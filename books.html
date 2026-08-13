@@ -339,34 +339,6 @@ button {
 </div>
 
 <script>
-  
-function toggleMode() {
-  reviewMode = !reviewMode;
-
-  bookshelf.classList.toggle("review-mode", reviewMode);
-  bookshelf.innerHTML = "";
-
-  if (reviewMode) {
-    // REVIEW MODE: one book per shelf
-    originalShelves.forEach(shelf => {
-      shelf.querySelectorAll(".book").forEach(book => {
-        const newShelf = document.createElement("div");
-        newShelf.className = "shelf";
-        newShelf.appendChild(book.cloneNode(true));
-        bookshelf.appendChild(newShelf);
-      });
-    });
-  } else {
-    // SHELF MODE: restore original shelves
-    originalShelves.forEach(shelf => {
-      bookshelf.appendChild(shelf.cloneNode(true));
-    });
-  }
-  attachBookClicks();
-}
-</script>
-
-<script>
 function attachBookClicks() {
   document.querySelectorAll(".book").forEach(book => {
     book.onclick = () => openModal(book);
@@ -429,10 +401,6 @@ window.onclick = function(e) {
   }
 };
 
-function icks() {
-  attachBookClicks();
-}
-
 // run initially
 attachBookClicks();
 
@@ -477,12 +445,41 @@ fetch("books.json")
       }
     }
   });
+  
+  function createBookElement(book) {
+  const bookEl = document.createElement("div");
+  bookEl.className = "book";
+  bookEl.innerHTML = `
+    <div class="book-cover">
+      ${book.cover}
+    </div>
+    <div class="meta">
+      <div class="title">${book.title}</div>
+      <div class="raw-date" style="display:none">
+        ${book.date || ""}
+      </div>
+      <div class="reviewed-date" style="display:none">
+        ${book.dateReviewed || ""}
+      </div>
+      ${
+        book.dateReviewed
+          ? `<div class="date">Reviewed: ${book.dateReviewed}</div>`
+          : ""
+      }
+    </div>
+    <div class="review">
+      ${(book.review || "(no review)")
+        .split("\n\n")
+        .map(p => `<p>${p}</p>`)
+        .join("")}
+    </div>
+  `;
+  return bookEl;
+}
 
 function buildShelves(data) {
   bookshelf.innerHTML = "";
-
   const shelves = {};
-
   data.forEach(book => {
     if (!book.title) return;
     if (!book.review) {
@@ -498,51 +495,15 @@ function buildShelves(data) {
       shelf.appendChild(label);
       shelves[book.shelf] = shelf;
     }
-
     // create book
-    const bookEl = document.createElement("div");
-    bookEl.className = "book";
-
-    bookEl.innerHTML = `
-      <div class="book-cover">
-        <img class="cover" src="${book.cover}">
-      </div>
-      <div class="meta">
-  <div class="title">${book.title}</div>
-  <div class="raw-date" style="display:none">${book.date}</div>
- ${
-  book.dateReviewed
-    ? `
-      <div class="reviewed-date" style="display:none">
-        ${book.dateReviewed}
-      </div>
-      <div class="date">
-        Reviewed: ${book.dateReviewed}
-      </div>
-      <div class="raw-reviewed-date" style="display:none">
-        ${book.dateReviewed}
-      </div>
-      `
-    : ""
-}
-</div>
-      <div class="review">
-        ${book.review
-          .split("\n\n")
-          .map(p => `<p>${p}</p>`)
-          .join("")
-        }
-      </div>
-    `;
-
-    shelves[book.shelf].appendChild(bookEl);
+    shelves[book.shelf].appendChild(
+      createBookElement(book)
+    );
   });
-
   // Add shelves to page
   Object.values(shelves).forEach(shelf => {
     bookshelf.appendChild(shelf);
   });
-
   // Save layout for toggle
   originalShelves = [...bookshelf.children].map(s => s.cloneNode(true));
 }
@@ -581,11 +542,15 @@ function buildShelves(data) {
   const books = data.filter(book => book.title);
   books.sort((a, b) => {
     const dateA = parseBookDate(
-      useReviewedDate ? a.dateReviewed : a.date
-    );
-    const dateB = parseBookDate(
-      useReviewedDate ? b.dateReviewed : b.date
-    );
+  useReviewedDate
+    ? (a.dateReviewed || a.date)
+    : a.date
+);
+const dateB = parseBookDate(
+  useReviewedDate
+    ? (b.dateReviewed || b.date)
+    : b.date
+);
     return dateB - dateA;
   });
   for (let i = 0; i < books.length; i += 6) {
@@ -599,27 +564,9 @@ function buildShelves(data) {
         : `Older (${i + 1}+)`;
     shelf.appendChild(label);
     books.slice(i, i + 6).forEach(book => {
-      const bookEl = document.createElement("div");
-      bookEl.className = "book";
-      bookEl.innerHTML = `
-        <div class="book-cover">
-          ${book.cover}
-        </div>
-        <div class="meta">
-          <div class="title">${book.title}</div>
-          <div class="raw-date" style="display:none">${book.date}</div>
-          <div class="reviewed-date" style="display:none">
-            ${book.dateReviewed || ""}
-          </div>
-        </div>
-        <div class="review">
-          ${(book.review || "(no review)")
-            .split("\n\n")
-            .map(p => `<p>${p}</p>`)
-            .join("")}
-        </div>
-      `;
-      shelf.appendChild(bookEl);
+      shelf.appendChild(
+        createBookElement(book)
+      );
     });
     bookshelf.appendChild(shelf);
   }
