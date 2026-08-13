@@ -92,7 +92,7 @@ const preview = plainText
     el.href = `books.html?book=${encodeURIComponent(latest.title)}`;
     el.innerHTML = `
       <div class="latest-book-title">${latest.title}</div>
-      <div>${latest.dateReviewed}</div>
+      <div class="latest-book-date">${latest.dateReviewed || latest.date}</div>
       <div class="latest-book-preview">${preview}</div>
     `;
   }
