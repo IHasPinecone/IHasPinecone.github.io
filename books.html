@@ -321,8 +321,11 @@ button {
 </header>
 
 <div class="controls">
-  <!--<button onclick="toggleMode()">Toggle "See All Reviews"</button>-->
-  <button onclick="toggleChronological()">Toggle Chronological Mode</button>
+  <select id="sortMode" onchange="changeSortMode()">
+    <option value="genre">Sort by Genre</option>
+    <option value="reviewed">Sort by Date Reviewed</option>
+    <option value="read">Sort by Date Read</option>
+  </select>
 </div>
 
 <div class="bookshelf" id ="bookshelf"></div>
@@ -546,21 +549,17 @@ function buildShelves(data) {
 
   function parseBookDate(dateStr) {
   if (!dateStr) return new Date(0);
-
   const seasonMatch =
     dateStr.match(/^(Winter|Spring|Summer|Fall)\s+(\d{4})$/i);
-
   if (seasonMatch) {
     const season = seasonMatch[1].toLowerCase();
     const year = parseInt(seasonMatch[2]);
-
     const months = {
       winter: 0, // January
       spring: 3, // April
       summer: 6, // July
       fall: 9    // October
     };
-
     return new Date(year, months[season], 1);
   }
 
@@ -575,6 +574,71 @@ function buildShelves(data) {
 
   function getSortDate(book) {
   return parseBookDate(book.dateReviewed || book.date);
+}
+
+  function buildDateShelves(data, useReviewedDate) {
+  bookshelf.innerHTML = "";
+  const books = data.filter(book => book.title);
+  books.sort((a, b) => {
+    const dateA = parseBookDate(
+      useReviewedDate ? a.dateReviewed : a.date
+    );
+    const dateB = parseBookDate(
+      useReviewedDate ? b.dateReviewed : b.date
+    );
+    return dateB - dateA;
+  });
+  for (let i = 0; i < books.length; i += 6) {
+    const shelf = document.createElement("div");
+    shelf.className = "shelf";
+    const label = document.createElement("div");
+    label.className = "shelf-label";
+    label.textContent =
+      i === 0
+        ? "Most Recent"
+        : `Older (${i + 1}+)`;
+    shelf.appendChild(label);
+    books.slice(i, i + 6).forEach(book => {
+      const bookEl = document.createElement("div");
+      bookEl.className = "book";
+      bookEl.innerHTML = `
+        <div class="book-cover">
+          ${book.cover}
+        </div>
+        <div class="meta">
+          <div class="title">${book.title}</div>
+          <div class="raw-date" style="display:none">${book.date}</div>
+          <div class="reviewed-date" style="display:none">
+            ${book.dateReviewed || ""}
+          </div>
+        </div>
+        <div class="review">
+          ${(book.review || "(no review)")
+            .split("\n\n")
+            .map(p => `<p>${p}</p>`)
+            .join("")}
+        </div>
+      `;
+      shelf.appendChild(bookEl);
+    });
+    bookshelf.appendChild(shelf);
+  }
+}
+
+  function changeSortMode() {
+  const mode = document.getElementById("sortMode").value;
+  fetch("books.json")
+    .then(res => res.json())
+    .then(data => {
+      if (mode === "genre") {
+        buildShelves(data);
+      } else if (mode === "reviewed") {
+        buildDateShelves(data, true);
+      } else if (mode === "read") {
+        buildDateShelves(data, false);
+      }
+      attachBookClicks();
+    });
 }
 
   function buildChronologicalShelves(data) {
