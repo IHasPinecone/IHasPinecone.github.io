@@ -449,11 +449,11 @@ fetch("books.json")
 function createBookElement(book) {
   const bookEl = document.createElement("div");
   bookEl.className = "book";
-
   bookEl.innerHTML = `
     <div class="book-cover">
       ${book.cover}
     </div>
+
     <div class="meta">
       <div class="title">${book.title}</div>
       <div class="raw-date" style="display:none">
@@ -463,6 +463,7 @@ function createBookElement(book) {
         ${book.dateReviewed || ""}
       </div>
     </div>
+
     <div class="review">
       ${(book.review || "(no review)")
         .split("\n\n")
@@ -470,7 +471,6 @@ function createBookElement(book) {
         .join("")}
     </div>
   `;
-
   return bookEl;
 }
 
