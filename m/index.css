@@ -5,12 +5,11 @@ body {
         text-align: center;
       }
         .main {
-                margin-right: 18vw; /* space for sidebar*/
+                margin-left: 18vw;
         }
 
       .centerimage {
         display: block;
-        
         margin-left: auto;
         margin-right: auto;
       }
@@ -20,16 +19,16 @@ body {
         border: none;
       }
 
-      .rightindex {
+      .leftindex {
         position: fixed;
         top: 80px;
-        right: 5vw;
+        left: 5vw;
         max-width: 15vw;
         text-align: left;
         display: inline;
       }
 
-      .rightindex a {
+      .leftindex a {
         justify-content: left;
       }
 
@@ -39,11 +38,6 @@ body {
                 text-decoration: none;
                 margin: 0;
         }
-
-        #recent-posts > div {
-                
-        }
-
         #latestUpdate {
                 display: block;
                 margin-bottom: 40px;
@@ -53,7 +47,6 @@ body {
                 display: block;
                 margin-bottom: 40px;
         }
-
         #latestBookReview,
         #latestBookReview:visited,
         #latestBookReview:hover,
@@ -73,13 +66,11 @@ body {
 .latest-book-preview {
   font-size: 0.9em;
 }
-
         #recent-posts > div {
                 display: block;
                 margin-bottom: 16px;
                 margin-top: 16px;
         }
-
         #latestUpdate,
         #latestUpdate:visited {
             color: black;
@@ -114,8 +105,8 @@ body {
       .nav {
         list-style-type: none;
         margin: 0;
-        margin-left: 5vw;
-        margin-right: 21vw;
+        margin-right: 5vw;
+        margin-left: 21vw;
       }
       .navitem {
         display: inline;
@@ -125,13 +116,10 @@ body {
         display: flex;
         flex-direction: column;
         padding: 9px;
-
         width: 150px;
         /*min-height: 150px;*/
-
         border: 7px solid white;
         border-radius: 5px;
-        
         box-shadow: black 2px 2px 20px;
         background-color: rgba(255,255,255,0.5);
         color: black;
