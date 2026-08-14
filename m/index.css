@@ -5,7 +5,7 @@ body {
         text-align: center;
       }
         .main {
-                margin-left: 18vw;
+                margin-right: 18vw;
         }
 
       .centerimage {
@@ -19,17 +19,17 @@ body {
         border: none;
       }
 
-      .leftindex {
+      .rightindex {
         position: fixed;
         top: 80px;
-        left: 5vw;
+        right: 5vw;
         max-width: 15vw;
         text-align: left;
         display: inline;
       }
 
-      .leftindex a {
-        justify-content: left;
+      .rightindex a {
+        justify-content: right;
       }
 
         .sidebar-link {
@@ -105,8 +105,8 @@ body {
       .nav {
         list-style-type: none;
         margin: 0;
-        margin-right: 5vw;
-        margin-left: 21vw;
+        margin-right: 21vw;
+        margin-left: 5vw;
       }
       .navitem {
         display: inline;
