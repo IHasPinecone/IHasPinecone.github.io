@@ -96,7 +96,7 @@ const tables = {
     "the soup that makes you blind",
     "some campbell's soup",
     "Walmart sushi",
-    "beef from my deep freeze",
+    "deep freeze beef",
     "concrete paste",
     "a tub of insects",
     "hotdogs",
