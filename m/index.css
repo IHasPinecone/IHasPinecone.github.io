@@ -49,6 +49,9 @@ h1.centertext {
         display: inline-block;
         text-align: center;
 }
+.tile-wrapper {
+  text-align: center;
+}
 
 
       .superspace {
