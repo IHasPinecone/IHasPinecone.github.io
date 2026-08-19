@@ -30,6 +30,7 @@ body {
   background-color: var(--heading-fill);
   border: 3px solid var(--border-color);
   border-radius: 8px;
+  width: 30vw;
 }
 
 .section-header h2 {
