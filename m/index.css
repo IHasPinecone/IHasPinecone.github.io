@@ -5,7 +5,7 @@ body {
         text-align: center;
       }
         .main {
-                margin-right: 22vw;
+                margin-right: 17vw;
         }
 
       .centerimage {
@@ -39,6 +39,7 @@ h1.centertext {
         border-radius: 8px;
         padding: 15px;
         display: inline-block;
+        text-align: center;
 }
 
 
@@ -51,7 +52,7 @@ h1.centertext {
         position: fixed;
         top: 0vw;
         right: 0vw;
-        max-width: 20vw;
+        max-width: 15vw;
         height: 100vh;
         text-align: left;
         display: inline;
