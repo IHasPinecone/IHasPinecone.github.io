@@ -1,6 +1,13 @@
+:root {
+  --bg-color: powderblue;
+  --nav-fill: rgba(255,255,255,0.5);
+  --heading-fill: rgba(255,255,255,0.8);
+  --border-color: white;
+}
+
 body {
-        background-color: powderblue
-      }
+  background-color: var(--bg-color);
+}
       .centertext {
         text-align: center;
       }
@@ -35,8 +42,8 @@ body {
 h1.centertext {
         margin: auto;
         max-width: 65wv;
-        background-color: rgba(255, 255, 255, 0.8);
-        border: 3px solid white;
+        background-color: var(--heading-fill);
+        border: 3px solid var(--border-color);
         border-radius: 8px;
         padding: 15px;
         display: inline-block;
@@ -59,8 +66,8 @@ h1.centertext {
         display: inline;
         padding: 20px;
         box-sizing: border-box;
-        background-color: rgba(255, 255, 255, 0.8);
-        border-left: 3px solid white;
+        background-color: var(--heading-fill);
+        border-left: 3px solid var(--border-color);
         overflow-y: auto;
         box-shadow: -2px 0 10px rgba(0,0,0,0.2);
       }
@@ -155,10 +162,10 @@ h1.centertext {
         padding: 9px;
         width: 150px;
         /*min-height: 150px;*/
-        border: 7px solid white;
+        border: 7px solid var(--border-color);
+        background-color: var(--nav-fill);
         border-radius: 5px;
         box-shadow: black 2px 2px 20px;
-        background-color: rgba(255,255,255,0.5);
         color: black;
         text-decoration: none;
       }
