@@ -50,8 +50,8 @@ h1.centertext {
       .rightindex {
         position: fixed;
         top: 80px;
-        right: 5vw;
-        max-width: 15vw;
+        right: 0vw;
+        max-width: 20vw;
         height: 100vh;
         text-align: left;
         display: inline;
