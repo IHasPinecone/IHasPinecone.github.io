@@ -142,7 +142,8 @@ h1.centertext {
 .card-image {
   display: block;
   width: 100%;
-  height: 100px;
+  height: 400px;
+  width: 300px;
   object-fit: cover;
   border-radius: 3px;
 }
@@ -160,7 +161,7 @@ h1.centertext {
         display: flex;
         flex-direction: column;
         padding: 9px;
-        width: 250px;
+        /*width: 250px;*/
         /*min-height: 150px;*/
         border: 7px solid var(--border-color);
         background-color: var(--nav-fill);
