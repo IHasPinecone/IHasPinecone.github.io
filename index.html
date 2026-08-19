@@ -199,6 +199,93 @@ window.addEventListener("DOMContentLoaded", populateLatestBookReview);
         <div>${update.text}</div>
       `;
     </script>
+
+<div
+  style="
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 9999;
+    background: white;
+    padding: 8px;
+    border-radius: 6px;
+  "
+>
+  <label for="themeSelect">Theme:</label>
+  <select id="themeSelect">
+    <option value="classic">Classic</option>
+    <option value="forest">Forest</option>
+    <option value="sunset">Sunset</option>
+    <option value="midnight">Midnight</option>
+  </select>
+</div>
+
+  <script>
+const themes = {
+  classic: {
+    bg: "powderblue",
+    nav: "rgba(255,255,255,0.5)",
+    heading: "rgba(255,255,255,0.8)",
+    border: "white"
+  },
+  1: {
+    bg: "#f8b6ba",
+    nav: "#f5ecc2",
+    heading:  "#fdc57e",
+    border: "#b24a3a"
+  },
+  12: {
+    bg: "#f48b8b",
+    nav: "#7d9d8a",
+    heading: "#d9a06a",
+    border: "#4f8f76"
+  },
+  3: {
+    bg: "#437742",
+    nav: "#ebd3a2",
+    heading: "#b09f36",
+    border: "#da525d"
+  },
+  4: {
+    bg: "#ca92a8",
+    nav: "#f5ecc2",
+    heading: "#f8b6ba",
+    border: "#6b7140"
+  },
+  forest: {
+    bg: "#cfe8cf",
+    nav: "#9ec5a1",
+    heading: "#b8d8b8",
+    border: "#4f7942"
+  },
+  sunset: {
+    bg: "#ffe0b2",
+    nav: "#ffcc80",
+    heading: "#ffd8a8",
+    border: "#f57c00"
+  },
+  midnight: {
+    bg: "#1a2238",
+    nav: "#30475e",
+    heading: "#3f5873",
+    border: "#a7c5eb"
+  }
+};
+
+function applyTheme(name) {
+  const t = themes[name];
+  document.documentElement.style.setProperty('--bg-color', t.bg);
+  document.documentElement.style.setProperty('--nav-fill', t.nav);
+  document.documentElement.style.setProperty('--heading-fill', t.heading);
+  document.documentElement.style.setProperty('--border-color', t.border);
+}
+
+document.getElementById("themeSelect").addEventListener("change", e => {
+  applyTheme(e.target.value);
+});
+
+applyTheme("classic");
+</script>
   
   </body>
 </html>
