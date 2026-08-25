@@ -537,18 +537,20 @@ function buildShelves(data) {
   bookshelf.innerHTML = "";
   const books = data.filter(book => book.title);
   books.sort((a, b) => {
-    const dateA = parseBookDate(
-  useReviewedDate
-    ? (a.dateReviewed || a.date)
-    : a.date
-);
-const dateB = parseBookDate(
-  useReviewedDate
-    ? (b.dateReviewed || b.date)
-    : b.date
-);
-    return dateB - dateA;
-  });
+  const dateA = parseBookDate(
+    useReviewedDate
+      ? (a.dateReviewed || a.date)
+      : a.date
+  );
+  const dateB = parseBookDate(
+    useReviewedDate
+      ? (b.dateReviewed || b.date)
+      : b.date
+  );
+  const diff = dateB - dateA;
+  if (diff !== 0) return diff;
+  return a.title.localeCompare(b.dateReviewed);
+});
   for (let i = 0; i < books.length; i += 6) {
     const shelf = document.createElement("div");
     shelf.className = "shelf";
