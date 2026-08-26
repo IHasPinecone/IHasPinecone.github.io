@@ -549,7 +549,13 @@ function buildShelves(data) {
   );
   const diff = dateB - dateA;
   if (diff !== 0) return diff;
-  return a.title.localeCompare(b.dateReviewed);
+  if (!useReviewedDate) {
+    const reviewedA = parseBookDate(a.dateReviewed);
+    const reviewedB = parseBookDate(b.dateReviewed);
+    const reviewedDiff = reviewedB - reviewedA;
+    if (reviewedDiff !== 0) return reviewedDiff;
+  }
+    return a.title.localeCompare(b.title);
 });
   for (let i = 0; i < books.length; i += 6) {
     const shelf = document.createElement("div");
