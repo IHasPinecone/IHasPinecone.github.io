@@ -86,7 +86,7 @@ const tables = {
     "the daughter of a Lutheran pastor",
     "my worst enemy",
     "God"],
-  food: ["bagel and cream cheese",
+  food: ["bagel with cream cheese",
     "eggs with chorizo and sourdough bread",
     "oatmeal (I love chia seeds)",
     "a cappuccino",
