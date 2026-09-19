@@ -68,6 +68,8 @@ h3 {
     margin-right: auto;
     margin-top: 60px;
     font-size: 1.6em;
+    max-width: 45ch;
+    text-align: left;
 }
 
 /* ===== Utility Classes ===== */
@@ -84,7 +86,6 @@ h3 {
 
 .lefttext {
     text-align: left;
-    max-width: 45ch;
 }
 
 .caption {
