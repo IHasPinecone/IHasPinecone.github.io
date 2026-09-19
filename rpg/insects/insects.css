@@ -1,7 +1,7 @@
 /* ===== Base Page Styling ===== */
 
 html {
-    background-color: tan;
+    background-color: #867e42;
 }
 
 body {
@@ -43,6 +43,8 @@ p {
     line-height: 1.5;
     max-width: 65ch;
     margin: 0 auto 1.5rem;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 30px;
 }
 
 .voice {
@@ -60,6 +62,14 @@ h2 {
     font-size: 2em;
 }
 
+h3 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    font-size: 1.6em;
+}
+
 /* ===== Utility Classes ===== */
 
 .superspace {
@@ -74,6 +84,7 @@ h2 {
 
 .lefttext {
     text-align: left;
+    max-width: 45ch;
 }
 
 .caption {
@@ -87,6 +98,13 @@ h2 {
 /* ===== Images ===== */
 
 .centerimage {
+    display: block;
+    margin: 0 auto;
+    max-width: 400px;
+    max-height: 300px;
+}
+
+.bigimage {
     display: block;
     margin: 0 auto;
     width: 100%;
