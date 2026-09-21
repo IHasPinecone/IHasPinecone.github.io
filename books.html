@@ -358,9 +358,8 @@ function openModal(book) {
   "Date Read: " +
   book.querySelector(".raw-date").textContent;
   
-  const reviewed = book.querySelector(".reviewed-date");
+const reviewed = book.querySelector(".reviewed-date");
 const reviewedElement = document.getElementById("modalReviewedDate");
-
 if (reviewed) {
   reviewedElement.textContent =
     `Date Reviewed: ${reviewed.textContent.trim()}`;
@@ -458,9 +457,11 @@ function createBookElement(book) {
       <div class="raw-date" style="display:none">
         ${book.date || ""}
       </div>
-      <div class="reviewed-date" style="display:none">
-        ${book.dateReviewed || ""}
-      </div>
+      ${book.dateReviewed ? `
+        <div class="reviewed-date" style="display:none">
+        ${book.dateReviewed}
+        </div>
+        ` : ""}
     </div>
 
     <div class="review">
