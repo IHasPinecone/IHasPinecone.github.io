@@ -31,6 +31,8 @@ body {
   border: 3px solid var(--border-color);
   border-radius: 8px;
   width: 30vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-header h2 {
