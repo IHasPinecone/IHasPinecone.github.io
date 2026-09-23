@@ -50,7 +50,7 @@ function buildPodcastItems(feedPosts) {
     const postUrl = `${SITE_URL}/${post.link}`;
 
     const episodeImage = post.coverImage
-      ? `${<SITE_URL}/${post.coverImage}`
+      ? `${SITE_URL}/${post.coverImage}`
       : "";
 
     return `
