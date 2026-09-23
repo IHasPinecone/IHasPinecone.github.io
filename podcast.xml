@@ -9,23 +9,5 @@
     <itunes:author>IHasPinecone</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     
-    <item>
-      <title><![CDATA[]]></title>
-      <link>https://ihaspinecone.github.io/</link>
-      <guid isPermaLink="false"><![CDATA[]]></guid>
-      <pubDate>Invalid Date</pubDate>
-
-      https://ihaspinecone.github.io/bg/ph/ph1.webp
-      <itunes:image href=https://ihaspinecone.github.io/bg/ph/ph1.webp/>
-
-      <enclosure
-        url=""
-        length=""
-        type="audio/mpeg" />
-
-      <description><![CDATA[
-        
-      ]]></description>
-    </item>
   </channel>
 </rss>
