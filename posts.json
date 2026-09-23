@@ -106,5 +106,15 @@
     "topic": "",
     "readTime": "",
     "summary": "Copy the URL into your RSS reader to get a little update when I make a post."
+  },
+  {
+    "title": "Sandbox Episode 1: PLACEHOLDER THIS IS WHAT WE CALL A PLACEHOLDER FOR THE REAL TITLE",
+    "datetime": "09/28/2026",
+    "coverImage": "",
+    "link": "sandbox/ep1.html",
+    "topic": "Podcast",
+    "readTime": "",
+    "audioFile": "https://ihaspincone.githubio/sandbox/sandboxEP1.mp3",
+    "summary": "LOREM IPSUM DOLOR SIT AMET."
   }
 ]
