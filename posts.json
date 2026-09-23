@@ -108,6 +108,16 @@
     "summary": "Copy the URL into your RSS reader to get an update when I make a post :D"
   },
   {
+    "title": "Sandbox Ep.1 This one has a 404",
+    "datetime": "09/28/2026",
+    "coverImage": "bg/ph/ph1.webp",
+    "link": "sandbox/ep1.html",
+    "topic": "Podcast",
+    "readTime": "",
+    "audioFile": "https://ihaspinecone.github.io/sandbox/sandboxEp1.mp3",
+    "summary": "LOREM IPSUM DOLOR SIT AMET."
+  },
+  {
     "title": "Sandbox Ep.1 THE PLACEHOLDER GOES HERE THIS IS HERE",
     "datetime": "09/28/2026",
     "coverImage": "bg/ph/ph1.webp",
