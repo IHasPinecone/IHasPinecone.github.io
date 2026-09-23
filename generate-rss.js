@@ -2,8 +2,7 @@ const fs = require("fs");
 
 const SITE_URL = "https://ihaspinecone.github.io";
 const SITE_TITLE = "Pinecone Rodeo";
-const SITE_DESCRIPTION =
-  "Is It Possible For a Man to Love Board Games and Jesus Christ?";
+const SITE_DESCRIPTION = "Is It Possible For a Man to Love Board Games and Jesus Christ?";
 
 const posts = JSON.parse(
   fs.readFileSync("posts.json", "utf8")
@@ -34,7 +33,7 @@ function buildNormalItems(feedPosts) {
     <item>
       <title><![CDATA[${post.title}]]></title>
       <link>${postUrl}</link>
-      <guid>${postUrl}</guid>
+      <guid isPermaLink="false">${post.audioFile}</guid>
       <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
       <category><![CDATA[${post.topic || "NONAME"}]]></category>
 
