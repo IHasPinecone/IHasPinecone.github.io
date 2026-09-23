@@ -48,18 +48,20 @@ function buildNormalItems(feedPosts) {
 function buildPodcastItems(feedPosts) {
   return feedPosts.map(post => {
     const postUrl = `${SITE_URL}/${post.link}`;
-    
+
     const episodeImage = post.coverImage
-  ? `${SITE_URL}/${post.coverImage}`
-  : "";
+      ? `<itunesURL}/${post.coverImage}`
+      : "";
 
     return `
     <item>
       <title><![CDATA[${post.title}]]></title>
       <link>${postUrl}</link>
-      <guid>${postUrl}</guid>
+      <guid isPermaLink="false"><![CDATA[${post.audioFile}]]></guid>
       <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
+
       ${episodeImage}
+
       <enclosure
         url="${post.audioFile}"
         type="audio/mpeg" />
