@@ -10,32 +10,6 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
 
     
     <item>
-      <title><![CDATA[Sandbox Ep.1 This one has a 404]]></title>
-      <link>https://ihaspinecone.github.io/sandbox/ep1.html</link>
-      <guid>https://ihaspinecone.github.io/sandbox/ep1.html</guid>
-      <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
-      <category><![CDATA[Podcast]]></category>
-
-      <description><![CDATA[
-        <img src="imageHtml">
-        good luck playing this episode.
-      ]]></description>
-    </item>
-
-    <item>
-      <title><![CDATA[Sandbox Ep.1 THE PLACEHOLDER GOES HERE THIS IS HERE]]></title>
-      <link>https://ihaspinecone.github.io/sandbox/ep1.html</link>
-      <guid>https://ihaspinecone.github.io/sandbox/ep1.html</guid>
-      <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
-      <category><![CDATA[Podcast]]></category>
-
-      <description><![CDATA[
-        <img src="imageHtml">
-        LOREM IPSUM DOLOR SIT AMET.
-      ]]></description>
-    </item>
-
-    <item>
       <title><![CDATA[RSS Feed is Live]]></title>
       <link>https://ihaspinecone.github.io/rss.xml</link>
       <guid>https://ihaspinecone.github.io/rss.xml</guid>
@@ -188,6 +162,19 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <description><![CDATA[
         <img src="imageHtml">
         What I get up to in the night times.
+      ]]></description>
+    </item>
+
+    <item>
+      <title><![CDATA[]]></title>
+      <link>https://ihaspinecone.github.io/</link>
+      <guid>https://ihaspinecone.github.io/</guid>
+      <pubDate>Invalid Date</pubDate>
+      <category><![CDATA[Podcast]]></category>
+
+      <description><![CDATA[
+        <img src="imageHtml">
+        
       ]]></description>
     </item>
 
