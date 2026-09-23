@@ -5,7 +5,8 @@
     "coverImage": "",
     "link": "m/Launch.html",
     "topic": "Blog",
-    "readTime": "(2 min read)"
+    "readTime": "(2 min read)",
+    "summary": "Wahoo!"
   },
   {
     "title": "Rear Window is a Movie",
@@ -13,7 +14,8 @@
     "coverImage": "bg/RWAssets/RWposter.webp",
     "link": "bg/rearwindow.html",
     "topic": "Board Games",
-    "readTime": "(10 min read)"
+    "readTime": "(10 min read)",
+    "summary": "I thought I hated games that were like Mysterium, turns out I just didn't like Mysterium."
   },
   {
     "title": "Dreams page is now live",
@@ -21,7 +23,8 @@
     "coverImage": "",
     "link": "dreams.html",
     "topic": "",
-    "readTime": ""
+    "readTime": "",
+    "summary": "What I get up to in the night times."
   },
   {
     "title": "The Tax",
@@ -29,7 +32,8 @@
     "coverImage": "faith/tax/burn barrel sky.webp",
     "link": "faith/tax.html",
     "topic": "Faith",
-    "readTime": "(10 min read)"
+    "readTime": "(10 min read)",
+    "summary": "I make the world worse every day that I am allowed to draw breath. I am one part of a despicable wretched class choking the life from this beautiful land..."
   },
   {
     "title": "The Pax Transhumanity Keynote Address",
@@ -37,7 +41,8 @@
     "coverImage": "bg/PaxTranshumanity/SteveJobs.jpg",
     "link": "bg/PaxTranshumanity.html",
     "topic": "Board Games",
-    "readTime": "(10 min read)"
+    "readTime": "(10 min read)",
+    "summary": "Get Excited About Pax Transhumanity!"
   },
   {
     "title": "Dandan Inspired Formats",
@@ -45,7 +50,8 @@
     "coverImage": "bg/Dandan/Skullbriar_poster_shorter.png",
     "link": "bg/Dandan.html",
     "topic": "Board Games",
-    "readTime": "(5 min read)"
+    "readTime": "(5 min read)",
+    "summary": "A heuristic for studying Dandan formats."
   },
   {
     "title": "Book Reviews page is now live",
@@ -53,7 +59,8 @@
     "coverImage": "",
     "link": "books.html",
     "topic": "",
-    "readTime": ""
+    "readTime": "",
+    "summary": "The thing holding me back from donating my old books was seeing them sitting on my shelf. This is my compromise. I've also jotted down a short review for each one."
   },
   {
     "title": "Salton Sea and Agony in Games",
@@ -61,7 +68,8 @@
     "coverImage": "bg/Salton/salton-dark.jpg",
     "link": "bg/salton.html",
     "topic": "Board Games",
-    "readTime": "(10 min read)"
+    "readTime": "(10 min read)",
+    "summary": "Help! Can anyone hear me!"
   },
   {
     "title": "REMEMBER WHAT THEY TOOK FROM YOU",
@@ -69,7 +77,8 @@
     "coverImage": "bg/container/box.jpg",
     "link": "bg/container.html",
     "topic": "Board Games",
-    "readTime": "(10 min read)"
+    "readTime": "(10 min read)",
+    "summary": "Container will take it back."
   },
   {
     "title": "Incense",
@@ -77,7 +86,8 @@
     "coverImage": "faith/incense/cirticalhits.com.br.jpg",
     "link": "faith/incense.html",
     "topic": "Faith",
-    "readTime": "(10 min read)"
+    "readTime": "(10 min read)",
+    "summary": "Churches, incense, nature, and smoke machines."
   },
   {
     "title": "Life Updates page is live",
@@ -85,6 +95,7 @@
     "coverImage": "",
     "link": "updates.html",
     "topic": "",
-    "readTime": ""
+    "readTime": "",
+    "summary": "Ever wanted to know what i'm up to?"
   }
 ]
