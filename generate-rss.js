@@ -19,7 +19,7 @@ posts.sort(
 );
 
 const podcastPosts = posts.filter(
-  post => post.topic === "podcast"
+  post => post.topic === "Podcast"
 );
 
 function buildNormalItems(feedPosts) {
