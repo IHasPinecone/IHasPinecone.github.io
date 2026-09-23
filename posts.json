@@ -108,25 +108,14 @@
     "summary": "Copy the URL into your RSS reader to get an update when I make a post :D"
   },
   {
-    "title": "Sandbox Ep.1 This one has a 404",
-    "datetime": "09/28/2026",
-    "coverImage": "bg/ph/ph3.webp",
-    "link": "sandbox/ep1.html",
-    "topic": "Podcast",
-    "readTime": "",
-    "audioFile": "https://ihaspinecone.github.io/sandbox/sandboxEp1.mp3",
-    "audioLength": "123456789",
-    "summary": "good luck playing this episode."
-  },
-  {
-    "title": "Sandbox Ep.1 THE PLACEHOLDER GOES HERE THIS IS HERE",
-    "datetime": "09/28/2026",
+    "title": "",
+    "datetime": "",
     "coverImage": "bg/ph/ph1.webp",
-    "link": "sandbox/ep1.html",
+    "link": "",
     "topic": "Podcast",
     "readTime": "",
-    "audioFile": "https://rss.art19.com/episodes/user/ZyW0EWP3Y87O8Qzl9LaQFo4nzu5L6Hi_/14ff9965-c16d-4043-9025-bce8b6dcabd5.mp3?rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94",
-    "audioLength": "123456789",
-    "summary": "LOREM IPSUM DOLOR SIT AMET."
+    "audioFile": "",
+    "audioLength": "",
+    "summary": ""
   }
 ]
