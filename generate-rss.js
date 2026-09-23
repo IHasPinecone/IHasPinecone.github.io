@@ -26,9 +26,8 @@ function buildNormalItems(feedPosts) {
     const postUrl = `${SITE_URL}/${post.link}`;
 
     const imageHtml = post.coverImage
-      ? `${SITE_URL}/${post.coverImage}<br/><br/>`
-      : "";
-
+      ? `${SITE_URL}/${post.coverImage}`
+      :"";
     return `
     <item>
       <title><![CDATA[${post.title}]]></title>
@@ -38,7 +37,7 @@ function buildNormalItems(feedPosts) {
       <category><![CDATA[${post.topic || "NONAME"}]]></category>
 
       <description><![CDATA[
-        ${imageHtml}
+        <img src="imageHtml">
         ${post.summary || ""}
       ]]></description>
     </item>`;
@@ -64,6 +63,7 @@ function buildPodcastItems(feedPosts) {
 
       <enclosure
         url="${post.audioFile}"
+        length="${post.audioLength}"
         type="audio/mpeg" />
 
       <description><![CDATA[

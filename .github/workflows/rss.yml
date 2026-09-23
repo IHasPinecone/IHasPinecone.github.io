@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - posts.json
+      - generate-rss.js
 
 permissions:
   contents: write
