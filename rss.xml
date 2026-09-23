@@ -17,20 +17,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[Podcast]]></category>
 
       <description><![CDATA[
-        https://ihaspinecone.github.io/bg/ph/ph3.webp<br/><br/>
-        good luck playing this episode.
-      ]]></description>
-    </item>
-
-    <item>
-      <title><![CDATA[Sandbox Ep.404 This one too]]></title>
-      <link>https://ihaspinecone.github.io/sandbox/ep1.html</link>
-      <guid>https://ihaspinecone.github.io/sandbox/ep1.html</guid>
-      <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
-      <category><![CDATA[Podcast]]></category>
-
-      <description><![CDATA[
-        https://ihaspinecone.github.io/bg/ph/ph2.webp<br/><br/>
+        <img src="imageHtml">
         good luck playing this episode.
       ]]></description>
     </item>
@@ -43,7 +30,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[Podcast]]></category>
 
       <description><![CDATA[
-        https://ihaspinecone.github.io/bg/ph/ph1.webp<br/><br/>
+        <img src="imageHtml">
         LOREM IPSUM DOLOR SIT AMET.
       ]]></description>
     </item>
@@ -56,7 +43,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[NONAME]]></category>
 
       <description><![CDATA[
-        
+        <img src="imageHtml">
         Copy the URL into your RSS reader to get an update when I make a post :D
       ]]></description>
     </item>
@@ -69,7 +56,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[NONAME]]></category>
 
       <description><![CDATA[
-        
+        <img src="imageHtml">
         Ever wanted to know what i'm up to?
       ]]></description>
     </item>
@@ -82,7 +69,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[Faith]]></category>
 
       <description><![CDATA[
-        https://ihaspinecone.github.io/faith/incense/cirticalhits.com.br.jpg<br/><br/>
+        <img src="imageHtml">
         Churches, incense, nature, and smoke machines.
       ]]></description>
     </item>
@@ -95,7 +82,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[Board Games]]></category>
 
       <description><![CDATA[
-        https://ihaspinecone.github.io/bg/container/box.jpg<br/><br/>
+        <img src="imageHtml">
         Container will take it back.
       ]]></description>
     </item>
@@ -108,7 +95,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[Board Games]]></category>
 
       <description><![CDATA[
-        https://ihaspinecone.github.io/bg/Salton/salton-dark.jpg<br/><br/>
+        <img src="imageHtml">
         Help! Can anyone hear me!
       ]]></description>
     </item>
@@ -121,7 +108,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[NONAME]]></category>
 
       <description><![CDATA[
-        
+        <img src="imageHtml">
         The thing holding me back from donating my old books was seeing them sitting on my shelf. This is my compromise. I've also jotted down a short review for each one.
       ]]></description>
     </item>
@@ -134,7 +121,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[Board Games]]></category>
 
       <description><![CDATA[
-        https://ihaspinecone.github.io/bg/Dandan/Skullbriar_poster_shorter.png<br/><br/>
+        <img src="imageHtml">
         A heuristic for studying Dandan formats.
       ]]></description>
     </item>
@@ -147,7 +134,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[Board Games]]></category>
 
       <description><![CDATA[
-        https://ihaspinecone.github.io/bg/PaxTranshumanity/SteveJobs.jpg<br/><br/>
+        <img src="imageHtml">
         Get Excited About Pax Transhumanity!
       ]]></description>
     </item>
@@ -160,7 +147,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[Faith]]></category>
 
       <description><![CDATA[
-        https://ihaspinecone.github.io/faith/tax/burn barrel sky.webp<br/><br/>
+        <img src="imageHtml">
         I make the world worse every day that I am allowed to draw breath. I am one part of a despicable wretched class choking the life from this beautiful land...
       ]]></description>
     </item>
@@ -173,7 +160,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[Blog]]></category>
 
       <description><![CDATA[
-        
+        <img src="imageHtml">
         The website now exists.
       ]]></description>
     </item>
@@ -186,7 +173,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[Board Games]]></category>
 
       <description><![CDATA[
-        https://ihaspinecone.github.io/bg/RWAssets/RWposter.webp<br/><br/>
+        <img src="imageHtml">
         I thought I hated games that were like Mysterium, turns out I just didn't like Mysterium.
       ]]></description>
     </item>
@@ -199,7 +186,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <category><![CDATA[NONAME]]></category>
 
       <description><![CDATA[
-        
+        <img src="imageHtml">
         What I get up to in the night times.
       ]]></description>
     </item>
