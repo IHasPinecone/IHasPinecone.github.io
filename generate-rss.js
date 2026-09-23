@@ -18,16 +18,21 @@ posts.sort(
   (a, b) => parseDate(b.datetime) - parseDate(a.datetime)
 );
 
-const items = posts.map(post => {
-  const postUrl = `${SITE_URL}/${post.link}`;
+const podcastPosts = posts.filter(
+  post => post.topic === "podcast"
+);
 
-  const imageHtml = post.coverImage
-    ? `${SITE_URL}/${post.coverImage}<br/><br/>`
-    : "";
+function buildFeed(feedPosts) {
+  return feedPosts.map(post => {
+    const postUrl = `${SITE_URL}/${post.link}`;
 
-  const summary = post.summary || "";
+    const imageHtml = post.coverImage
+      ? `<imgTE_URL}/${post.coverImage}<br/><br/>`
+      : "";
 
-  return `
+    const summary = post.summary || "";
+
+    return `
     <item>
       <title><![CDATA[${post.title}]]></title>
       <link>${postUrl}</link>
@@ -38,9 +43,12 @@ const items = posts.map(post => {
         ${summary}
       ]]></description>
     </item>`;
-}).join("\n");
+  }).join("\n");
+}
 
-const rss = `<?xml version="1.0" encoding="UTF-8"?>
+const normalItems = buildFeed(posts);
+
+const normalRss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
 xmlns:content="http://purl.org/rss/1.0/modules/content/"
 >
@@ -49,12 +57,28 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
     <link>${SITE_URL}</link>
     <description>${SITE_DESCRIPTION}</description>
     <language>en-us</language>
-
-${items}
-
+    ${normalItems}
   </channel>
 </rss>`;
 
-fs.writeFileSync("rss.xml", rss);
+fs.writeFileSync("rss.xml", normalRss);
+
+const podcastItems = buildFeed(podcastPosts);
+
+const podcastRss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+  <channel>
+    <title>Pinecone Rodeo Podcast</title>
+    <link>${SITE_URL}</link>
+    <description>Podcast feed</description>
+    <language>en-us</language>
+    ${podcastItems}
+  </channel>
+</rss>`;
+
+fs.writeFileSync("podcast.xml", podcastRss);
+
 
 console.log("rss.xml generated");
