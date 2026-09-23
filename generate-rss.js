@@ -35,14 +35,15 @@ const items = posts.map(post => {
       <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
       <category><![CDATA[${post.topic || "General"}]]></category>
       <description><![CDATA[
-        ${imageHtml}
         ${summary}
       ]]></description>
     </item>`;
 }).join("\n");
 
 const rss = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0"
+xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
   <channel>
     <title>${SITE_TITLE}</title>
     <link>${SITE_URL}</link>
