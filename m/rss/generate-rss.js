@@ -2,7 +2,8 @@ const fs = require("fs");
 
 const SITE_URL = "https://ihaspinecone.github.io";
 const SITE_TITLE = "Pinecone Rodeo";
-const SITE_DESCRIPTION = "Is It Possible For a Man to Love Board Games and Jesus Christ?";
+const SITE_DESCRIPTION =
+  "Is It Possible For a Man to Love Board Games and Jesus Christ?";
 
 const posts = JSON.parse(
   fs.readFileSync("posts.json", "utf8")
@@ -21,7 +22,7 @@ const items = posts.map(post => {
   const postUrl = `${SITE_URL}/${post.link}`;
 
   const imageHtml = post.coverImage
-    ? `<img src="${SITE_URL}/${poste}<br/><br/>`
+    ? `${SITE_URL}/${post.coverImage}<br/><br/>`
     : "";
 
   const summary = post.summary || "";
