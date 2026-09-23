@@ -10,6 +10,19 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
 
     
     <item>
+      <title><![CDATA[Sandbox Ep.1 This one has a 404]]></title>
+      <link>https://ihaspinecone.github.io/sandbox/ep1.html</link>
+      <guid>https://ihaspinecone.github.io/sandbox/ep1.html</guid>
+      <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
+      <category><![CDATA[Podcast]]></category>
+
+      <description><![CDATA[
+        https://ihaspinecone.github.io/bg/ph/ph1.webp<br/><br/>
+        LOREM IPSUM DOLOR SIT AMET.
+      ]]></description>
+    </item>
+
+    <item>
       <title><![CDATA[Sandbox Ep.1 THE PLACEHOLDER GOES HERE THIS IS HERE]]></title>
       <link>https://ihaspinecone.github.io/sandbox/ep1.html</link>
       <guid>https://ihaspinecone.github.io/sandbox/ep1.html</guid>
