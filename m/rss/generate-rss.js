@@ -18,20 +18,26 @@ posts.sort(
 );
 
 const items = posts.map(post => {
-  const link = `${SITE_URL}/${post.link}`;
+  const postUrl = `${SITE_URL}/${post.link}`;
+
+  const imageHtml = post.coverImage
+    ? `<img src="${SITE_URL}/${poste}<br/><br/>`
+    : "";
+
+  const summary = post.summary || "";
 
   return `
-  <item>
-    <title><![CDATA[${post.title}]]></title>
-    <link>${link}</link>
-    <guid>${link}</guid>
-    <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
-    <category><![CDATA[${post.topic || "General"}]]></category>
-    <description><![CDATA[
-      ${post.topic || "Post"}
-      ${post.readTime || ""}
-    ]]></description>
-  </item>`;
+    <item>
+      <title><![CDATA[${post.title}]]></title>
+      <link>${postUrl}</link>
+      <guid>${postUrl}</guid>
+      <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
+      <category><![CDATA[${post.topic || "General"}]]></category>
+      <description><![CDATA[
+        ${imageHtml}
+        ${summary}
+      ]]></description>
+    </item>`;
 }).join("\n");
 
 const rss = `<?xml version="1.0" encoding="UTF-8"?>
