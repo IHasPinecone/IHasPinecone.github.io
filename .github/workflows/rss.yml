@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 24
 
-      - run: node m/rss/generate-rss.js
+      - run: node generate-rss.js
 
       - name: Commit updated feed
         run: |
