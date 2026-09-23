@@ -33,7 +33,7 @@ function buildNormalItems(feedPosts) {
     <item>
       <title><![CDATA[${post.title}]]></title>
       <link>${postUrl}</link>
-      <guid isPermaLink="false">${post.audioFile}</guid>
+      <guid>${postUrl}</guid>
       <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
       <category><![CDATA[${post.topic || "NONAME"}]]></category>
 
