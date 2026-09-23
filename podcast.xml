@@ -15,7 +15,7 @@
       <guid isPermaLink="false"><![CDATA[https://ihaspinecone.github.io/sandbox/sandboxEp1.mp3]]></guid>
       <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
 
-      <itunesURL}/bg/ph/ph3.webp
+      <SITE_URL}/bg/ph/ph3.webp
 
       <enclosure
         url="https://ihaspinecone.github.io/sandbox/sandboxEp1.mp3"
@@ -32,14 +32,14 @@
       <guid isPermaLink="false"><![CDATA[https://rss.art19.com/episodes/user/ZyW0EWP3Y87O8Qzl9LaQFo4nzu5L6Hi_/14ff9965-c16d-4043-9025-bce8b6dcabd5.mp3?rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94]]></guid>
       <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
 
-      <itunesURL}/bg/ph/ph1.webp
+      <SITE_URL}/bg/ph/ph1.webp
 
       <enclosure
         url="https://rss.art19.com/episodes/user/ZyW0EWP3Y87O8Qzl9LaQFo4nzu5L6Hi_/14ff9965-c16d-4043-9025-bce8b6dcabd5.mp3?rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94"
         type="audio/mpeg" />
 
       <description><![CDATA[
-        LOREM IPSUM DOLOR SIT AMET
+        LOREM IPSUM DOLOR SIT AMET.
       ]]></description>
     </item>
   </channel>
