@@ -60,6 +60,7 @@ function buildPodcastItems(feedPosts) {
       <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
 
       ${episodeImage}
+      <itunes:image href=${episodeImage}/>
 
       <enclosure
         url="${post.audioFile}"
