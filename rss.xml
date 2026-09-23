@@ -8,15 +8,30 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
     <description>Is It Possible For a Man to Love Board Games and Jesus Christ?</description>
     <language>en-us</language>
 
+    
+    <item>
+      <title><![CDATA[Sandbox Episode 1: PLACEHOLDER THIS IS WHAT WE CALL A PLACEHOLDER FOR THE REAL TITLE]]></title>
+      <link>https://ihaspinecone.github.io/sandbox/ep1.html</link>
+      <guid>https://ihaspinecone.github.io/sandbox/ep1.html</guid>
+      <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
+      <category><![CDATA[Podcast]]></category>
+
+      <description><![CDATA[
+        https://ihaspinecone.github.io/bg/ph/ph1.webp<br/><br/>
+        LOREM IPSUM DOLOR SIT AMET.
+      ]]></description>
+    </item>
 
     <item>
       <title><![CDATA[RSS Feed is Live]]></title>
       <link>https://ihaspinecone.github.io/rss.xml</link>
       <guid>https://ihaspinecone.github.io/rss.xml</guid>
       <pubDate>Wed, 23 Sep 2026 00:00:00 GMT</pubDate>
-      <category><![CDATA[General]]></category>
+      <category><![CDATA[NONAME]]></category>
+
       <description><![CDATA[
-        Copy the URL into your RSS reader to get a little update when I make a post.
+        
+        Copy the URL into your RSS reader to get an update when I make a post :D
       ]]></description>
     </item>
 
@@ -25,8 +40,10 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <link>https://ihaspinecone.github.io/updates.html</link>
       <guid>https://ihaspinecone.github.io/updates.html</guid>
       <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-      <category><![CDATA[General]]></category>
+      <category><![CDATA[NONAME]]></category>
+
       <description><![CDATA[
+        
         Ever wanted to know what i'm up to?
       ]]></description>
     </item>
@@ -37,7 +54,9 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <guid>https://ihaspinecone.github.io/faith/incense.html</guid>
       <pubDate>Mon, 27 Jul 2026 00:00:00 GMT</pubDate>
       <category><![CDATA[Faith]]></category>
+
       <description><![CDATA[
+        https://ihaspinecone.github.io/faith/incense/cirticalhits.com.br.jpg<br/><br/>
         Churches, incense, nature, and smoke machines.
       ]]></description>
     </item>
@@ -48,7 +67,9 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <guid>https://ihaspinecone.github.io/bg/container.html</guid>
       <pubDate>Mon, 22 Jun 2026 00:00:00 GMT</pubDate>
       <category><![CDATA[Board Games]]></category>
+
       <description><![CDATA[
+        https://ihaspinecone.github.io/bg/container/box.jpg<br/><br/>
         Container will take it back.
       ]]></description>
     </item>
@@ -59,7 +80,9 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <guid>https://ihaspinecone.github.io/bg/salton.html</guid>
       <pubDate>Sat, 30 May 2026 00:00:00 GMT</pubDate>
       <category><![CDATA[Board Games]]></category>
+
       <description><![CDATA[
+        https://ihaspinecone.github.io/bg/Salton/salton-dark.jpg<br/><br/>
         Help! Can anyone hear me!
       ]]></description>
     </item>
@@ -69,8 +92,10 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <link>https://ihaspinecone.github.io/books.html</link>
       <guid>https://ihaspinecone.github.io/books.html</guid>
       <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
-      <category><![CDATA[General]]></category>
+      <category><![CDATA[NONAME]]></category>
+
       <description><![CDATA[
+        
         The thing holding me back from donating my old books was seeing them sitting on my shelf. This is my compromise. I've also jotted down a short review for each one.
       ]]></description>
     </item>
@@ -81,7 +106,9 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <guid>https://ihaspinecone.github.io/bg/Dandan.html</guid>
       <pubDate>Sun, 26 Apr 2026 00:00:00 GMT</pubDate>
       <category><![CDATA[Board Games]]></category>
+
       <description><![CDATA[
+        https://ihaspinecone.github.io/bg/Dandan/Skullbriar_poster_shorter.png<br/><br/>
         A heuristic for studying Dandan formats.
       ]]></description>
     </item>
@@ -92,7 +119,9 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <guid>https://ihaspinecone.github.io/bg/PaxTranshumanity.html</guid>
       <pubDate>Sat, 04 Apr 2026 00:00:00 GMT</pubDate>
       <category><![CDATA[Board Games]]></category>
+
       <description><![CDATA[
+        https://ihaspinecone.github.io/bg/PaxTranshumanity/SteveJobs.jpg<br/><br/>
         Get Excited About Pax Transhumanity!
       ]]></description>
     </item>
@@ -103,7 +132,9 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <guid>https://ihaspinecone.github.io/faith/tax.html</guid>
       <pubDate>Sat, 14 Mar 2026 00:00:00 GMT</pubDate>
       <category><![CDATA[Faith]]></category>
+
       <description><![CDATA[
+        https://ihaspinecone.github.io/faith/tax/burn barrel sky.webp<br/><br/>
         I make the world worse every day that I am allowed to draw breath. I am one part of a despicable wretched class choking the life from this beautiful land...
       ]]></description>
     </item>
@@ -114,7 +145,9 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <guid>https://ihaspinecone.github.io/m/Launch.html</guid>
       <pubDate>Fri, 06 Mar 2026 00:00:00 GMT</pubDate>
       <category><![CDATA[Blog]]></category>
+
       <description><![CDATA[
+        
         The website now exists.
       ]]></description>
     </item>
@@ -125,7 +158,9 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <guid>https://ihaspinecone.github.io/bg/rearwindow.html</guid>
       <pubDate>Fri, 06 Mar 2026 00:00:00 GMT</pubDate>
       <category><![CDATA[Board Games]]></category>
+
       <description><![CDATA[
+        https://ihaspinecone.github.io/bg/RWAssets/RWposter.webp<br/><br/>
         I thought I hated games that were like Mysterium, turns out I just didn't like Mysterium.
       ]]></description>
     </item>
@@ -135,8 +170,10 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <link>https://ihaspinecone.github.io/dreams.html</link>
       <guid>https://ihaspinecone.github.io/dreams.html</guid>
       <pubDate>Fri, 06 Mar 2026 00:00:00 GMT</pubDate>
-      <category><![CDATA[General]]></category>
+      <category><![CDATA[NONAME]]></category>
+
       <description><![CDATA[
+        
         What I get up to in the night times.
       ]]></description>
     </item>
