@@ -22,15 +22,13 @@ const podcastPosts = posts.filter(
   post => post.topic === "podcast"
 );
 
-function buildFeed(feedPosts) {
+function buildNormalItems(feedPosts) {
   return feedPosts.map(post => {
     const postUrl = `${SITE_URL}/${post.link}`;
 
     const imageHtml = post.coverImage
-      ? `<imgTE_URL}/${post.coverImage}<br/><br/>`
+      ? `${SITE_URL}/${post.coverImage}<br/><br/>`
       : "";
-
-    const summary = post.summary || "";
 
     return `
     <item>
@@ -38,17 +36,41 @@ function buildFeed(feedPosts) {
       <link>${postUrl}</link>
       <guid>${postUrl}</guid>
       <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
-      <category><![CDATA[${post.topic || "General"}]]></category>
+      <category><![CDATA[${post.topic || "NONAME"}]]></category>
+
       <description><![CDATA[
-        ${summary}
+        ${imageHtml}
+        ${post.summary || ""}
       ]]></description>
     </item>`;
   }).join("\n");
 }
 
-const normalItems = buildFeed(posts);
+function buildPodcastItems(feedPosts) {
+  return feedPosts.map(post => {
+    const postUrl = `${SITE_URL}/${post.link}`;
 
-const normalRss = `<?xml version="1.0" encoding="UTF-8"?>
+    return `
+    <item>
+      <title><![CDATA[${post.title}]]></title>
+      <link>${postUrl}</link>
+      <guid>${postUrl}</guid>
+      <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
+
+      <enclosure
+        url="${post.audioFile}"
+        type="audio/mpeg" />
+
+      <description><![CDATA[
+        ${post.summary || ""}
+      ]]></description>
+    </item>`;
+  }).join("\n");
+}
+
+const normalItems = buildNormalItems(posts);
+
+const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
 xmlns:content="http://purl.org/rss/1.0/modules/content/"
 >
@@ -57,28 +79,34 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
     <link>${SITE_URL}</link>
     <description>${SITE_DESCRIPTION}</description>
     <language>en-us</language>
+
     ${normalItems}
+
   </channel>
 </rss>`;
 
-fs.writeFileSync("rss.xml", normalRss);
+fs.writeFileSync("rss.xml", rssFeed);
 
-const podcastItems = buildFeed(podcastPosts);
+const podcastItems = buildPodcastItems(podcastPosts);
 
-const podcastRss = `<?xml version="1.0" encoding="UTF-8"?>
+const podcastFeed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
-xmlns:content="http://purl.org/rss/1.0/modules/content/"
->
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+
   <channel>
     <title>Pinecone Rodeo Podcast</title>
     <link>${SITE_URL}</link>
-    <description>Podcast feed</description>
-    <language>en-us</language>
+    <description>Dreamrules and other Pinecone Rodeo podcasts</description>
+
+    <itunes:author>Aaron Topp</itunes:author>
+    <itunes:explicit>false</itunes:explicit>
+
     ${podcastItems}
+
   </channel>
 </rss>`;
 
-fs.writeFileSync("podcast.xml", podcastRss);
-
+fs.writeFileSync("podcast.xml", podcastFeed);
 
 console.log("rss.xml generated");
+console.log("podcast.xml generated");
