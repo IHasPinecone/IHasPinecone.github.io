@@ -3,6 +3,8 @@
   xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
     <title>Sandbox</title>
+    https://ihaspinecone.github.io/sandbox/imgs/Sandbox-Cover.webp
+    <itunes:image href="https://ihaspinecone.github.io/sandbox/imgs/Sandbox-Cover.webp"</>
     <link>https://ihaspinecone.github.io</link>
     <description>Sandbox is where the designers of the Dreamrules varient for the Dune board game talk about their designs and love for the game. Sandbox is hosted by Pine (IHasPinecone) and Awptea (Awpteamoose), with requent guests Chron and Ridwan and many other members of the Drearules community. Dune was originally published by Avalon Hill in 1979 and later reprinted by Gale Force Nine in 2019.</description>
     <itunes:author>IHasPinecone</itunes:author>
@@ -13,7 +15,7 @@
       <link>https://ihaspinecone.github.io/sandbox/ep1.html</link>
       <guid>https://ihaspinecone.github.io/sandbox/ep1.html</guid>
       <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
-
+      https://ihaspinecone.github.io/bg/ph/ph3.webp
       <enclosure
         url="https://ihaspinecone.github.io/sandbox/sandboxEp1.mp3"
         type="audio/mpeg" />
@@ -28,7 +30,7 @@
       <link>https://ihaspinecone.github.io/sandbox/ep1.html</link>
       <guid>https://ihaspinecone.github.io/sandbox/ep1.html</guid>
       <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
-
+      https://ihaspinecone.github.io/bg/ph/ph1.webp
       <enclosure
         url="https://rss.art19.com/episodes/user/ZyW0EWP3Y87O8Qzl9LaQFo4nzu5L6Hi_/14ff9965-c16d-4043-9025-bce8b6dcabd5.mp3?rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94"
         type="audio/mpeg" />
