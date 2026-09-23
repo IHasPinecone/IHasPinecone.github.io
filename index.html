@@ -83,6 +83,8 @@
       <h2>Podcasts</h2>
       <img src="m/bokkuri/sticker_tea.png">
     </div>
+    <ul id="podcast" class="centernav"></ul>
+    <hr class="superspace">
 
   </main>
 
@@ -127,6 +129,7 @@ window.addEventListener("DOMContentLoaded", populateLatestBookReview);
         const recentPosts = document.getElementById("recent-posts");
         const boardGames = document.getElementById("board-games");
         const faith = document.getElementById("faith");
+        const podcast = document.getElementById("podcast");
         
         // Sidebar
         posts.slice(0, 3).forEach(post => {
@@ -180,6 +183,9 @@ window.addEventListener("DOMContentLoaded", populateLatestBookReview);
               break;
             case "Faith":
               faith.appendChild(li);
+              break;
+            case "Podcast":
+              podcast.appendChild(li);
               break;
             }
           });
