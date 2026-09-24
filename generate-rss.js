@@ -8,6 +8,17 @@ const posts = JSON.parse(
   fs.readFileSync("posts.json", "utf8")
 );
 
+function sanitize(text = "") {
+  return text
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .trim();
+}
+
+
 function parseDate(dateStr) {
   const [month, day, year] = dateStr.split("/");
   return new Date(year, month - 1, day);
@@ -30,7 +41,7 @@ function buildNormalItems(feedPosts) {
       :"";
     return `
     <item>
-      <title><![CDATA[${post.title}]]></title>
+      <title><![CDATA[${sanitize(post.title)}]]></title>
       <link>${postUrl}</link>
       <guid>${postUrl}</guid>
       <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
@@ -54,7 +65,7 @@ function buildPodcastItems(feedPosts) {
 
     return `
     <item>
-      <title><![CDATA[${post.title}]]></title>
+      <title><![CDATA[${sanitize(post.title)}]]></title>
       <link>${postUrl}</link>
       <guid isPermaLink="false"><![CDATA[${post.audioFile}]]></guid>
       <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
@@ -68,7 +79,7 @@ function buildPodcastItems(feedPosts) {
         type="audio/mpeg" />
 
       <description><![CDATA[
-        ${post.summary || ""}
+        ${sanitize(post.summary) || ""}
       ]]></description>
     </item>`;
   }).join("\n");
