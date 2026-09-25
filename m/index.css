@@ -93,6 +93,14 @@ h1.centertext {
                 text-decoration: none;
                 margin: 0;
         }
+        .sidebar-link-rss {
+                display: flex;
+                align-items: left;
+                gap: 10px;
+                color: inherit;
+                text-decoration: none;
+                margin: 0;
+        }
         #latestUpdate {
                 display: block;
                 margin-bottom: 40px;
