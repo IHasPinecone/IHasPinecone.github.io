@@ -161,8 +161,8 @@ h1.centertext {
 
 .card-image-small {
   display: block;
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
   object-fit: contain;
   border-radius: 3px;
 }
