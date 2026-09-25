@@ -84,7 +84,7 @@ h1.centertext {
       }
 
       .rightindex a {
-        justify-content: right;
+        justify-content: left;
       }
 
         .sidebar-link {
