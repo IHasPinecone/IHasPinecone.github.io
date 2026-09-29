@@ -36,8 +36,8 @@ p {
     line-height: 1.5;
     max-width: 65ch;
     margin: 0 auto 1.5rem;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 15px;
 }
 
 .voice {
