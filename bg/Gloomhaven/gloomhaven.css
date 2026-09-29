@@ -5,25 +5,12 @@ html {
   background-repeat: repeat;
 }
 
-html {
-    
-    background-color: #EEEEEE;
-}
-
 body {
-    color: black;
+    color: white;
 
     font-family: "Open Sans", "SN Pro", sans-serif;
     font-size: clamp(20px, 1rem + 0.2vw, 30px);
     line-height: 1.5;
-}
-
-.content {
-    background-color: rgba(235, 235, 235, 0.8);
-    max-width: 700px;
-    margin: 0 auto;
-    padding: clamp(16px, 4vw, 32px);
-    min-height: 100vh;
 }
 
 @media (max-width: 768px) {
