@@ -10,8 +10,8 @@ body {
 #container {
     max-width: 850px;
     margin: 0 auto;
-    background: #f5ecc2;
-    border: 2px #b24a3a;
+    background: #fdc57e;
+    border: 4px #b24a3a;
     padding: 20px;
 }
 
@@ -25,6 +25,8 @@ h1 {
     font-size: 36px;
     letter-spacing: 2px;
     color: #000;
+    background-color: #fdc57e;
+    border: 4px #b24a3a;
 }
 
 .subtitle {
@@ -41,7 +43,7 @@ hr {
 .post {
     border: 1px solid #808080;
     margin-bottom: 12px;
-    background: #fdc57e;
+    background: #f5ecc2;
 }
 
 .post-link {
@@ -53,7 +55,7 @@ hr {
 }
 
 .post-link:hover {
-    background: #e8e8e8;
+    background: #fcfaee;
 }
 
 .thumbnail {
