@@ -36,6 +36,28 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <link>https://ihaspinecone.github.io/rss.xml</link>
       <guid>https://ihaspinecone.github.io/rss.xml</guid>
       <pubDate>Wed, 23 Sep 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        Copy the URL into your RSS reader to get an update when I make a post :D
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+  <channel>
+    <title>Pinecone Rodeo</title>
+    <link>https://ihaspinecone.github.io</link>
+    <description>Is It Possible For a Man to Love Board Games and Jesus Christ?</description>
+    <language>en-us</language>
+
+    
+    <item>
+      <title><![CDATA[RSS Feed is Live]]></title>
+      <link>https://ihaspinecone.github.io/rss.xml</link>
+      <guid>https://ihaspinecone.github.io/rss.xml</guid>
+      <pubDate>Wed, 23 Sep 2026 00:00:00 GMT</pubDate>
       <category><![CDATA[NONAME]]></category>
 
       <description><![CDATA[
@@ -185,6 +207,3076 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         <img src="imageHtml">
         What I get up to in the night times.
       ]]></description>
+    </item>
+
+  </channel>
+</rss>
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[Life Updates page is live]]></title>
+      <link>https://ihaspinecone.github.io/updates.html</link>
+      <guid>https://ihaspinecone.github.io/updates.html</guid>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        Ever wanted to know what i'm up to?
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link id="themeStylesheet" rel="stylesheet" href="updates/minimal.css">
+  <title>Life Updates</title>
+  <meta content="What I'm Doing Right Now" property="og:title" />
+  <meta content="Real-time updates on my wild and exciting life." property="og:description" />
+  <meta content="https://ihaspinecone.github.io/updates.html" property="og:url" />
+  <meta content="#43B581" name="theme-color" />
+  <meta name="twitter:card" content="summary_large_image">
+<title>
+  What I'm doing right now
+</title>
+</head>
+
+<body>
+<h1>
+  What I'm Doing Right Now
+</h1>
+
+<h2>
+  Real-time updates on my wild and exciting life.
+</h2>
+
+<h3 id="monthDisplay"></h3>
+
+<div class="controls">
+  <button id="firstBtn" onclick="goFirst()">⏮</button>
+  <button id="prevBtn" onclick="goPrevious()">◀</button>
+  <button id="nextBtn" onclick="goNext()">▶</button>
+  <button id="lastBtn" onclick="goLast()">⏭</button>
+</div>
+  
+<div id="result"></div>
+
+<div class="controls">
+  <button id="botfirstBtn" onclick="goFirst()">⏮</button>
+  <button id="botprevBtn" onclick="goPrevious()">◀</button>
+  <button onclick="window.location.href='https://ihaspinecone.github.io/updates/explaining-the-updates-page.html'">Help</button>
+  <button id="botnextBtn" onclick="goNext()">▶</button>
+  <button id="botlastBtn" onclick="goLast()">⏭</button>
+</div>
+
+
+<div class="controls" style="margin-top: 60px;">
+  <a href="index.html">
+    <img class="centerimage" src="bg\RWAssets\back.gif"/>
+  </a>
+</div>
+
+<script src="updates/dailyUpdates.js"> </script>
+
+<script src="updates/updates.js"> </script>
+  
+<script>
+  let currentSeed;
+  
+  const FIRST_MONTH = new Date(2026, 7, 1); // August 2026
+
+  currentSeed = getSeedFromUrl() || getCurrentMonthSeed();
+  runMany();
+  
+  </script>
+  
+</body>
+</html>
+
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[Incense]]></title>
+      <link>https://ihaspinecone.github.io/faith/incense.html</link>
+      <guid>https://ihaspinecone.github.io/faith/incense.html</guid>
+      <pubDate>Mon, 27 Jul 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        Churches, incense, nature, and smoke machines.
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <html>
+    <head>
+        <link rel="preconnect" href="hhtps://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+        rel="stylesheet" />
+        <link rel="stylesheet" href="incense/incense.css" />
+        <title>
+            Incense
+        </title>
+        <meta content="Incense" property="og:title" />
+        <meta content="Churches, incense, nature, and smoke machines." property="og:description" />
+        <meta content="https://ihaspinecone.github.io/faith/incense.html" property="og:url" />
+        <meta content="https://ihaspinecone.github.io/faith/incense/cirticalhits.com.br.jpg" property="og:image" />
+        <meta content="15844367" data-react-helmet="true" name="theme-color" />
+        <meta name="twitter:card" content="summary_large_image">
+
+    </head>
+
+    <body>
+        <hr class="superspace"/>
+
+        <h1 class="centertext">
+            Incense
+        </h1>
+        <p class="centertext">
+            (10 min. read)
+        </p>
+        <figure>
+            <img class="centerimage" src="incense/cirticalhits.com.br.jpg">
+            <figcaption class="centertext">
+                
+            </figcaption>
+        </figure>
+        <p class="lefttext">
+            Sometimes when I walk into a church it’s like being hit in the face. The previous distractions going through my mind about life or work or whatever are just knocked out of me. With that clarity I can stroll forward into the church focusing on the only thing that really matters at the end of the day: God. My body actually feels a physical reaction after I've stepped across that boundary, like some deep part of me recognizes that this moment is different, more meaningful, than the moments from the rest of the day. It doesn't happen every time, but praise God for when it does.<br>I love that quiet walk to my pew, my mind blank and just fully in the moment. Part of what puts me in this state is the church building itself; the construction and artwork are supposed to instill this feeling of importance. This place is different; it is separated from the World.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="incense/pic i took in barcelona.jpg">
+            <figcaption class="centertext">
+                I really need to clean the lens on my phone :/
+            </figcaption>
+        </figure>
+
+        <p>
+            Praise God for the feeling of a still church. I'm not kidding when I say it feels different than any other building. The church is open, but not dry and cracky like a gym. The openness isn't acoustically smothered like a theater either, you can actually hear your footsteps. But the footsteps aren't due to some tragic emptiness, but the history; I can feel all the faithful who worshipped here before me, praying here day after day. My grandparents felt this same way when they were my age, coming to pray. And this place isn't dusty or dirty like a warehouse, it's ageless. My steps are just one part of this unbroken chain, echoing through time.
+        </p>
+
+        <p>
+            And the incense. Oh the incense. This same incense is how my great-great-great-grandparents found God. The floral and spiced smell just naturally brings one into a prayerful state. Monks in the middle ages, worshipping the same God, smelled the same fragrance. Businessmen in the 20s would have slowed down when that aroma wafted into their nostrils. Third century mystics would've found that powerful fiery God in these same scents. The specific blends may have changed, but the feeling never did. Hundreds and hundreds of years Christians have been brought to God by the same smell of incense I feel when I step into a church.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="incense/thays-orrico-incense-adoration.webp">
+            <figcaption class="centertext">
+                Image: Thays Orrico
+            </figcaption>
+        </figure>
+
+        <p>
+            Picture the thurible. You know what a thurible is: it's the big thing on a long silver chain that incense burns inside. I think they look pretty cool. Not gonna lie, there's a reason fantasy artists love drawing these things being wielded in their cool fantasy religions. In Catholicism the thurible is often used at Adoration. The Lord has just been exposed in the Eucharist, the whole congregation sits still as the priest moves and kneels before God. There's a moment of silence as he takes the incense and fills the thurible. Then, still kneeled in reverence before his Creator, the priest takes the thurible and flings it forward toward God. With each throw the thurible swings and billows out clouds, tracing arcs through the air. The clouds fly and thrust like an impressionist painter throwing paint, splashing wildly and erratically. As the thurible is cast, it's as it shouts “MORE TO YOU GOD! MORE TO YOU!” The thurible gives itself fully in its worship. With every swing it shouts and exhales “MORE GLORY TO YOU GOD OF HOSTS!” The worship is full throated, without restraint, nothing is held back. "PRAISE GOD ABOVE ALL CREATION."<br>When it’s finished it leaves behind its masterwork; every arc it threw remains and fills the space with a third dimension. A heavy blanket of smoke catches shafts of light, and the clouds still remain shifting on gentle air currents, enthroning God. The image the thurible leaves is striking; there's nothing in our mundane life that looks quite like it. The viewer is drawn out of the mundane world into the divine.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="incense/holy cross monastery incense in thurible.webp">
+            <figcaption class="centertext">
+                Image: Ivan Derkach
+            </figcaption>
+        </figure>
+
+        <p>
+            While the smoke covers and obfuscates, it also strangely focuses your gaze. You see less with your earthly eyes, so you must look deeper. The incense calls to see beyond the surface. Christ says <a href="https://www.biblegateway.com/passage/?search=Luke%205%3A4&version=NIV" target="_blank">
+                "Cast out into deep water."
+            </a> Let your nets down deeper. There’s a strong surging current underneath the mundane. Let down your nets and feel this strong and powerful pull. Your nets will feel near tearing with the power felt under the surface.
+        </p>
+
+        <p>
+            The thurible is passionate, artful. Some of the greatest Christian art ever produced is the temporary smoke of a thurible. It’s transporting. Its performance is lively and meaningful, deep and ancient. You see how God has been found inside incense since before Christianity. Ancient Judaism threw incense to find God, as did ancient pagan religions. Incense has always had the power to bring humans to a place where they seek and grasp for that eternal divinity.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="incense/Michaela Gobbi.webp">
+            <figcaption class="centertext">
+                Image: Michaela Gobbi
+            </figcaption>
+        </figure>
+
+        <hr class="superspace">
+        <hr class="superspace">
+
+        <figure>
+            <img class="centerimage" src="incense/amazon smoke machine.png">
+        </figure>
+
+        <p>
+            Many modern churches have opted to replace the ancient thurible with the modern smoke machine. They've replaced the outdated device for something more modern. Thuribles are expensive, annoying to handle, and just don't feel "new". They think they can replace the pathos, the romance, the history with a plastic, unfeeling, mechanical smoke machine. The thurible is human, giving of itself via the swings of a priest. This clockwork could never replace the sublime worship of a thurible. Do they believe that C<sub>3</sub>H<sub>8</sub>O<sub>2</sub> can replace incense? Remember the Tower of Babel? Humans in their vainglory try to reach heaven with man-made machinery. Incense was given and ordained by God himself for worship. Who are you lowly humans to use your glycerine golem?
+        </p>
+
+        
+        <hr class="superspace">
+        <hr class="superspace">
+
+        <figure>
+            <img class="centerimage" src="incense/daniel3.webp">
+            <figcaption class="centertext">
+            </figcpation>
+        </figure>
+
+        <p>
+            <a href="https://www.biblegateway.com/passage/?search=Daniel%203%3A52-90&version=NABRE" target="_blank">
+                The book of Daniel
+            </a> gives us verses praising God by reciting everything that gives him glory.
+        </p>
+
+        <p class="voice">
+            All you winds, bless the Lord,<br>
+            Fire and heat, bless the Lord,<br>
+            Cold and chill, bless the Lord,<br>
+            Mountains and hills, bless the Lord,<br>
+            Seas and rivers, bless the Lord,<br>
+            All you water creatures, bless the Lord,<br>
+            All you birds of the air, bless the Lord,<br>
+            All you beasts, wild and tame, bless the Lord,<br>
+            ...
+        </p>
+
+        <figure>
+            <img class="centerimage" src="incense/wetland1.webp">
+            <figcaption class="centertext">
+                
+            </figcaption>
+        </figure>
+
+        <p class="lefttext">
+            The natural world was created perfect by God. Nature, without the compromising force of humanity’s sinfulness, is our example of what perfect worship looks like. A deer scampers into the woods, it praises God. A fish nibbles algae from a rock, it praises God. Leaves fall from a tree. they praise God. There is no other way they could exist. They simply <i>do</i>. They repeat their routine, and in doing so God is honored.
+        </p>
+
+        <p>
+            Due to nature's perfection, churches are designed to emulate nature. Tall columns rise up like trees, the circular rose window resembles the sun. The building is so open you can see things far away, making you feel like you're more in a field than a city, and the openness isn't from a strictly utilitarian standpoint like a warehouse. The church is extravagant and maybe a little wasteful, to emulate nature. If you don't believe nature is extravagant and wasteful look outside at all the species of birds and plants. The world is 1000x <i>more</i> than it ever needed to be. And while we are looking at extravagance look at the walls of a church, all its ornate spirals and curves. The church's finer details are not the hard edges of civilization, but flowing and sometimes thorny like flowers. Try walking through a city, and on your walk enter a church. The church feels nothing like the city.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="incense/St John Cantius Church in Chicago Eric Allix Rogers.jpg">
+            <figcaption class="centertext">
+                Image: Eric Allix Rogers
+            </figcaption>
+        </figure>
+
+        <p>
+            Of course churches aren't literally forests, they resemble nature. Churches are humanity using their intellect and creativity that was uniquely given to us by God. We share in God's ability to make good things. As God made the oceans, we made our society. As He set the stars, we made our laws. As he formed the animals we made our tools. And, of course, we made churches. And we made those churches to resemble nature. Of course we would, what else would we our art on? But we also have license to take our inspiration and run in a new direction. Our naturey churches don't have to literally have nature things in it. And you know what reader? You know what, to me, feels like it acts like nature? Smoke machines.<br>
+            Going back a second, why is nature perfect? It's because nature isn't corrupted by free will. The way it was made simply glorifies God, in and of itself. The deer doesn't take center stage like a diva, neither do the fish, trees, wind, gravity, fire, frost, mountains, and hills. They do not take center stage, they just exist. You know what a smoke machine does?
+        </p>
+
+        <p>
+            What if the humble smoke machine, is actually more natural than the thurible. The thurible is artful and passionate, but it would not relegate itself to second-fiddle. It will go and give its performance full throated. Nature is about the background, the fringes of your attention. Now you see where I've been going with all this. Did I trick you with that brutal takedown of smoke machines earlier? I’m kinda proud of that one. But really, if our churches are a forest, shouldn't they have a bird just chirping in the background giving glory to God? That's what a smoke machine does. It is the bird chirping in the background glorifying God. I like both the smoke machine and the thurible, but they feel different. One is passionate, the other is humble. It’s great that humanity can use its creativity to worship God in new ways. The smoke machine doesn’t have the history of the thurible, but it serves its own unique role, one the thurible never could, to exist unseen in the background, simply doing its role. Strangely, the smoke machine’s role feels <em>more</em> natural.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="incense/christ in the city.jpg">
+            <figcaption class="centertext">
+                Image: Christ in the City
+            </figcaption>
+        </figure>
+
+        <p>
+            Certainly smoke machines are more prevalent among Protestant churches, not Catholic ones. That's Catholocism, it's a slow ship to turn. That's what makes the church so enduring, it thinks not in years but in centuries. Shoutout to that old adage "it takes 100 years to implement an ecumenical council." I think Catholics should more properly take this cue from our Protestant brothers and sisters. The smoke machine is nothing like the thurible, and that's ok. The smoke machine isn't some beautiful instrument thrown about as the focus of worship, it is, if anything, more like a choir. The choir doesn't sit in front like some concert. The choir usually sits <i>behind</i> the faithful, contributing unseen. Smoke machines can be hidden behind plants and statues, tucked away. And at appropriate times, like at Adoration or any long period of worship, it can be deployed to enthrone God with smoke. After all, the church is ever ancient, ever new.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="incense/adoration surrounding.jpg">
+            <figcaption class="centertext">
+                Image: Damascus Mission Campus
+            </figcaption>
+        </figure>
+
+        <p>
+            <a href="../index.html">
+                <img class="centerimage" src="..\bg\RWAssets\back.gif"/>
+            </a>
+        </p>
+
+    </body>
+
+</html>
+
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[REMEMBER WHAT THEY TOOK FROM YOU]]></title>
+      <link>https://ihaspinecone.github.io/bg/container.html</link>
+      <guid>https://ihaspinecone.github.io/bg/container.html</guid>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        Container will take it back.
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+        rel="stylesheet" />
+        <link id="theme" rel="stylesheet" href="container/container.css" />
+        <title>
+            REMEMBER WHAT THEY TOOK FROM YOU! Container will take it back.
+        </title>
+        <meta content="REMEMBER WHAT THEY TOOK FROM YOU" property="og:title" />
+        <meta content="Container will take it back." property="og:description" />
+        <meta content="https://ihaspinecone.github.io/bg/salton.html" property="og:url" />
+        <meta content="https://ihaspinecone.github.io/bg/container/box.jpg" property="og:image" />
+        <meta content="15844367" data-react-helmet="true" name="theme-color" />
+        <meta name="twitter:card" content="summary_large_image">
+    </head>
+
+    <body>
+    <div class="content">
+        <hr class="superspace"/>
+        <h1 class="centertext">
+            REMEMBER WHAT THEY TOOK FROM YOU
+        </h1>
+        <p class="centertext">
+            (10 min. read)
+        </p>
+
+        <div class="style-toggle-wrapper">
+            <button id="styleToggle">
+                Accessibility Toggle
+            </button>
+        </div>
+
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="container/toronto-island.jpg">
+                </a>
+            </div>
+        </figure>
+        
+        <p>
+          When you buy something in Monopoly where does the money go? Who gets it? Some unknown real estate company? Are you satisfied if the game just says “The Bank”? When you wrap around the board in Monopoly to collect $200 where does the money come from? Is it from this same vague “bank”. 
+       </p>
+        <p>
+            The bank is obviously an abstraction of the market or something, but that's not all it does. The bank also works to erase player agency. Players can’t sell hotels to each other or empty the pool of money Chance Cards pull from. With a bank, these things are not in the players hands, but the designers. The designer can freely tweak and balance the game to fit <i>their</i> intended experience; not yours. They will decide how much money a hotel costs, they will choose the income the hotels give. Doesn’t that piss you off? Doesn’t that get you mad? They don't want you to see this! See what they are taking from you! Think of what games you could be playing, without those designers trying to smother your freedom! The designers who hang their entire game off a bank. I'll tell you what I think of those designers: they are cowards.
+        </p>
+        <figure class="centerbox">
+            <img class="centerimage" src="container/box-outside.jpg">
+            <figcaption class="caption">
+                There are those of us who dream of something more.
+            </figcaption>
+        </figure>
+        <p>
+            There are some designers that live a little more dangerously. They know that when you have a dog, you don't chain them up in a small area, you let the dog run free! You'll see its full potential when it's let off the leash to run as hard and fast as it wants. The designers who think this way dream of a wider world of unknown prices and opportunity, where the changing whim of a single player could send the whole table into a death spiral or a new explosion of economic activity. In these games the economy is a strange gumbo made by everyone at the table, a collaboration free to go in many directions. I am here to present one of these wild and dangerous games. You might ask ‘what is this game about?’ I’ll tell you; it’s about shipping cargo. Yeah I’m excited too.
+        </p>
+        <p>
+            Meet Container.
+        </p>
+        <figure class="centerbox">
+            <img class="centerimage" src="container/widde.jpg">
+            <figcaption class="caption">
+                (it's fun I swear bro trust me.)
+            </figcaption>
+        </figure>
+        <p>
+            In this game players buy and sell crates from each other, but this ain’t no pussyfoot Monopoly with a ‘Go’ space. Nah, if you want to make money in this game, you need to find <i>another player</i> who will sell it to you, and <i>another one</i> that will buy it back from you at a higher price. The designers didn’t decide “these crates are $3” YOU did that. If you refuse to buy at $3 the other player might drop the price, or not. If you always buy at $3 they might raise the prices, or not. This game doesn’t shove players into specific behaviors, the game has built a world and asks players to find their place in it.
+        </p>
+         <figure class="centerbox">
+            <img class="centerimage" src="container/ships.jpg">
+            <figcaption class="caption">
+                The latest edition added a lot of color to the game. Don't look at older versions if you're at risk of boredom.
+            </figcaption>
+        </figure>
+        <p>
+            Ok but what’s all this buying and selling for? Glad you asked, players are trying to sell crates to the center island for points, and getting the crates there is not easy. First, crates need made in factories, then they need transported on trucks to warehouses, then they are picked up by ships, and then after a lengthy shipping time they arrive on the island where they are unloaded. So that’s about 4 hoops a crate needs to jump through for it to be scored. And here’s the kicker, at <i>every</i> step I just listed, players must buy and sell between to each other. The crate must move from one player's board, to another. Every step requires a transaction. No single player is allowed to bring a crate “from farm to table” by themselves.
+        </p>
+        </figure><figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="rowimage" src="container/cycle-factories.jpg">
+                </a>
+                <a>
+                    <img class="rowimage" src="container/cycle-fill-warehouses.jpg">
+                </a>
+                <a>
+                    <img class="rowimage" src="container/cycle-warehouses.jpg">
+                </a>
+                <a>
+                    <img class="rowimage" src="container/cycle-sell.jpg">
+                </a>
+            </div>
+            <figcaption class="caption">
+                <i>
+                    And here we observe the lifecyle of the humble crate: factories, warehouses, shipping, and selling to the island. Isn't nature beautiful?
+                </i>
+            </figcaption>
+        </figure>
+        <p>
+            Like I said this game doesn’t set prices for things, players do. You can imagine how player personality could radically change the market. My friend Jack is really stingy; he hates over-spending so if prices are high he might just refuse to buy anything. All the money sitting in his hand is effectively removed from the game. With less money available, everything will have to come down in price, not just the things he is holding out for. And the opposite is also true, my friend Ihor plays at a much higher velocity. He is always making high risk plays trying to surge as far ahead of everyone else as possible. He never hoards money, so the economy expands. With more money flowing around prices will keep climbing and climbing.
+        </p>
+        <figure class="centerbox">
+            <img class="centerimage" src="container/money-darker.jpg">
+            <figcaption class="caption">
+                Highly recommend poker chips instead of the money cards for this game. There’s nothing better than slamming down a stack of chips.
+            </figcaption>
+        </figure>
+        <p>
+            This all works because Container's economy is mostly “closed”; money doesn’t enter or leave, it only changes hands. Remember that in monopoly you’re always paying money to and taking income from the bank, meanwhile in Container the money exclusively flows between players. Closed economies are frequently some of the most interesting game economies to examine, and a lot of that is how much they are player driven; where money ends up is based on who the players give it to. I will give a caveat that Container's economy isn't totally closed. Container is very smart about how its money enters or leaves, because it's all controlled by player personality and strategy, and it tends to come in giant bursts the whole table must react to.
+        </p>
+        <p>
+            Money leaves the game when players invest in infratructure: factories, warehouses, etc. This reduces the economy temporarily, but it will grow back due to increased efficiency. The real sauce is how new money enters. When players sell to the center island there's an auction for the goods where the delivering player not only receives the winning bid, but also takes that same amount from the bank. So if someone put an enormous bid on a really good shipment, it's possible the entire economy just expanded by like 25%. That's 25% growth, all in the hands of a single player. Will they freely spend it and make prices rise? Will they throw it all into infrastructure to keep the economy the same? It's all up to player decisions to shape the economy, even the parts where the closed system breaks. Also that auction isn't even a normal auction where players keep bidding each other up. It's a single round blind auciton; you have no idea what the other players are willing to pay. It's always immensely funny when we reveal the bids and everyone reveals small numbers like $4, $2, $6 and then one player just chucked in $28. It's so funny every time it happens.
+        </p>
+        <p>
+            The semi closed economy isn't the only reason I like Container though. I think the designers made a lot of great choices to encourage a more chaotic economy. The next big piece of the pie is turn order.
+        </p>
+        <h2 class="centertext">
+            Sidereal Confluence vs Container
+        </h2>
+        <figure class="centerbox">
+            <img class="centerimage" src="container/sid-con.webp">
+            <figcaption class="caption">
+                This game's scale makes it feel like the perfect convention game to me. It feels weird I don't see it more often.<br>Credit to @Cliffy73 on BoardGameGeek
+            </figcaption>
+        </figure>
+        <p>
+            Maybe the most beloved trading game of all time is Sidereal Confluence, and it’s obvious why people like it: Sidereal Confluence delivers on the promise of a truly open market. Every round there is a trading phase where every player literally stands up and starts running around the room making as many deals as possible. All the trades happen in real time, there's lots of yelling and frantic energy, with the right group it can be a really great time, but I don’t like it.
+        </p>
+        <p>
+            See, Sidereal Confluence really is a totally open market, players can talk and deal and trade with each other at any time, and when your market is totally open you remove all the hard edges. I’ve talked <a target="_blank" href="https://ihaspinecone.github.io/bg/salton.html">before</a> about my love of miserable games, games where things don't always go according to plan, games that make your heart sink in despair, or skip a beat when you barely avoid disaster. Container is this sort of game, you can really be put in a corner in this game in a way you really can't in Sidereal Confluence because of Container's strict turn structure.
+        </p>
+        <figure class="centerbox">
+            <img class="centerimage" src="container/situation.jpg">
+            <figcaption class="caption">
+                A friend of mine always builds out his warehouses to store more crates and it’s never worked out for him. Watching him play is like watching someone stepping on a rake over and over. It's very funny.
+            </figcaption>
+        </figure>
+        <p>
+            Look at this market in Container. Only one player has crates for sale, and the player after you in turn order really really wants to fill up their ship. Here's a cool thing you can you; you can buy the cheap crates and list your own crates for really high prices. What are they gonna do? Are they going to just pass their turn out of principle? You might identify this player doesn’t have any good actions available to them besides picking up crates. You only get so many turns in this game, you don’t want to waste them. They might just eat your giant costs because there is nothing better for them to do. If you tried to squeeze someone in Sidereal Confluence, someone else would jump in and compete with you so everything would end up getting sold for almost the fair market value.
+        </p>
+        <figure class="centerbox">
+            <img class="centerimage" src="container/sid-con-chart.png">
+            <figcaption class="caption">
+                Sidereal Confluence actually knows everything ends up going to a standard price, so it literally gives players a diagram telling them how much everything is.
+            </figcaption>
+        </figure>
+        <p>
+            That’s what a truly free and open market does: it finds the accurate price. And who wants a perfectly accurate price in a trading game? That’s not the fun part. What’s fun are the miserable points: being put over a barrel and trying to get out of it, or exploiting another vulnerable player for all they are worth. In Sidereal Confluence you just don’t get that much value per trade. The savviest trader in the world might be getting 5% or 10% extra value for every trade they do, but in Container a good player could double or triple the value they get from every trade because they can squeeze people against the game's hard edges. Ultimately these two games are about different things: Sidereal Confluence isn’t a game about making the <i>best</i> trades, it’s making the <i>most</i>. It's a game about who can be the loudest and talk the most. If you can make 100 trades, you'll beat the person who only made 80. Sidereal Confluence's market doesn't have the ridiculous booms or glorious busts, it doesn't have the desperation or the exploitation. In Sidereal Confluence the market is so open, that it feels lifeless.
+        </p>
+        <h2 class="centertext">
+            Double or Nothing?
+        </h2>
+        <figure class="centerbox">
+            <img class="centerimage" src="container/wid3.jpg">
+            <figcaption class="caption">
+                While playing this game I love to stack all the little crates in awesome little piles.
+            </figcaption>
+        </figure>
+        <p>
+            The last thing that makes this game really shine for me how hard holding a a lead can be. Let’s say you are winning early; what do you do? What is a ‘safe’ play that will let you just maintain your lead forever? I’ll give you a short answer: there isn’t one. Every option requires an investment; you have to buy something then sell it. A good play can look a lot like a bad one, and what looks like a safe play could fully ruin you. This is a recurring fact in many games I love; you are always on the brink of disaster. If you feel comfortable, that's when you need to be most on guard. There’s many ways other games give you this sense of unease. Container does it with one simple question: Double or Nothing? You have to buy from another player and hope to sell it at a profit. You always need to keep reinvesting, and every reinvestment has the potential to fail. If the wrong bet plays out poorly, it could send you all the way back down to the bottom.
+        </p>
+        <h2 class="centertext">
+            A Small Criticism
+        </h2>
+        <figure class="centerbox">
+            <img class="centerimage" src="container/island.jpg">
+            <figcaption class="caption">
+                I'm a fake fan because I don't have the latest expansion.
+            </figcaption>
+        </figure>
+        <p>
+            I am going to briefly mention my biggest complaint with the game: the game is very simple. This is also its greatest strength. Even with its slow trickle of expansions over the decades the game is still very easy to learn. You can teach it in 5 minutes and play for hours. But, with a game so simple, games will start feeling samey after a while. Remember how I said earlier the game feels very different with different tables of players? The market is ultimately an averaging of every player's personality. The flipping is of course that the same players will keep finding the same level over and over. My group played this game a lot, but with the same people it felt very stale. I will also mention at the end here <a target="_blank" href="https://www.jordandraper.com/tokyotsukijimarket/">Tokyo Tsukigi Market by Jordan Draper</a>. That game is much more complicated than Container and has lots of variance game-to-game. It feels like a kickstarter spiritual successor to Container in a good way. If you did click that link though, you saw that it's sadly out of print. Plus, all the Tabletop Simulator mods are broken. For what it's worth there are lots of print and play assets out there if you're very dedicated. I think the game is 100% worth it.
+        </p>
+        <p>
+            I really like Container, and despite it being out of print for a long time, it is currently in print. It makes me so happy that this game is on store shelves again. It’s one of the best games I’ve ever played and certainly my favorite trading game, alongside Tokyo Tsukigi Market. I highly recommend.
+        </p>
+        <figure class="centerbox">
+            <img class="centerimage" src="../faith/tax/burn barrel sky.webp">
+            <figcaption class="caption">
+                
+            </figcaption>
+        </figure>
+        <hr class="superspace">
+
+        <p>
+            <a href="../index.html">
+                <img class="centerimage" src="RWAssets\back.gif"/>
+            </a>
+        </p>
+    </div>
+
+    <script>
+    const themeLink = document.getElementById("theme");
+    const button = document.getElementById("styleToggle");
+    const params = new URLSearchParams(window.location.search);
+    
+    const NORMAL_CSS = "container/container.css";
+    const ACCESSIBLE_CSS = "readable.css";
+    const STORAGE_KEY = "siteStyle";
+
+  // Initialize style: URL → localStorage → default
+ let style =
+    params.get("style") ||
+    localStorage.getItem(STORAGE_KEY) ||
+    "normal";
+
+  function applyStyle() {
+    if (style === "accessible") {
+      themeLink.href = ACCESSIBLE_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    } else {
+      themeLink.href = NORMAL_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    }
+
+    localStorage.setItem(STORAGE_KEY, style);
+  }
+
+  applyStyle();
+
+  button.addEventListener("click", () => {
+    style = (style === "normal") ? "accessible" : "normal";
+
+    if (style === "accessible") {
+      // Keep URL parameter for accessible mode
+      params.set("style", "accessible");
+      window.history.replaceState(
+        {},
+        "",
+        "?" + params.toString()
+      );
+    } else {
+      // Remove query string entirely for normal mode
+      window.history.replaceState(
+        {},
+        "",
+        window.location.pathname
+      );
+    }
+
+    applyStyle();
+  });
+</script>
+
+    </body>
+
+</html>
+
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[Salton Sea and Agony in Games]]></title>
+      <link>https://ihaspinecone.github.io/bg/salton.html</link>
+      <guid>https://ihaspinecone.github.io/bg/salton.html</guid>
+      <pubDate>Sat, 30 May 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        Help! Can anyone hear me!
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+        rel="stylesheet" />
+        <link id="theme" rel="stylesheet" href="Salton/Salton.css" />
+        <title>
+            Salton Sea and Agony in Games
+        </title>
+        <meta content="Salton Sea and Agony in Games" property="og:title" />
+        <meta content="Help! Can anyone hear me!" property="og:description" />
+        <meta content="https://ihaspinecone.github.io/bg/salton.html" property="og:url" />
+        <meta content="https://ihaspinecone.github.io/bg/Salton/salton-dark.jpg" property="og:image" />
+        <meta content="15844367" data-react-helmet="true" name="theme-color" />
+        <meta name="twitter:card" content="summary_large_image">
+
+    </head>
+
+    <body>
+    <div class="content">
+        <hr class="superspace"/>
+        <h2 class="centertext">
+            Where am I?
+        </h2>
+        <p class="centertext">
+            (10 min. read)
+        </p>
+
+        <div class="style-toggle-wrapper">
+            <button id="styleToggle">
+                Accessibility Toggle
+            </button>
+        </div>
+
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="Salton/room-dark.jpg">
+                </a>
+            </div>
+        </figure>
+
+        <p class="voice">
+            It’s dark here. I shift my weight and my back spasms in knots from lying on the hard concrete. My mouth is dry and cracked. I weakly croak.<br>
+            “Hello?”<br>
+            I sit silently in the dark, someone stirs next to me, and then another. There’s a group of us down here. 
+        </p>
+        <p class="voice">
+            As we all stir awake a panic quitely ripples through the group. Where are we? What is this place? Is there a way out?<br>
+            We are silenced by a spotlight flashing in the middle of the room. There's a board game box there. What is this? Then we hear a voice, speaking as if just outside our peripheral vision. “Hello everyone.” It intones. Its voice is deep and hateful. “The rules are simple. Everyone of you will play. Only one of you can win.” We all look back down at the game.
+        </p>
+
+        <figure class="centerbox">
+            <img class="centerimage" src="Salton/spotlight-salton3.jpg">
+            <figcaption class="caption">
+                That's when I first saw it.
+            </figcaption>
+        </figure>
+        
+        <p>
+            Salton Sea is an economic euro game in the picturesque Salton Sea. Through it’s unique action selection mechanism players will amass resources and try to have the most victory points at the end of the game. Oh yeah, hold on to your butts for this exciting game. If you have anti-boredom medication take it now. (No but for real, this game is actually really unique)
+        </p>
+
+        <figure class="centerbox">
+            <img class="centerimage" src="Salton/money-all.jpg">
+            <figcaption class="caption">
+                I didn’t know at the time, but these are the instruments of our torment. He handed us blades and commanded us to cut.
+            </figcaption>
+        </figure>
+        <p>
+            Here’s the game’s core: the money cards on their back have special actions. This gives money two uses: to be spent or to be used for that action. And here’s the kicker: using the action does NOT discard the card. This means you can just keep taking that action over and over again as long as you don't spend the money. This means you really don't want to actually spend your money in this game. Holding onto it feels so good.
+        </p>
+        
+        <figure class="centerbox">
+            <img class="centerimage" src="Salton/wingspan-salton-standing.jpg">
+            <figcaption class="caption">
+                 Adrenaline carried us through the early game, but once that wore off only the most determined had the strength to keep fighting. I locked eyes with one opponent. He had fire in his eyes. There’s no hope.
+            </figcaption>
+        </figure>
+
+        <p>
+            Having money on hand feels better than spending it. It’s a very pleasant mechanic. And look at that pleasant box, cool blues and warm oranges as the sun sets on this scenic lake. It reminds me of Wingspan; that’s nice. And the box is nice and small. It’s only half the size of a normal game box. You could easily carry this thing around in a backpack. This must be a nice pleasant experience.
+        </p>
+
+        <figure class="centerbox">
+            <img class="centerimage" src="Salton/salton-slush.jpg">
+            <figcaption class="caption">
+                I had to remember what I was fighting for. Without the dream of escape I was sure to lose.
+            </figcaption>
+        </figure>
+
+        <p>
+            Don’t be fooled. This game does not have your best interests at heart. It is here to make you suffer. Remember that central mechanic where holding onto money feels good? Well this game’s trick is constantly assaulting you to get you to spend the money anyway. This game will give you money, and then immediately make you spend it. It gives only so it can have the sick satisfaction of taking it away, and losing that efficiency money gives you feels so bad. No other game makes you hate spending money more than this one. This game was crafted by Belial and his sixfold legions of hell with a six-times-six goetic invocation. This game will override your self-preservation instincts. It will get you to carve flesh out of your very body. The Halls of Hell have started to march against you, your time is at an end.
+        </p>
+
+        <figure class="centerbox">
+            <img class="centerimage" src="Salton/reserach.jpg">
+            <figcaption class="caption">
+                Everywhere there are traps. I saw fellow players make even one wrong step, and a bear trap snapped on their leg. They screamed begging me to help but I kept moving.I must find the right path through this.
+
+            </figcaption>
+        </figure>
+
+        <p>
+            One way this game gets you to spend money is these powerful research cards that come out every turn. These are either powerful one shot abilities, or really strong snowball-y upgrades. They have a simple temptation; “take me as early as you can, the earlier the better.” BUT NOT TOO EARLY. If you spend all your money on that card and bankrupt yourself you’ll never recover. So through this game you always have that devil on your shoulder tempting to you to ruin your game.
+        </p>
+        <p>
+            And of course this is all on the public market. So your opponents also all have a devil tempting them the same way. You better swipe it up before they do! Better watch your step though.
+        </p>
+
+        <figure class="centerbox">
+            <img class="centerimage" src="Salton/refining.jpg">
+            <figcaption class="caption">
+                Who designed this game? What cruel man would make this?
+            </figcaption>
+        </figure>
+
+        <p>
+            The Prince of Hell wouldn’t be satisfied if only research was expensive. Everything in this game is expensive, even the basic actions. These massive prices make your hand of money a ferris wheel of cards. At the same rate you’re getting new cards, the old ones are also being ripped away from you. As every card leaves your hand you’ll feel that stinging sensation like tape being ripped off your skin.
+        </p>
+
+        <figure class="centerbox">
+            <img class="centerimage" src="Salton/sell-contracts3.jpg">
+            <figcaption class="caption">
+                At one point it looked like the game extended an olive branch, it offered peace. I survived because I resisted it’s false promise.
+            </figcaption>
+        </figure>
+
+        <p>
+            This game offers an illusion of safety. It looks like you can just take this sell action and be set for life. The sell action gives you so much money. But the sell action doesn’t give you points or additional actions. Only contracts do that. And contacts suck. They are awful. They give you like no money back. Sure you'll get extra actions for future turns, but you've thrown in $18 worth or resources and are only gettin back like $6.
+        </p>
+
+        <p>
+            If you stay in that little kiddy pool taking sell actions you’ll feel safe, but you’ll never achieve greatness. You’ll only win this game if you take these awful contracts and stay poor forever. This game is about going right to the edge of disaster, but not falling in. And again, spending money is so painful every step you take to that edge is a ragged cut across your back.
+        </p>
+
+        <figure class="centerbox">
+            <img class="centerimage" src="Salton/no 1's.jpg">
+            <figcaption class="caption">
+                When I took the last $1 card from the market I saw my opponent panic. “No!” he said “Please no! I need to make it home to my family!”
+            </figcaption>
+        </figure>
+
+        <p>
+            The final trap of this game is back to the core of that infernal money. The game’s bank is not limitless. There’s a very small pool of money available every turn. If it all gets taken, you have to wait multiple turns for the bank to refresh. Frankly this is just cruel. You’ve spent all your money, and you are ready to sell everything and make it all back, and there are no $1 bills left. You can either lose the value and take what you can, or delay selling. These both feel really bad and stretch out the agony of being broke even longer.
+        </p>
+        
+        <figure class="centerbox">
+            <img class="centerimage" src="Salton/salton-slush2.jpg">
+            <figcaption class="caption">
+                I must win! I must escape! I will win this infernal game no matter the cost.
+            </figcaption>
+        </figure>
+
+        <hr class="superspace"/>
+        <h2 class="centertext">
+            Agony in Games
+        </h2>
+
+        <p>
+            No game can be your favorite unless it hurts you. Pain deepens our attachment to the game and makes us feel everything more deeply. Imagine someone blocking you in Agricola. When you feel that stab of anger, the game now has its hooks in you. Now you’re invested. You were just on auto-pilot before, now it's personal.
+        </p>
+
+        <p>
+            Few things are more painful in a game than an embarrassing loss. That's the way most games hurt us. I imagine many deep relationships with games started walking home after a bad loss. You turn the game over and over in your mind, theory crafting and strategizing. The pain from the loss increases investment in the game. But here’s the trick with Salton Sea: it gets you to that place of pain, even if you’re not losing.
+        </p>
+
+        <p>
+            In Salton Sea every time you spend money and throw that action away, it sets you up to feel the hole it left in future turns. “Ah damn I wish I had that card I spent two turns ago.” Now in a perfect world, that play was probably optimal, but it feels bad. Even when you’re dominating a game, it’s still full of these painful choices that increase your investment in the game.
+        </p>
+
+        <p>
+            Salton Sea is a cruel game. It seems to take some satisfaction in your suffering. I don’t know where it came from, but it has to be a hellish place. This game really is great. Highly recommend.
+        </p>
+
+
+
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="rowimage" src="Salton/points-purple-yellow.jpg">
+                </a>
+                <a>
+                    <img class="rowimage" src="Salton/points-black.jpg">
+                </a>
+                <a>
+                    <img class="rowimage" src="Salton/points-teal2.jpg">
+                </a>
+            </div>
+        </figure>
+
+        <p class="voice">
+            Eventually it became obvious I was winning. Every other player’s mis-step left them further and further behind. Eventually my score passed 100 and went off the board. I never got a look at the taskmaster that put us here, but I could feel his wicked grin when he looked at me. A shiver passed down my spine.
+        </p>
+
+        <p class="voice">
+            When I clacked my final piece on the board to end the game every other player disappeared. I squinted but couldn’t see anything in the pitch black. I must have passed out at some point because the next thing I remember I was waking back up in a field miles away from my house. My shirt and pants were in tatters and I felt like I hadn’t eaten in days. I got to my feet and looked down. There is it. The game I won.<br>
+            - May 21st 2022
+        </p>
+
+        <figure class="centerbox">
+            <img class="centerimage" src="Salton/field salton2.jpg">
+        </figure>
+
+        <figure class="centerbox">
+            <img class="centerimage" src="Salton/field salton1.jpg">
+        </figure>
+
+
+        <hr class="superspace">
+
+        <p>
+            <a href="../index.html">
+                <img class="centerimage" src="RWAssets\back.gif"/>
+            </a>
+        </p>
+    </div>
+
+    <script>
+    const themeLink = document.getElementById("theme");
+    const button = document.getElementById("styleToggle");
+    const params = new URLSearchParams(window.location.search);
+    
+    const NORMAL_CSS = "Salton/Salton.css";
+    const ACCESSIBLE_CSS = "readable.css";
+    const STORAGE_KEY = "siteStyle";
+
+  // Initialize style: URL → localStorage → default
+ let style =
+    params.get("style") ||
+    localStorage.getItem(STORAGE_KEY) ||
+    "normal";
+
+  function applyStyle() {
+    if (style === "accessible") {
+      themeLink.href = ACCESSIBLE_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    } else {
+      themeLink.href = NORMAL_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    }
+
+    localStorage.setItem(STORAGE_KEY, style);
+  }
+
+  applyStyle();
+
+  button.addEventListener("click", () => {
+    style = (style === "normal") ? "accessible" : "normal";
+
+    if (style === "accessible") {
+      // Keep URL parameter for accessible mode
+      params.set("style", "accessible");
+      window.history.replaceState(
+        {},
+        "",
+        "?" + params.toString()
+      );
+    } else {
+      // Remove query string entirely for normal mode
+      window.history.replaceState(
+        {},
+        "",
+        window.location.pathname
+      );
+    }
+
+    applyStyle();
+  });
+</script>
+
+    </body>
+
+</html>
+
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[Book Reviews page is now live]]></title>
+      <link>https://ihaspinecone.github.io/books.html</link>
+      <guid>https://ihaspinecone.github.io/books.html</guid>
+      <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        The thing holding me back from donating my old books was seeing them sitting on my shelf. This is my compromise. I've also jotted down a short review for each one.
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<style>
+:root {
+  --wood-light: #c58b6b;
+  --wood-dark: #8b5a3c;
+  --shelf-shadow: rgba(0,0,0,0.35);
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #3a2b23;
+}
+
+  /* ---------- PAGE DESCRIPTION ---------- */
+.description {
+  width: 1000px;
+  margin: 24px auto 16px;
+  padding: 20px 24px;
+  background: rgba(255, 247, 235, 0.9);
+  border-left: 6px solid #6b3e26;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #2b1b12;
+}
+
+.description p {
+  margin: 0;
+}
+
+/* Label */
+.shelf-label {
+  position: absolute;
+  top: -20px;
+  left: 16px;
+
+  background: linear-gradient(to bottom, #d2a679, #8b5a3c);
+  color: #2b1b12;
+
+  padding: 8px 22px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+
+  border-radius: 4px;
+
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,0.2),
+    inset 0 -3px 5px rgba(0,0,0,0.4),
+    2px 3px 6px rgba(0,0,0,0.5);
+
+  border: 1px solid #5c3a27;
+
+  text-align: center;
+}
+
+
+/* ---------- TOGGLE ---------- */
+.controls {
+  padding: 16px;
+  background: #241812;
+  text-align: center;
+}
+
+button {
+  background: #c9a27d;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ---------- BOOKSHELF ---------- */
+.bookshelf {
+  width: 1016px;
+  margin: 0 auto;
+  padding: 20px;
+
+  background: #5a3726;  /* #7b4a2f; */
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,0.4);
+}
+
+.bookshelf::before {
+  left: -28px;
+}
+
+.bookshelf::after {
+  right: -28px;
+}
+
+.shelf {
+  position: relative;
+  margin-bottom: 45px;
+  padding: 24px 24px 0;
+  background: linear-gradient(
+    to bottom,
+    var(--wood-light),
+    var(--wood-dark)
+  );
+  box-shadow: inset 0 -6px 12px var(--shelf-shadow);
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+}
+
+/* shelf lip */
+.shelf::after {
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  width: 100%;
+  height: 18px;
+  background: linear-gradient(
+    to bottom,
+    #6d432c,
+    #3f2618
+  );
+}
+
+
+/* ---------- BOOK ---------- */
+.book {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.cover {
+  width: 130px;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+
+  transform: none;
+  /* border: 1px solid black; */
+
+  box-shadow: 3px 0px 6px rgba(0,0,0,0.5);
+
+  transition: transform 0.2s ease;
+}
+
+.book:hover .cover {
+  transform: translateY(-10px);
+  box-shadow: 
+    6px 12px 16px rgba(0,0,0,0.5);
+}
+
+
+
+/* ---------- REVIEW ---------- */
+.review {
+  display: none;
+  max-width: 700px;
+  color: #111;
+  background: rgba(255,255,255,0.85);
+  padding: 16px;
+  line-height: 1.6;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+/* ---------- MODES ---------- */
+.bookshelf.review-mode .shelf {
+  flex-direction: column;
+}
+
+.bookshelf.review-mode .book {
+  flex-direction: row;
+}
+
+.bookshelf.review-mode .review {
+  display: block;
+}
+
+.bookshelf.review-mode .cover {
+  width: 180px;
+  height: 260px;
+}
+
+
+/* ---------- MODAL ---------- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  margin: 6vh auto;
+  max-width: 800px;
+  max-height: 90vh;
+  background: #fff;
+  padding: 0;
+  border-radius: 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* ---------- HEADER ---------- */
+.modal-header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+  padding: 16px 24px 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+  z-index: 10;
+}
+  
+.modal-cover,
+.modal-review {
+  padding: 0 24px 24px;
+}
+
+
+.modal-header h2 {
+  margin: 0;
+  font-family: Georgia, serif;
+}
+
+/* ---------- COVER + TEXT FLOW ---------- */
+.modal-cover {
+  width: 180px;
+  float: left;   
+  box-shadow: none;
+  border: none;
+  margin: 0;
+}
+
+.modal-date {
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+.modal-review {
+  line-height: 1.6;
+  font-size: 18px;
+  position: relative;
+  z-index: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+
+  /* ---------- METADATA ---------- */
+.meta {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 14px;
+  display: none;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.date {
+  opacity: 0.8;
+  font-size: 13px;
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 8px;
+  font-size: 12px;
+  background: #6b3e26;
+  color: #fff;
+  border-radius: 12px;
+}
+
+/* ---------- REVIEW MODE LAYOUT ---------- */
+.bookshelf.review-mode .meta {
+  text-align: left;
+  margin-top: 0;
+  display: block;
+}
+
+.bookshelf.review-mode .tag {
+  background: #8a4f2d;
+}
+</style>
+
+<title>
+  Pine's Bookshelf
+</title>
+<meta content="Pine's Bookshelf" property="og:title" />
+<meta content="The thing holding me back from donating all my old books is I liked seeing them sitting on my shelf. This is my compromise. I've also jotted down a short review for each one." property="og:description" />
+<meta content="https://ihaspinecone.github.io/books.html" property="og:url" />
+<meta content="https://ihaspinecone.github.io/books/man-writing-book-reviews.gif" property="og:image" />
+<meta content="15844367" data-react-helmet="true" name="theme-color" />
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body>
+
+<header class="description">
+  <p>
+    The thing holding me back from donating my old books was seeing them sitting on my shelf. This is my compromise.<br>I've also jotted down a short review for each one.
+  </p>
+</header>
+
+<div class="controls">
+  <select id="sortMode" onchange="changeSortMode()">
+    <option value="genre">Sort by Shelf</option>
+    <option value="reviewed">Sort by Date Reviewed</option>
+    <option value="read">Sort by Date Read</option>
+  </select>
+</div>
+
+<div class="bookshelf" id ="bookshelf"></div>
+
+  
+
+<div class="controls">
+  <a href="index.html">
+    <img class="controls" src="bg\RWAssets\back.gif"/>
+  </a>
+</div>
+
+<script>
+function attachBookClicks() {
+  document.querySelectorAll(".book").forEach(book => {
+    book.onclick = () => openModal(book);
+  });
+}
+  
+function openModal(book) {
+  const modal = document.getElementById("bookModal");
+
+  document.getElementById("modalCover").src =
+    book.querySelector(".cover").src;
+
+  document.getElementById("modalTitle").textContent =
+    book.querySelector(".title").textContent;
+
+  document.getElementById("modalDate").textContent =
+  "Date Read: " +
+  book.querySelector(".raw-date").textContent;
+  
+const reviewed = book.querySelector(".reviewed-date");
+const reviewedElement = document.getElementById("modalReviewedDate");
+if (reviewed) {
+  reviewedElement.textContent =
+    `Date Reviewed: ${reviewed.textContent.trim()}`;
+  reviewedElement.style.display = "block";
+} else {
+  reviewedElement.textContent = "";
+  reviewedElement.style.display = "none";
+}
+  
+  document.getElementById("modalReview").innerHTML =
+    book.querySelector(".review").innerHTML;
+
+  modal.style.display = "block";
+  document.body.style.overflow = "hidden";
+  
+  // update URL
+  history.pushState(
+  {},
+  "",
+  `?book=${encodeURIComponent(
+    book.querySelector(".title").textContent
+  )}`
+);
+}
+  
+function closeModal() {
+  document.getElementById("bookModal").style.display = "none";
+  document.body.style.overflow = "";
+
+  history.pushState({}, "", window.location.pathname);
+}
+
+// close when clicking outside
+window.onclick = function(e) {
+  const modal = document.getElementById("bookModal");
+  if (e.target === modal) {
+    closeModal();
+  }
+};
+
+// run initially
+attachBookClicks();
+
+</script>
+
+<div id="bookModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle"></h2>
+      <div id="modalDate" class="modal-date"></div>
+      <div id="modalReviewedDate" class="modal-date"></div>
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+    </div>
+
+    <div class="modal-body">
+      <img id="modalCover" class="modal-cover">
+      <div id="modalReview" class="modal-review"></div>
+  </div>
+</div>
+
+<!-- reads json file -->
+<script>
+const bookshelf = document.getElementById("bookshelf");
+let originalShelves = [];
+let reviewMode = false;
+let chronologicalMode = false;
+
+fetch("books.json")
+  .then(res => res.json())
+  .then(data => {
+    buildShelves(data);
+    attachBookClicks();
+    const params = new URLSearchParams(window.location.search);
+    const bookTitle = params.get("book");
+    if (bookTitle) {
+      const bookEl = [...document.querySelectorAll(".book")]
+        .find(book =>
+          book.querySelector(".title")?.textContent === bookTitle
+        );
+      if (bookEl) {
+        openModal(bookEl);
+      }
+    }
+  });
+  
+function createBookElement(book) {
+  const bookEl = document.createElement("div");
+  bookEl.className = "book";
+  bookEl.innerHTML = `
+    <div class="book-cover">
+        <img class="cover" src="${book.cover}">
+    </div>
+    <div class="meta">
+      <div class="title">${book.title}</div>
+      <div class="raw-date" style="display:none">
+        ${book.date || ""}
+      </div>
+      ${book.dateReviewed ? `
+        <div class="reviewed-date" style="display:none">
+        ${book.dateReviewed}
+        </div>
+        ` : ""}
+    </div>
+
+    <div class="review">
+      ${(book.review || "(no review)")
+        .split("\n\n")
+        .map(p => `<p>${p}</p>`)
+        .join("")}
+    </div>
+  `;
+  return bookEl;
+}
+
+function buildShelves(data) {
+  bookshelf.innerHTML = "";
+  const shelves = {};
+  data.forEach(book => {
+    if (!book.title) return;
+    if (!book.review) {
+        book.review = "(no review)";
+      }
+    if (!shelves[book.shelf]) {
+      const shelf = document.createElement("div");
+      shelf.className = "shelf";
+      const label = document.createElement("div");
+      label.className = "shelf-label";
+      label.textContent = book.shelf;
+
+      shelf.appendChild(label);
+      shelves[book.shelf] = shelf;
+    }
+    // create book
+    shelves[book.shelf].appendChild(
+      createBookElement(book)
+    );
+  });
+  // Add shelves to page
+  Object.values(shelves).forEach(shelf => {
+    bookshelf.appendChild(shelf);
+  });
+  // Save layout for toggle
+  originalShelves = [...bookshelf.children].map(s => s.cloneNode(true));
+}
+
+  function parseBookDate(dateStr) {
+  if (!dateStr) return new Date(0);
+  const seasonMatch =
+    dateStr.match(/^(Winter|Spring|Summer|Fall)\s+(\d{4})$/i);
+  if (seasonMatch) {
+    const season = seasonMatch[1].toLowerCase();
+    const year = parseInt(seasonMatch[2]);
+    const months = {
+      winter: 0, // January
+      spring: 3, // April
+      summer: 6, // July
+      fall: 9    // October
+    };
+    return new Date(year, months[season], 1);
+  }
+
+  const parsed = new Date(dateStr);
+
+  if (!isNaN(parsed)) {
+    return parsed;
+  }
+
+  return new Date(0);
+}
+
+  function getSortDate(book) {
+  return parseBookDate(book.dateReviewed || book.date);
+}
+
+  function buildDateShelves(data, useReviewedDate) {
+  bookshelf.innerHTML = "";
+  const books = data.filter(book => book.title);
+  books.sort((a, b) => {
+  const dateA = parseBookDate(
+    useReviewedDate
+      ? (a.dateReviewed || a.date)
+      : a.date
+  );
+  const dateB = parseBookDate(
+    useReviewedDate
+      ? (b.dateReviewed || b.date)
+      : b.date
+  );
+  const diff = dateB - dateA;
+  if (diff !== 0) return diff;
+  if (!useReviewedDate) {
+    const reviewedA = parseBookDate(a.dateReviewed);
+    const reviewedB = parseBookDate(b.dateReviewed);
+    const reviewedDiff = reviewedB - reviewedA;
+    if (reviewedDiff !== 0) return reviewedDiff;
+  }
+    return a.title.localeCompare(b.title);
+});
+  for (let i = 0; i < books.length; i += 6) {
+    const shelf = document.createElement("div");
+    shelf.className = "shelf";
+    const label = document.createElement("div");
+    label.className = "shelf-label";
+    label.textContent =
+      i === 0
+        ? "Most Recent"
+        : `Older (${i + 1}+)`;
+    shelf.appendChild(label);
+    books.slice(i, i + 6).forEach(book => {
+      shelf.appendChild(
+        createBookElement(book)
+      );
+    });
+    bookshelf.appendChild(shelf);
+  }
+}
+
+  function changeSortMode() {
+  const mode = document.getElementById("sortMode").value;
+  fetch("books.json")
+    .then(res => res.json())
+    .then(data => {
+      if (mode === "genre") {
+        buildShelves(data);
+      } else if (mode === "reviewed") {
+        buildDateShelves(data, true);
+      } else if (mode === "read") {
+        buildDateShelves(data, false);
+      }
+      attachBookClicks();
+    });
+}
+
+  function buildChronologicalShelves(data) {
+    bookshelf.innerHTML = "";
+
+    // Remove empty items, then sort and group into shelves of 6
+    const books = data.filter(book => book.title);
+    books.sort(
+      (a, b) => getSortDate(b) - getSortDate(a)
+      );
+    for (let i = 0; i < books.length; i += 6) {
+      const shelf = document.createElement("div");
+      shelf.className = "shelf";
+
+      const label = document.createElement("div");
+      label.className = "shelf-label";
+      label.textContent = i === 0 ? "Most Recent" : `Older (${i + 1}+)`;
+      shelf.appendChild(label);
+
+      const chunk = books.slice(i, i + 6);
+
+      chunk.forEach(book => {
+        const bookEl = document.createElement("div");
+        bookEl.className = "book";
+
+        bookEl.innerHTML = `
+        <div class="book-cover">
+          <img class="cover" src="${book.cover}">
+        </div>
+        <div class="meta">
+          <div class="title">${book.title}</div>
+          <div class="raw-date" style="display:none">${book.date}</div>
+          <div class="reviewed-date" style="display:none">${book.dateReviewed}</div>
+        </div>
+        <div class="review">
+          ${
+            (book.review || "(no review)")
+              .split("\n\n")
+              .map(p => `<p>${p}</p>`)
+              .join("")
+          }
+        </div>
+        `;
+
+        shelf.appendChild(bookEl);
+      });
+      bookshelf.appendChild(shelf);
+    }
+  }
+    
+
+  function toggleChronological() {
+  chronologicalMode = !chronologicalMode;
+
+  fetch("books.json")
+    .then(res => res.json())
+    .then(data => {
+      if (chronologicalMode) {
+        buildChronologicalShelves(data);
+      }
+      else {
+        buildShelves(data);
+      }
+      attachBookClicks();
+    });
+  }
+  
+</script>
+
+</body>
+</html>
+
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[Dandan Inspired Formats]]></title>
+      <link>https://ihaspinecone.github.io/bg/Dandan.html</link>
+      <guid>https://ihaspinecone.github.io/bg/Dandan.html</guid>
+      <pubDate>Sun, 26 Apr 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        A heuristic for studying Dandan formats.
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+        <link id="theme" rel="stylesheet" href="Dandan/Dandan.css" />
+        <title>
+            Dandan Style Formats
+        </title>
+        <meta content="Dandan Style Formats" property="og:title" />
+        <meta content="A heuristic for studying Dandan formats." property="og:description" />
+        <meta content="https://ihaspinecone.github.io/bg/Dandan.html" property="og:url" />
+        <meta content="https://ihaspinecone.github.io/bg/Dandan/Skullbriar_poster_5000x.png" property="og:image" />
+        <meta content="15844367" data-react-helmet="true" name="theme-color" />
+        <meta name="twitter:card" content="summary_large_image">
+    </head>
+
+    <body>
+    <div class="content">
+        <hr class="superspace"/>
+        <h2 class="centertext">
+            Dandan Inspired Formats
+        </h2>
+        <p class="centertext">
+            (5 min. read)
+        </p>
+
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="Dandan/Skullbriar_poster_5000x.png">
+                </a>
+            </div>
+            <figcaption class="caption">
+                <i>
+                    Artist: Nils Hamm
+                </i>
+            </figcaption>
+        </figure>
+
+        <p class="voice">
+            5 years ago today,
+            <span class="hover-image"> Skullbriar, the Walking Grave <img src="Dandan/cmd-227-skullbriar-the-walking-grave.jpg" alt="preview"> </span>
+            passed away. Last night, <span class="hover-image"> Bereaved Survivor <img src="Dandan/mid-4-bereaved-survivor.jpg" alt="preview"> </span>
+            joined her husband in death peacefully in her sleep, surrounded by their <span class="hover-image"> seven children.<img src="Dandan/mh3-30-hexgold-slith.jpg" alt="preview"> </span>
+        </p>
+        <p class="voice">
+            Skullbriar was many things to many people— A coworker, a friend, a father, but to <span class="hover-image">
+                Bereaved Survivor<img src="Dandan/mid-4-bereaved-survivor.jpg" alt="preview">
+            </span>
+            , he was a loving and supportive husband.
+        </p>
+        <p class="voice">
+            As a young man, Skullbriar served his country in the <span class="hover-image"> Vietnam War. <img src="Dandan/bro-250-supply-drop.jpg" alt="preview"> </span>
+            After his years of service, was admitted to
+            <span class="hover-image"> University <img src="Dandan/plst-STX-256-letter-of-acceptance.jpg" alt="preview"> </span>
+            where he studied agriculture and met his future wife. They were married 3 years later. Friends have said that Skullbriar could often be seen riding his
+            <span class="hover-image"> beloved motorcycle <img src="Dandan/dft-30-spotcycle-scouter.jpg" alt="preview"> </span>
+            until it was totaled in an accident and had to be sent to the
+            <span class="hover-image"> junkyard. <img src="Dandan/dft-242-scrap-compactor.jpg" alt="preview"> </span>
+            As the couple aged, his wife recalled how every morning he would prepare his favorite food for breakfast — <span class="hover-image"> a bagel with cream cheese. <img src="Dandan/spm-161-bagel-and-schmear.jpg" alt="preview"> </span>
+        </p>
+        <p class="voice">
+            The Skullbriar household was a place of laughter and joy. Anyone visiting the house would hear the kids cackling with joy as they played with their their
+            <span class="hover-image"> favorite <img src="Dandan/neo-248-iron-apprentice.jpg" alt="preview"> </span>
+            <span class="hover-image"> toys. <img src="Dandan/dsk-33-splitskin-doll.jpg" alt="preview"> </span>
+            The centerpiece of their home was a
+            <span class="hover-image"> curious and amusing statue <img src="Dandan/m11-208-jinxed-idol.jpg" alt="preview"> </span>
+            given to the family by Skullbriar's uncle. And no visitor would forget how the whole family doted on
+            <span class="hover-image"> their beloved pet cat. <img src="Dandan/cmb2-6-frontier-explorer.jpg" alt="preview"> </span>
+        </p>
+        <p class="voice">
+            Skullbriar would tell coworkers of his dreams of moving to the countryside one day. He said he always wanted to become a cattle rancher. His death was tragic, but ultimately,
+            <span class="hover-image"> it was how he would've wanted to go. <img src="Dandan/otj-6-bovine-intervention.jpg" alt="preview"> </span>
+        </p>
+        <p class="voice">
+            The funeral for Bereaved Survivor is to be held at <span class="hover-image"> The Fair Basilica <img src="Dandan/one-252-the-fair-basilica.jpg" alt="preview"> </span>.
+        </p>
+
+        <hr class="superspace">
+
+        <figure class="centerbox">
+            <img class="centerimage" src="Dandan/datenight.jpg">
+            <figcaption class="caption">
+                The cows don't stand a chance.
+            </figcaption>
+        </figure>
+        
+        <p>
+            <a href="https://cubecobra.com/cube/about/31de8c39-59b9-4121-bca3-fc147d385a37" target="_blank">
+                A Eulogy for Skullbriar and his Wife
+            </a>
+            is a 1v1 shared deck Magic format inspired by Dandan. It creates a unique subgame using an existing game not unlike video game mods. As you noticed, this format also has some silly lore.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="rowimage" src="Dandan/tsb-19-dandan.jpg">
+                </a>
+                <a>
+                    <img class="rowimage" src="Dandan/5ed-103-memory-lapse.jpg">
+                </a>
+            </div>
+            <figcaption class="caption">
+                <i>
+                    I love the original art of Dandan so much.
+                </i>
+            </figcaption>
+        </figure>
+        <p>
+            The original Dandan format is named after the iconic fish, but everyone knows what really made it unique was Memory Lapse. Both players use a single shared deck, so Memory Lapse functions more like a weird draw spell rather than straight removal. Whatever you hit with it goes on top of the deck ready for you yourself to draw.
+        </p>
+        <p>
+            A Eulogy for Skullbriar and His Wife sets itself apart by not focusing the shared library, but the shared graveyard. When a creature enters the graveyard, it's available for either player to bring back with a resurrection spell. The format also found unique identity by focusing on the battlefield and the energy mechanic. They play differently enough we've found people who don't like Dandan do tend to like this format.
+        </p>
+        <figure class="centerbox">
+            <img class="centerimage" src="Dandan/aggressive-skullbriar.jpg" class="caption">
+            <figcaption class="caption">
+                Opponent just killed Skullbriar on my side, resurrected him on his, and now i'm basically dead.
+            </figcaption>
+        </figure>
+        <p>
+            When designing a game, it's easy to hyperfocus on your source of inspiration. I personally was stuck for a long time trying to one-for-one replace cards in Dandan like a Ship of Theseus. Unsurprisingly, the format only became great when I was comfortable making a clean break and taking the format in its own new direction. And honestly I think this thought process is very common among Dandan fans considering how many versions of "Dandan but with Lightning Bolts" i've seen.
+        </p>
+        <p>
+            Did you notice a pattern when I was describing Skullbriar and Dandan? Dandan is about Memory Lapse (an instant) interacting with the shared library, while this format is Skullbriar (a creature) interacting with the shared graveyard. They both are “X Card plus shared Y”. In order to inspire others making their own formats I'll make a random table to roll on using this hueristic. Ideally one could use this as a spark to break away from copying Dandan one-for-one.
+        </p>
+
+        <div class="table-wrap">
+            <table class="d20-table">
+                <thead>
+                    <tr>
+                        <th>d8</th>
+                        <th>Shared Zone</th>
+                        <th>Key Card</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Hand</td><td>Creature (big)</td></tr>
+                    <tr><td>2</td><td>Library</td><td>Creature (small)</td></tr>
+                    <tr><td>3</td><td>Graveyard</td><td>Land</td></tr>
+                    <tr><td>4</td><td>Battlefield (lands)</td><td>Instant</td></tr>
+                    <tr><td>5</td><td>Battlefield (nonlands)</td><td>Sorcery</td></tr>
+                    <tr><td>6</td><td>Exile</td><td>Artifact/Enchantment</td></tr>
+                    <tr><td>7</td><td>Command Zone</td><td>Planeswalker</td></tr>
+                    <tr><td>8</td><td>All Cards of a Specific Type</td><td>Planechase</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>
+            For example, shared Library + key Instant is the type original Dandan falls into. Let's give this table a rip.
+        </p>
+        <figure class="centerbox">
+            <div class="centerimage">
+                <a>
+                    <img class="rowimage" src="Dandan/2d8.png">
+                </a>
+            </div>
+            <figcaption class="caption">
+                <i>
+                    You can tell I actually rolled dice because the same one came up both times, which is statistically possible but not something a human would come up with.
+                </i>
+            </figcaption>
+        </figure>
+        <p>
+            Looking at the table, 5 & 5 means sorcery plus shared nonlands. Ok, whenever a player plays a nonland it goes into a shared battlefield. And the key card is a sorcery. Maybe… Sweltering Suns? Creatures are shared between players, but anyone can wipe the board? And 4 toughness creatures are key because they survive the board wipe. We might be getting somewhere.
+        </p>
+        <figure class="centerbox">
+            <div class="centerimage">
+                <a>
+                    <img class="rowimage" src="Dandan/akh-149-sweltering-suns.jpg">
+                </a>
+            </div>
+            <figcaption class="caption">
+                <i>
+                    TASTE THE SUN
+                </i>
+            </figcaption>
+        </figure>
+        <p>
+            A funny quirk is that if you play a creature, your opponent is the first to attack with it because it loses summoning sickness on their turn. This effectively makes aggro impossible. And because all creatures are shared the only creatures that can block are defenders. So lets add one of them. And while i'm at it i'll add a creature the wall can successfully block.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="rowimage" src="Dandan/ddf-41-steel-wall.jpg">
+                </a>
+                <a>
+                    <img class="rowimage" src="Dandan/soi-149-convicted-killer.jpg">
+                </a>
+                <a>
+                    <img class="rowimage" src="Dandan/soi-149-branded-howler.jpg">
+                </a>
+            </div>
+            <figcaption class="caption">
+                <i>
+                    AWOOO
+                </i>
+            </figcaption>
+        </figure>
+        <p>
+            So far it seems the game is about making sure there’s more 2/2s on the board during your turn and more defenders on your opponent’s turn. Crazy idea: both players start at 1 life? Now the game is all about that one good turn. All it takes is one good attack to win. A visual aesthetic is also starting to form here, maybe it’s the end of the world with fire raining from the sky. The werewolf is interesting because it if flips it can kill the wall, so controlling when the werewolf flips is important.
+        </p>
+        <p>
+            With only 1 life this is very all-gas-no-brakes. I’m worried it won’t be interactive, just players dumping their hand, but of course if you just dump your hand your opponent will have those resources too. I can’t tell if there’s anything cool here. But I know I won't know for sure unless I playtest it. This wall is really boring though, so for the readers edification i've including some other cool defenders that could replace it.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="rowimage" src="Dandan/mid-58-larder-zombie.jpg">
+                </a>
+            </div>
+            <figcaption class="caption">
+                <i>
+                    There's a zombie on your lawn.
+                </i>
+            </figcaption>
+        </figure>
+        <p>
+            Larder zombie is neat because this format still has a shared library, so controlling the top card is important. Note: If you tap the zombie your opponent can't use it to block your creature, but there need to be four creatures in play for that to happen.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="rowimage" src="Dandan/usg-50-shimmering-barrier.jpg">
+                </a>
+            </div>
+            <figcaption class="caption">
+                <i>
+                    "Summon Wall" is also the name of my post-punk band.
+                </i>
+            </figcaption>
+        </figure>
+        <p>
+            If four of these are in play it pseudo softlocks the game because a single flipped werewolf will never break throgh. (The first strike will mean it never gets to deal damage and kill a wall). Maybe cycling makes this interesting?
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="rowimage" src="Dandan/bfz-176-jaddi-offshoot.jpg">
+                </a>
+            </div>
+            <figcaption class="caption">
+                <i>
+                    Yeah good job on that flavor text man. I think that calls for an early lunch.
+                </i>
+            </figcaption>
+        </figure>
+        <p>
+            Play this and let your opponent gain a life if they have a land? Dangerous considering everyone starts at 1 life.
+        </p>
+        
+        <hr class="superspace">
+
+        <p>
+            So there’s an example of how to use the Dandan Inspired Formats table. If you want to know more about specifically A Eulogy for Skullbriar and his Wife you should check out
+            <a href="https://cubecobra.com/cube/about/31de8c39-59b9-4121-bca3-fc147d385a37" target="_blank">
+                the Cube Cobra page.
+            </a>
+        </p>
+
+
+        <hr class="superspace">
+
+        <p>
+            <a href="../index.html">
+                <img class="centerimage" src="RWAssets\back.gif"/>
+            </a>
+        </p>
+    </div>
+
+    <script>
+            const params = new URLSearchParams(window.location.search);
+            const style = params.get("style");
+
+            if (style === "readable") {
+                document.getElementById("theme").href = "readable.css";
+            }
+    </script>
+    </body>
+
+</html>
+
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[The Pax Transhumanity Keynote Address]]></title>
+      <link>https://ihaspinecone.github.io/bg/PaxTranshumanity.html</link>
+      <guid>https://ihaspinecone.github.io/bg/PaxTranshumanity.html</guid>
+      <pubDate>Sat, 04 Apr 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        Get Excited About Pax Transhumanity!
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+        rel="stylesheet" />
+        <link id="theme" rel="stylesheet" href="PaxTranshumanity/PT.css" />
+        <title>
+            The Pax Transhumanity Keynote Address.
+        </title>
+        <meta content="The Pax Transhumanity keynote address." property="og:title" />
+        <meta content="Get Excited About Pax Transhumanity!" property="og:description" />
+        <meta content="https://ihaspinecone.github.io/bg/PaxTranshumanity.html" property="og:url" />
+        <meta content="https://ihaspinecone.github.io/bg/PaxTranshumanity/SteveJobs.jpg" property="og:image" />
+        <meta content="15844367" data-react-helmet="true" name="theme-color" />
+        <meta name="twitter:card" content="summary_large_image">
+    </head>
+
+    <body>
+        <hr class="superspace"/>
+
+        <h2 class="centertext">
+            Keynote Address for Pax Transhumanity
+        </h2>
+        <p class="centertext">
+            (10 min. read)
+        </p>
+        <div class="style-toggle-wrapper">
+            <button id="styleToggle">
+                Accessibility Toggle
+            </button>
+        </div>
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/SteveJobs.jpg">
+            <figcaption class="centertext">
+                <i>
+                    Image Credit: Tom Coates
+                </i>
+            </figcaption>
+        </figure>
+        <p class="lefttext">
+            “Are you ready to hear me talk about board games?!”<br>
+            An eruption of cheers and excitement. Hands fly into the air, I can just make out the first few rows under the bright lights but the crowd is loud.
+        </p>
+        <p>
+            “Today I have for you three revolutionary games. The first game’s scale is enormous. It encompasses all of humanity. Everything from the poverty in the third world to the cutting edge tech of Silicon Valley.”
+        </p>
+        <p>
+            “The second game is short. It plays in under an hour, while not sacrificing any strategic depth.” Graphics are appearing behind me on stage as I deliver the keynote. With every sentece a chorus of cheers moves through the crowd.
+        </p>
+        <p>
+            “The third game is about uncertainty. You never are sure what will be worth points until the very end."
+        </p>
+        <p>
+            The graphics disappear. All the lights go dark except a single spotlight on me. I pause a beat.
+        </p>
+        <p>
+            “Actually, I don’t have 3 separate games for you. What I’m describing is actually a single game. A game with a large scale, that plays in under an hour, and is exciting at every moment.” An explosion of light behind me as the graphics spin and flash. Pax Transhumanity.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/PTClose.jpg">
+            <figcaption class="centertext">
+                <i>
+                    The Game of the Century
+                </i>
+            </figcaption>
+        </figure>
+
+        <p>
+            “A better game! A game beyond the slag we’ve had before! Such a shining example of what design can be! I thought the crowd was loud before, now it’s a typhoon.
+        </p>
+        <p>
+            “In this game you’ll operate globe spanning companies! Get ready to build and innovate!” The stage under me shakes with the shouts so much I wonder if it’ll hold together.
+        </p>
+        <p>
+            “Your scientists will push the boundaries! Go beyond what was ever thought was possible!”
+        </p>
+        <p>
+            “Get ready! Because in this game you will… syndicate the ideas to allow commercialization! Get ready to do maker work in the first world and use your patents! Deploy your think tank to use ideas by completely avoiding the need for syndication. Cause a nuclear exchange impact to discard a number of solved problems in the indicated sphere. Get ready for the Human Progress Splay!”
+        </p>
+        <p>
+            ...
+        </p>
+        <p>
+            What? Did I say something wrong?
+        </p>
+        <p>
+            ...
+        </p>
+        <p>
+            Is it the theme?
+        </p>
+
+        <hr class="superspace">
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/withmug.jpg">
+            <figcaption class="centertext">
+                <i>
+                    I hate cuboid game boxes. Impossible to fit neatly on a shelf.
+                </i>
+            </figcaption>
+        </figure>
+
+        <p class="lefttext">
+            Pax Transhumanity is obtuse. I imagine your eyes glazed over those nonsense words at the end of that skit. Bad news: those are the words actually used in the game. Commercialization, Patents, Thinker Work, Developing World, Human Progress Splay etc. These are all game terms. I was taught this game at a convention. My friend knew the rules would overwhelm me so he prefaced his rules explanation with “For your first game, don’t try to do any strategy. Just try with all your might to simply perform legal actions. That's all you'll be able to do.”
+        </p>
+        <p>
+            What wild advice! I’m an experienced gamer, I read rulebooks for fun. I can handle complexity. But my friend was right. We aren't dealing with ordinary complexity with this game. This game’s rules are madness.
+        </p>
+
+        <hr class="superspace">
+
+        <h2 class="centertext">
+            Words? How about these symbols instead.
+        </h2>
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/robot.jpg">
+            <figcaption class="centertext">
+                <i>
+                    This robot and his friends are here to help. I don't know if they all have triangle heads.
+                </i>
+            </figcaption>
+        </figure>
+
+        <p class="lefttext">
+            Look at this card. None of those words are rules text. Those are purely for flavor. Instead of text explaining the rules, what we have instead are these moon-rune looking symbols. Don’t worry though, the rulebook has a glossary saying what the symbols do. How many are there? Twenty-two. That’s kinda a lot. But they follow a pattern right? No. Are the symbols at least intuitive? Well, you tell me.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/orangesymbols.jpg">
+            <figcaption class="centertext">
+                <i>
+                    This game calls its glossary a "Rosetta Stone" to ensure maximum confusion.
+                </i>
+            </figcaption>
+        </figure>
+        
+
+        <p>          
+            That orange circle on the left means “start a company” while that orange symbol under it means “end the entire game”. Yeah that little innocuous orange arrow means THE GAME IS OVER. And don’t worry, the context in the game doesn't help either.
+        </p>
+
+        <p class="lefttext">
+            I like symbols in games. Symbols can make a game so much more readable. It's always faster to read a good symbol than read a sentence explaining an effect. You can know what something does at a glance, if the symbols are good. Great Western Trail for example is a game with fantastic symbols. It's possible to see a symbol in that game and just guess what it does because it's so intuitive. No rulebook required. Brown/Blue pointing to your deck? That’s buy a brown/blue sheep and put it on top of your deck. What about the dog card, bird card, and boat card? They all mean “get a dog/bird/boat.”
+        </p>
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/GWT.png">
+            <figcaption class="centertext">
+                <i>
+                    The dog in this game is a good boy.
+                </i>
+            </figcaption>
+        </figure>
+        <p>
+            Great Western Trail game is 10x more complex than Pax Transhumanity but it’s somehow easier to learn. And the difference is obvious: Pax’s symbols are complete bollocks.
+        </p>
+
+        <hr class="superspace">
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/men.jpg">
+            <figcaption class="centertext">
+                <i>
+                    One of these means take a new worker. The other means take a new worker, but they<br> are immediatly placed down placating heat. Good luck remembering which is which.
+                </i>
+            </figcaption>
+        </figure>
+        <hr class="superspace">
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/surge.jpg">
+            <figcaption class="centertext">
+                <i>
+                    Which of these icons do you think is "surge"? I'll give you a hint: it's not the lighting bolt.
+                </i>
+            </figcaption>
+        </figure>
+        <hr class="superspace">
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/jetpacks.jpg">
+            <figcaption class="centertext">
+                <i>
+                    Jetpacks solve mental health.
+                </i>
+            </figcaption>
+        </figure>
+
+        <p class="lefttext">
+            Could these symbols have been designed better? Is it possible to make this system not nonsense? Yes. But it needs to be a priority. And it wasn't a priority here. Maybe you are a smart player and picked up that the colors are important. Then the game will throw a purple symbol at you. You go around the board looking for the other purple things it connects to, but they doesn’t exist. Eat that you stupid idiot. Purple circle means something entirely different from all the other colors! Enjoy picking up the rulebook to learn what that does!
+        </p>
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/SocialResilience.jpg">
+            <figcaption class="centertext">
+                I've looked up what this purple symbol does in the rulebook more than i've actually resolved the effect.
+            </figcaption>
+        </figure>
+
+        <p>
+            I guess the designers didn't have time/money to design an intuitive and comprehensive set of symbols for this game, but that won’t stop designer Matt Eklund from using symbols anyway! During playtesting he had to see how bad the symbols were, but he persevered! He is made of tougher stuff than you and I. His tenacity and stubbornness are admirable, and i’d probably want him leading my squadron in like a war, but I don't want him designing my board games.
+        </p>
+
+        <hr class="superspace">
+
+        <h2 class="centertext">
+            <i>
+                The Greatest Weapon in Teaching a Game
+            </i>
+        </h2>
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/BlackMirrorClose.jpg">
+            <figcaption class="centertext">
+                <i>
+                    Most of the cards in this game are also plots of Black Mirror episodes.
+                </i>
+            </figcaption>
+        </figure>
+
+        <p>
+            Dear reader, you know how important theme is in a game. Theme grabs your attention and makes you excited. Sometimes a strange rule is made clear because of a theme. What's Pax Transhumanity's theme? Transhumanism. You know what that is? Exactly. Basically it's radically using technology to improve human lives. Stuff like putting computers in our brain or modifying our genes. Right now transhumanists are talking a lot about AI. And I won't lie to you: I knew a bit about transhumanism before playing this game, and it did not help me learn the rules at all.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/brass.jpg">
+            <figcaption class="centertext">
+                (loud-fog-horn.wav)
+            </figcaption>
+        </figure>
+
+        <p>
+            Let me teach you how Brass Birmingham’s market works. Here’s the market. If you try to sell iron to a stocked market you can only fill these cheap bottoms spots – you won’t get paid much. But if you sell to an empty market you can fill the expensive high spots. Buy when the market is full and flush. Sell when it's empty. As you can see, this a really simple model of a market.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/spheres.jpg">
+            <figcaption class="centertext">
+                As we all know, the natural step after researching ID Theft is a career in "Adverse Jurisdictions".
+            </figcaption>
+        </figure>
+
+        <p>
+            Contrast this with a much simpler system in Pax Transhumanity. To hire an agent you put them in a sphere. Spheres are um... Spheres are basically areas of commerce or maybe research. They are the First World, Developing World, Space, and Cloud. Duh. What else would the spheres be? Place your hired agent on one of the circles in a sphere. The circles represent jobs, I think. And you either employ them as a researcher, inventor, or both. (By placing them on the left or right side) This is because people specialize in real life. And when an agent does something they move downward. Don't ask me why being a data hacker leads to work in "Bandwidth Bottlenecks".
+        </p>
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/algernon.jpg">
+            <figcaption class="centertext">
+                Algernon would've been happier as a mindless drone I think.
+            </figcaption>
+        </figure>
+
+        <p>
+            Hiring an agent is one of the simplest actions in the game. But without the theme helping you, this simple action feels more complex than it is. The rulebook doesn’t use words like “cards” or “activate” when it can use words like “ideas”, or “commercialize”. You could probably change the theme of this game to winemaking and it would make about as much sense. It might even be better to learn without terms like “fallout impact” or “divest”. We’d use terms like “ferment”, “age”, or “bottle”. These terms aren't helpful, but they'd be less intimidating.
+        </p>
+        <p>
+            The game’s problem isn’t actually complexity. This is not a giant complex monster like a Twilight Imperium. The terms make it so much worse than it actually is. The rules are so simple they could be condensed into a single flowchart. In fact the game does this. I imagine if the game wasn’t completely insane this flowchart might actually help you learn the game. It doesn't though.
+
+        </p>
+
+        <figure>
+            <img src="PaxTranshumanity/chart.jpg" class="centerimage">
+            <figcaption class="centertext">
+                If you're ever confused please refer to the incredibly clear and helpful chart.
+            </figcaption>
+        </figure>
+
+        <p>
+            This article has a twist ending. Learning this game is like sending your brain through a meat grinder. Your synapses are crushed between its metal gears and reduced to paste. Once broken down, your brain paste will slowly reform. You’ll develop entirely new neural pathways just for this game. You, somehow, start to see lines of logic running through the whole game… It’s... Beautiful… The game actually is really thematic. What were you thinking before? The game actually makes perfect sense.
+        </p>
+
+        <h2 class="centertext">
+            The Twist
+        </h2>
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/blue-inblue.jpg">
+        </figure>
+
+        <p>
+            Like Paul Atreides emerging from the Water of Life with blue-in-blue eyes, you’ve awakened to designer Matt Eklund’s genius. What before was obtuse and bizarre is strangely inevitable. There’s no other way this game could’ve been. The theme simply demands these things. The game has done the impossible. It’s done a hat trick and transformed itself from an unintelligible mess to something strangely elegant.
+        </p>
+
+        <p>
+            Reader, I hope you reach this point one day. I hope you ascend the mountain of game design genius and reach the peak. Once you are up here you can look down on the world below. It’s so small. It’s so… provincial. That’s the whole thing huh… This Pax Transhumanity game. Maybe it’s strange to say this, but it’s actually really funny?
+        </p>
+
+        <p>
+            The game reads like a parody of board games. Weird terms, offbeat theme, intimidating topics. It feels like farce. It feels like a real life version of that Parks and Recreation skit Cones of Dunshire.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="PaxTranshumanity/ConesofDunshire.jpg">
+            <figcaption class="centertext">
+                This is actually me showing my friends this game.
+            </figcaption>
+        </figure>
+
+        <p>
+            The game feels like a parody game, without actually being complicated. And when it clicks it's elegant. It only uses the comical language of an overly complicated board game as part of the joke. It has all the benefits of giant complicated game without actually taking 8 hours. It plays in like 45 minutes.  It’s hilarious. And it’s hilarious to play too. With the right group teaching this game is a riot. You know how much i’ve laughed playing this game? It’s sidesplittingly funny. “Quick do a nuclear exchange event because he like an idiot divested his heat! Oh no! That’s the third blue tech in the progress splay! AAAAAA FREE RESEARCH YES! NO! NO! DON’T COMMERCIALIZE THAT NOOO!” And then we all look up at each other and burst out laughing at the silliness of what we just said. If you ever get the chance, have some brewskies and learn this game. With the right group there’s nothing like it.
+        </p>
+
+        <p>
+            Pax Transhumanity is a very special game to me. It’s my sweet little princess. On one hand baffling terminology, until it clicks. Once it clicks there’s nothing like it. This game deserves the world. 10/10.
+        </p>
+
+        <hr class="superspace">
+
+        <p>
+            <a href="../index.html">
+                <img class="centerimage" src="RWAssets\back.gif"/>
+            </a>
+        </p>
+
+        <script>
+  const themeLink = document.getElementById("theme");
+  const button = document.getElementById("styleToggle");
+  const params = new URLSearchParams(window.location.search);
+
+  const NORMAL_CSS = "PaxTranshumanity/PT.css";
+  const ACCESSIBLE_CSS = "readable.css";
+  const STORAGE_KEY = "siteStyle";
+
+  // Initialize style: URL → localStorage → default
+ let style =
+    params.get("style") ||
+    localStorage.getItem(STORAGE_KEY) ||
+    "normal";
+
+  function applyStyle() {
+    if (style === "accessible") {
+      themeLink.href = ACCESSIBLE_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    } else {
+      themeLink.href = NORMAL_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    }
+
+    localStorage.setItem(STORAGE_KEY, style);
+  }
+
+  applyStyle();
+
+  button.addEventListener("click", () => {
+    style = (style === "normal") ? "accessible" : "normal";
+
+    if (style === "accessible") {
+      // Keep URL parameter for accessible mode
+      params.set("style", "accessible");
+      window.history.replaceState(
+        {},
+        "",
+        "?" + params.toString()
+      );
+    } else {
+      // Remove query string entirely for normal mode
+      window.history.replaceState(
+        {},
+        "",
+        window.location.pathname
+      );
+    }
+
+    applyStyle();
+  });
+</script>
+        
+    </body>
+
+</html>
+
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[The Tax]]></title>
+      <link>https://ihaspinecone.github.io/faith/tax.html</link>
+      <guid>https://ihaspinecone.github.io/faith/tax.html</guid>
+      <pubDate>Sat, 14 Mar 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        I make the world worse every day that I am allowed to draw breath. I am one part of a despicable wretched class choking the life from this beautiful land...
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <html>
+    <head>
+        <link rel="preconnect" href="hhtps://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+        rel="stylesheet" />
+        <link rel="stylesheet" href="tax/tax.css" />
+        <title>
+            The Tax
+        </title>
+        <meta content="The Tax" property="og:title" />
+        <meta content="I make the world worse every day that I am allowed to draw breath. I am one part of a despicable wretched class choking the life from this beautiful land..." property="og:description" />
+        <meta content="https://ihaspinecone.github.io/faith/tax.html" property="og:url" />
+        <meta content="https://ihaspinecone.github.io/faith/tax/burn%20barrel%20sky.webp" property="og:image" />
+        <meta content="15844367" data-react-helmet="true" name="theme-color" />
+        <meta name="twitter:card" content="summary_large_image">
+
+    </head>
+
+    <body>
+        <hr class="superspace"/>
+
+        <h2 class="centertext">
+            The Tax
+        </h2>
+        <p class="centertext">
+            (10 min. read)
+        </p>
+        <figure>
+            <img class="centerimage" src="tax/Christ Driving Out The Moneychangers.jpg">
+        </figure>
+        <p class="lefttext">
+            I make the world worse every day that I am allowed to draw breath. I am one part of a despicable wretched class choking the life from this beautiful land called America. Our blood is iron and sulfur. Our teeth, jagged and grinding. Where we turn our eyes spoils and rots, bubbling with contagion, spewing miasma. You may have met someone like me before, maybe you were at a party. There’s a man here. He seems nice enough. You approach him. You strike up conversation. He describes something strange to you. He’s very insistent that he tells you the difference between Actual Grace and Sanctifying Grace. Huh. You’re not really interested so you try to pivot to another topic. Your pivot fails and now he’s describing what a purificator is and how you can’t use it as a corporal cloth at Mass. Those are both just white cloths though right? Whatever. Your eyes slide over to the door, maybe you can make a break for it? But it’d be rude to just leave. What is he talking about now? Hyperdulia? Latria? Oh, wait. He needs to grab his Missal to show you an example. Now’s your chance. You move through the exit into the cold night air.
+        </p>
+
+        <p class="lefttext">
+            Outside there’s someone else. He’s crouching over a pile of logs. Oh no. You’ve walked into the snare of another one. He’s now explaining proper fire making techniques. Oh brother. It’s just firemaking. It’s not some masculine black magic. Don’t tell me he’s gonna start talking about grilling next. Is that someone else walking up? You blurt out in a panic “Oh hey how are you?” The new person pauses. He blinks, and launches into describing the Scott Hahn book he was reading today.
+        </p>
+
+        <p class="lefttext">
+            Overconfidant young Catholic men. Our purpose in life is to tell you facts, dispense unasked-for wisdom, or tell you about some rule the church has. Ultimately our problem is probably how agonizingly practical we are. There’s always something concrete and practical for us to talk about. We rarely have time for the beautiful and sublime. Next time you meet someone like us, just wait. Wait and see how long it takes him to solve a problem or tell you a fact.<br>“You know, technically you’re not supposed to…”<br>“You know the church used to do it this way…”<br>“Priest’s don’t follow this rule, but according to the Missal they need to…”<br>
+        </p>
+
+        <p class="lefttext">
+            I think I have this bitterness because, of all these offenders, I am the first and greatest. If I'm going to write about faith I need to limit myself. I want to be different than I am. I want to talk about beauty. I’m not Catholic because I heard the most interesting fact or liked some rule. I’m Catholic because I found someone I’m madly in love with; I fell in love with Christ. 
+        </p>
+
+        <p class="lefttext">
+            So here’s a rule for this blog, inspired by old school RPG blogger <a href="https://joeskythedungeonbrawler.wordpress.com/2010/07/12/house-rule-for-osr-and-not-osr-games-people-blogs/">Joesky</a>. Every spiritual post must be about something beautiful. If I have finished a post and all I've done is offer advice or give facts, I’ll end meditating on a poem.
+        </p>
+
+        <p class="lefttext">
+            And guess what? This post is about a rule so I’m starting immediately. Post is over. Now for the poem that’s actually pretty topical.
+        </p>
+
+        <hr class="superspace">
+
+        <h2 class="centertext">
+            Spring and Fall
+        </h2>
+        <p class="centertext">
+            by Gerard Many Hopkins
+        </p>
+
+        <figure>
+            <img class="centerimage" src="tax/creek.gif">
+        </figure>
+
+        <p class="lefttext">
+            Hopkins can be hard to read, so here's a summary of the poem: The poet is addressing a child (Margaret) transfixed by how a tree changes color in fall. She is awestruck by its beauty. The poet sadly says she won’t always react to the tree like this. When she’s older she’ll walk past these trees and not even spare a thought for it. The poet continues grieve this loss of wonder further. When these feelings are gone Margaret will “will weep and know why.”
+        </p>
+
+        <p class="centertext">
+            Márgarét, áre you gríeving<br>
+            Over Goldengrove unleaving?<br>
+            Leáves like the things of man, you<br>
+            With your fresh thoughts care for, can you?<br>
+            Ah! ás the heart grows older<br>
+            It will come to such sights colder<br>
+            By and by, nor spare a sigh<br>
+            Though worlds of wanwood leafmeal lie;<br>
+            And yet you wíll weep and know why.<br>
+            Now no matter, child, the name:<br>
+            Sórrow’s spríngs áre the same.<br>
+            Nor mouth had, no nor mind, expressed<br>
+            What heart heard of, ghost guessed:<br>
+            It ís the blight man was born for,<br>
+            It is Margaret you mourn for.<br>
+        </p>
+
+        <p class="lefttext">
+            If you’ve never read Hopkins I recommend reading the poem aloud. While I think this poem’s flow is a little awkward compared to the rest of his work, in general I think his work shines best when heard aloud.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="tax/todd henson.webp">
+            <figcaption class="centertext">
+                <i>
+                    Márgarét, áre you gríeving<br>
+                    Over Goldengrove unleaving?<br>
+                    Leáves like the things of man, you<br>
+                    With your fresh thoughts care for, can you?<br>
+                    (photo by Todd Henson)
+                </i>
+            </figcaption>
+        </figure>
+
+        <p class="lefttext">
+            Anyone with children in their life has a story of a child being very profound while looking at something simple. So it's fitting the poet doesn't use the name of a real tree species. With “goldengrove” Hopkins isn’t tying himself down to any concrete flaws a real tree would have. The child is solely focused on the beauty and wouldn't notice any flaws. What tree did you imagine? Picture a goldengrove in your mind. Isn’t it wonderful? That's what the child sees with their "fresh thoughts". It’s almost a cliche in movies when a child says something shockingly insightful that makes all the adults pause. Now adults may just be jaded because we’ve seen this stuff before, but this is more profound than that. The simpler life of a kid means they can see through a veil that more weathered eyes can’t. I know it’s something more because we wouldn’t mourn it so deeply if it was just novelty.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="tax/river.gif">
+            <figcaption class="centertext">
+                <i>
+                    Ah! ás the heart grows older<br>
+                    It will come to such sights colder<br>
+                    By and by, nor spare a sigh<br>
+                    Though worlds of wanwood leafmeal lie;<br>
+                    And yet you wíll weep and know why.<br>
+                </i>
+            </figcaption>
+        </figure>
+
+        <p class="lefttext">
+            An adult could walk through a “world” of leaves on the ground (wanwood leafmeal) without any emotion. How could we insist that we see the world more clearly if that's how we react to it? It’s as if we see the world in black and white. Remember when Christ told us to be “childlike” in our faith? <a href="https://www.biblegateway.com/passage/?search=Matthew%2018%3A2-3&version=NABRE">(Mt 18:2-3)</a>
+            It’s easy to read "childlike" as just "trusting": Live reliant on God like a child relies on their parents. But there's more to it. God speaks to us constantly, calling out to be in communion with us. This childlike vision allows us to see God's hand in everything. Wouldn't that be such a more intiment relationship with God? Being able to sit with him and see the world more fully.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="tax/horizontal lines.webp">
+            <figcaption class="centertext">
+                <i>
+                    Now no matter, child, the name:<br>
+                    Sórrow’s spríngs áre the same.<br>
+                    Nor mouth had, no nor mind, expressed<br>
+                    What heart heard of, ghost guessed:<br>
+                    It ís the blight man was born for,<br>
+                    It is Margaret you mourn for.<br>
+                </i>
+            </figcaption>
+        </figure>
+
+        <p class="lefttext">
+            Is it possible to recapture part of this wonder and awe? The poem implies no. “It is the blight man was born for.” But what if we really tried? Take time intentionally to be in nature. Walk through the park. Canoe down a river. Sit and watch the birds out our window. But being transfixed by this will never come as easy as it was, and it’ll never be as intense as it was as children. However I do wonder, maybe as we age we do naturally recapture it? I see retired men with bad backs still going out to fish. I see women with walkers still walking to watch birds. A child is not distracted by life so they can see through the mundane veil. Then as young adults and in middle age we are too busy running around to see it. But once we get toward the end of our life, the things that aren’t important seem to fall away. We focus more on what's important in life: and beauty has to be up there in terms of importantce.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="tax/barn rainbow.webp">
+        </figure>
+
+        <p>
+            Maybe when I retire I'll start to see through that veil that eluded me. Or maybe when I reach that age what will change is my priorities.It won't be any easier, but i'll be fighting harder to find it.
+        </p>
+
+        <figure>
+            <img class="centerimage" src="tax/burn barrel sky.webp">
+        </figure>
+
+        <p>
+            <a href="../index.html">
+                <img class="centerimage" src="..\bg\RWAssets\back.gif"/>
+            </a>
+        </p>
+
+    </body>
+
+</html>
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[Site has been launched!]]></title>
+      <link>https://ihaspinecone.github.io/m/Launch.html</link>
+      <guid>https://ihaspinecone.github.io/m/Launch.html</guid>
+      <pubDate>Fri, 06 Mar 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        The website now exists.
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Launching the Site!</title>
+    <link rel="stylesheet" href="../bg/readable.css"/>
+  </head>
+  <body>
+    <hr class="superspace"/>
+    <hr class="superspace"/>
+    <hr class="superspace"/>
+    <p>
+        03-06-2026
+    </p>
+    <p>
+        Alright. There's the site launched. For posterity i've provided a screenshot of what the homepage looks like right now.
+    </p>
+    <p>
+        Eventually I want to give the homepage a lot more character. But first I'm going to finish more of these pieces. I have 4 google docs that I think are ready to be made into posts. I just have to add images and make it all look nice. Rear Window was the most straightforward so that's why it was finished first. And the Dream Archive barely required any effort to make. Ultimately what keeps me up at night is worrying i'll abandon this project before I've actually finished anything.
+    </p>
+    <p>
+        I don't plan on keeping this up forever, but I want it to have things on it before I abandon it. Right now my timeline is 24 months. There WILL be an article on here every month for the next 24 months. The whole point of this exercise is to finish things. I've always liked writing for myself and journaling. I want to try my hand at making things for other people to read.
+    </p>
+    <p>
+      <a href="../index.html">
+        <img class="center nav" src="../bg/RWAssets/back.gif"/>
+      </a>
+    </p>
+    <figure>
+        <img src="blog/launchday.png">
+    </figure>
+
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[Rear Window is a Movie]]></title>
+      <link>https://ihaspinecone.github.io/bg/rearwindow.html</link>
+      <guid>https://ihaspinecone.github.io/bg/rearwindow.html</guid>
+      <pubDate>Fri, 06 Mar 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        I thought I hated games that were like Mysterium, turns out I just didn't like Mysterium.
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <html>
+  <head>
+    <link rel="preconnect" href="hhtps://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+     <link rel="stylesheet" href="RWAssets/rearwindow.css" />
+    <title>
+      Rear Window is a Movie
+    </title>
+  </head>
+  
+  <body>
+    <ul class="center">
+      <li><a href="../../A.html">A</a></li>
+      <li><a href="../../B.html">B</a></li>
+      <li><a href="../../C.html">C</a></li>
+      <li><a href="../../D.html">D</a></li>
+      <li><a href="../../E.html">E</a></li>
+    </ul>
+  <h2 class="centertext">
+    <figure>
+      <img class="inlineimage centerimage" style ="width: 100%" src="RWAssets/marquise.gif"/>
+      <figcaption class="centertext">
+        <i>
+          (5 min. read)
+        </i>
+      </figcaption>
+    </figure>
+  </h2>
+  <p class="centertext">(thanks to the publisher Funko Games for taking this really nice promo picture)</p>
+  <p>
+    This is about a board game that came out a few years ago called Rear Window.
+  </p>
+  <figure>
+    <img class="inlineimage centerimage" src="RWAssets/RWgame.jpg"/>
+    <figcaption class="centertext">
+      <i>
+        Like the Hitchcock film. I promise I'm not a fake fan. I've seen clips of this movie on Youtube Shorts.
+      </i>
+    </figcaption>
+  </figure>
+    <p>
+      Have you ever been wrong, like really wrong? For the first time in my life I am. Rear Window changed the way I look at an entire genre of board games.  That genre is communication games. One player places cards out to communicate information to the other players. To say there’s a clock, they might put out a bed and some electricity. Because alarm clocks wake people up and there's electricity in clocks. And it's up to the rest of the players to decode that logic correctly. And I used to think that was at it's core not fun. But Rear Window really shook things up for me. Where other games in the genre zig, Rear Window zags. It challenges every assumption and reengineers the genre from first principles. Looking at this game must have been what classical painters thought when they saw Van Gogh. Ok maybe not that crazy but I think you get my point.
+    </p>
+  <figure>
+      <img class="inlineimage centerimage" src="RWAssets/mysterium-board.png"/>
+  </figure>
+    <p>
+      The most popular game in this subgenre is probably Mysterium. And honestly, to me the game always felt very sluggish. The cards in this game are intentionally very complicated. There’s a million little details on these cards and they don’t share a common theme. When I played Mysterium it often felt like a crapshoot whether my audience would correctly guess the info. Sometimes the players would understand what I meant, but just as often the players would hyperfocus on some small detail I didn’t intend and the whole game would be lost.
+    </p>
+    <p>
+      Looking back at that clock example. The director put out the electricity and the bed. Except the electricty card has handcuffs, and now the audience are completly off track because they've decided to hyperfocus on the handcuffs. No matter what I do there’s things to distract my audience.
+    </p>
+  <figure>
+      <img class="inlineimage centerimage" src="RWAssets/mysterium-cards.webp"/>
+  </figure>
+    <p>
+      I assume this frustration was intentional. The designers assume that if the cards were easy to use there’d be no game. That makes sense, but for me it  was never FUN. It was like handing me crayons and asking me to make a crossword. These tools are just frustrating. Here's Rear Windows first big departure: look at these cards!
+    </p>
+  <figure>
+      <img class="inlineimage centerimage" src="RWAssets/TTS screenshot.png"/>
+    <figcaption class="centertext">
+      <i>So simple! So relavent! No wonder the other players correctly guessed my genius clues!</i>
+  </figure>
+    <p>
+      Need to reference the yellow lady? There she is! Need to say something about a musician? Look at all those instruments! Mysterium in the same position would've just throw you cards with MC Esher Stairs, the Necronomicon, and a plant growing human heads and say "Figure it out champ!" These easy cards give Rear Window a smooth foundation to build off of. Or if you prefer a movie metaphor, it's a nice clean set to film your movie with. The simple cards means Rear Window asks you convey a lot more information than Mysterium. Players need to guess 4 characters, in 4 rooms, doing 4 activities. And you don't have many cards to do it with. The director just makes a lot more interesting decisions about where to put their best clues.
+    </p>
+    <figure>
+      <img  class="inlineimage centerimage" style ="width: 75%" src="RWAssets/dune-set.jpg"/>
+      <figcaption class="centertext">
+        <i>Look at these amatuers, filming on a set. They aren't even getting the accurate Arrakis experience.</i>
+      </figcaption>
+    </figure>
+      <p>
+      The director isn’t the only one with these interesting gamey decisions to make, the audience does as well. The audience has these once-per-game powers. So while the audience tries to unpick the director’s logic, sprinkled in are moments of “do we want to use this power now or later” “do we think this is the best time for the power?” “Which card do we use the power on?” These are concrete mechanical decisions sprinkled into the more ethereal discussion about what the heck the director is getting at with these clues. That’s Rear Window’s secret. Arguing about the director’s weird logic is still in the game, but it’s paced out between more concrete mechanical decisions. Like any good movie, pacing is important. A whole game about nothing but wibbly-wobbly logic chains would get old fast.
+    </p>
+  <figure>
+      <img class="inlineimage centerimage" src="RWAssets/RWpowers.webp"/>
+  </figure>
+    <p>
+      And these player powers have some sauce to them. The coolest is this arrow token. The audience chooses a card and the director places the arrow wherever they want on the card. First off I havn’t seen this type of power in any game of this genre before, which is crazy because it feels like it really plays to the genre’s strengths. And honestly, this power has so many interesting uses. Every game there's lots of debate on when and where is best to use this power. Use it early to lock in some info? Save it for the end when you'll need it most? Which clue do you use it on? Which cluse are you most unsure about? One time my players argued for 5 minutes about which clue to use the arrow power on. And once they decided I placed the arrow on the card, and all the players looked down at it, then back up at me and said "That doesn't help at all." And we burst out laughing. It’s so juicy. The other once/game powers are really cool too.
+    </p>
+    <figure>
+      <img class="inlineimage centerimage" src="RWAssets/star.jpg"/>
+    </figure>
+      <p>
+      This wouldn’t be a game about film without a really cool twist at the end. That is, in this cooperative game, it's possible that the director, the person giving you all the clues, actually might be working against you! The way this works is that in about one-third of games, a murderer is in one of the rooms. That means the director actually needs to keep secret whats in that room, while still giving correct information about the other rooms. If the director keeps the twist secret until the end of the game, they win. If the audience correctly guesses the twist and finds the killer the audience wins. This game is 100% cooperative most of the time, but sometimes a killer shows up and the game becomes 100% audience vs director. Only one team can win.
+      </p>
+    <figure>
+      <img class="inlineimage centerimage" src="RWAssets/MURDER.png"/>
+    </figure>
+    <p>
+      On paper this rule feels like it wouldn’t work. How is the audience supposed to guess there’s a murder if the director doesn’t want to tell them? Well, have you ever seen a murder mystery? It’s never one clue that gives it away, it’s lots of little clues that all line up. The most obvious hint is the director doesn't give good cards for one of the rooms. The director probably did that to not waste their precious cards on it. But there’s a ton of other smaller things the audince will look for too. Reader you might just have to trust me when I say this mechanic plays great. And it's another little mechanical thing to break up the crazy logic untying the genre is known for.
+    </p>
+    <figure>
+      <img class="inlineimage centerimage" style ="width: 75%" src="RWAssets/RWscreenshot.jpg"/>
+      <figcaption class="centertext">
+        <i>It's true I havn't seen the movie Rear Window, but I dodge the "uncultured" label because I've had wikipedia page for El Topo open in my browser for like a week.</i>
+      </figcaption>
+    </figure>
+    <p>
+      We really are living in a golden age of party games. Gone are the days of pictionary's tyrannical rule. Every year more cool party games are coming out that don't involve drawing pictures or miming actions. What a great time to be a party game player. So Clover, Decrypto, Don't Get Got, 2 Rooms and a Boom. All really simple games that are just really fun. Honestly Rear Window is on the more complex end of that list I just mentioned. If you wanted you could probably throw out the murderer module and the game will still play great. But for me the murderer being a possibility makes every game so much more juicy to play. But the core is still great. Taking Mysterium's awkward cards, replacing them with easy to use cards, and then asking the director to communicate way more information was a genius move, and the player powers give everyone interesting things to discuss in-between all the logic unraveling.
+    </p>
+    <p>
+      I'll end this by giving a shout-out to my Ukrainian friend, living in Wales, visiting me on vacation in Serbia who gave me this game so I could bring it back to America. At time of writing I could only find really expensive copies of this game in the US, but for whatever reason there’s plentiful copies in the UK.
+    </p>
+   
+    <p>
+      <a href="../index.html">
+        <img class="center nav" src="RWAssets/back.gif"/>
+      </a>
+    </p>
+  </body>
+</html>
+
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[Dreams page is now live]]></title>
+      <link>https://ihaspinecone.github.io/dreams.html</link>
+      <guid>https://ihaspinecone.github.io/dreams.html</guid>
+      <pubDate>Fri, 06 Mar 2026 00:00:00 GMT</pubDate>
+
+      <description><![CDATA[
+        What I get up to in the night times.
+      ]]></description>
+
+      <content:encoded><![CDATA[
+        <html>
+    <head>
+        <link rel="preconnect" href="hhtps://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap"/>
+        <link rel="stylesheet" href="m/dreamsAssets/dreams.css" />
+        <title>
+            Dream Archive
+        </title>
+        <hr class="superspace"/>
+        <h1 class="centertext">
+            Dreams
+        </h1>
+        <h2 class="centertext">
+            Yeah all of these dreams are real.
+        </h2>
+        <hr class="superspace"/>
+    </head>
+
+    <body>
+        <h2 class="lefttext">
+            06/30/2026
+        </h2>
+        <p>
+            I was shopping for clothes and met a guy who claimed to be a cast member on Duck Dynasty. I didnt recognize him but figured he must've been from a later season or something.
+        </p>
+        <h2 class="superspace">
+
+        <h2 class="lefttext">
+            06/26/2026
+        </h2>
+        <p>
+            I went back to seminary and chased my friend around on all 4's<br>Second Dream: There was a voice chat in the Dune Tabletop Discord Server called "open letters" and someone was streaming Microsoft Word in it.
+        </p>
+        <h2 class="superspace">
+        
+        <h2 class="lefttext">
+            06/21/2026
+        </h2>
+        <p>
+            Pope Leo shockingly died.
+        </p>
+        <h2 class="superspace">
+
+        <h2 class="lefttext">
+            05/24/2026
+        </h2>
+        <p>
+            Tyler the Creator hosted a rap battle ala the finale of 8 Mile, except it was funny. There was a giant stage with tons of cool lights and effects. But it was just people roasting each other like "you a poopy head man"
+        </p>
+        <h2 class="superspace">
+
+        <h2 class="lefttext">
+            05/22/2026
+        </h2>
+        <p>
+            I started a bar with lights where one side of the bar had stark white spotlights and the other side was basically pitch black, and everywhere in the middle existed on that gradient in greyscale. with lots of walls to create different environments. Everyone who wanted to go crazy and dance was in the dark side, the chill hangouts where you can actually hear each other talk in the middle, and idk who would be on the stark white side.
+        </p>
+        <h2 class="superspace">
+        
+        <h2 class="lefttext">
+            05/21/2026
+        </h2>
+        <p>
+            There was an Alice in Wonderland reboot: Alice had a meet-cute with this charming boy and they both went into Wonderland together. They go on this journey to this giant ice castle by train hopping and ice skating; they laugh and have fun the whole time. When they reach the ice castle there's this giant cgi sequence where Alice ice skates with the boy, and she realizes she is happy for the first time.<br>Cut to Alice in real life wearing vr goggles while her husband and kids sit next to her. The whole movie was a VR couples therapy. The charming boy is her real life husband and they've learned to love each other again through this experience.
+        </p>
+        <h2 class="superspace">
+        
+        <h2 class="lefttext">
+            05/11/2026
+        </h2>
+        <p>
+            The new Scott Pilgrim anime was actually a Broadway-style musical, and Netflix didn't have the rights to post the animation on YouTube. So they brought in the original cast to do really low budget live action music videos for all the songs. I dreamed these fake music videos for fake songs so vividly that when I woke up this morning I had to google it to make sure they weren't real. Legit I have every single lyric and every single visual for like a fake dozen music videos in my head right now.
+        </p>
+        <hr class="superspace">
+
+         <h2 class="lefttext">
+            04/13/2026
+        </h2>
+        <p>
+            I was in a car ride with Sabrina Carpenter. As a joke I asked if all her songs were about the same guy or different guys. (Apparently it was very funny to imply they were all about real people). She thought it was funny.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            04/11/2026
+        </h2>
+        <p>
+            I woke up this morning laughing really hard. I have no idea what in my dream was so funny but it woke me up.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            03/26/2026
+        </h2>
+        <p>
+            Metamucil started selling their product as bright orange gummies and the pharmacist was really insistent I switch because they were cheaper.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            03/17/2026
+        </h2>
+        <p>
+            Gas was $1.50/gallon so I filled up my car with gas despite having 7/8 of my tank already full.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            03/07/2026
+        </h2>
+        <p>
+            I'd committed to playing board games with two different groups this morning and it was like having two dates to the prom. I kept excusing myself from one game to run over to the other one.
+        </p>
+        <hr class="superspace">
+        
+        <h2 class="lefttext">
+            03/06/2026
+        </h2>
+        <p>
+            Instead of chalices with people holding them at Mass, Communion was distributed by being just left on a table at the front of church. It was stored inside rain sticks that made really loud sound when you tipped them back to drink.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            02/22/2026
+        </h2>
+        <p>
+            Youtube added a feature where you could see how much money lifetime the ads you've watched have generated for Youtube. My number was 4 figures and it sent me into a downward spiral of depression. I think I went to live in the woods.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            02/14/2026
+        </h2>
+        <p>
+           My old roommate was working as a bartender at a high end bar. I asked him what he reccomeneded I get. He got really nervous and said "Well we have the Ronald Reagen platter." I said sure and he put six 8oz fireballs in a basket with about 30 Walmart cookies, a giant bowl of shredded lettuce with pickles on top, and a few water bottles. I was like "wtf i'm not paying $100 for fireballs and some shitty salad" and left.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            12/26/2025
+        </h2>
+        <p>
+            I was watching a high school production of a musical based on the myth of Achilles. Except Achilles in the opening song keeps talking to the crowd saying he has read this story before and is determined to not make the same mistake again.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            12/25/2025
+        </h2>
+        <p>
+            I was a poor person in Victorian England who found a small cheap theater that did productions of classics plays. Except the curator would sit in the cheap seats with us and just make fun of everyone in the expensive seats. Eventually the actors would go off script and make fun of the rich people too. It turned into a Victorian Rocky Horror Picture Show thing where I kept coming back not for the plays but for the fun experience.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            12/22/2026
+        </h2>
+        <p>
+            I was part of some performing song and dance troupe and there was one girl that looked exactly like an anime girl. Everyone else were normal people but there was this one abberant chibi kawaii desu desu. And I was the only one who noticed.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            09/18/2025
+        </h2>
+        <p>
+            My dad's dream last night was him and my irl friend in a hostage situation inside a grain silo.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            07/22/2025
+        </h2>
+        <p>
+            I got added to a group chat with Quintin Smith, Internet Shaquille, and a really small youtuber i'd never heard of. (Apparently they were all friends) The chat was made so they could all give me advice on how to run my TTRPG campaign and I was upset because I thought my campaign sucked and it was a waste of their time to look at it.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            07/17/2025
+        </h2>
+        <p>
+            I walked into my aunt's house and started drinking her iced tea. She got really mad at me.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            06/17/2025
+        </h2>
+        <p>
+            There was a real law firm called HHM.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            05/15/2025
+        </h2>
+        <p>
+            I dreamt that I posted the Numa-Numa Train Youtube video in a group chat and an irl friend of mine commented on it.
+        </p>
+        <p>
+            UPDATE: Turns out this actually happened I just thought it was a dream. I guess it's pretty mundane so that shouldn't surprise me.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            04/03/2025
+        </h2>
+        <p>
+            There was a woodpecker.
+        </p>
+        <p>
+            05/11/2026 UPDATE: I saw a woodpecker :D
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            03/12/2026
+        </h2>
+        <p>
+            There was a woodpecker.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            12/06/2024
+        </h2>
+        <p>
+            My boyscout troop was fighting a real war with swords and axes. We slaughtered another troop by pretending to be friends and when everyone was relaxed we attacked and left no survivors.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            11/30/2024
+        </h2>
+        <p>
+            I tried like an hour to set up a volleyball net in a gym. When it was almost done I woke up.
+        </p>
+        <p>
+            /s My brother's been pressuring me to play more Beastie Ball. Dreaming about volleyball probably means he's got me.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            10/20/2024
+        </h2>
+        <p>
+            I received communion on the hand and forgot the words to The Angelus.
+        </p>
+        <p>
+            /s My friend called this zoomer christian brainrot.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            10/15/2024
+        </h2>
+        <p>
+            I was playing Dune
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            06/22/2024
+        </h2>
+        <p>
+            My dad picked up smoking.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            05/05/2024
+        </h2>
+        <p>
+            Turns out I had a chemistry class all semester that I forgot about, and I failed so I can't graduate.
+        </p>
+        <p>
+            /s This dream was the day of my college graduation.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            05/03/2024
+        </h2>
+        <p>
+            I thought of a regional variant of Dewgong that was called Begone and my brain was like DO NOT FORGET THIS YOU NEED TO POST IT.
+        </p>
+        <p>
+            Maybe it was a prescient vision of the future to prevent Nintendo from making it. Maybe it ruins OU or something.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            04/27/2024
+        </h2>
+        <p>
+            I was 5'10"
+        </p>
+        <p>
+            /s All my friends irl are over 6'. I am 5'8".
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            04/25/2024
+        </h2>
+        <p>
+            I was in an Alien Isolation type game except I had a gun and the alien was a mascot character with basically no animation and it moved at like mach 4.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            04/15/2024
+        </h2>
+        <p>
+            My roomate needed candid footage of me for his new video so he moved into my room and set up a camera.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            04/04/2024
+        </h2>
+        <p>
+            I overslept my alarm.
+        </p>
+        <p>
+            /s Then my alarm went off irl.
+        </p>
+        <p>
+            r/TwoSentenceHorror
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            03/20/2024
+        </h2>
+        <p>
+            /s I can't remember the dream I had last night but inside the dream I remember thinking "This is really cool. I should post it."
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            02/29/2024
+        </h2>
+        <p>
+            Someone told me too much salt causes appendicits.
+        </p>
+        <p>
+            /s I don't know if this is a real fact someone told me or a dream.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            02/11/2024
+        </h2>
+        <p>
+            I was diagnosed with autism. I told them that was ridiculous and then they showed me the test.
+        </p>
+        <p>
+            r/TwoSentenceHorror
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            01/31/2024
+        </h2>
+        <p>
+            I had really bad poison ivy on my pants.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            01/22/2024
+        </h2>
+        <p>
+            There was a 5th bedroom on the second floor of our college house with its own personal bathroom and we somehow never noticed until now.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            01/17/2024
+        </h2>
+        <p>
+            Evangelion's ending was completely different. Eva Unit 1 was completely feral and scrambling around the earth killing angels. It was like that state it was in crawling around on all 4s. It sustained that for like years. Basically everyone is dead except Shinji, who's following the Eva unit around like he's a friend of the iron giant if the iron giant ripped beasts apart with its bare hands.
+        </p>
+        <p>
+            As the years went by the Eva Unit kept falling apart more and more until one day a laser samurai shows up and cuts a massive slash across the Eva's face, killing it. Shinji was pretty neutral on the situation. He was following the Eva more out of habit than anything else.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            12/28/2023
+        </h2>
+        <p>
+            I had a really cool tattoo.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            12/10/2023
+        </h2>
+        <p>
+            There was a guy I met with a black shirt that just had the magic card Smuggler's Copter printed on it. Like the entire front of the shirt was just this card and I thought it was the funniest thing ever.
+        </p>
+        <p>
+            UPDATE: The night before I had this dream the card shot up in price from $1 to $12.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            11/11/2023
+        </h2>
+        <p>
+            I've had this recurring dream the past few weeks where everyone in my college house actually lives in a log cabin in the snowy mountains. The looks of the cabin have been extremely consistent in every dream. I could with 100% accuracy draw the floor plan for this cabin. And it's got a hot tub on the second floor balcony. Plus one of my good friends from high school that I havn't talked with in a few years also lives with us.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            10/20/2023
+        </h2>
+        <p>
+            My CPA roomate was putting hot coals under his bed like it was the 1600s and was pissed that we were using his logs.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            04/26/2023
+        </h2>
+        <p>
+            New Narnia movie :)
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            01/20/2023 
+        </h2>
+        <p>
+            /s I never actually have people in my dreams. People I know might be in them but I never see them. They are always "off-camera." Idk what that says about me psychologicially.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            01/15/2023
+        </h2>
+        <p>
+            Romantic life worked with quick saves. When you say the wrong dialogue option you completely lose out on the romantic option unless you reload a save.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            08/17/2022
+        </h2>
+        <p>
+            I went online and filled out a form to be a Lutheran minister at a local church. I served there for years. Over time my sermons were filled with more and more Catholic things until I was just fully preaching things against their faith and some old people got mad at me.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            07/06/2022 
+        </h2>
+        <p>
+            I was at my extended family's lakehouse and a massive oil rig boat was parked right on the end of our dock. I was super pissed at my brother for giving them permission to be there because they were killing all the minnows and plant life in the lake. Most of the dream was just me screaming about how evil the people who run the rig are.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            02/11/2022 
+        </h2>
+        <p>
+            All my homeworks from all semester didn't submit.
+        </p>
+        <hr class="superspace">
+
+        <h2 class="lefttext">
+            01/18/2022 
+        </h2>
+        <p>
+            There was this alcoholic beverage called "Ded" that contains tranquilizers that numb your tongue. It also contains a bunch of sugar and is marketed to dude bros.
+        </p>
+        <hr class="superspace">
+        <hr class="superspace">
+    </body>
+</html>
+
+      ]]></content:encoded>
     </item>
 
   </channel>
