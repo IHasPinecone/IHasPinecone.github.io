@@ -11,11 +11,19 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
     
     <item>
       <title><![CDATA[RSS Feed is Live]]></title>
-      <link>https://ihaspinecone.github.io/rss.html</link>
-      <guid>https://ihaspinecone.github.io/rss.html</guid>
+      <link>https://ihaspinecone.github.io/m/rss.html</link>
+      <guid>https://ihaspinecone.github.io/m/rss.html</guid>
       <pubDate>Wed, 23 Sep 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[Copy the URL into your RSS reader to get an update when I make a post :D]]></description>
-      <content:encoded><![CDATA[]]></content:encoded>
+      <content:encoded><![CDATA[
+  <h1>RSS Link</h1>
+  <p>
+    Copy + Paste this link into your rss reader
+  </p>
+  <p>
+    https://ihaspinecone.github.io/rss.xml
+  </p>
+]]></content:encoded>
     </item>
 
     <item>

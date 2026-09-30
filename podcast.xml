@@ -9,40 +9,5 @@
     <itunes:author>IHasPinecone</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     
-    <item>
-      <title><![CDATA[Test Episode 2]]></title>
-      <link>https://ihaspinecone.github.io/sandbox/ep2.html</link>
-      <guid isPermaLink="false"><![CDATA[https://rss.art19.com/episodes/user/ZyW0EWP3Y87O8Qzl9LaQFo4nzu5L6Hi_/d502ce06-f031-41fc-8d4b-611923d01282.mp3?rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94]]></guid>
-      <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
-
-      <itunes:image href="https://ihaspinecone.github.io/bg/ph/ph4.webp"/>
-
-      <enclosure
-        url="https://rss.art19.com/episodes/user/ZyW0EWP3Y87O8Qzl9LaQFo4nzu5L6Hi_/d502ce06-f031-41fc-8d4b-611923d01282.mp3?rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94"
-        length="37007360"
-        type="audio/mpeg" />
-
-      <description><![CDATA[
-        This is a placeholder for episode 2.
-      ]]></description>
-    </item>
-
-    <item>
-      <title><![CDATA[Test Episode 1]]></title>
-      <link>https://ihaspinecone.github.io/sandbox/ep1.html</link>
-      <guid isPermaLink="false"><![CDATA[https://rss.art19.com/episodes/user/ZyW0EWP3Y87O8Qzl9LaQFo4nzu5L6Hi_/181ef875-b592-44c0-acd9-430f0439a94f.mp3?rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94]]></guid>
-      <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
-
-      <itunes:image href="https://ihaspinecone.github.io/bg/ph/ph7.webp"/>
-
-      <enclosure
-        url="https://rss.art19.com/episodes/user/ZyW0EWP3Y87O8Qzl9LaQFo4nzu5L6Hi_/181ef875-b592-44c0-acd9-430f0439a94f.mp3?rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94"
-        length="49316257"
-        type="audio/mpeg" />
-
-      <description><![CDATA[
-        This is a placeholder for episode 1.
-      ]]></description>
-    </item>
   </channel>
 </rss>
