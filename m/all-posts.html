@@ -42,14 +42,14 @@
             posts.forEach(post => {
 
                 const image = post.coverImage && post.coverImage.trim() !== ""
-                    ? post.coverImage
-                    : "bg/ph/ph1.webp";
+                    ? `../post.coverImage'
+                    : "../bg/ph/ph1.webp";
 
                 const article = document.createElement("article");
                 article.className = "post";
 
                 article.innerHTML = `
-                    <a href="${post.link}" class="post-link">
+                    <a href="${..\post.link}" class="post-link">
 
                         <img
                             src="${image}"
