@@ -1,0 +1,84 @@
+<html>
+  <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+        rel="stylesheet" />
+        <link id="theme" rel="stylesheet" href="wwg/wwg.css" />
+        <title>
+            Wallet Wargame
+        </title>
+        <meta content="Wallet Wargame" property="og:title" />
+        <meta content="I designed a series of wargames that are the size of credit card so they easily fit in your wallet. You can pull them out while waiting for your food at a resturant or killing time at a con, or just bored at Thanksgiving." property="og:description" />
+        <meta content="https://ihaspinecone.github.io/bg/wallet-wargame.html" property="og:url" />
+        <meta content="https://ihaspinecone.github.io/bg/wallet-wargame.jpg" property="og:image" />
+        <meta content="15844367" data-react-helmet="true" name="theme-color" />
+        <meta name="twitter:card" content="summary_large_image">
+  </head>
+  <body>
+    <h1>Wallet Wargame</h1>
+    <div class="style-toggle-wrapper">
+            <button id="styleToggle">
+                Accessibility Toggle
+            </button>
+    </div>
+    <p>
+      A year ago while sitting in a restaurant my brother pulled out his wallet saying “I bought this at a game store a while ago. It’s a social deduction game that fits in your wallet.” He pulled it out and sure enough it was the size of a credit card, easily fitting alongside his stack of gift cards.<br>
+      The social deduction game was trash. The game itself was nothing and it felt like a waste of time even trying to do it. But the I always liked the idea of a game that fits in your wallet so you can play it with someone whenever you have spare time. So I made one.<br>
+      It’s called the Wallet Wargame series. It’s a battling mech game with a really simple ruleset, designed to be played in 10 minutes. There’s three scenarios in total, each offering a different experience. There’s a battle behind enemy lines, a training exercise, and a race to the end.<br>
+      The pdf is (here), I recommend printing the units on double sided on thick card stock. That single page has the units for all 3 scenarios on it. You can fold each scenario up, using the rules for the scenario as a wrapper. Although if you know me in real life just ask me and I’ll probably give you one because I have a ton extra in my car. I can also just mail them to you. (they all obviously fit into a standard letter.)<br>
+      Besides it’s form factor, my favorite part of the design are the optional questions after each scenario. These are designed to spark discussion between you and your game partner after the game is over. Narrative wargames are nothing new but I think the short evocative questions are well suited to this game’s minimalist design.<br>
+      If anyone wants to make their own scenarios for the game feel free. Just keep in mind the game is best when it happens fast so make sure things wrap up quickly. This is not the system for long term tactical maneuvering, it’s for high risk explosive play.
+    </p>
+
+    <script>
+    const themeLink = document.getElementById("theme");
+    const button = document.getElementById("styleToggle");
+    const params = new URLSearchParams(window.location.search);
+    
+    const NORMAL_CSS = "container/container.css";
+    const ACCESSIBLE_CSS = "readable.css";
+    const STORAGE_KEY = "siteStyle";
+
+  // Initialize style: URL → localStorage → default
+ let style =
+    params.get("style") ||
+    localStorage.getItem(STORAGE_KEY) ||
+    "normal";
+  function applyStyle() {
+    if (style === "accessible") {
+      themeLink.href = ACCESSIBLE_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    } else {
+      themeLink.href = NORMAL_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    }
+    localStorage.setItem(STORAGE_KEY, style);
+  }
+  applyStyle();
+  button.addEventListener("click", () => {
+    style = (style === "normal") ? "accessible" : "normal";
+
+    if (style === "accessible") {
+      // Keep URL parameter for accessible mode
+      params.set("style", "accessible");
+      window.history.replaceState(
+        {},
+        "",
+        "?" + params.toString()
+      );
+    } else {
+      // Remove query string entirely for normal mode
+      window.history.replaceState(
+        {},
+        "",
+        window.location.pathname
+      );
+    }
+    applyStyle();
+  });
+</script>
+
+  </body>
+</html>
