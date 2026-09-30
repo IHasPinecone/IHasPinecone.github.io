@@ -60,7 +60,6 @@ return feedPosts.map(post => {
 
   </item>`;
 }).join("\n");
-}
 
 
 function buildPodcastItems(feedPosts) {
