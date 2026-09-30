@@ -39,7 +39,8 @@ function buildNormalItems(feedPosts) {
     let htmlContent = "";
 
     try {
-      htmlContent = fs.readFileSync(post.link, "utf8");
+      const htmlFilePath = post.link.replace(/^\/+/, "");
+      htmlContent = fs.readFileSync(htmlFilePath, "utf8");
     } catch (err) {
       console.error(`Could not read ${post.link}: ${err.message}`);
     }
@@ -78,8 +79,7 @@ function buildPodcastItems(feedPosts) {
       <guid isPermaLink="false"><![CDATA[${post.audioFile}]]></guid>
       <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
 
-      ${episodeImage}
-      <itunes:image href=${episodeImage}/>
+      ${episodeImage ? `<itunes:image href="${episodeImage}"/>` : ""}
 
       <enclosure
         url="${post.audioFile}"
