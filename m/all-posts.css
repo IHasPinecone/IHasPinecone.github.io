@@ -1,5 +1,5 @@
 body {
-    background: powderblue;
+    background: #f8b6ba;
     color: #000;
     font-family: Verdana, Arial, sans-serif;
     font-size: 14px;
@@ -10,8 +10,8 @@ body {
 #container {
     max-width: 850px;
     margin: 0 auto;
-    background: #EEEEEE;
-    border: 2px solid black;
+    background: #f5ecc2;
+    border: 2px #b24a3a;
     padding: 20px;
 }
 
@@ -29,7 +29,7 @@ h1 {
 
 .subtitle {
     margin-top: 6px;
-    color: #555;
+    color: #fdc57e;
 }
 
 hr {
@@ -41,7 +41,7 @@ hr {
 .post {
     border: 1px solid #808080;
     margin-bottom: 12px;
-    background: #f5f5f5;
+    background: #fdc57e;
 }
 
 .post-link {
