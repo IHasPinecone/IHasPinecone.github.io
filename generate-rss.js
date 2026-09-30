@@ -9,15 +9,19 @@ const posts = JSON.parse(
 );
 
 function sanitize(text = "") {
-  return text
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;")
     .trim();
 }
-
+function sanitizeCdata(text = "") {
+  return String(text)
+    .replace(/]]>/g, "]]]]><![CDATA[>")
+    .trim();
+}
 
 function parseDate(dateStr) {
   const [month, day, year] = dateStr.split("/");
@@ -32,33 +36,51 @@ const podcastPosts = posts.filter(
   post => post.topic === "Podcast"
 );
 
+function extractBodyContent(html = "") {
+  const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+
+  let content = bodyMatch ? bodyMatch[1] : html;
+
+  // Remove elements that should not be embedded in an RSS reader.
+  content = content
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/<nav\b[^>]*>[\s\S]*?<\/nav>/gi, "")
+    .replace(/<header\b[^>]*>[\s\S]*?<\/header>/gi, "")
+    .replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/gi, "");
+
+  // Prevent embedded content from closing the RSS CDATA section.
+  return content.replace(/]]>/g, "]]]]><![CDATA[>");
+}
+
 function buildNormalItems(feedPosts) {
   return feedPosts.map(post => {
-    const postUrl = `${SITE_URL}/${post.link}`;
+    const cleanLink = post.link.replace(/^\/+/, "");
+    const postUrl = `${SITE_URL}/${cleanLink}`;
 
     let htmlContent = "";
 
     try {
-      const htmlFilePath = post.link.replace(/^\/+/, "");
-      htmlContent = fs.readFileSync(htmlFilePath, "utf8");
+      const fullHtml = fs.readFileSync(cleanLink, "utf8");
+      htmlContent = extractBodyContent(fullHtml);
     } catch (err) {
-      console.error(`Could not read ${post.link}: ${err.message}`);
+      console.error(`Could not read ${cleanLink}: ${err.message}`);
     }
+
+    const safeTitle = sanitize(post.title)
+      .replace(/]]>/g, "]]]]><![CDATA[>");
+
+    const safeSummary = sanitize(post.summary || "")
+      .replace(/]]>/g, "]]]]><![CDATA[>");
 
     return `
     <item>
-      <title><![CDATA[${sanitize(post.title)}]]></title>
+      <title><![CDATA[${safeTitle}]]></title>
       <link>${postUrl}</link>
       <guid>${postUrl}</guid>
       <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
-
-      <description><![CDATA[
-        ${sanitize(post.summary || "")}
-      ]]></description>
-
-      <content:encoded><![CDATA[
-        ${htmlContent}
-      ]]></content:encoded>
+      <description><![CDATA[${safeSummary}]]></description>
+      <content:encoded><![CDATA[${htmlContent}]]></content:encoded>
     </item>`;
   }).join("\n");
 }
@@ -93,7 +115,10 @@ function buildPodcastItems(feedPosts) {
   }).join("\n");
 }
 
-const normalItems = buildNormalItems(posts);
+const normalPosts = posts.filter(
+  post => post.topic !== "Podcast"
+);
+const normalItems = buildNormalItems(normalPosts);
 
 const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
