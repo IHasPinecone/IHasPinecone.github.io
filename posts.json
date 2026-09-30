@@ -102,31 +102,9 @@
     "title": "RSS Feed is Live",
     "datetime": "09/23/2026",
     "coverImage": "",
-    "link": "rss.html",
+    "link": "m/rss.html",
     "topic": "",
     "readTime": "",
     "summary": "Copy the URL into your RSS reader to get an update when I make a post :D"
-  },
-  {
-    "title": "Test Episode 1",
-    "datetime": "9/29/2026",
-    "coverImage": "bg/ph/ph7.webp",
-    "link": "sandbox/ep1.html",
-    "topic": "Podcast",
-    "readTime": "",
-    "audioFile": "https://rss.art19.com/episodes/user/ZyW0EWP3Y87O8Qzl9LaQFo4nzu5L6Hi_/181ef875-b592-44c0-acd9-430f0439a94f.mp3?rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94",
-    "audioLength": "49316257",
-    "summary": "This is a placeholder for episode 1."
-  },
-  {
-    "title": "Test Episode 2",
-    "datetime": "9/30/2026",
-    "coverImage": "bg/ph/ph4.webp",
-    "link": "sandbox/ep2.html",
-    "topic": "Podcast",
-    "readTime": "",
-    "audioFile": "https://rss.art19.com/episodes/user/ZyW0EWP3Y87O8Qzl9LaQFo4nzu5L6Hi_/d502ce06-f031-41fc-8d4b-611923d01282.mp3?rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94",
-    "audioLength": "37007360",
-    "summary": "This is a placeholder for episode 2."
   }
 ]
