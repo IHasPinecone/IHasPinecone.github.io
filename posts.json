@@ -109,7 +109,7 @@
   },
   {
     "title": "Test Episode 1",
-    "datetime": "10/1/2026",
+    "datetime": "9/29/2026",
     "coverImage": "bg/ph/ph7.webp",
     "link": "sandbox/ep1.html",
     "topic": "Podcast",
@@ -120,7 +120,7 @@
   },
   {
     "title": "Test Episode 2",
-    "datetime": "10/3/2026",
+    "datetime": "9/30/2026",
     "coverImage": "bg/ph/ph4.webp",
     "link": "sandbox/ep2.html",
     "topic": "Podcast",
