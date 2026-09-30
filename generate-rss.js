@@ -32,34 +32,35 @@ const podcastPosts = posts.filter(
   post => post.topic === "Podcast"
 );
 
-return feedPosts.map(post => {
-  const postUrl = `${SITE_URL}/${post.link}`;
+function buildNormalItems(feedPosts) {
+  return feedPosts.map(post => {
+    const postUrl = `${SITE_URL}/${post.link}`;
 
-  let htmlContent = "";
+    let htmlContent = "";
 
-  try {
-    htmlContent = fs.readFileSync(post.link, "utf8");
-  } catch (err) {
-    console.error(`Could not read ${post.link}`);
-  }
+    try {
+      htmlContent = fs.readFileSync(post.link, "utf8");
+    } catch (err) {
+      console.error(`Could not read ${post.link}: ${err.message}`);
+    }
 
-  return `
-  <item>
-    <title><![CDATA[${sanitize(post.title)}]]></title>
-    <link>${postUrl}</link>
-    <guid>${postUrl}</guid>
-    <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
+    return `
+    <item>
+      <title><![CDATA[${sanitize(post.title)}]]></title>
+      <link>${postUrl}</link>
+      <guid>${postUrl}</guid>
+      <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
 
-    <description><![CDATA[
-      ${post.summary || ""}
-    ]]></description>
+      <description><![CDATA[
+        ${sanitize(post.summary || "")}
+      ]]></description>
 
-    <content:encoded><![CDATA[
-      ${htmlContent}
-    ]]></content:encoded>
-
-  </item>`;
-}).join("\n");
+      <content:encoded><![CDATA[
+        ${htmlContent}
+      ]]></content:encoded>
+    </item>`;
+  }).join("\n");
+}
 
 
 function buildPodcastItems(feedPosts) {
