@@ -12,13 +12,13 @@
     <item>
       <title><![CDATA[Proof of Concept Episode Ep0]]></title>
       <link>https://ihaspinecone.github.io/sandbox/ep1.html</link>
-      <guid isPermaLink="false"><![CDATA[https://ihaspinecone.github.io/sandbox/SandboxEp0.mpg]]></guid>
+      <guid isPermaLink="false"><![CDATA[https://ihaspinecone.github.io/sandbox/SandboxEp0.mp3]]></guid>
       <pubDate>Fri, 02 Oct 2026 00:00:00 GMT</pubDate>
 
       <itunes:image href="https://ihaspinecone.github.io/bg/ph/ph7.webp"/>
 
       <enclosure
-        url="https://ihaspinecone.github.io/sandbox/SandboxEp0.mpg"
+        url="https://ihaspinecone.github.io/sandbox/SandboxEp0.mp3"
         length="49316257"
         type="audio/mpeg" />
 
