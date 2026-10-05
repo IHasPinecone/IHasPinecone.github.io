@@ -2,7 +2,7 @@
 <rss version="2.0"
   xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
-    <title>Sandbox</title>
+    <title>Sandbox—A Dune Dreamrules Design Podcast</title>
     <itunes:image href="https://ihaspinecone.github.io/sandbox/imgs/sandbox-cover.jpg"/>
     <link>https://ihaspinecone.github.io</link>
     <description>Sandbox is where the designers of the Dreamrules varient for the Dune board game talk about their designs and love for the game. Sandbox is hosted by Pine (IHasPinecone) and Awptea (Awpteamoose), with requent guests Chron and Ridwan and many other members of the Drearules community. Dune was originally published by Avalon Hill in 1979 and later reprinted by Gale Force Nine in 2019.</description>
@@ -23,7 +23,7 @@
         type="audio/mpeg" />
 
       <description><![CDATA[
-        &lt;![CDATA[<p>In this episode Pine and Awptea talk about their love of dune and how the game feels like a first draft more than a professionally published game</p><p>The faction sheets and rulebook for Dreamrules can be found here https://pinecone.rodeo/bg/dreamrules.html and in the Dune Tabletop Discord (link)</p><p>Pine&#39;s Website: https://pinecone.rodeo</p><p>All music and sound effects by Stéphane Picq and Philippe Ulrich for Dune (1992) for MSDOS Cryo Interactive and Dune—Spice Opera (1992)</p><p>Special thanks to ___ for extracting/compiling all the voice lines</p>
+        &lt;![CDATA[<p>In this episode Pine and Awptea talk about their love of dune and how the game feels not like a professionally published game but a first draft of a game.</p><p>The faction sheets and rulebook for Dreamrules can be found here: https://pinecone.rodeo/bg/dreamrules.html and in the Dune Tabletop Discord: https://discord.com/invite/dune-tabletop-624609341886169117</p><p>Pine&#39;s Website: https://pinecone.rodeo</p><p>All music by Stéphane Picq and Philippe Ulrich for Dune (1992) by Cryo Interactive for MSDOS</p><p>All voice lines are also from the game.</p><p>Special thanks to ___ for extracting and sharing all the audio files from the game.</p>
       ]]></description>
     </item>
   </channel>
