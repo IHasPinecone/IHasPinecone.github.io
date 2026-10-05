@@ -86,7 +86,7 @@ function buildNormalItems(feedPosts) {
 }
 
 
-function buildPodcastItems(feedPosts) {
+/*function buildPodcastItems(feedPosts) {
   return feedPosts.map(post => {
     const postUrl = `${SITE_URL}/${post.link}`;
 
@@ -133,17 +133,17 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
     ${normalItems}
 
   </channel>
-</rss>`;
+</rss>`;*/
 
 fs.writeFileSync("rss.xml", rssFeed);
 
-const podcastItems = buildPodcastItems(podcastPosts);
+//const podcastItems = buildPodcastItems(podcastPosts);
 
 const podcastFeed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
   xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
-    <title>Sandbox</title>
+    <title>Sandbox—A Dune Dreamrules Design Podcast</title>
     <itunes:image href="https://ihaspinecone.github.io/sandbox/imgs/Sandbox-Cover.webp"/>
     <link>${SITE_URL}</link>
     <description>Sandbox is where the designers of the Dreamrules varient for the Dune board game talk about their designs and love for the game. Sandbox is hosted by Pine (IHasPinecone) and Awptea (Awpteamoose), with requent guests Chron and Ridwan and many other members of the Drearules community. Dune was originally published by Avalon Hill in 1979 and later reprinted by Gale Force Nine in 2019.</description>
