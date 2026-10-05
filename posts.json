@@ -106,16 +106,5 @@
     "topic": "",
     "readTime": "",
     "summary": "Copy the URL into your RSS reader to get an update when I make a post :D"
-  },
-  {
-    "title": "Proof of Concept Episode Ep0",
-    "datetime": "10/2/2026",
-    "coverImage": "bg/ph/ph7.webp",
-    "link": "sandbox/ep0.html",
-    "topic": "Podcast",
-    "readTime": "",
-    "audioFile": "https://ihaspinecone.github.io/sandbox/SandboxEp0.mp3",
-    "audioLength": "49316257",
-    "summary": "<![CDATA[<p>In this episode Pine does a proof of conept. (pithy summary with a joke)</p><p>The faction sheets and rulebook for Dreamrules can be found here https://pinecone.rodeo/bg/dreamrules.html and in the Dune Tabletop Discord (link)</p><p>Pine's Website: https://pinecone.rodeo</p><p>All music and sound effects by Stéphane Picq and Philippe Ulrich for Dune (1992) for MSDOS Cryo Interactive and Dune—Spice Opera (1992)</p><p>Special thanks to ___ for extracting/compiling all the voice lines.</p><p>The thumbnail is created by central419.<p>]]>"
   }
 ]
