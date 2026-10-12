@@ -305,7 +305,7 @@ button {
   Pine's Bookshelf
 </title>
 <meta content="Pine's Bookshelf" property="og:title" />
-<meta content="The thing holding me back from donating all my old books is I liked seeing them sitting on my shelf. This is my compromise. I've also jotted down a short review for each one." property="og:description" />
+<meta content="The thing holding me back from donating all my old books was seeing them sitting on my shelf. This is my compromise. I've also jotted down a short review for each one." property="og:description" />
 <meta content="https://ihaspinecone.github.io/books.html" property="og:url" />
 <meta content="https://ihaspinecone.github.io/books/man-writing-book-reviews.gif" property="og:image" />
 <meta content="15844367" data-react-helmet="true" name="theme-color" />
@@ -328,9 +328,7 @@ button {
   </select>
 </div>
 
-<div class="bookshelf" id ="bookshelf"></div>
-
-  
+<div class="bookshelf" id ="bookshelf"></div>  
 
 <div class="controls">
   <a href="index.html">
@@ -640,24 +638,6 @@ function buildShelves(data) {
       bookshelf.appendChild(shelf);
     }
   }
-    
-
-  function toggleChronological() {
-  chronologicalMode = !chronologicalMode;
-
-  fetch("books.json")
-    .then(res => res.json())
-    .then(data => {
-      if (chronologicalMode) {
-        buildChronologicalShelves(data);
-      }
-      else {
-        buildShelves(data);
-      }
-      attachBookClicks();
-    });
-  }
-  
 </script>
 
 </body>
