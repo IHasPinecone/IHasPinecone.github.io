@@ -428,7 +428,7 @@ let chronologicalMode = false;
 fetch("books.json")
   .then(res => res.json())
   .then(data => {
-    buildShelves(data);
+    buildDateShelves(data, true); // sort by dateReviewed
     attachBookClicks();
     const params = new URLSearchParams(window.location.search);
     const bookTitle = params.get("book");
