@@ -153,7 +153,7 @@ fs.writeFileSync("rss.xml", rssFeed);*/
   </channel>
 </rss>`;
 
-fs.writeFileSync("podcast.xml", podcastFeed);*/
+fs.writeFileSync("sandbox.xml", podcastFeed);*/
 
 console.log("rss.xml generated");
-console.log("podcast.xml generated");
+console.log("sandbox.xml generated");
