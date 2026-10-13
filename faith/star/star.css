@@ -6,7 +6,6 @@ html {
 
 body {
     color: black;
-
     font-family: "Open Sans", "SN Pro", sans-serif;
     font-size: clamp(16px, 1.5rem + 0.2vw, 19px);
     line-height: 1.5;
@@ -39,7 +38,6 @@ body {
 /* ===== Text ===== */
 
 p {
-    font-size: 1rem;
     line-height: 1.5;
     max-width: 65ch;
     margin: 0 auto 1.5rem;
