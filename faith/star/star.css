@@ -72,17 +72,18 @@ h2 {
     margin-top: 10px;
 }
 
-.lefttext {
-    text-align: left;
-}
-
 .caption {
     max-width: 600px;
-    width: 100%;
     text-align: center;
     margin-top: 10px;
     font-size: .9em;
 }
+
+.lefttext {
+    text-align: left;
+}
+
+
 
 /* ===== Images ===== */
 
