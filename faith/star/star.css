@@ -20,22 +20,11 @@ body {
 }
 
 @media (max-width: 768px) {
-    p,
-    .voice {
-        max-width: 100%
-    }
-
-    h2 {
-        font-size: 1.75rem;
-    }
-
-    .image-row {
-        flex-direction: column;
-        align-items: center;
+    p {
+        padding: 0 10px;
+        max-width: none;
     }
 }
-
-/* ===== Text ===== */
 
 p {
     line-height: 1.5;
