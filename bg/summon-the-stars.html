@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+        rel="stylesheet" />
+        <link id="theme" rel="stylesheet" href="sts/sts.css" />
+        <title>
+            Summon the Stars: A Coop Variant for Wingspan
+        </title>
+        <meta content="Summon the Stars: A Coop Variant for Wingspan" property="og:title" />
+        <meta content="An experiment rules varient with multiple win-conditions acting as a Rorschach test." property="og:description" />
+        <meta content="https://ihaspinecone.github.io/bg/summon-the-stars.html" property="og:url" />
+        <meta content="https://ihaspinecone.github.io/bg/sts/summon-the-stars.jpg" property="og:image" />
+        <meta content="15844367" data-react-helmet="true" name="theme-color" />
+        <meta name="twitter:card" content="summary_large_image">
+    </head>
+
+    <body>
+        <div class="content">
+            <h1 class="center text">Summon the Stars: A Coop Variant for Wingspan</h1>
+            <p class="center text">(yeah you read that right)</p>
+
+        <div class="style-toggle-wrapper">
+            <button id="styleToggle">
+                Accessibility Toggle
+            </button>
+        </div>
+
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/bandits-few2.jpg" alt="gloomhaven bandits">
+                </a>
+                <figcaption class="caption">
+                Shoutout to Starfire for taking pictures with his nicely painted Gloomhaven set.
+                </figcaption>
+            </div>
+        </figure>
+
+        <p class="lefttext">
+            We all value games differently. Some of us love winning above all else, but most have other more subtle and unconscious biases. Summon the Stars forces players to expose what they value most in the game, whether consciously or unconscoiusly. In Summon the Stars players will score points to turn back the clock and repel the invaders, and may optionally work together to balance the humors. After the final round, players will achieve a unique ending based on how far the clock has been turned back and whether the humors are balanced. Different endings both have inherint rewards (such as signing the board and beating difficult challenges) and legacy rewards (new content and upgrading personal characters)
+        </p>
+        <p>
+          This game is a proof of concept for whether reading a rulebook and playing a game can expose unconscious bias about what players value in a game. The game also works to kickstart conversation more broadly about what players value.
+        </p>
+
+        <h2 class="center text">Rules</h2>
+
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/bandits-few2.jpg" alt="gloomhaven bandits">
+                </a>
+                <figcaption class="caption">
+                (humors/constellation board)
+                </figcaption>
+            </div>
+        </figure>
+
+        <p>
+          To play you will need a standard copy of Wingspan, and a printout of the humors board, and a character sheet for each player.<br>
+          (Click here for a pdf of the humors board)
+          (Click here for a pdf of the character sheets)
+        </p>
+
+        <p>
+          Setup a standard game for 2-5 players.<br>
+          Do not deal out starting bonus cards (although players may gain bonus cards through other means)<br>
+          Do not setup the objectives board.
+          If it is your first time playing enter the current date and number of players into (this page). It will determine th
+        </p>
+
+
+        <h2 class="center text">Expansions</h2>
+        <p>
+          Players are free to add extra bird packs, but proper content expansions run the risk of making the game too easy. Players more familiar with the expansions are free to tweak numbers to levels that seem appropriate. Conquoring numbers are supposed to be difficult to achieve on a first play, but possible after a few upgrades. Remember players start the game with 6 birds instead of 3 and have a unique player power.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/box2.jpg" alt="gloomhaven box">
+                </a>
+                <figcaption class="caption">
+                A game box big enough to flatten most fruits.
+            </figcaption>
+            </div>
+        </figure>
+
+
+
+
+
+        </div>
+        <p>
+            <a href="../index.html">
+                <img class="centerimage" src="RWAssets\back.gif"/>
+            </a>
+        </p>
+
+        <script>
+    const themeLink = document.getElementById("theme");
+    const button = document.getElementById("styleToggle");
+    const params = new URLSearchParams(window.location.search);
+    
+    const NORMAL_CSS = "gloomhaven/gloomhaven.css";
+    const ACCESSIBLE_CSS = "readable.css";
+    const STORAGE_KEY = "siteStyle";
+
+  // Initialize style: URL → localStorage → default
+ let style =
+    params.get("style") ||
+    localStorage.getItem(STORAGE_KEY) ||
+    "normal";
+
+  function applyStyle() {
+    if (style === "accessible") {
+      themeLink.href = ACCESSIBLE_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    } else {
+      themeLink.href = NORMAL_CSS;
+      button.textContent = "Toggle Accessibility Mode";
+    }
+
+    localStorage.setItem(STORAGE_KEY, style);
+  }
+
+  applyStyle();
+
+  button.addEventListener("click", () => {
+    style = (style === "normal") ? "accessible" : "normal";
+
+    if (style === "accessible") {
+      // Keep URL parameter for accessible mode
+      params.set("style", "accessible");
+      window.history.replaceState(
+        {},
+        "",
+        "?" + params.toString()
+      );
+    } else {
+      // Remove query string entirely for normal mode
+      window.history.replaceState(
+        {},
+        "",
+        window.location.pathname
+      );
+    }
+
+    applyStyle();
+  });
+</script>
+    </body>
+</html>
