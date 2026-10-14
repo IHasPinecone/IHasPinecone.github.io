@@ -1,0 +1,41 @@
+body {
+  background-image: url("shandalarfiles/stars.jpg");
+  background-repeat: repeat;
+  color: white;
+}
+p,
+ul {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  font-size: 1.5em;
+}
+h2 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  font-size: 2em;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+.shandalarlogo {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  text-align: center;
+}
+.centerimage {
+  display: inline-block;
+}
+.floatright {
+  float: right;
+}
+li {
+  padding: 5px;
+}
