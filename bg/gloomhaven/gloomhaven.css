@@ -68,6 +68,7 @@ h2 {
     margin-left: auto;
     margin-right: auto;
     font-size: 2em;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 /* ===== Utility Classes ===== */
