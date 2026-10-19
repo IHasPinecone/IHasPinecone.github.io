@@ -63,6 +63,14 @@ p {
     font-style: italic;
 }
 
+h1 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2.5em;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
 h2 {
     display: block;
     margin-left: auto;
