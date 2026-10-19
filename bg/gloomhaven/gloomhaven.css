@@ -18,7 +18,7 @@ body {
     .voice 
     .caption {
         max-width: 100%;
-        padding: 15px 20px;
+        padding: 15px 25px;
     }
 
     h2 {
@@ -39,7 +39,7 @@ p {
     max-width: 65ch;
     margin: 0 auto 1.5rem;
     background-color: rgba(0, 0, 0, 0.6);
-    padding: 15px 20px;
+    padding: 15px 25px;
 }
 
 .caption {
