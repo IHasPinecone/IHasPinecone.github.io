@@ -21,7 +21,7 @@ body {
             transparent 40%),
         var(--canvas);
     color: var(--ink);
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "Open Sans", "SN Pro", sans-serif;
     line-height: 1.7;
 }
 
@@ -79,7 +79,7 @@ body {
     border-left: 4px solid var(--accent);
 
     color: #4b4138;
-    font-style: italic;
+    -style: italic;
 }
 
 /* =========================
