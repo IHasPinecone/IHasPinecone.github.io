@@ -151,7 +151,29 @@ hr {
     transform: rotate(-0.3deg);
 }
 
+.artist-credit {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
 
+    font-size: 0.9rem;
+    color: #6b5b4a;
+
+    letter-spacing: 0.03em;
+}
+
+.artist-credit a {
+    color: var(--wood);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+
+    transition: color 0.2s ease;
+}
+
+.artist-credit a:hover {
+    color: var(--accent);
+}
+
+//audio
 .audio-note {
     max-width: 650px;
     margin: 4rem auto;
@@ -166,8 +188,6 @@ hr {
         0 3px 10px var(--shadow),
         0 12px 25px rgba(0,0,0,.08);
 }
-
-//audio
 .audio-note h3 {
     margin-top: 0;
     margin-bottom: 0.5rem;
