@@ -451,6 +451,13 @@ const compiledCases = cases.map(c => {
   });
 });
 
+const caseExpansions = [
+    {
+        start: new Date(2026, 10, 1), // November 2026
+        cases: window.extraCases_November2026
+    }
+];
+
 //new tables
 const tableExpansions = [
   {
@@ -462,6 +469,16 @@ const tableExpansions = [
     tables: window.extraTables_June2027
   }
 ];
+
+function getCasesForMonth(seedInput) {
+    let activeCases = [...cases];
+    for (const expansion of caseExpansions) {
+        if (seedInput >= expansion.start && expansion.cases) {
+            activeCases = activeCases.concat(expansion.cases);
+        }
+    }
+    return activeCases;
+}
 
 function getTablesForMonth(seed) {
   const monthDate = parseSeed(seed);
@@ -481,9 +498,13 @@ function createGenerator(seedInput) {
   const rng = mulberry32(seed);
 
   const activeTables = getTablesForMonth(seedInput);
+  const activeCases = compileCases(
+    getCasesForMonth(seedInput);
+  );
 
   return function generateOne() {
-    const selected = compiledCases[Math.floor(rng() * compiledCases.length)];
+    
+    const selected = activeCases[Math.floor(rng() * compiledCases.length)];
 
     return selected.map(part => {
       if (part.type === "text") return part.value;
