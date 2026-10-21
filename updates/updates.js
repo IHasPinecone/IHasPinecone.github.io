@@ -1,4 +1,4 @@
-// this first function is for bug testing
+/* this first function is for bug testing
 const RealDate = Date;
 window.Date = class extends RealDate {
   constructor(...args) {
@@ -12,7 +12,7 @@ window.Date = class extends RealDate {
   }
   static parse = RealDate.parse;
   static UTC = RealDate.UTC;
-};
+};*/
 
 function parseSeed(seed) {
   const [monthName, yearString] = seed.trim().split(/\s+/);
