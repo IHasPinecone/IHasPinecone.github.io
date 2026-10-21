@@ -481,9 +481,10 @@ const tableExpansions = [
 ];
 
 function getCasesForMonth(seedInput) {
+    const monthDate = parseSeed(seedInput);
     let activeCases = [...cases];
     for (const expansion of caseExpansions) {
-        if (seedInput >= expansion.start && expansion.cases) {
+        if (monthDate >= expansion.start && expansion.cases) {
             activeCases = activeCases.concat(expansion.cases);
         }
     }
