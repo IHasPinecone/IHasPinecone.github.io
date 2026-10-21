@@ -454,7 +454,7 @@ const compiledCases = cases.map(c => {
 //new tables
 const tableExpansions = [
   {
-    start: new Date(2026, 10, 1),
+    start: new Date(2026, 09, 1),
     tables: window.extraTables_November2026
   },
   {
