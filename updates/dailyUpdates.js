@@ -487,7 +487,7 @@ function createGenerator(seedInput) {
 
     return selected.map(part => {
       if (part.type === "text") return part.value;
-      return pick(tables[part.name], rng);
+      return pick(activeTables[part.name], rng);
     }).join("");
   };
 }
