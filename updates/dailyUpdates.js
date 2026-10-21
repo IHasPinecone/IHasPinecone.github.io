@@ -499,7 +499,7 @@ function createGenerator(seedInput) {
 
   const activeTables = getTablesForMonth(seedInput);
   const activeCases = compileCases(
-    getCasesForMonth(seedInput);
+    getCasesForMonth(seedInput)
   );
 
   return function generateOne() {
