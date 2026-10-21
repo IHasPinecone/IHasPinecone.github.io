@@ -160,7 +160,7 @@ window.extraTables_November2026 = {
     "E4 openings (zzzzz)",
     "working at a 911 call center",
     "how many watches is enough",
-    judging a book by its cover",
+    "judging a book by its cover",
     "long distance relationships",
     "a shocking secret",
     "someone who got a tattoo of the Brand of Sacrifice from Berserk but got in on the front of his neck instead of the back",
