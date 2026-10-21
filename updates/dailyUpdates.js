@@ -451,9 +451,36 @@ const compiledCases = cases.map(c => {
   });
 });
 
+//new tables
+const tableExpansions = [
+  {
+    start: new Date(2026, 10, 1),
+    tables: window.extraTables_November2026
+  },
+  {
+    start: new Date(2027, 5, 1),
+    tables: window.extraTables_June2027
+  }
+];
+
+function getTablesForMonth(seed) {
+  const monthDate = parseSeed(seed);
+  const result = structuredClone(baseTables);
+  for (const expansion of tableExpansions) {
+    if (monthDate >= expansion.start) {
+      for (const key in expansion.tables) {
+        result[key].push(...expansion.tables[key]);
+      }
+    }
+  }
+  return result;
+}
+
 function createGenerator(seedInput) {
   const seed = hashSeed(seedInput);
   const rng = mulberry32(seed);
+
+  const activeTables = getTablesForMonth(seedInput);
 
   return function generateOne() {
     const selected = compiledCases[Math.floor(rng() * compiledCases.length)];
