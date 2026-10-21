@@ -94,13 +94,13 @@ window.extraTables_November2026 = {
 };
 
   window.extraCases_November2026 = [
-    { text: "Is (thing) good?" },
-    { text: "There's a weird inconsistency in (thing)." },
-    { text: "FMK: (thing), (thing), (thing)." },
-    { text: "Debated the exact definition of (thing) with (person)" },
-    { text: "Sketched a proof-of-concept for (thing)." },
-    { text: "Thought about a poetic interpretation of (thing)" },
+    { text: "Is (topic) good?" },
+    { text: "There's a weird inconsistency in (topic)." },
+    { text: "FMK: (topic), (topic), (topic)." },
+    { text: "Debated the exact definition of (topic) with (person)" },
+    { text: "Sketched a proof-of-concept for (topic)." },
+    { text: "Thought about a poetic interpretation of (topic)" },
     { text: "Had a difficult conversation with (person)." },
-    { text: "Talked with (person) about a lack of standards with (thing)." }
+    { text: "Talked with (person) about a lack of standards with (topic)." }
   ];
 
