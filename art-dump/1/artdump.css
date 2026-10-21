@@ -151,7 +151,7 @@ hr {
     transform: rotate(-0.3deg);
 }
 
-.artist-credit {
+.credit {
     margin-top: 0.75rem;
     margin-bottom: 0.5rem;
 
@@ -161,7 +161,7 @@ hr {
     letter-spacing: 0.03em;
 }
 
-.artist-credit a {
+.credit a {
     color: var(--wood);
     text-decoration: none;
     border-bottom: 1px dotted var(--accent);
@@ -169,7 +169,7 @@ hr {
     transition: color 0.2s ease;
 }
 
-.artist-credit a:hover {
+.credit a:hover {
     color: var(--accent);
 }
 
