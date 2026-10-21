@@ -468,7 +468,7 @@ function getTablesForMonth(seed) {
   const result = structuredClone(baseTables);
   for (const expansion of tableExpansions) {
     if (monthDate >= expansion.start) {
-      for (const key in expansion.baseTables) {
+      for (const key in expansion.tables) {
         result[key].push(...expansion.tables[key]);
       }
     }
