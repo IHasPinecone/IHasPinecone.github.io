@@ -82,6 +82,13 @@
     <hr class="superspace"/>
 
     <div class="section-header">
+      <h2>Art Dumps</h2>
+      <img src="m/bokkuri/sticker_yay.png">
+    </div>
+    <ul id="art" class="centernav"></ul>
+    <hr class="superspace">
+
+    <div class="section-header">
       <h2>Podcasts</h2>
       <img src="m/bokkuri/sticker_tea.png">
     </div>
@@ -140,6 +147,7 @@ window.addEventListener("DOMContentLoaded", populateLatestBookReview);
         const boardGames = document.getElementById("board-games");
         const faith = document.getElementById("faith");
         const podcast = document.getElementById("podcast");
+        const art = document.getElementById("art");
         
         // Sidebar
         posts.slice(0, 3).forEach(post => {
@@ -194,6 +202,8 @@ window.addEventListener("DOMContentLoaded", populateLatestBookReview);
             case "Faith":
               faith.appendChild(li);
               break;
+            case "Art":
+              art.appendChild(li);
             case "Podcast":
               podcast.appendChild(li);
               break;
