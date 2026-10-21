@@ -1,0 +1,56 @@
+<head>
+        <link rel="preconnect" href="hhtps://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+        rel="stylesheet" />
+        <link rel="stylesheet" href="1/artdump.css" />
+        <title>
+            Art Dump 1
+        </title>
+        <meta content="Art Dump 1" property="og:title" />
+        <meta content="Here's a bunch of art I found that I like." property="og:description" />
+        <meta content="https://pinecone.rodeo/art-dump/1.html" property="og:url" />
+        <meta content="https://pinecone.rodeo/art-dump/1/Józef_Chełmoński_Anioł_i_dzieci_wiejskie.jpg" property="og:image" />
+        <meta content="15844367" data-react-helmet="true" name="theme-color" />
+        <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body>
+  <h1>Art Dump 1</h1>
+  <p>
+    While looking at art for <a href="../faith/star-in-the-east.html">Tell The Prince There is a Star in the East</a> I ended up looking at a lot of pieces I liked, but didn't fit the words.
+  </p>
+  <div class="gallery">
+
+    <div class="art-piece">
+        <img src="1/Józef_Chełmoński_Anioł_i_dzieci_wiejskie.jpg" alt="alt text here">
+        <p class="caption">
+            this is the text under the work. Lorem Ipsum Dolor Sit Amet
+        </p>
+    </div>
+
+    <div class="art-piece">
+        <img src="1/Józef_Chełmoński_Kosynierzy.jpg" alt="other alt text">
+    </div>
+
+</div>
+
+<div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    document.querySelectorAll(".art-piece img").forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add("active");
+      });
+    });
+    lightbox.addEventListener("click", () => {
+      lightbox.classList.remove("active");
+    });
+  </script>
+</body>
