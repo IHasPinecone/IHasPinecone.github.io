@@ -14,14 +14,6 @@ window.Date = class extends RealDate {
   static UTC = RealDate.UTC;
 };*/
 
-// for added tables
-const tableExpansions = [
-  {
-    start: new Date(2026, 10, 1), // November 2026
-    tables: window.extraTables_November2026
-  }
-];
-
 function parseSeed(seed) {
   const [monthName, yearString] = seed.trim().split(/\s+/);
   const monthMap = {
@@ -46,20 +38,6 @@ function formatSeed(date) {
     month: "long",
     year: "numeric"
   });
-}
-
-function getTablesForMonth(seed) {
-  const monthDate = parseSeed(seed);
-  const result = structuredClone(baseTables);
-  for (const expansion of tableExpansions) {
-    if (monthDate >= expansion.start) {
-      for (const key in expansion.tables) {
-        result[key].push(...expansion.tables[key]);
-      }
-    }
-  }
-
-  return result;
 }
   
   function runMany() {
