@@ -93,7 +93,7 @@ window.extraTables_November2026 = {
   ]
 };
 
-  window.extraCases_December2026 = [
+  window.extraCases_November2026 = [
     { text: "Is (thing) good?" },
     { text: "There's a weird inconsistency in (thing)." },
     { text: "FMK: (thing), (thing), (thing)." },
