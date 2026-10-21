@@ -144,7 +144,7 @@ hr {
 
     color: #51473e;
     font-style: italic;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     line-height: 1.8;
 
     box-shadow:
@@ -186,12 +186,11 @@ hr {
         0 3px 10px var(--shadow),
         0 12px 25px rgba(0,0,0,.08);
 }
-.audio-note h3 {
+.audio-note p {
     margin-top: 0;
     margin-bottom: 0.5rem;
     color: var(--wood-dark);
     font-weight: normal;
-    letter-spacing: 0.05em;
 }
 
 .audio-note p {
