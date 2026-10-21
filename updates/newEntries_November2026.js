@@ -90,7 +90,7 @@ window.extraTables_November2026 = {
     "Józef Chełmoński (link)</a>",
     "flag football",
     "community outreach"
-  ];
+  ]
 };
 
   window.extraCases_December2026 = [
