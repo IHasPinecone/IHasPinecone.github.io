@@ -42,7 +42,9 @@ body {
 /* Framed artwork */
 .art-piece img {
     display: block;
-    width: min(100%, 650px);
+    max-width: 100%;
+    max-height: 500px;
+    width: auto;
     height: auto;
 
     background: white;
