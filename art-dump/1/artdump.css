@@ -150,3 +150,41 @@ hr {
 
     transform: rotate(-0.3deg);
 }
+
+
+.audio-note {
+    max-width: 650px;
+    margin: 4rem auto;
+
+    padding: 1.5rem;
+
+    background: var(--paper);
+
+    border: 1px solid #d7c8a3;
+
+    box-shadow:
+        0 3px 10px var(--shadow),
+        0 12px 25px rgba(0,0,0,.08);
+}
+
+//audio
+.audio-note h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+
+    color: var(--wood-dark);
+
+    font-weight: normal;
+    letter-spacing: 0.05em;
+}
+
+.audio-note p {
+    margin-bottom: 1rem;
+
+    color: #4b4138;
+    font-style: italic;
+}
+
+.audio-note audio {
+    width: 100%;
+}
