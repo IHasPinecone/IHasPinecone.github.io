@@ -17,7 +17,7 @@ function hashSeed(str) {
 }
 
 /* ---------- Tbles ---------- */
-const tables = {
+const baseTables = {
   person: ["my brother",
     "my sister",
     "my dad",
@@ -468,7 +468,7 @@ function getTablesForMonth(seed) {
   const result = structuredClone(baseTables);
   for (const expansion of tableExpansions) {
     if (monthDate >= expansion.start) {
-      for (const key in expansion.tables) {
+      for (const key in expansion.baseTables) {
         result[key].push(...expansion.tables[key]);
       }
     }
