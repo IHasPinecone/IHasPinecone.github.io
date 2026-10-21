@@ -441,15 +441,25 @@ const cases = [
   { text: "Played chess with (person)." },
 ];
 
-const compiledCases = cases.map(c => {
-  const parts = c.text.split(/(\(.*?\))/g);
-
-  return parts.map(part => {
-    const match = part.match(/^\((.*?)\)$/);
-    if (match) return { type: "table", name: match[1] };
-    return { type: "text", value: part };
+function compileCases(caseList) {
+  return caseList.map(c => {
+    const parts = c.text.split(/(\(.*?\))/g);
+    return parts.map(part => {
+      const match = part.match(/^\((.*?)\)$/);
+      if (match) {
+        return {
+          type: "table",
+          name: match[1]
+        };
+      }
+      return {
+        type: "text",
+        value: part
+      };
+    });
   });
-});
+}
+const compiledCases = compileCases(cases);
 
 const caseExpansions = [
     {
@@ -504,7 +514,9 @@ function createGenerator(seedInput) {
 
   return function generateOne() {
     
-    const selected = activeCases[Math.floor(rng() * compiledCases.length)];
+    const selected = activeCases[
+      Math.floor(rng() * activeCases.length)
+      ];
 
     return selected.map(part => {
       if (part.type === "text") return part.value;
