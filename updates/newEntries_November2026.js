@@ -9,6 +9,12 @@ window.extraTables_November2026 = {
     "a cat",
     "a cow"
   ],
+  place: [
+    "at a thrift store",
+    "next to the water tower",
+    "in Dayton Ohio",
+    "in a waiting room",
+  ],
   topic: [
     "my English copy of the voynich manuscript",
     "Final Fantasy Crystal Chronicles",
