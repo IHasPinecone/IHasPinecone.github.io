@@ -97,7 +97,9 @@ window.extraTables_November2026 = {
     "paperclips",
     "Józef Chełmoński https://pinecone.rodeo/art-dump/1.html</a>",
     "flag football",
-    "community outreach"
+    "community outreach",
+    "installing a big flaming pit",
+    "werewolves"
   ]
 };
 
