@@ -7,7 +7,9 @@ window.extraTables_November2026 = {
     "someone who is not like other guys",
     "lowkey my antagonist",
     "a cat",
-    "a cow"
+    "a cow",
+    "a BIG Harry Potter fan",
+    "someone in my TTRPG group"
   ],
   place: [
     "at a thrift store",
