@@ -1,83 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guestbook</title>
-  <style>
-    body {
-      background-color: #fcebc2; /* Warm retro beige background */
-      color: #000000;
-      font-family: "Times New Roman", Times, serif;
-      font-size: 16px;
-      margin: 0;
-      padding: 20px 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 720px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .nav-header {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    a {
-      color: #7b52ab;
-      text-decoration: underline;
-      font-size: 18px;
-    }
-
-    a:hover {
-      color: #552d80;
-    }
-
-    /* Embedded SmartGuestbook Frame */
-    .guestbook-frame {
-      width: 100%;
-      height: 800px;
-      border: 1px solid #a88d67;
-      background-color: #ffffff;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .fallback-note {
-      margin-top: 15px;
-      font-size: 14px;
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>My Guestbook</title>
 </head>
 <body>
+    <h1>Welcome to My Website</h1>
+    <p>Thanks for stopping by!</p>
 
-  <div class="container">
-    <div class="nav-header">
-      <a href="index.html">&lt;&lt; Back to Home</a>
-    </div>
-
-    <!-- Embedded SmartGuestbook -->
-    <iframe 
-      src="http://users3.smartgb.com/g/g.php?a=s&i=g36-42493-5b" 
-      class="guestbook-frame" 
-      title="Guestbook" 
-      frameborder="0">
-    </iframe>
-
-    <div class="fallback-note">
-      Having trouble viewing the guestbook? 
-      <!-- Replace href with your SmartGB link -->
-      <a href="http://users3.smartgb.com/g/g.php?a=s&i=g36-42493-5b" target="_blank" rel="noopener noreferrer">Click here to open it directly</a>.
-    </div>
-  </div>
-
+    <!-- CommentBox Guestbook -->
+    <div class="commentbox"></div>
+    <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+    <script>
+      commentBox('5699856593059840-proj');
+    </script>
 </body>
 </html>
