@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~*~ Welcome to My GeoCities Guestbook ~*~</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Retro CSS Styles & Animations */
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=VT323&family=Press+Start+2P&display=swap');
+
+        body {
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+            background-color: #000080;
+            background-image: radial-gradient(#00ffff 0.5px, transparent 0.5px), radial-gradient(#ff00ff 0.5px, #000033 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            color: #ffff00;
+        }
+
+        .font-pixel {
+            font-family: 'Press Start 2P', monospace;
+        }
+
+        .font-vt323 {
+            font-family: 'VT323', monospace;
+        }
+
+        .retro-border-outset {
+            border: 4px ridge #c0c0c0;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .retro-border-inset {
+            border: 4px groove #c0c0c0;
+        }
+
+        .win95-window {
+            background: #c0c0c0;
+            color: #000;
+            border: 3px outset #ffffff;
+        }
+
+        .win95-titlebar {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: white;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+
+        .rainbow-text {
+            background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 2s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: #c0c0c0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #808080;
+            border: 2px outset #ffffff;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-2 md:p-6 text-yellow-300">
+
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Header Banner -->
+        <header class="text-center mb-6 win95-window p-2 retro-border-outset">
+            <div class="win95-titlebar p-1 flex justify-between items-center mb-2">
+                <span class="text-xs font-mono">C:\GEOCITIES\HOMEPAGE\GUESTBOOK.EXE</span>
+                <div class="flex gap-1">
+                    <button class="bg-gray-300 text-black px-1 text-xs border border-white font-bold" onclick="alert('Cannot minimize Web 1.0!')">_</button>
+                    <button class="bg-gray-300 text-black px-1 text-xs border border-white font-bold" onclick="alert('Under Construction Forever!')">X</button>
+                </div>
+            </div>
+
+            <div class="bg-black p-4 border-2 border-yellow-400 text-center relative overflow-hidden">
+                <!-- Under Construction GIF simulation -->
+                <div class="flex justify-center items-center gap-2 mb-2">
+                    <span class="text-2xl animate-bounce">⚠️</span>
+                    <h1 class="text-2xl md:text-4xl font-pixel text-yellow-400 rainbow-text tracking-widest">
+                        MY GUESTBOOK
+                    </h1>
+                    <span class="text-2xl animate-bounce">⚠️</span>
+                </div>
+                <marquee class="bg-blue-900 text-lime-300 font-vt323 text-xl border border-lime-400 py-1">
+                    *** WELCOME TO MY DIGITAL REALM! *** PLEASE SIGN MY GUESTBOOK BEFORE YOU LEAVE! *** BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 AT 800x600 RESOLUTION! *** DON'T FORGET TO TURN YOUR SOUND ON! ***
+                </marquee>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Sidebar Left: Controls & Stats -->
+            <div class="space-y-6">
+                
+                <!-- Web Counter -->
+                <div class="win95-window p-3 text-center">
+                    <div class="win95-titlebar text-xs p-1 mb-2">VISITOR COUNTER</div>
+                    <p class="text-xs text-black mb-1 font-sans">You are visitor number:</p>
+                    <div class="inline-flex bg-black px-3 py-1 border-2 border-gray-600 font-pixel text-red-500 text-xl tracking-widest" id="visitor-count">
+                        004,829
+                    </div>
+                    <div class="mt-2 text-[10px] text-gray-700 font-sans">
+                        [ Powered by WebCounter 1998 ]
+                    </div>
+                </div>
+
+                <!-- Retro Badges -->
+                <div class="win95-window p-3 text-center">
+                    <div class="win95-titlebar text-xs p-1 mb-2">COOL STUFF</div>
+                    <div class="flex flex-wrap justify-center gap-2 text-xs text-black font-bold">
+                        <span class="bg-blue-600 text-white px-2 py-1 rounded border border-black text-[10px]">Netscape NOW!</span>
+                        <span class="bg-yellow-400 text-black px-2 py-1 border border-black text-[10px]">HTML 3.2</span>
+                        <span class="bg-red-600 text-white px-2 py-1 border border-black text-[10px]">IE 4.0 Ready</span>
+                        <span class="bg-purple-600 text-white px-2 py-1 border border-black text-[10px]">Geocities CyberCity</span>
+                    </div>
+                </div>
+
+                <!-- Mode & Firebase Settings Modal Launcher -->
+                <div class="win95-window p-3 text-center text-black">
+                    <div class="win95-titlebar text-xs p-1 mb-2">BACKEND SETTINGS</div>
+                    <p class="text-xs mb-2 font-sans">Current Storage Mode:</p>
+                    <div id="storage-mode-indicator" class="font-bold text-sm bg-yellow-200 p-1 border border-black mb-3">
+                        Local Storage (Simulated)
+                    </div>
+                    <button onclick="toggleConfigModal()" class="w-full bg-gray-200 border-2 border-black p-2 font-sans text-xs font-bold active:bg-gray-400 hover:bg-white">
+                        ⚙️ Configure Firebase Backend
+                    </button>
+                </div>
+
+                <!-- Embed Code Box -->
+                <div class="win95-window p-3 text-black">
+                    <div class="win95-titlebar text-xs p-1 mb-2">EMBED ON YOUR SITE</div>
+                    <p class="text-[11px] mb-2 font-sans">Copy this iframe snippet to add this guestbook to your GitHub Pages or personal site:</p>
+                    <textarea readonly id="embed-code" class="w-full h-20 text-[10px] font-mono p-1 bg-white border border-gray-800 focus:outline-none"></textarea>
+                    <button onclick="copyEmbedCode()" class="mt-1 w-full bg-blue-700 text-white p-1 text-xs font-sans hover:bg-blue-800">
+                        📋 Copy Code
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Form + Entries -->
+            <div class="md:col-span-2 space-y-6">
+
+                <!-- Sign Guestbook Form -->
+                <div class="win95-window p-4">
+                    <div class="win95-titlebar p-1 mb-3 flex justify-between items-center">
+                        <span>✏️ SIGN MY GUESTBOOK</span>
+                        <span class="text-xs font-normal">Leave a mark on the web!</span>
+                    </div>
+
+                    <form id="guestbook-form" onsubmit="handleFormSubmit(event)" class="space-y-3 text-black text-sm font-sans">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block font-bold text-xs mb-1">Handle / Name <span class="text-red-600">*</span></label>
+                                <input type="text" id="input-name" required placeholder="e.g. Neo_99" class="w-full p-1.5 border-2 border-gray-600 bg-white font-mono text-sm">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-xs mb-1">Cyber Location</label>
+                                <input type="text" id="input-location" placeholder="e.g. CyberSpace / NYC" class="w-full p-1.5 border-2 border-gray-600 bg-white font-mono text-sm">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block font-bold text-xs mb-1">Email (Will be public!)</label>
+                                <input type="email" id="input-email" placeholder="cool_kid@aol.com" class="w-full p-1.5 border-2 border-gray-600 bg-white font-mono text-sm">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-xs mb-1">Fav 90s Thing</label>
+                                <select id="input-fav" class="w-full p-1.5 border-2 border-gray-600 bg-white font-sans text-sm">
+                                    <option value="📼 VHS Tapes">📼 VHS Tapes</option>
+                                    <option value="👾 Tamagotchi">👾 Tamagotchi</option>
+                                    <option value="💿 Dial-up Tones">💿 Dial-up Tones</option>
+                                    <option value="🎮 Nintendo 64">🎮 Nintendo 64</option>
+                                    <option value="📼 Space Jam">📼 Space Jam</option>
+                                    <option value="🥤 Surge Soda">🥤 Surge Soda</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block font-bold text-xs mb-1">Message <span class="text-red-600">*</span></label>
+                            <textarea id="input-message" required rows="3" placeholder="Cool site! Add me to your webring!!" class="w-full p-1.5 border-2 border-gray-600 bg-white font-mono text-sm"></textarea>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2">
+                            <span class="text-[11px] text-gray-600 italic">* HTML tags are stripped for safety!</span>
+                            <button type="submit" class="bg-gray-300 hover:bg-gray-100 text-black font-bold px-6 py-2 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5">
+                                💾 Submit Entry
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Guestbook Entries List -->
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center text-yellow-300 font-pixel text-sm">
+                        <h2>📖 RECENT SIGNATURES</h2>
+                        <span id="entry-count-badge" class="bg-yellow-400 text-black text-xs px-2 py-0.5 font-sans font-bold">0 Entries</span>
+                    </div>
+
+                    <div id="entries-container" class="space-y-4">
+                        <!-- Entries rendered here dynamically -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-xs text-gray-400 win95-window p-3">
+            <p class="font-vt323 text-lg text-black">
+                Hosted with pride on <span class="underline">GitHub Pages</span> | Best viewed in 800x600 resolution with 256 colors
+            </p>
+            <p class="mt-1 text-[10px] text-gray-700">
+                Created with 90s Nostalgia. No copyright intended. Built for Web 1.0 lovers.
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- Firebase Settings Modal -->
+    <div id="config-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="win95-window max-w-md w-full p-4 text-black font-sans">
+            <div class="win95-titlebar p-1 mb-3 flex justify-between items-center">
+                <span>⚙️ FIREBASE BACKEND CONFIGURATION</span>
+                <button onclick="toggleConfigModal()" class="bg-gray-300 text-black px-2 border border-white text-xs font-bold">X</button>
+            </div>
+
+            <p class="text-xs mb-3">
+                To enable live cloud backend across different visitors, enter your Firebase web app parameters below. Leave empty to use local storage mode.
+            </p>
+
+            <form onsubmit="saveFirebaseConfig(event)" class="space-y-2 text-xs">
+                <div>
+                    <label class="block font-bold">ApiKey</label>
+                    <input type="text" id="fb-apiKey" class="w-full p-1 border bg-white font-mono">
+                </div>
+                <div>
+                    <label class="block font-bold">AuthDomain</label>
+                    <input type="text" id="fb-authDomain" class="w-full p-1 border bg-white font-mono">
+                </div>
+                <div>
+                    <label class="block font-bold">ProjectId</label>
+                    <input type="text" id="fb-projectId" class="w-full p-1 border bg-white font-mono">
+                </div>
+                <div class="flex justify-end gap-2 pt-3">
+                    <button type="button" onclick="clearFirebaseConfig()" class="bg-red-200 border border-black px-3 py-1 font-bold hover:bg-red-300">
+                        Reset to Local
+                    </button>
+                    <button type="submit" class="bg-green-200 border border-black px-4 py-1 font-bold hover:bg-green-300">
+                        Save Config
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        // Default Mock / Local Data
+        const DEFAULT_ENTRIES = [
+            {
+                id: '1',
+                name: 'CoolSkater_98',
+                location: 'Austin, TX',
+                email: 'sk8er@aol.com',
+                fav: '🎮 Nintendo 64',
+                message: 'Awesome guestbook dude! Your MIDI music background is so rad. Hit me up on ICQ!',
+                timestamp: '11/14/1998, 4:20:00 PM'
+            },
+            {
+                id: '2',
+                name: 'CyberAngel',
+                location: 'Tokyo, Japan',
+                email: 'angel@geocities.com',
+                fav: '👾 Tamagotchi',
+                message: 'Greetings from the Pacific! Loving the neon palette. Signed and bookmarked! ☆*',
+                timestamp: '03/22/1999, 10:15:30 AM'
+            }
+        ];
+
+        let isFirebaseActive = false;
+        let db = null;
+
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', () => {
+            setupEmbedCode();
+            initStorageMode();
+            lucide.createIcons();
+        });
+
+        function setupEmbedCode() {
+            const currentUrl = window.location.href;
+            const iframeCode = `<iframe src="${currentUrl}" width="100%" height="700" frameborder="0" style="border: 2px ridge #c0c0c0;"></iframe>`;
+            document.getElementById('embed-code').value = iframeCode;
+        }
+
+        function copyEmbedCode() {
+            const textarea = document.getElementById('embed-code');
+            textarea.select();
+            document.execCommand('copy');
+            alert('Embed iframe snippet copied to clipboard!');
+        }
+
+        function initStorageMode() {
+            const fbConfig = localStorage.getItem('geocities_fb_config');
+            if (fbConfig) {
+                try {
+                    const config = JSON.parse(fbConfig);
+                    // Initialize Firebase dynamic import script if configuration exists
+                    loadFirebase(config);
+                    return;
+                } catch (e) {
+                    console.error('Invalid saved config', e);
+                }
+            }
+            // Default to Local Storage
+            useLocalStorageMode();
+        }
+
+        function useLocalStorageMode() {
+            isFirebaseActive = false;
+            document.getElementById('storage-mode-indicator').innerText = 'Local Storage (Simulated)';
+            renderEntries(getLocalEntries());
+        }
+
+        function getLocalEntries() {
+            const stored = localStorage.getItem('geocities_entries');
+            if (!stored) {
+                localStorage.setItem('geocities_entries', JSON.stringify(DEFAULT_ENTRIES));
+                return DEFAULT_ENTRIES;
+            }
+            return JSON.parse(stored);
+        }
+
+        function saveLocalEntry(entry) {
+            const entries = getLocalEntries();
+            entries.unshift(entry);
+            localStorage.setItem('geocities_entries', JSON.stringify(entries));
+            renderEntries(entries);
+        }
+
+        // Firebase loader setup
+        function loadFirebase(config) {
+            // Note: External dynamic module loading for custom Firebase config setup
+            import('https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js').then(({ initializeApp }) => {
+                import('https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js').then(({ getFirestore, collection, addDoc, onSnapshot, query }) => {
+                    try {
+                        const app = initializeApp(config);
+                        db = getFirestore(app);
+                        isFirebaseActive = true;
+                        document.getElementById('storage-mode-indicator').innerText = '⚡ Firebase Live Backend';
+                        
+                        // Listen to Firestore real-time snapshot
+                        const q = collection(db, 'guestbook');
+                        onSnapshot(q, (snapshot) => {
+                            const entries = [];
+                            snapshot.forEach((doc) => {
+                                entries.push({ id: doc.id, ...doc.data() });
+                            });
+                            // Sort in client memory
+                            entries.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                            renderEntries(entries);
+                        }, (err) => {
+                            console.error('Firestore Error:', err);
+                            alert('Firebase connection failed. Falling back to local storage.');
+                            useLocalStorageMode();
+                        });
+                    } catch (err) {
+                        alert('Firebase initialization error!');
+                        useLocalStorageMode();
+                    }
+                });
+            });
+        }
+
+        // Form submission handler
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+
+            const name = sanitize(document.getElementById('input-name').value);
+            const location = sanitize(document.getElementById('input-location').value) || 'Cyberspace';
+            const email = sanitize(document.getElementById('input-email').value) || 'N/A';
+            const fav = document.getElementById('input-fav').value;
+            const message = sanitize(document.getElementById('input-message').value);
+            const timestamp = new Date().toLocaleString();
+
+            const newEntry = {
+                name,
+                location,
+                email,
+                fav,
+                message,
+                timestamp
+            };
+
+            if (isFirebaseActive && db) {
+                try {
+                    const { collection, addDoc } = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js');
+                    await addDoc(collection(db, 'guestbook'), newEntry);
+                } catch (err) {
+                    console.error('Failed to post to Firebase:', err);
+                    alert('Could not submit to Firebase. Storing locally instead.');
+                    saveLocalEntry({ id: Date.now().toString(), ...newEntry });
+                }
+            } else {
+                saveLocalEntry({ id: Date.now().toString(), ...newEntry });
+            }
+
+            document.getElementById('guestbook-form').reset();
+            alert('Thank you! Your signature was added to the guestbook!');
+        }
+
+        function sanitize(str) {
+            const temp = document.createElement('div');
+            temp.textContent = str;
+            return temp.innerHTML;
+        }
+
+        // Render functions
+        function renderEntries(entries) {
+            const container = document.getElementById('entries-container');
+            document.getElementById('entry-count-badge').innerText = `${entries.length} Entries`;
+
+            if (entries.length === 0) {
+                container.innerHTML = `
+                    <div class="win95-window p-4 text-center text-black font-sans">
+                        No guestbook entries found yet. Be the first to sign!
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = entries.map(entry => `
+                <div class="win95-window p-3 text-black font-sans">
+                    <div class="win95-titlebar p-1 text-xs flex justify-between items-center mb-2">
+                        <span class="font-bold">Entry ID: #${entry.id.substring(0, 6)}</span>
+                        <span>🗓️ ${entry.timestamp}</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                        <!-- User Card -->
+                        <div class="bg-gray-100 p-2 border border-gray-400 text-center flex flex-col items-center justify-center">
+                            <div class="w-12 h-12 bg-yellow-300 rounded-full border-2 border-black flex items-center justify-center text-xl mb-1 shadow-inner">
+                                👾
+                            </div>
+                            <span class="font-bold text-sm text-blue-900 break-all">${entry.name}</span>
+                            <span class="text-[10px] text-gray-600">📍 ${entry.location}</span>
+                            <span class="text-[10px] bg-purple-200 px-1 mt-1 border border-purple-500 rounded">${entry.fav || '📼 VHS'}</span>
+                        </div>
+
+                        <!-- Message Body -->
+                        <div class="md:col-span-3 flex flex-col justify-between bg-white p-2 border border-gray-400 font-mono text-sm">
+                            <p class="whitespace-pre-wrap break-words">${entry.message}</p>
+                            
+                            <div class="mt-3 pt-2 border-t border-gray-200 flex justify-between items-center text-[11px] text-gray-500">
+                                <span>📧 Mail: <a href="mailto:${entry.email}" class="text-blue-600 underline">${entry.email}</a></span>
+                                <span class="bg-yellow-100 text-yellow-800 px-1 border border-yellow-400 text-[10px]">Verified Webizen</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Modal Handlers
+        function toggleConfigModal() {
+            document.getElementById('config-modal').classList.toggle('hidden');
+        }
+
+        function saveFirebaseConfig(e) {
+            e.preventDefault();
+            const config = {
+                apiKey: document.getElementById('fb-apiKey').value.trim(),
+                authDomain: document.getElementById('fb-authDomain').value.trim(),
+                projectId: document.getElementById('fb-projectId').value.trim()
+            };
+
+            if (!config.apiKey || !config.projectId) {
+                alert('Please provide at least ApiKey and ProjectId!');
+                return;
+            }
+
+            localStorage.setItem('geocities_fb_config', JSON.stringify(config));
+            toggleConfigModal();
+            initStorageMode();
+        }
+
+        function clearFirebaseConfig() {
+            localStorage.removeItem('geocities_fb_config');
+            document.getElementById('fb-apiKey').value = '';
+            document.getElementById('fb-authDomain').value = '';
+            document.getElementById('fb-projectId').value = '';
+            toggleConfigModal();
+            useLocalStorageMode();
+        }
+    </script>
+</body>
+</html>
