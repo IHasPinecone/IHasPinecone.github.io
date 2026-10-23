@@ -2,13 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Guestbook</title>
+    <style>
+        :root {
+            --bg-color: #f8b6ba;
+            --nav-color: #f5ecc2;
+            --heading-color: #fdc57e;
+            --border-color: #b24a3a;
+        }
+        body {
+            background-color: var(--bg-color);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #2b1313;
+            text-align: center;
+        }
+        .guestbook-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--nav-color);
+            border: 4px double var(--border-color);
+            padding: 20px;
+            box-shadow: 4px 4px 0px rgba(178, 74, 58, 0.3);
+        }
+        h1 {
+            background-color: var(--heading-color);
+            color: var(--border-color);
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 26px;
+            margin: 0 0 15px 0;
+            padding: 8px 12px;
+            border: 2px outset #ffffff;
+            letter-spacing: 1px;
+        }
+        p {
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        .iframe-wrapper {
+            background-color: #ffffff;
+            border: 2px inset var(--border-color);
+            padding: 4px;
+        }
+        iframe {
+            display: block;
+            width: 100%;
+            height: 480px;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Website</h1>
-    <p>Thanks for stopping by!</p>
 
-    <!-- UltraGuest guestbook -->
-<iframe src="https://www.ultraguest.com/embed/1772398445" title="Guestbook" width="100%" height="420" style="border:1px solid #ccc;border-radius:6px;max-width:100%" loading="lazy" referrerpolicy="no-referrer"></iframe>
+    <div class="guestbook-container">
+        <h1>Welcome to My Website</h1>
+        <p>Thanks for stopping by!</p>
+
+        <!-- UltraGuest guestbook -->
+        <div class="iframe-wrapper">
+            <iframe src="https://www.ultraguest.com/embed/1772398445" 
+                    title="Guestbook" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer">
+            </iframe>
+        </div>
+    </div>
+
 </body>
 </html>
