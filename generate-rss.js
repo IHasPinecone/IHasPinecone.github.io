@@ -4,9 +4,15 @@ const SITE_URL = "https://ihaspinecone.github.io";
 const SITE_TITLE = "Pinecone Rodeo";
 const SITE_DESCRIPTION = "Is It Possible For a Man to Love Board Games and Jesus Christ?";
 
-const posts = JSON.parse(
-  fs.readFileSync("posts.json", "utf8")
-);
+// Safely read and parse posts.json
+let posts = [];
+try {
+  const rawData = fs.readFileSync("posts.json", "utf8");
+  posts = JSON.parse(rawData);
+} catch (err) {
+  console.error("Error reading or parsing posts.json:", err.message);
+  process.exit(1);
+}
 
 function sanitize(text = "") {
   return String(text)
@@ -19,20 +25,29 @@ function sanitize(text = "") {
 }
 
 function parseDate(dateStr) {
-  const [month, day, year] = dateStr.split("/");
-  return new Date(year, month - 1, day);
+  if (!dateStr) return new Date(0);
+  
+  // Handle "MM/DD/YYYY" format
+  if (dateStr.includes("/")) {
+    const [month, day, year] = dateStr.split("/");
+    const parsed = new Date(year, month - 1, day);
+    return isNaN(parsed) ? new Date(0) : parsed;
+  }
+  
+  // Fallback for ISO strings or other formats
+  const parsed = new Date(dateStr);
+  return isNaN(parsed) ? new Date(0) : parsed;
 }
 
+// Safely sort posts
 posts.sort(
   (a, b) => parseDate(b.datetime) - parseDate(a.datetime)
 );
 
 function extractBodyContent(html = "") {
   const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-
   let content = bodyMatch ? bodyMatch[1] : html;
 
-  // Remove elements that should not be embedded in an RSS reader.
   content = content
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "")
@@ -40,44 +55,53 @@ function extractBodyContent(html = "") {
     .replace(/<header\b[^>]*>[\s\S]*?<\/header>/gi, "")
     .replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/gi, "");
 
-  // Prevent embedded content from closing the RSS CDATA section.
   return content.replace(/]]>/g, "]]]]><![CDATA[>");
 }
 
 function buildNormalItems(feedPosts) {
   return feedPosts.map(post => {
+    if (!post || !post.link) {
+      console.warn("Skipping a post due to missing link property.");
+      return "";
+    }
+
     const cleanLink = post.link.replace(/^\/+/, "");
     const postUrl = `${SITE_URL}/${cleanLink}`;
 
     let htmlContent = "";
-
     try {
-      const fullHtml = fs.readFileSync(cleanLink, "utf8");
-      htmlContent = extractBodyContent(fullHtml);
+      if (fs.existsSync(cleanLink)) {
+        const fullHtml = fs.readFileSync(cleanLink, "utf8");
+        htmlContent = extractBodyContent(fullHtml);
+      } else {
+        console.warn(`File not found on disk: ${cleanLink}`);
+      }
     } catch (err) {
       console.error(`Could not read ${cleanLink}: ${err.message}`);
     }
 
-    const safeTitle = sanitize(post.title)
+    const safeTitle = sanitize(post.title || "Untitled")
       .replace(/]]>/g, "]]]]><![CDATA[>");
 
     const safeSummary = sanitize(post.summary || "")
       .replace(/]]>/g, "]]]]><![CDATA[>");
+
+    const postDate = parseDate(post.datetime);
 
     return `
     <item>
       <title><![CDATA[${safeTitle}]]></title>
       <link>${postUrl}</link>
       <guid>${postUrl}</guid>
-      <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
+      <pubDate>${postDate.toUTCString()}</pubDate>
       <description><![CDATA[${safeSummary}]]></description>
       <content:encoded><![CDATA[${htmlContent}]]></content:encoded>
     </item>`;
-  }).join("\n");
+  }).filter(Boolean).join("\n");
 }
 
 const normalPosts = posts.filter(
-  post => post.topic !== "Podcast"
+  post => post && post.topic !== "Podcast"
 );
 const normalItems = buildNormalItems(normalPosts);
 
@@ -97,5 +121,4 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
 </rss>`;
 
 fs.writeFileSync("rss.xml", rssFeed);
-
-console.log("rss.xml generated");
+console.log("rss.xml generated successfully");
