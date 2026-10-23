@@ -10,6 +10,538 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
 
     
     <item>
+      <title><![CDATA[Guestbook is Live]]></title>
+      <link>https://ihaspinecone.github.io/guestbook.html</link>
+      <guid>https://ihaspinecone.github.io/guestbook.html</guid>
+      <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[After looking at a ton of hosting services I decided to just use the one my brother used. Go figure.]]></description>
+      <content:encoded><![CDATA[
+    <p>Redirecting to the guestbook...</p>
+    <p>If you are not redirected automatically, <a href="https://www.ultraguest.com/view/pinecone-rodeo" style="color: #b24a3a; font-weight: bold;">click here</a>.</p>
+]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[Józef Chełmoński]]></title>
+      <link>https://ihaspinecone.github.io/art-dump/1.html</link>
+      <guid>https://ihaspinecone.github.io/art-dump/1.html</guid>
+      <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[While browsing public domain art for another project, I was moved by the art of Józef Chełmoński.]]></description>
+      <content:encoded><![CDATA[
+  <h1>Józef Chełmoński</h1>
+  <p class="gallery-description">
+    While looking at pieces for <a href="../faith/star-in-the-east.html">another post</a> I couldn't stop browsing art from Józef Chełmoński. While I didn't use any of the pieces I found, I still wanted a place to leave them for other people to see.<br>
+          This is not a summary of "Chełmoński's Best Works" or "Most Influential Works", this is just what personally connected with me. I'm sure there's some very notable works I'm ommiting and some suspect stuff I'm including, that's not what this list is for.
+  </p>
+  <div class="audio-note">
+    <p>For the record, I do kinda (almost) know how to pronounce his name.<br>In Polish "ch" is prnounced "heh" and the ł is like a "W".<br>This isn't perfect but it's my best approximation.</p>
+    <audio controls preload="none">
+        <source src="1/jozef-chelmonski.wav" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+  </div>
+  <div class="gallery">
+
+          <div class="art-piece">
+                <img src="1/krzyz-w-zadymce.jpg" alt="Cross in the Snow">
+                <p class="credit">Cross in a blizzard, 1907, oil on canvas.</p>
+                <p class="caption">
+                    This piece—wow. This was the first one I saw and it's what set me down this rabbit-hole. I actually wanted want to rewrite the <a href="../faith/star-in-the-east.html">crucifixion scene</a> to be more cold and lonely, but I'm glad I didn't. I don't think this painting is about Christ, when I see this I think of the simple rural faith in Eastern Europe. This is about the people.<br>Chełmoński's Wikipedia calls him a "realist" painter; yeah that's what stands out to me. This painting is so real.
+                </p>
+          </div>
+          <hr>
+          
+          <div class="art-piece">
+                <img src="1/return-from-a-ball-sleigh-ride-1879.jpg" alt="Return From a Ball Sleigh Ride">
+                <p class="credit">Return from a ball (Sleigh ride). 1879. oil on canvas. 80 × 160 cm (31.4 × 62.9 in). Katowice, Silesian Museum</p>
+                <p class="caption">
+                    Most of Chełmoński's work is people riding horses. I wonder if the reason he painted so many is because they were easy to sell; I imagine rich people like frothing horses and hunting dogs.<br>There are a few of these that stood out to me though. I love the soft face of the daughter in the back of the sleigh. This is such a "Christmas" image to me.<br>(Click on the image to make it bigger)
+                </p>
+          </div>
+          <div class="art-piece">
+                <img src="1/Józef_Chełmoński_Jarmark_na_kresach_1883.jpg" alt="Merchants Relaxing">
+                <p class="credit">At the Market, 1883, oil on canvas  57 × 92.5 cm, National Museum in Warsaw (MNW)</p>
+                <p class="caption">
+                    My friend tells me these are probably merchants relaxing and drinking tea. I love little details like the boy's red tunic and how the man is so hunched over driving the horses.
+                </p>
+          </div>
+          <div class="art-piece">
+                <img src="1/j-zef-che-mo-ski-babie-lato.jpg" alt="Indian Summer">
+                <p class="credit">Indian summer. 1875. oil on canvas. 119.7 × 156.5 cm (47.1 × 61.6 in). Warsaw, National Museum in Warsaw (MNW).</p>
+                <p class="caption">
+                    What do you think she is thinking?
+                </p>
+          </div>
+          <div class="art-piece">
+                <img src="1/kozacy.png" alt="Cossacks">
+                <p class="credit">Cossacks in march. 1881. oil on canvas. 70 × 175 cm (27.5 × 68.8 in). Warsaw, National Museum in Warsaw (MNW).</p>
+                <p class="caption">
+                    Eastern Europe loves the Cossacks. Historically they were a civilian militia; defending the people when their government didn't. Today they are beloved both because they were extremely successfull (the Turks were so scared of them), and they've since become a symbol of freedom.
+                </p>
+          </div>
+          <div class="art-piece">
+                <img src="1/Józef_Chełmoński_-_At_the_entrance_to_a_tavern_-_MP_1050_-_National_Museum_in_Warsaw.jpg" alt="Before the Inn">
+                <p class="credit">Before the inn. 1877. oil on canvas. 71 × 174.5 cm (27.9 × 68.7 in). Warsaw, National Museum in Warsaw (MNW).</p>
+          </div>
+          <hr>
+
+          
+          <div class="art-piece">
+                <img src="1/moonlight-1877.jpg" alt="Sleigh in Moonlight">
+                <p class="credit">Moonlit night. 1877. oil on canvas. 76.5 × 145 cm (30.1 × 57 in). Private collection.</p>
+                <p class="caption">
+                    According to wikipedia, toward the end of his life Chełmoński painted people less and less, and nature more and more.<br>The lighting on this one is just beautiful, that moonlight is just the perfect shade.<br>This makes me fantasize about being a hunter with his dogs on the snow These pieces remind me that this was how these people lived. The sleighs riding into untouched snow evoke not forntiersman per say, but certainly people who lived on the edge of a harsh wilderness.
+                </p>
+          </div>
+          <div class="art-piece">
+                <img src="1/night-in-ukraine-1877.jpg" alt="Night in Ukraine">
+                <p class="credit">Night in the Ukraine. 1877. oil on canvas. 69 × 129 cm (27.1 × 50.7 in). Warsaw, National Museum in Warsaw (MNW).</p>
+          </div>
+          <hr>
+
+          
+          <div class="art-piece">
+                <img src="1/polna-droga.png" alt="Meadow">
+                <p class="credit">Path Through a Field. 1889. oil on canvas. 55 x 45.5 cm. National Museum in Warsaw (MNW)</p>
+                <p class="caption">
+                    Now we are getting to the truly great stuff. As Jozef got older this is more and more what he chose to make; simple nature with no exciting horses or people in sight; just wild flowers and grass. As he got older he could've done whatever he wanted, but this is what captivated him. He seems to love the nature he saw daily.<br>The distant trees actually remind me of grain silos and barns from my hometown.
+                </p>
+          </div>
+          <div class="art-piece">
+                <img src="1/odlot-zurawi-1870.jpg" alt="Cranes Taking Off in the Mist">
+                <p class="credit">Cranes, 1870, oil on canvas, National Museum in Kraków.</p>
+                <p class="caption">
+                    This is my absolute favorite. The fog in the morning, the silhouetted cranes, the dots of red flowers; it moves something in me. This reminds me of waking up early at a quiet lakefront cottage and sitting on the porch drinking coffee with no one else around.
+                </p>
+          </div>
+          <div class="art-piece">
+                <img src="1/jozef-partridges-in-the-snow.jpg" alt="Partridges in the Snow">
+                <p class="credit">Partridges in the snow, 1891, oil on canvas, National Museum in Warsaw (MNW).</p>
+          </div>
+          <div class="art-piece">
+                <img src="1/p2971141162097.jpg" alt="Orange Sky Cranes Taking Off">
+                <p class="credit">Taking-off Cranes, 1871, oil on canvas, Private collection.</p>
+          </div>
+          <div class="art-piece">
+                <img src="1/wisz-ce-kaczki-hanging-ducks.png" alt="Hanging Ducks">
+                <p class="credit">Hanging Ducks, 1879, oil on canvas, 49.5 cm x 39.5 cm, National Museum in Krakow (NMK)</p>
+          </div>
+          <div class="art-piece">
+                <img src="1/dawn-the-kingdom-of-birds-1906.jpg" alt="Dawn—The Kingdom of Birds">
+                <p class="credit">Dawn. Kingdom of birds, 1906, Private collection.</p>
+          </div>
+          <hr>
+</div>
+
+<div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+        <p>
+            <a href="../index.html">
+                <img class="centerimage" src="..\bg\RWAssets\back.gif"/>
+            </a>
+        </p>
+
+  
+]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[Wait, You Play Gloomhaven Competitively?]]></title>
+      <link>https://ihaspinecone.github.io/bg/gloomhaven.html</link>
+      <guid>https://ihaspinecone.github.io/bg/gloomhaven.html</guid>
+      <pubDate>Fri, 16 Oct 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Like, I thought the game was co-op. What?]]></description>
+      <content:encoded><![CDATA[
+        <div class="content">
+            <h1 class="center text">Wait, You Play Gloomhaven Competitively?</h1>
+            <p class="center text">(15 min. read)</p>
+
+        <div class="style-toggle-wrapper">
+            <button id="styleToggle">
+                Accessibility Toggle
+            </button>
+        </div>
+
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/bandits-few2.jpg" alt="gloomhaven bandits">
+                </a>
+                <figcaption class="caption">
+                Shoutout to Starfire for taking pictures with his nicely painted Gloomhaven set.
+                </figcaption>
+            </div>
+        </figure>
+
+        <p class="lefttext">
+            A few months ago I was at home, restless and just itching for an argument. Maybe the urge to fight came from too many boring days at work or some deep desire to go to war. Either way my prayer was answered when I saw two friends of mine playing Gloomhaven in a Discord call. Gloomhaven–perfect! Not only do I have issues with that game, it’s also an incredibly popular game so by ripping it apart I can maintain my contrarian status! So, like a hero, I joined the Discord call to hijack the conversation.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/box2.jpg" alt="gloomhaven box">
+                </a>
+                <figcaption class="caption">
+                A game box big enough to flatten most fruits.
+            </figcaption>
+            </div>
+        </figure>
+        <p>
+            For the record, Gloomhaven's combat system is great, I have no notes there. I just do not like other parts of the design. One of these friends in the discord call however, has Gloomhaven as his absolute #1 favorite game of all time, so him disagreeing with me I guess shouldn't have been a surprise. What was a surprise though was learning he played the game totally different from me. I’d go as far to say each of our groups play so differently it'd be near impossible for players to go from one group to the other.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/stars-cards.jpg" alt="gloomhaven cards starfire designed">
+                </a>
+                <figcaption class="caption">
+                This friend likes the game so much he helped design these cards. And we are proud of him for it.
+            </figcaption>
+            </div>
+        </figure>
+        <p>
+            For context, Gloomhaven isn’t a very complicated game conceptually. "How do you play?" shouldn't be a hard question to answer. It's a very straight forward skirmish game where you play as Dungeons & Dragons-like heroes. You do your little fights, read a paragraph of text, then move onto the next fight; rinse and repeat. One fight is against some slimes in a cave, you read that the cave leads to the wizard who made the slimes, the next fight is against the wizard. You get it.
+        </p>
+        <p>
+            The game is just players working together to kill things. The game does add one tiny hiccup to this formula: any XP you gain and any treasure you grab is yours to keep; rewards are not split evenly among the party. This means everyone wants to win the conflict, but every player wants to maximize their personal rewards as much as possible. You’re on the same team, but you aren't working together 100% of the time.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/provoke-terror.jpg" alt="gloomhaven provoke terror">
+                </a>
+                <figcaption class="caption">
+                Here’s a litmus test for whether a game is about combat vs roleplay: does the ability “Provoke Terror” deal damage?
+            </figcaption>
+            </div>
+        </figure>
+        <p>
+            The reason players will work against the group interest for XP is simple: leveling up is fun. Who doesn't love picking out a new upgrade or optimizing a build? Who doesn't love getting more powerful? Dopamine from getting stronger powers like 80% of AAA video games for a reason; people love it. It really gets the people going when they learn they now deal +2 more damage while flanking. But there’s actually an even bigger hook in Gloomahven that tempts you to betray your friends: when your character reaches max level you unlock an new character no one else can use. My friend noted people in his group often put the fight in mild jeopardy of losing just so they can get extra XP, because they wanted to unlock their new toy. The siren song of new content lures players into acting selfishly.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/upgrads.jpg" alt="gloomhaven upgrade sheets">
+                </a>
+                <figcaption class="caption">
+                This is a game for nerds because filling out paperwork is the most fun part.
+            </figcaption>
+            </div>
+        </figure>
+        <p>
+            Apparently that’s how the game is supposed to work, and not at all how my group plays. This is where the divide between the two groups comes from. My group would never fight each other for gold/XP. Instead we always work together to distribute gold/XP to the people that can use it best. If one person needs mobility, we coordinate the fight to make sure they get the Charged Boots. If someone is about to unlock a powerful ability, we help them get XP. It’s not uncommon for one player to end up with no gold/XP at all because they were helping others the whole time. We play the game entirely cooperatively, ignoring the competitive elements my friend's group loves.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/charged-boots2.jpg" alt="gloomhaven charged boots">
+                </a>
+                <figcaption class="caption">
+                What fit are you wearing these with?
+            </figcaption>
+            </div>
+        </figure>
+        <p>
+            When we were playing fullly cooperatively one particular rule often felt really lame and out of place: players can't trade items with each other. We recognize this rule exists for balance reasons, but it felt really weird narratively that we'd jump in front of canons and get stabbed protecting each other, but would never give our ally an extra piece of leather to mak some boots. I'm willing to admit maybe this <i>ludo-narrative dissonance</i> should've been a canary's call that we were playing the game different from the designer's intent, but it never really crossed our minds that this game was supposed to be competative in any way.
+        </p>
+
+        <h2 class="center text">Different Incentives</h2>
+        
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/skeletons.jpg" alt="gloomhaven skeleton encounter">
+                </a>
+            </div>
+        </figure>
+        <p>
+            Two groups read the exact same rulebook, and played completely differently: why? One group is motivated by winning the scenario at all costs, while the other group wants to get more powerful and unlock new content, and neither group actually misread any rules. Technically, in the eye of the law, no rules were ever broken. Both groups followed the letter of the law, but had different interpretations on the spirit of the law. The rules in this game are almost like a Magic Eye Picture; every group sees a different set of incentives when they look at it.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/magic-eye.webp" alt="magic eye picture">
+                </a>
+                <figcaption class="caption">
+                I see a game about fighting monsters.
+            </figcaption>
+            </div>
+        </figure>
+        <p>
+            This is a big deal. If players can read identical rules, but produce different incentives from it, the game itself could become degenerate. Consider two basketball teams disagreeing on incentives: one team is playing normally, while the other wants to rack up points without playing defense at all. These two teams could technically play a game of basketball together, but it wouldn't be a satisfying game. The all-offense team would likely get upset with the normal team for burning clock through passing instead of just shooting immediately. You could imagine them saying "they aren't playing the game correctly, you're ruining it for us by wasting all this time." Players agreeing on incentives is probably the single most important thing in any game.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/endless-envelopes.jpg" alt="gloomhaven encounter envelopes">
+                </a>
+                <figcaption class="caption">
+                Did I mention how many scenarios there are in this game? This game is insanely long
+            </figcaption>
+            </div>
+        </figure>
+        <p>
+            I imagine some folk reading this are very confused. “The goal of Gloomhaven is to win; both of the groups agree on that, so what’s the problem?” Well, no. Of course the goal of the game is to win, but it’s reductive to say that’s why people play. Why do you pull Gloomhaven off the shelf instead of Catan? There’s some motivation here besides winning. You might be playing because you like getting stronger, or you want to unlock all the hidden content in the box. Or maybe you're just a euro-gamer and want to make a bunch of combos.
+        </p>
+         <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/skull.jpg" alt="gloomhaven skull of hatred">
+                </a>
+                <figcaption class="caption">
+                There is no skull of kindness in the game which is probably some indication of prejudice against skulls.
+            </figcaption>
+            </div>
+        </figure>
+        <p>
+            Those are all valid reasons to enjoy a game beyond winning. My friend's group just made their calculus of what they enjoyed differently. They wanted to build combos and unlock new characters, meanwhile my group's primary motivation is to win a difficult scenario. The best moment at our game nights is that hopeless moment of “oh no we are going to lose”, then some clever play reverses the situation and we win anyway. I personally would take winning a difficult fight over a new character any day of the week. However, there was one other massive incentive that was tipping the scales for my group.
+        </p>
+
+        <h2 class="center text">Fear of Losing</h2>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/slimes.jpg" alt="gloomhaven slime encounter">
+                </a>
+                <figcaption class="caption">
+                Gloomhaven old-heads know how stupid hard the original slime encounter was.
+            </figcaption>
+            </div>
+        </figure>
+        <p>
+            My group played on a much higher difficulty than my friend's group did. So when my friend's group put the scenario in mild jeopardy to get some treasure, the odds of them actually losing are still pretty low. Meanwhile my group has losing as a possibility almost constantly. And here's the thing with difficulty in Gloomhaven: by far the absolute most unfun thing that can happen to you in Gloomhaven is to lose a fight. It’s not like you are heavily punished for losing, it’s actually much worse: the game doesn’t do anything if you lose a fight. The game just resets everything to before the fight started and asks you to try again: after you just did that fight for 2 hours.
+        </p>
+        <p>
+            Variety is the spice of life in these scenario-based games. Redoing the same fight you just did when there's literally 40 untouched challenges waiting in the box feels awful. Ending a night on a loss makes redoing it next week feel like such a waste of time. Often redoing a fight doesnt even require a large change in tactics. Maybe instead of focusing the minions you now focus the boss. Once you realize the optimal strategy, actually executing can feel tedious and annoying.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/moon-earring.jpg" alt="gloomhaven moon earring">
+                </a>
+                <figcaption class="caption">The Glooomhaven cast must have their ears pierced since they can equip this item. Cephalofair hasn't reponded to my email about circumcision.</figcaption>
+            </div>
+        </figure>
+
+        <p>
+            My group wants the threat of failure, but we super hate it when it actually happens. And we would certainly dislike someone who caused us to lose because they were being greedy and going for treasure. This where the culture clash I mentioned earlier would come from if people tried to move groups. If someone from my friend's group showed up we'd consider them a jerk and not want to play with them anymore. Players in my group might even secretly love unlocking new characters, but would never prioritize it because of how bitter losing is.
+        </p>
+
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/sabaton.jpg" alt="gloomhaven sabaton like the band">
+                </a>
+                <figcaption class="caption">
+                Oh, like the band
+            </figcaption>
+            </div>
+        </figure>
+        
+        <h2 class="center text">Aside about "Pretending you Won"</h2>
+        <p>
+            Losing feels so bad many groups just skip a scenario once they have failed it instead of retrying. That’s a valid way of playing I guess, but it doesn't take a genius to see why it’s unsatisfying. At the end of the day, sure, Gloomhaven is just a string of fights. Who cares if you skip one. But actually trying to skip a fight when the narrative doesn't call for it is acknowledging the story's tacked-on nature in a way that's a little gauche: yeah sure we all know that, but you shouldn’t just come out and say it. More importantly, the game doesn't <i>need</i> to work this way. There are ways to design around this problem.
+        </p>
+        <p>
+            For one, this game could've just told its story in a different way. One option is just what Warhammer does and make the universe so big that everything is canon. There's probably a place somewhere that the Tyranids fought the Space Marines on an ice world, sure. This frames each individual combat as a vignette of a much larger story, a single sentence in a novel. The actual outcome won't affect the larger story, but this moment still feels important to these people here. Imagine if Gloomhaven was actually the story of a hundred heroes defending the world against a zombie apocalypse, each battle telling the story of the few souls trapped here. People <i>love</i> warhammer lore so clearly this giant scale storytelling can work. That's not the only solution though. The story could've accomodate wins/losses organically, like the videogame Pyre did so well. In Pyre the combats are not battles-to-the-death, but something closer to sport; winning and losing doesn't mean the characters die, it means lost credibility or money or whatever resource is being fought over. Maybe after losing a fight the players don't have enough money to pay for Tiny Tim's surgury so he will spend the rest of his days limping. The story will still continue on with a crippled Tiny Tim, but it's actual impact on the larger arc is minimal. Losing the fight had more of a flavorful impact that a strict mechanical one. This way the player's actions clearly have consequences, but it doesn't require forking the story multiple times to create.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/Pyre.png" alt="pyre promotional image">
+                </a>
+                <figcaption class="caption">
+                Same studio that made Hades btw. Remember when they said "we don't didn’t make sequels”?<br>lol. lmao.
+                </figcaption>
+            </div>
+        </figure>
+        <p>
+            A more straightforward fix without rewritting the story would be a system that tracks wins/losses. Imagine if every loss added a "Doom" to the town, triggering a special scenario once players hit 5/10/15 doom. If players win the doom scenario, the damage is undone. But if the players fail a doom scenario they unlock a unique ending, and if they succeed the doom scenario it's as if nothing happened. You could even add a rule where if players fail a scenario they actually have a choice between adding a doom or retrying the scenario. Players who just want to move on can have narrative consequences for their failure, and players who don't mind retrying can go for their "perfect" run. Ultimately, my point is “pretend you won” is a bad solution to a fixable problem.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/gh-062-doom-powder.jpeg" alt="gloomhaven doom powder">
+                </a>
+                <figcaption class="caption">
+                This is basically <a href="https://youtu.be/AO4lIIFQ6RY" color:inherit>pocket sand</a>.
+            </figcaption>
+            </div>
+        </figure>
+        <h2 class="center text">Tinkering with Incentives</h2>
+        <p>
+            People approach games trying to win, but are usually chasing some other desire (build combos, face a hard challenge, unlock content). What you want out of an expereince shapes the way you play. I've detailed how my group came to our "afraid of losing" playstyle, but consider a hypothetical: if Gloomhaven had the Doom system I just described, would my table change our behavior? Personally, I think some of us would shift into more greedy progression-focused gamers. I think with only a slight shift in the rules, our incentives would change.
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="gloomhaven/matrix.jpg" alt="gloomhaven temporal matrix">
+                </a>
+                <figcaption class="caption">
+                When I saw the art I thought this item would be the craziest thing ever. I bet its like a giant bomb! Turns out it's high-medium good.
+            </figcaption>
+            </div>
+        </figure>
+        <p>
+            Ultimately, things get muddled in Gloomhaven because it throws mutliple reasons to play in front of its players. More straightforward games don't have this problem; no one plays Pandemic to build combos or unlock new content. Even in Pandemic Legacy new content is not locked to one player like it is in Gloomhaven. Pandemic Legacy doesn't have that much personal advancemnt, combos, etc. The only reason to play Pansemic is to work together to beat the challenge, there's nothing else there, so incentives are not muddled.
+        </p>
+        <p>
+            All of this got my brain turning. If Gloomhaven did this on accident, could I do it on purpose? Could I create a game that, by design, had unclear incentives? It could behave as a weird ludic-Rorschach test. I could make a set of weird win conditions, and depending on which one the players choose, it would say something about what they value as players; the way you play the game is a mirror into your own brain. And wouldn’t it be really funny if this extremely weird avant-garde game was a rules variant for Wingspan?
+        </p>
+        <p>
+            <!-- <a href="summon-the-stars.html">(click here to learn about Summon the Star: A Coop Variant for Wingspan)</a> -->
+            (Summon The Stars rules coming soon)
+        </p>
+        <figure class="centerbox">
+            <div class="image-row">
+                <a>
+                    <img class="centerimage" src="sts/sts-cover-image.jpg" alt="Summon The Stars: A Coop Varient for Wingspan by Elizabeth Hargrave">
+                </a>
+                <figcaption class="caption">
+                Summon the Star: A Coop Variant for Wingspan by Elizabeth Hargrave
+            </figcaption>
+            </div>
+        </figure>
+        </div>
+        <p>
+            <a href="../index.html">
+                <img class="centerimage" src="RWAssets\back.gif"/>
+            </a>
+        </p>
+
+        
+    ]]></content:encoded>
+    </item>
+
+    <item>
+      <title><![CDATA[Tell the Prince There is a Star in the East]]></title>
+      <link>https://ihaspinecone.github.io/faith/star-in-the-east.html</link>
+      <guid>https://ihaspinecone.github.io/faith/star-in-the-east.html</guid>
+      <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[In the great deep sky the stars spin, and down to earth the brightest star in the sky bows low. Content Warning: Gore, Violence Against Children, Isolation]]></description>
+      <content:encoded><![CDATA[
+        <hr class="superspace"/>
+
+        <h1 class="centertext">
+            Tell The Prince There is a Star in the East
+        </h1>
+        <p class="centertext">
+            (10 min. read)
+        </p>
+        <figure>
+            <img class="centerimage" src="star/vedder-star-of-bethlehem.jpg">
+            <figcaption class="caption">
+                Elihu Vedder (American, 1836–1923), Star of Bethlehem, 1879–80<br>Milwaukee Art Museum, Gift of Mrs. Montgomery Sears, M1925.2. 
+            </figcaption>
+        </figure>
+        <p class="lefttext">
+            In the great deep sky the stars spin, and down to earth the brightest star in the sky bows low.
+        </p>
+      <p>
+        Below the bowing star there is a child. At his laugh the universe springs to attention; the winds fly forward, the earth stands still, the cows lift their heads and the lamb turns its ear, and above them the brightest star in the sky bows down. Here, here is the greatest thing to ever happen. The word that spoke the wild into life is making his first coos This child’s voice can rend rocks in two. With a chuckle he could raise a mountain or rip apart the sky. By lifting a finger he could shatter the sun, scattering bright light across the galaxy, ripping a crevice into space and time that shouts an inescapable void absorbing and snuffing out all the matter sucked into its pull; earth mars, jupiter, saturn, mercury, venus, neptune all becoming less than a thought in the wake of the annihilating force as all humanity was and is has entered the abyss of non-existence. Aww look, the child just stuck out his tongue.
+      </p>
+
+      <p>
+        Men who watch the stars have journeyed here. They saw the brightest star in the sky bow down and are here to see the cause. They do not know the great power that sits in his mother’s lap pointing at the donkey. Oh that donkey does have a funny face! Yeah he does! Aw, yeah he does!
+      </p>
+
+      <p>
+        The men who watch the stars have brought gifts. They are unloading them from their wagon and giving them to the child… Why? Why would the voice from the heavens need all this metal? He called the first man Adam from the dust, what would he possibly do with some gold. Do they think they can appease him? All these hunks of rock might as well be straw, at least with straw he could rest his head. This child’s destiny is more than earthly kingship. He is not to be some petty king collecting taxes. This child is here for such a grand purpose that has no need of gold or whatever earthly wisdom these men think they can provide.
+      </p>
+
+      <p>
+        The slightly misguiding men who watch the stars have also brought frankincense and myrrh. Now we are getting somewhere. These gifts are still less than straw to the child, but he loves these men so they mean much more to him. These are gifts of love and devotion. They are following the example of the bowing star, there is nothing this child needs they can provide, but this is the greatest thing for them to do. They are giving the gift of their love to the incarnate deity. Oh Mary, he drooled on you, let me get you another towel.
+      </p>
+
+      <p>
+        After a time the men who watch the stars leave. The child sends an angel to guide them home safely. The stable is no more perfect by their absence than their prescience. The greatest thing has happened here, the child has made this place perfect. The stars spin above, the moon travels along its course, the brightest star in the sky bows low.
+      </p>
+
+      <p>
+        The child’s earthly father is nervous. There is much in this world who can’t stand to be in the presence of this child. Both the evil prince below and the princes of the earthly world see the end of their kingdoms in this child. How dare this baby be born on their soil!? They took this land with deception, war, and bloodshed. This earth BELONGS to them. If they don’t act now this child will ravage all they’ve tried to build here. Every tower and fortress they laid, every army they’ve raised could at any moment be crushed by the hand currently grasping for his mother’s breast. Awww, he is hungry. The princes shake in anger.
+      </p>
+
+      <p>
+        The princes must do something. Quick! Summon the legions, call the generals. They must kill this baby before it is too late. Go! Go! Go out! Take any child you can find and kill it! Slaughter and butcher every baby in the world! The princes know this is desperation, they know they have lost. They know it will not work. One of the lieutenants asks the dark prince why they fight when they know they’ve lost. The prince wheels on the lieutenant and tackles him to the ground. The prince pounds and smashes the lieutenant, smashing his nose into his face and gouging his eyes. It is not all lost. This prince will eventually get his satisfaction. He has been promised a chance to rip his baby limb from limb just as he assaults his lieutenant now. Humanity has been ransomed. The king has promised to give the child to him in exchange for humanity. The prince can’t wait to kill the child.
+      </p>
+
+      <p>
+        One day he will be able to put his fingers around the child’s throat and crush. He will smash his head against the ground. He will kick and stomp on his body, relishing every second. He will whip the boy, tearing flesh from bone with his cat-of-nine-tails. He will mock and throw a robe on him. Hah! He is the king after all he should have a robe! The robe will bind to his skin so when he falls the robe will move and rips the wounds open anew. He will weave a crown of barbs  and shove it onto his head. Blood from the world’s creator will burst and flow down his face. The prince will force the baby to carry a log through the streets, and the humans he loves so much will join in in taunting him. They will spit insults and hurl stones at him. They will ridicule and demean. To the prince it will be sweeter than wine.
+      </p>
+
+      <p>
+        Finally, the prince will take a hammer and pound iron into the child’s arms. He will smash metal into his legs, but not break the legs. He will not break the legs so the next part can be as long as possible. The prince will raise this child up on a cross, lifting him high for all to see. The world will stand and gaze at this humiliated near-corpse. To breath the child will have to pull himself up by his shattered hands and feet to ease pressure from his lungs. The same breath that spoke the world into existence will come at awful pain as he needs to use his nailed arms and legs to lift his chest up. Every moment will be agony for this child as he slowly dies and runs more and more out of strength. 
+      </p>
+
+      <p>
+        Much time will pass then, the child pulls his body up, barely draws a breath, and relaxes down, blood flowing down his arms and the wood of his cross. The child’s mother will be there, watching it happen the whole time. She will weep as her child’s life comes to an end. Every agonizing breath he takes will be like a sword driven through her heart.
+      </p>
+
+      <p>
+        Eventually the mocking crowds will grow bored and leave. The only ones left are a small fraction of his followers that stay. Most of his followers will move on, as if the years they spent with him never happened. Now it’s just the child and a small dwindling handful of people watching him die. Some of the followers will take a spring of hyssop soaked in bitter wine to give it to the savior for his final drink on earth. As he sucks the wine out of his chapped lips he will say his final words: “It is finished”. After that, the breath that created the world will cease.
+      </p>
+
+      <p>
+        Then the world will go dark. For the first time, the light that bowed low at his birth will disappear from the sky. The object of the light’s devotion is gone, he has gone to his heavenly father, he is not here. There is no need for the light here anymore.
+      </p>
+
+      <p>
+        Weeks later, some of those who loved the child will gather with his mother. They mourn his death and remember the way he laughed, the way he spoke. As they sit and remember they hear a strong driving wind in this crowded room and a great roaring sound; something new is happening here. The Son has returned to his Father so he can send gifts down from above. A flame bursts above the child’s mother and all his disciples. The star that bowed down to worship the child is now resting upon each of those who loved him. The flame transforms and kindles a new life in the humans that has never been seen before. Something new is happening here, the greatest thing is happening here; humans bear the sign of divinity. Humans hold the very essence of God inside themselves.
+      </p>
+
+      <p>
+        The prince screams in hatred. So soon after his victory of killing the child, the victory is robbed by something greater than the prince ever thought possible. As he realizes what has happened his armies are instantly driven back by the force now wielded by the humans. The dark prince cannot stand against them and is driven to his innermost fortress. The hosts of heaven are storming his gates, smashing and destroying every tower and fortress he built, routing every army he raised. The iron gates he built melt like wax before their power, releasing captives and restoring light to the world.
+      </p>
+
+      <p>
+        After centuries of war he is left with nothing. His castles plundered, his kingdom in ruin. He looks up from his shattered throne and sees the mother of the child looking down at him. What? What is she doing here? She and her child have already destroyed everything. Why does she still need to come here?
+      </p>
+
+      <p>
+        The mother extends a hand and in it is a glowing ball of light, a light brighter than the prince has seen in a long time, but a light he still recognizes. That is the light that proclaimed the child’s birth, the light he was supposed to carry, the light that was given to humanity. The child’s mother is offering him the chance to come back, to come back to the fold of God. He could once again be God’s Lucifer…
+      </p>
+
+        <figure>
+            <img class="centerimage" src="star/Edward_Burne-Jones_Star_of_Bethlehem.jpg">
+            <figcaption class="caption">
+                Edward Burne-Jones (English, 1833–1889), The Star of Bethlehem, (c.1885–1890)<br>Birmingham Museum & Art Gallery, Birmingham
+            </figcaption>
+        </figure>
+      <p>
+        “NO!” Rage boils inside him. The enemy thinks him weak! He will never go back. After all that has happened he could never allow himself to return. The prince shouts and insults the woman. She is the most despicable woman that has been born of men. She believes she is perfect but is the worst of them all. “NO!” MAY ALL OF HEAVEN WITHER AND ROT! MAY ALL THE HOSTS DEPART AND LEAVE ME ALONE!”
+      </p>
+      <p>
+        The woman’s face turns to sadness, almost as if she is upset?
+      </p>
+      <p>
+        “THE ARROGANCE! GO AWAY!”
+      </p>
+      <p>
+        The woman slowly turns to go, leaving the prince alone in the prison he created. The Prince could not stand to be God and so he never will. The mother of the child mounts her throne in Heaven beside her son. Around them angels and saints roar their praise to God. Blessed are you Lord of Heaven and Earth. Blessed be your firmament. Blessed be your throne. Blessed be the race you won with your own blood.
+      </p>
+      <figure>
+            <img class="centerimage" src="star/Fra_Angelico_—_Coronation_of_the_Virgin.jpg">
+            <figcaption class="caption">
+                	Fra Angelico (Italian, 1395–1455), Coronation of the Virgin, 1879–80<br>Uffizi Gallery, Florence.
+            </figcaption>
+        </figure>
+
+      <!-- <p>
+        <a href="star/star-in-the-east-artdump.html">(for art I like but did not use click here)</a>
+      </p>-->
+
+        <p>
+            <a href="../index.html">
+                <img class="backbtn" src="..\bg\RWAssets\back.gif"/>
+            </a>
+        </p>
+
+    ]]></content:encoded>
+    </item>
+
+    <item>
       <title><![CDATA[RSS Feed is Live]]></title>
       <link>https://ihaspinecone.github.io/m/rss.html</link>
       <guid>https://ihaspinecone.github.io/m/rss.html</guid>
@@ -66,6 +598,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
     <img class="centerimage" src="bg\RWAssets\back.gif"/>
   </a>
 </div>
+
 
 
 
@@ -414,7 +947,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
             I really like Container, and despite it being out of print for a long time, it is currently in print. It makes me so happy that this game is on store shelves again. It’s one of the best games I’ve ever played and certainly my favorite trading game, alongside Tokyo Tsukigi Market. I highly recommend.
         </p>
         <figure class="centerbox">
-            <img class="centerimage" src="../faith/tax/burn barrel sky.webp">
+            <img class="centerimage" src="container/fish-market.avif" alt="Fish Market Image">
             <figcaption class="caption">
                 
             </figcaption>
@@ -656,15 +1189,13 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
 
 <div class="controls">
   <select id="sortMode" onchange="changeSortMode()">
-    <option value="genre">Sort by Shelf</option>
     <option value="reviewed">Sort by Date Reviewed</option>
+    <option value="genre">Sort by Shelf</option>
     <option value="read">Sort by Date Read</option>
   </select>
 </div>
 
-<div class="bookshelf" id ="bookshelf"></div>
-
-  
+<div class="bookshelf" id ="bookshelf"></div>  
 
 <div class="controls">
   <a href="index.html">
@@ -981,7 +1512,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
             </button>
         </div>
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/SteveJobs.jpg">
+            <img class="centerimage" src="PaxTranshumanity/SteveJobs.jpg" alt="Steve Jobs Keynote Address">
             <figcaption class="centertext">
                 <i>
                     Image Credit: Tom Coates
@@ -1009,7 +1540,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </p>
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/PTClose.jpg">
+            <img class="centerimage" src="PaxTranshumanity/PTClose.jpg" alt="Pax Transhumanity Box is really small">
             <figcaption class="centertext">
                 <i>
                     The Game of the Century
@@ -1045,7 +1576,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         <hr class="superspace">
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/withmug.jpg">
+            <img class="centerimage" src="PaxTranshumanity/withmug.jpg" alt="Pax Transhumanity Box at coffee shop">
             <figcaption class="centertext">
                 <i>
                     I hate cuboid game boxes. Impossible to fit neatly on a shelf.
@@ -1067,7 +1598,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </h2>
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/robot.jpg">
+            <img class="centerimage" src="PaxTranshumanity/robot.jpg" alt="Pax Transhumanity Robot">
             <figcaption class="centertext">
                 <i>
                     This robot and his friends are here to help. I don't know if they all have triangle heads.
@@ -1080,7 +1611,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </p>
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/orangesymbols.jpg">
+            <img class="centerimage" src="PaxTranshumanity/orangesymbols.jpg" alt="Pax Transhumanity Orange Symbols">
             <figcaption class="centertext">
                 <i>
                     This game calls its glossary a "Rosetta Stone" to ensure maximum confusion.
@@ -1097,7 +1628,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
             I like symbols in games. Symbols can make a game so much more readable. It's always faster to read a good symbol than read a sentence explaining an effect. You can know what something does at a glance, if the symbols are good. Great Western Trail for example is a game with fantastic symbols. It's possible to see a symbol in that game and just guess what it does because it's so intuitive. No rulebook required. Brown/Blue pointing to your deck? That’s buy a brown/blue sheep and put it on top of your deck. What about the dog card, bird card, and boat card? They all mean “get a dog/bird/boat.”
         </p>
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/GWT.png">
+            <img class="centerimage" src="PaxTranshumanity/GWT.png" alt="Great Western Trail dog symbol he is a good boy.">
             <figcaption class="centertext">
                 <i>
                     The dog in this game is a good boy.
@@ -1110,7 +1641,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
 
         <hr class="superspace">
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/men.jpg">
+            <img class="centerimage" src="PaxTranshumanity/men.jpg" alt="Pax Transhumanity Worker Symbols">
             <figcaption class="centertext">
                 <i>
                     One of these means take a new worker. The other means take a new worker, but they<br> are immediatly placed down placating heat. Good luck remembering which is which.
@@ -1119,7 +1650,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </figure>
         <hr class="superspace">
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/surge.jpg">
+            <img class="centerimage" src="PaxTranshumanity/surge.jpg" alt="Pax Transhumanity Surge Symbol">
             <figcaption class="centertext">
                 <i>
                     Which of these icons do you think is "surge"? I'll give you a hint: it's not the lighting bolt.
@@ -1129,7 +1660,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         <hr class="superspace">
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/jetpacks.jpg">
+            <img class="centerimage" src="PaxTranshumanity/jetpacks.jpg" alt="Pax Transhumanity Jetpacks solve Mental Health">
             <figcaption class="centertext">
                 <i>
                     Jetpacks solve mental health.
@@ -1142,7 +1673,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </p>
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/SocialResilience.jpg">
+            <img class="centerimage" src="PaxTranshumanity/SocialResilience.jpg" alt="Pax Transhumanity Social Resilience Impact">
             <figcaption class="centertext">
                 I've looked up what this purple symbol does in the rulebook more than i've actually resolved the effect.
             </figcaption>
@@ -1161,7 +1692,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </h2>
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/BlackMirrorClose.jpg">
+            <img class="centerimage" src="PaxTranshumanity/BlackMirrorClose.jpg" alt="Pax Transhumanity Black Mirror Episodes">
             <figcaption class="centertext">
                 <i>
                     Most of the cards in this game are also plots of Black Mirror episodes.
@@ -1174,7 +1705,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </p>
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/brass.jpg">
+            <img class="centerimage" src="PaxTranshumanity/brass.jpg" alt="Brass Birmingham Market">
             <figcaption class="centertext">
                 (loud-fog-horn.wav)
             </figcaption>
@@ -1185,7 +1716,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </p>
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/spheres.jpg">
+            <img class="centerimage" src="PaxTranshumanity/spheres.jpg" alt="Pax Transhumanity Spheres">
             <figcaption class="centertext">
                 As we all know, the natural step after researching ID Theft is a career in "Adverse Jurisdictions".
             </figcaption>
@@ -1196,7 +1727,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </p>
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/algernon.jpg">
+            <img class="centerimage" src="PaxTranshumanity/algernon.jpg" alt="Pax Transhumanity Algernon">
             <figcaption class="centertext">
                 Algernon would've been happier as a mindless drone I think.
             </figcaption>
@@ -1211,7 +1742,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </p>
 
         <figure>
-            <img src="PaxTranshumanity/chart.jpg" class="centerimage">
+            <img src="PaxTranshumanity/chart.jpg" class="centerimage" alt="Pax Transhumanity Flowchart">
             <figcaption class="centertext">
                 If you're ever confused please refer to the incredibly clear and helpful chart.
             </figcaption>
@@ -1226,7 +1757,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </h2>
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/blue-inblue.jpg">
+            <img class="centerimage" src="PaxTranshumanity/blue-inblue.jpg" alt="Dune Paul Atreides Matt Eklund">
         </figure>
 
         <p>
@@ -1242,7 +1773,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         </p>
 
         <figure>
-            <img class="centerimage" src="PaxTranshumanity/ConesofDunshire.jpg">
+            <img class="centerimage" src="PaxTranshumanity/ConesofDunshire.jpg" alt="Pax Transhumanity is Cones of Dunshire">
             <figcaption class="centertext">
                 This is actually me showing my friends this game.
             </figcaption>
@@ -1470,13 +2001,6 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <pubDate>Fri, 06 Mar 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[I thought I hated games that were like Mysterium, turns out I just didn&#39;t like Mysterium.]]></description>
       <content:encoded><![CDATA[
-    <ul class="center">
-      <li><a href="../../A.html">A</a></li>
-      <li><a href="../../B.html">B</a></li>
-      <li><a href="../../C.html">C</a></li>
-      <li><a href="../../D.html">D</a></li>
-      <li><a href="../../E.html">E</a></li>
-    </ul>
   <h2 class="centertext">
     <figure>
       <img class="inlineimage centerimage" style ="width: 100%" src="RWAssets/marquise.gif"/>
@@ -1491,7 +2015,8 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
   <p>
     This is about a board game that came out a few years ago called Rear Window.
   </p>
-  <figure>
+  <p>10/19/2026: I fixed a lot of grammatical errors and confusing phrases. If you still think this essay is bad just think how much worse it used to be.</p>
+    <figure>
     <img class="inlineimage centerimage" src="RWAssets/RWgame.jpg"/>
     <figcaption class="centertext">
       <i>
@@ -1500,22 +2025,22 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
     </figcaption>
   </figure>
     <p>
-      Have you ever been wrong, like really wrong? For the first time in my life I am. Rear Window changed the way I look at an entire genre of board games.  That genre is communication games. One player places cards out to communicate information to the other players. To say there’s a clock, they might put out a bed and some electricity. Because alarm clocks wake people up and there's electricity in clocks. And it's up to the rest of the players to decode that logic correctly. And I used to think that was at it's core not fun. But Rear Window really shook things up for me. Where other games in the genre zig, Rear Window zags. It challenges every assumption and reengineers the genre from first principles. Looking at this game must have been what classical painters thought when they saw Van Gogh. Ok maybe not that crazy but I think you get my point.
+      Have you ever been wrong, like really wrong? For the first time in my life I am. Rear Window changed the way I look at an entire genre of board games: limited communication games. The pitch for these games is simple: one layer needs to communicate information to the other players , but can only communciate in specific ways. A common version of this is places cards with art out to communicate this. To communicate the word "clock" they might put out a bed and some electricity, because alarm clocks wake people up and there's electricity in clocks, and it's up to the rest of the players to decode that logic correctly. I used to think these games were really underwhelming. But where other games in this genre zig, Rear Window zags. Rear Window challanges many assumptions about how these games "need" to play and re-engineers the genre from first principles. Looking at this game must have been what classical painters thought when they saw Van Gogh—ok maybe not that crazy but I think you get my point.
     </p>
   <figure>
       <img class="inlineimage centerimage" src="RWAssets/mysterium-board.png"/>
   </figure>
     <p>
-      The most popular game in this subgenre is probably Mysterium. And honestly, to me the game always felt very sluggish. The cards in this game are intentionally very complicated. There’s a million little details on these cards and they don’t share a common theme. When I played Mysterium it often felt like a crapshoot whether my audience would correctly guess the info. Sometimes the players would understand what I meant, but just as often the players would hyperfocus on some small detail I didn’t intend and the whole game would be lost.
+      The most popular game in this subgenre is probably Mysterium. The communicator has a bunch of dreamlike illustrations and needs to communicate only a few pieces of information. And boy howdy did I find this game sluggish. It seems an intentional part of the design is making these card illustrations as unhelpful as possible. Cards always have a million little details that don't connect under a common theme. When I played Mysterium it often felt like a crapshoot whether my audience would correctly guess the info, or hyperfixate on a tiny detail that didn't matter.
     </p>
     <p>
-      Looking back at that clock example. The director put out the electricity and the bed. Except the electricty card has handcuffs, and now the audience are completly off track because they've decided to hyperfocus on the handcuffs. No matter what I do there’s things to distract my audience.
+      Taking that clock example: I might put out electricity and a bed, except the electricity card also has handcuffs, so now the othe rplayers are completely offtrack and trying to combine bed with handcuffs. And now they are so off-track nothing I can do with these obtuse cards can set them straight again.
     </p>
   <figure>
       <img class="inlineimage centerimage" src="RWAssets/mysterium-cards.webp"/>
   </figure>
     <p>
-      I assume this frustration was intentional. The designers assume that if the cards were easy to use there’d be no game. That makes sense, but for me it  was never FUN. It was like handing me crayons and asking me to make a crossword. These tools are just frustrating. Here's Rear Windows first big departure: look at these cards!
+      I assume this frustration with using the cards was intentional. A "level one" design document for this game would say somehting along the lines of "if the cards are easy to use, there'd be no game". It makes sense why the cards need to be annoying to use, but for me it was never FUN. This game is like handing me crayons to make a crossword puzzle. Sure it's a challenge problem, but the tools are so ill-fitting for the task I'm just gonig to get frustrated. Here's Rear Windows first big departure: look at these cards!
     </p>
   <figure>
       <img class="inlineimage centerimage" src="RWAssets/TTS screenshot.png"/>
@@ -1523,7 +2048,10 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       <i>So simple! So relavent! No wonder the other players correctly guessed my genius clues!</i>
   </figure>
     <p>
-      Need to reference the yellow lady? There she is! Need to say something about a musician? Look at all those instruments! Mysterium in the same position would've just throw you cards with MC Esher Stairs, the Necronomicon, and a plant growing human heads and say "Figure it out champ!" These easy cards give Rear Window a smooth foundation to build off of. Or if you prefer a movie metaphor, it's a nice clean set to film your movie with. The simple cards means Rear Window asks you convey a lot more information than Mysterium. Players need to guess 4 characters, in 4 rooms, doing 4 activities. And you don't have many cards to do it with. The director just makes a lot more interesting decisions about where to put their best clues.
+      Need to reference the yellow lady? There she is! Need to say something about a musician? Look at all those instruments! Mysterium in the same position would've just throw you cards with MC Esher Stairs, the Necronomicon, and a plant growing human heads. Rear Window just gives you the things you need! It's so beautiful I might cry.
+    </p>
+    <p>
+      One might think easy cards remove any challenge from the game, but not so! These cards are easy to use with a purpose. With these cards giving a smooth foundation to be built on top of. Or, if you prefer a movie metaphor, it's a nice clean set to film your movie with. You see you need to communicate a lot more sheer info in Rear Window than Mysterium. In Mysterium players need to guess 1 person, 1 place, and 1 object. (Cnl Mustard, in the ballroom, with the candlestick). In Rear Window, players need to guess 4 characters, in 4 rooms, doing 4 activities, with not that many more cards to do it with. With Mysterium you have a lot of cards that are hard to use, in Rear Window the cards are easy to use, but you have to use them very carefully to communicate all the information. It's just so much more interesting to come up with clues in Rear Window.
     </p>
     <figure>
       <img  class="inlineimage centerimage" style ="width: 75%" src="RWAssets/dune-set.jpg"/>
@@ -1532,19 +2060,21 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
       </figcaption>
     </figure>
       <p>
-      The director isn’t the only one with these interesting gamey decisions to make, the audience does as well. The audience has these once-per-game powers. So while the audience tries to unpick the director’s logic, sprinkled in are moments of “do we want to use this power now or later” “do we think this is the best time for the power?” “Which card do we use the power on?” These are concrete mechanical decisions sprinkled into the more ethereal discussion about what the heck the director is getting at with these clues. That’s Rear Window’s secret. Arguing about the director’s weird logic is still in the game, but it’s paced out between more concrete mechanical decisions. Like any good movie, pacing is important. A whole game about nothing but wibbly-wobbly logic chains would get old fast.
+      The player placing the cards (the director) isn’t the only one with these interesting decisions to make though, the audience (the guessers) do as well. While the audience tries to unpick the director’s logic, they also have 3 once-per-game powers. So sprinkled into the discussion of "what did they mean by this" are discussions of "is this a good time to use this power". The debate on using the powers gives stuck players a way to move forward, and just breaks up the experience; it's not all logic untangling it's also the kinda game-y decision on the best time to use the lifeline. Who Wants to Be a Millionaire gets a ton of mileage out of it's lifeline system for the same reason: it's nice to take a momentary break from the endless main game to do something else.
+    </p>
+    <p>These once-per-game abilities are also very concrete. Unwinding weird logic with cards is very... vibes based; it's a world of ethereal guesswork. These abilities let you make very concrete decisions. "If we use this we will narrow it down to these two things with 100% certainty." That’s Rear Window’s secret. Arguing about the director’s weird logic is still in the game, but it’s paced out between more concrete mechanical decisions. Like any good movie, pacing is important. A whole game about nothing but wibbly-wobbly logic chains would get old fast.
     </p>
   <figure>
       <img class="inlineimage centerimage" src="RWAssets/RWpowers.webp"/>
   </figure>
     <p>
-      And these player powers have some sauce to them. The coolest is this arrow token. The audience chooses a card and the director places the arrow wherever they want on the card. First off I havn’t seen this type of power in any game of this genre before, which is crazy because it feels like it really plays to the genre’s strengths. And honestly, this power has so many interesting uses. Every game there's lots of debate on when and where is best to use this power. Use it early to lock in some info? Save it for the end when you'll need it most? Which clue do you use it on? Which cluse are you most unsure about? One time my players argued for 5 minutes about which clue to use the arrow power on. And once they decided I placed the arrow on the card, and all the players looked down at it, then back up at me and said "That doesn't help at all." And we burst out laughing. It’s so juicy. The other once/game powers are really cool too.
+      Of course I should mention these powers have some sauce to them. The coolest is this arrow token: the audience chooses a card and the director places the arrow wherever they want on the card. First off, I havn’t seen this type of power in any game of this genre before, which is crazy because it feels like it really plays to the genre’s strengths. And secondly, this power has so many interesting uses. Every game there's lots of debate on when and where is best to use this power. Use it early to lock in some info? Save it for the end when you'll need it most? Which clue do you use it on? Which cluse are you most unsure about? One time my players argued for 5 minutes about which clue to use the arrow power on. And once they decided I placed the arrow on the card, and all the players looked down at it, then back up at me and said "That doesn't help at all." And we burst out laughing. It’s so juicy. The other once/game powers are really cool too.
     </p>
     <figure>
       <img class="inlineimage centerimage" src="RWAssets/star.jpg"/>
     </figure>
       <p>
-      This wouldn’t be a game about film without a really cool twist at the end. That is, in this cooperative game, it's possible that the director, the person giving you all the clues, actually might be working against you! The way this works is that in about one-third of games, a murderer is in one of the rooms. That means the director actually needs to keep secret whats in that room, while still giving correct information about the other rooms. If the director keeps the twist secret until the end of the game, they win. If the audience correctly guesses the twist and finds the killer the audience wins. This game is 100% cooperative most of the time, but sometimes a killer shows up and the game becomes 100% audience vs director. Only one team can win.
+      This wouldn’t be a game about film without a really cool twist at the end. The game is ostensibly a cooperative game. The director and audience are both working together to win. But in about 1/3 of games, the person giving the clues actually has a murderer they are trying to hide! They may be be working against you! In this case the director still wants the audience to guess most of the rooms correctly, but they specifically want the room with the murderer to be guessed wrong (we wouldn't want the audience guessing the twist after all). But if the audience guesses where the murderer is, the audience wins. This game is 100% cooperative most of the time, but sometimes a killer shows up and the game becomes 100% audience vs director. Only one team can win.
       </p>
     <figure>
       <img class="inlineimage centerimage" src="RWAssets/MURDER.png"/>
@@ -1570,6 +2100,9 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
         <img class="center nav" src="RWAssets/back.gif"/>
       </a>
     </p>
+
+    
+    
   ]]></content:encoded>
     </item>
 
