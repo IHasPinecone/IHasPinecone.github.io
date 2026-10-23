@@ -5,226 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guestbook</title>
   <style>
-    /* Global Page Styling */
     body {
       background-color: #fcebc2; /* Warm retro beige background */
       color: #000000;
       font-family: "Times New Roman", Times, serif;
       font-size: 16px;
-      line-height: 1.4;
       margin: 0;
       padding: 20px 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
     }
 
     .container {
       width: 100%;
-      max-width: 600px;
-    }
-
-    /* Top Report Link */
-    .top-report {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    /* Guestbook Entry Layout */
-    .entry {
-      margin-bottom: 25px;
-    }
-
-    .entry-row {
+      max-width: 720px;
       display: flex;
-      align-items: flex-start;
-      margin-bottom: 4px;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .entry-label {
-      font-weight: bold;
-      width: 90px;
-      flex-shrink: 0;
+    .nav-header {
+      margin-bottom: 20px;
+      text-align: center;
     }
 
-    .entry-content {
-      flex-grow: 1;
-      word-break: break-word;
-    }
-
-    /* Links & Actions */
     a {
-      color: #7b52ab; /* Muted purple link color */
+      color: #7b52ab;
       text-decoration: underline;
+      font-size: 18px;
     }
 
     a:hover {
       color: #552d80;
     }
 
-    .report-link {
+    /* Embedded SmartGuestbook Frame */
+    .guestbook-frame {
+      width: 100%;
+      height: 800px;
+      border: 1px solid #a88d67;
+      background-color: #ffffff;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .fallback-note {
+      margin-top: 15px;
+      font-size: 14px;
       text-align: center;
-      margin-top: 8px;
-      font-size: 15px;
-    }
-
-    /* Pagination Footer */
-    .pagination {
-      text-align: center;
-      margin-top: 30px;
-      margin-bottom: 20px;
-      font-size: 16px;
-    }
-
-    .pagination a {
-      margin: 0 2px;
-    }
-
-    /* Submission Form Styling (Optional toggle or header) */
-    .submit-card {
-      border: 1px dashed #a88d67;
-      padding: 15px;
-      margin-bottom: 30px;
-      background-color: #fff8e7;
-    }
-
-    .form-group {
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    .form-group label {
-      font-weight: bold;
-      width: 90px;
-    }
-
-    .form-group input, .form-group textarea {
-      flex-grow: 1;
-      font-family: inherit;
-      padding: 4px;
-    }
-
-    button {
-      font-family: "Times New Roman", Times, serif;
-      padding: 4px 12px;
-      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <!-- Top Action -->
-    <div class="top-report">
-      <a href="#report">Report</a>
+    <div class="nav-header">
+      <a href="index.html">&lt;&lt; Back to Home</a>
     </div>
 
-    <!-- Dynamic Entries Container -->
-    <div id="guestbook-entries">
-      
-      <!-- Entry 1 -->
-      <div class="entry">
-        <div class="entry-row">
-          <span class="entry-label">Name</span>
-          <span class="entry-content">Phil</span>
-        </div>
-        <div class="entry-row">
-          <span class="entry-label">Date</span>
-          <span class="entry-content">2025-03-05</span>
-        </div>
-        <div class="entry-row">
-          <span class="entry-label">Location</span>
-          <span class="entry-content">🇺🇸</span>
-        </div>
-        <div class="entry-row">
-          <span class="entry-label">Message</span>
-          <span class="entry-content">Your site is pretty kewl 😁 found you on Pokefarm and thought I'd say hi 💡 I also really like these little faces you have on here 🍳💻🍳💻🍳💻</span>
-        </div>
-        <div class="report-link">
-          <a href="#report">Report</a>
-        </div>
-      </div>
+    <!-- Embedded SmartGuestbook -->
+    <!-- Replace 'https://www.smartgb.com/g/g.asp?handle=YOUR_USERNAME' with your actual SmartGB URL -->
+    <iframe 
+      src="https://www.smartgb.com/g/g.asp?handle=YOUR_USERNAME" 
+      class="guestbook-frame" 
+      title="Guestbook" 
+      frameborder="0">
+    </iframe>
 
-      <!-- Entry 2 -->
-      <div class="entry">
-        <div class="entry-row">
-          <span class="entry-label">Name</span>
-          <span class="entry-content">superdude097</span>
-        </div>
-        <div class="entry-row">
-          <span class="entry-label">Date</span>
-          <span class="entry-content">2025-03-04</span>
-        </div>
-        <div class="entry-row">
-          <span class="entry-label">Location</span>
-          <span class="entry-content">🇺🇸</span>
-        </div>
-        <div class="entry-row">
-          <span class="entry-label">Message</span>
-          <span class="entry-content">I like your website 🙂</span>
-        </div>
-        <div class="report-link">
-          <a href="#report">Report</a>
-        </div>
-      </div>
-
-      <!-- Entry 3 -->
-      <div class="entry">
-        <div class="entry-row">
-          <span class="entry-label">Name</span>
-          <span class="entry-content">your loving wife</span>
-        </div>
-        <div class="entry-row">
-          <span class="entry-label">Date</span>
-          <span class="entry-content">2025-03-04</span>
-        </div>
-        <div class="entry-row">
-          <span class="entry-label">Message</span>
-          <span class="entry-content">we're out of milk. I've tried everything to contact you. This is the final straw. Do you WANT our daughter to get osteoporosis at the age of 12?</span>
-        </div>
-        <div class="report-link">
-          <a href="#report">Report</a>
-        </div>
-      </div>
-
-      <!-- Entry 4 -->
-      <div class="entry">
-        <div class="entry-row">
-          <span class="entry-label">Name</span>
-          <span class="entry-content">ash1mariii</span>
-        </div>
-        <div class="entry-row">
-          <span class="entry-label">Date</span>
-          <span class="entry-content">2025-03-04</span>
-        </div>
-        <div class="entry-row">
-          <span class="entry-label">Location</span>
-          <span class="entry-content">🇧🇷</span>
-        </div>
-        <div class="entry-row">
-          <span class="entry-label">Message</span>
-          <span class="entry-content">ts fire absolutely love this ty for the full field attack on pokefarm 😁😁🍳💻</span>
-        </div>
-        <div class="report-link">
-          <a href="#report">Report</a>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Footer Pagination -->
-    <div class="pagination">
-      Page 3 of 10 
-      <a href="#">&lt;</a> 
-      <a href="#">1</a> 
-      <a href="#">2</a> 
-      3 
-      <a href="#">4</a> 
-      <a href="#">5</a> 
-      <a href="#">6</a> 
-      <a href="#">&gt;</a> 
-      <a href="#">Last &gt;&gt;</a>
+    <div class="fallback-note">
+      Having trouble viewing the guestbook? 
+      <!-- Replace href with your SmartGB link -->
+      <a href="https://www.smartgb.com/g/g.asp?handle=YOUR_USERNAME" target="_blank" rel="noopener noreferrer">Click here to open it directly</a>.
     </div>
   </div>
 
