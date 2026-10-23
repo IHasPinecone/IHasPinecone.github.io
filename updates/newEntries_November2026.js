@@ -101,7 +101,9 @@ window.extraTables_November2026 = {
     "installing a big flaming pit",
     "werewolves",
     "the TTRPG system Mothership",
-    "how names of things don't matter"
+    "how names of things don't matter",
+    "what happened this morning",
+    
   ]
 };
 
@@ -114,6 +116,7 @@ window.extraTables_November2026 = {
     { text: "Thought about a poetic interpretation of (topic)" },
     { text: "Had a difficult conversation with (person)." },
     { text: "Talked with (person) about a lack of standards with (topic)." },
-    { text: "Bullied (person) because of their thoughts on (topic)." }
+    { text: "Bullied (person) because of their thoughts on (topic)." },
+    { text: "Finally, I can talk about (topic)." }
   ];
 
