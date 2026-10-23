@@ -99,7 +99,9 @@ window.extraTables_November2026 = {
     "flag football",
     "community outreach",
     "installing a big flaming pit",
-    "werewolves"
+    "werewolves",
+    "the TTRPG system Mothership",
+    "how names of things don't matter"
   ]
 };
 
