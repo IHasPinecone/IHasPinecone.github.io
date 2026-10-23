@@ -17,11 +17,6 @@ function sanitize(text = "") {
     .replace(/'/g, "&#39;")
     .trim();
 }
-function sanitizeCdata(text = "") {
-  return String(text)
-    .replace(/]]>/g, "]]]]><![CDATA[>")
-    .trim();
-}
 
 function parseDate(dateStr) {
   const [month, day, year] = dateStr.split("/");
@@ -30,10 +25,6 @@ function parseDate(dateStr) {
 
 posts.sort(
   (a, b) => parseDate(b.datetime) - parseDate(a.datetime)
-);
-
-const podcastPosts = posts.filter(
-  post => post.topic === "Podcast"
 );
 
 function extractBodyContent(html = "") {
@@ -85,36 +76,6 @@ function buildNormalItems(feedPosts) {
   }).join("\n");
 }
 
-
-/*function buildPodcastItems(feedPosts) {
-  return feedPosts.map(post => {
-    const postUrl = `${SITE_URL}/${post.link}`;
-
-    const episodeImage = post.coverImage
-      ? `${SITE_URL}/${post.coverImage}`
-      : "";
-
-    return `
-    <item>
-      <title><![CDATA[${sanitize(post.title)}]]></title>
-      <link>${postUrl}</link>
-      <guid isPermaLink="false"><![CDATA[${post.audioFile}]]></guid>
-      <pubDate>${parseDate(post.datetime).toUTCString()}</pubDate>
-
-      ${episodeImage ? `<itunes:image href="${episodeImage}"/>` : ""}
-
-      <enclosure
-        url="${post.audioFile}"
-        length="${post.audioLength}"
-        type="audio/mpeg" />
-
-      <description><![CDATA[
-        ${sanitize(post.summary) || ""}
-      ]]></description>
-    </item>`;
-  }).join("\n");
-}
-
 const normalPosts = posts.filter(
   post => post.topic !== "Podcast"
 );
@@ -135,25 +96,6 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
   </channel>
 </rss>`;
 
-fs.writeFileSync("rss.xml", rssFeed);*/
-
-//const podcastItems = buildPodcastItems(podcastPosts);
-
-/*const podcastFeed = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"
-  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
-  <channel>
-    <title>Sandbox—A Dune Dreamrules Design Podcast</title>
-    <itunes:image href="https://ihaspinecone.github.io/sandbox/imgs/Sandbox-Cover.webp"/>
-    <link>${SITE_URL}</link>
-    <description>Sandbox is where the designers of the Dreamrules varient for the Dune board game talk about their designs and love for the game. Sandbox is hosted by Pine (IHasPinecone) and Awptea (Awpteamoose), with requent guests Chron and Ridwan and many other members of the Drearules community. Dune was originally published by Avalon Hill in 1979 and later reprinted by Gale Force Nine in 2019.</description>
-    <itunes:author>IHasPinecone</itunes:author>
-    <itunes:explicit>false</itunes:explicit>
-    ${podcastItems}
-  </channel>
-</rss>`;
-
-fs.writeFileSync("sandbox.xml", podcastFeed);*/
+fs.writeFileSync("rss.xml", rssFeed);
 
 console.log("rss.xml generated");
-console.log("sandbox.xml generated");
