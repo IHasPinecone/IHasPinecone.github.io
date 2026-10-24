@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAAM-1978.108 Parchment Flipbook</title>
+  <style>
+    /* Tan / Parchment background palette */
+    body {
+      font-family: serif;
+      background-color: #f4ecd8;
+      color: #33281a;
+      margin: 0;
+      padding: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 4px 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    p.subtitle {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #665235;
+    }
+
+    /* Outer perspective container */
+    .viewport {
+      perspective: 2000px;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 20px 0;
+    }
+
+    /* Fixed size for a single page sheet */
+    :root {
+      --page-width: 320px;
+      --page-height: 480px;
+    }
+
+    @media (min-width: 640px) {
+      :root {
+        --page-width: 400px;
+        --page-height: 580px;
+      }
+    }
+
+    /* 
+      Book wrapper: centered dynamically using transform: translateX().
+      Width is 2 * page-width so full open book spread fits centrally.
+    */
+    .book {
+      position: relative;
+      width: calc(var(--page-width) * 2);
+      height: var(--page-height);
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    /* Individual sheet */
+    .page {
+      position: absolute;
+      top: 0;
+      left: 50%; /* Anchored at center spine */
+      width: var(--page-width);
+      height: var(--page-height);
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+      cursor: pointer;
+      user-select: none;
+      will-change: transform;
+    }
+
+    /* Front and back faces of each sheet - simple plain border, no shadows */
+    .page-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background-color: #fcf8ec;
+      border: 1px solid #8c7653;
+      box-sizing: border-box;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Prevent webkit flicker during 3D transform */
+      transform: translateZ(0);
+    }
+
+    .page-face.back {
+      transform: rotateY(180deg) translateZ(0);
+    }
+
+    /* Front and back faces of each sheet - simple plain border, no shadows */
+    .page-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background-color: #fcf8ec;
+      border: 1px solid #8c7653;
+      box-sizing: border-box;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page-face.back {
+      transform: rotateY(180deg);
+    }
+
+    /* Flipped state */
+    .page.flipped {
+      transform: rotateY(-180deg);
+    }
+
+    /* Page Image */
+    .page-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-color: #fcf8ec;
+    }
+
+    /* Controls bar at bottom */
+    footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    /* Plain default buttons */
+    button {
+      font-size: 1rem;
+      padding: 4px 12px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    /* Plain text page counter */
+    .page-counter {
+      font-size: 0.95rem;
+      color: #33281a;
+      user-select: none;
+    }
+
+    .nav-hint {
+      font-size: 0.8rem;
+      color: #665235;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>SAAM-1978.108 Collection</h1>
+    <p class="subtitle">Image Viewer</p>
+  </header>
+
+  <div class="viewport">
+    <div id="book" class="book">
+      <!-- Dynamic pages will be injected here -->
+    </div>
+  </div>
+
+  <footer>
+    <div class="controls">
+      <button id="btn-first" title="First Page">|&lt;</button>
+      <button id="btn-prev" title="Previous Page">&lt;</button>
+      
+      <span id="page-counter" class="page-counter">Sheet 1 of 27</span>
+      
+      <button id="btn-next" title="Next Page">&gt;</button>
+      <button id="btn-last" title="Last Page">&gt;|</button>
+    </div>
+
+    <p class="nav-hint">Use buttons, click pages, or press Left / Right arrows</p>
+  </footer>
+
+  <script>
+    const TOTAL_IMAGES = 54;
+    const PREFIX = "SAAM-1978.108.";
+    const SUFFIX = "_2.jpg";
+    const FOLDER = "2/";
+
+    const book = document.getElementById('book');
+    const btnFirst = document.getElementById('btn-first');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnLast = document.getElementById('btn-last');
+    const pageCounter = document.getElementById('page-counter');
+
+    // 54 images on 27 double-sided sheets
+    const totalSheets = Math.ceil(TOTAL_IMAGES / 2);
+    let currentSheet = 0; // 0 = front cover showing, totalSheets = back cover showing
+    let isFlipping = false; // Prevents rapid clicking during CSS flip animation
+    const ANIMATION_DURATION = 800; // Matches CSS 0.8s transition
+
+    function getImageUrl(index) {
+      return `${FOLDER}${PREFIX}${index}${SUFFIX}`;
+    }
+
+    // Build the 27 physical sheets
+    function buildBook() {
+      book.innerHTML = '';
+
+      for (let i = 0; i < totalSheets; i++) {
+        const frontIndex = i * 2 + 1;
+        const backIndex = i * 2 + 2;
+
+        const sheet = document.createElement('div');
+        sheet.className = 'page';
+        sheet.style.zIndex = totalSheets - i;
+
+        // Front Face
+        const frontFace = document.createElement('div');
+        frontFace.className = 'page-face front';
+
+        const frontImg = document.createElement('img');
+        frontImg.className = 'page-img';
+        frontImg.src = getImageUrl(frontIndex);
+        frontImg.alt = `Image ${frontIndex}`;
+        frontImg.onerror = function() {
+          this.src = `https://placehold.co/600x800/fcf8ec/33281a?text=${FOLDER}${PREFIX}${frontIndex}${SUFFIX}`;
+        };
+        frontFace.appendChild(frontImg);
+
+        // Back Face
+        const backFace = document.createElement('div');
+        backFace.className = 'page-face back';
+
+        if (backIndex <= TOTAL_IMAGES) {
+          const backImg = document.createElement('img');
+          backImg.className = 'page-img';
+          backImg.src = getImageUrl(backIndex);
+          backImg.alt = `Image ${backIndex}`;
+          backImg.onerror = function() {
+            this.src = `https://placehold.co/600x800/fcf8ec/33281a?text=${FOLDER}${PREFIX}${backIndex}${SUFFIX}`;
+          };
+          backFace.appendChild(backImg);
+        }
+
+        sheet.appendChild(frontFace);
+        sheet.appendChild(backFace);
+
+        // Direct page clicking logic
+        sheet.addEventListener('click', () => {
+          if (isFlipping) return;
+          if (i === currentSheet) {
+            goNext();
+          } else if (i === currentSheet - 1) {
+            goPrev();
+          }
+        });
+
+        book.appendChild(sheet);
+      }
+    }
+
+    // Update flipping status and keep book centered
+    function updateBookState() {
+      const sheets = document.querySelectorAll('.page');
+
+      sheets.forEach((sheet, index) => {
+        if (index < currentSheet) {
+          sheet.classList.add('flipped');
+        } else {
+          sheet.classList.remove('flipped');
+        }
+
+        // Keep turning page on top during animation to prevent z-fighting flicker
+        if (isFlipping && (index === currentSheet - 1 || index === currentSheet)) {
+          sheet.style.zIndex = totalSheets + 10;
+        } else if (index < currentSheet) {
+          sheet.style.zIndex = index + 1;
+        } else {
+          sheet.style.zIndex = totalSheets - index;
+        }
+      });
+
+      /*
+        Spine & Cover Centering Logic:
+        - When closed on Front Cover (currentSheet === 0): Translate -25% so the right half (Front Cover) is centered in the viewport.
+        - When closed on Back Cover (currentSheet === totalSheets): Translate +25% so the left half (Back Cover) is centered in the viewport.
+        - When open (0 < currentSheet < totalSheets): Translate 0% so the spine is centered and open spread is balanced.
+      */
+      if (currentSheet === 0) {
+        book.style.transform = 'translateX(-25%)';
+      } else if (currentSheet === totalSheets) {
+        book.style.transform = 'translateX(25%)';
+      } else {
+        book.style.transform = 'translateX(0%)';
+      }
+
+      // Update button states
+      btnFirst.disabled = (currentSheet === 0 || isFlipping);
+      btnPrev.disabled = (currentSheet === 0 || isFlipping);
+      btnNext.disabled = (currentSheet === totalSheets || isFlipping);
+      btnLast.disabled = (currentSheet === totalSheets || isFlipping);
+
+      pageCounter.textContent = `Sheet ${currentSheet} of ${totalSheets}`;
+    }
+
+    function triggerFlip(action) {
+      if (isFlipping) return;
+      isFlipping = true;
+      action();
+      updateBookState();
+      
+      setTimeout(() => {
+        isFlipping = false;
+        updateBookState();
+      }, ANIMATION_DURATION);
+    }
+
+    function goNext() {
+      if (currentSheet < totalSheets && !isFlipping) {
+        triggerFlip(() => { currentSheet++; });
+      }
+    }
+
+    function goPrev() {
+      if (currentSheet > 0 && !isFlipping) {
+        triggerFlip(() => { currentSheet--; });
+      }
+    }
+
+    function goFirst() {
+      if (currentSheet > 0 && !isFlipping) {
+        triggerFlip(() => { currentSheet = 0; });
+      }
+    }
+
+    function goLast() {
+      if (currentSheet < totalSheets && !isFlipping) {
+        triggerFlip(() => { currentSheet = totalSheets; });
+      }
+    }
+
+    // Event listeners for controls
+    btnFirst.addEventListener('click', goFirst);
+    btnPrev.addEventListener('click', goPrev);
+    btnNext.addEventListener('click', goNext);
+    btnLast.addEventListener('click', goLast);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (isFlipping) return;
+      if (e.key === 'ArrowRight') {
+        goNext();
+      } else if (e.key === 'ArrowLeft') {
+        goPrev();
+      } else if (e.key === 'Home') {
+        goFirst();
+      } else if (e.key === 'End') {
+        goLast();
+      }
+    });
+
+    // Initialize book
+    buildBook();
+    updateBookState();
+  </script>
+</body>
+</html>
