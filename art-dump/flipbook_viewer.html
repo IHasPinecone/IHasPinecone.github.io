@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SAAM-1978.108 Parchment Flipbook</title>
   <style>
-    /* Tan / Parchment background palette */
     body {
       font-family: serif;
       background-color: #f4ecd8;
@@ -19,18 +18,15 @@
       justify-content: space-between;
       box-sizing: border-box;
     }
-
     header {
       text-align: center;
       margin-bottom: 10px;
     }
-
     h1 {
       margin: 0 0 4px 0;
       font-size: 1.5rem;
       font-weight: bold;
     }
-
     p.subtitle {
       margin: 0;
       font-size: 0.9rem;
@@ -52,13 +48,13 @@
     /* Fixed size for a single page sheet */
     :root {
       --page-width: 320px;
-      --page-height: 480px;
+      --page-height: 420px;
     }
 
     @media (min-width: 640px) {
       :root {
-        --page-width: 400px;
-        --page-height: 580px;
+        --page-width: 500px;
+        --page-height: 650px;
       }
     }
 
@@ -89,7 +85,6 @@
       will-change: transform;
     }
 
-    /* Front and back faces of each sheet - simple plain border, no shadows */
     .page-face {
       position: absolute;
       top: 0;
@@ -113,28 +108,6 @@
       transform: rotateY(180deg) translateZ(0);
     }
 
-    /* Front and back faces of each sheet - simple plain border, no shadows */
-    .page-face {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      background-color: #fcf8ec;
-      border: 1px solid #8c7653;
-      box-sizing: border-box;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .page-face.back {
-      transform: rotateY(180deg);
-    }
-
     /* Flipped state */
     .page.flipped {
       transform: rotateY(-180deg);
@@ -156,6 +129,11 @@
       gap: 8px;
       margin-top: 10px;
     }
+    .secondary-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .controls {
       display: flex;
@@ -164,7 +142,6 @@
       gap: 12px;
     }
 
-    /* Plain default buttons */
     button {
       font-size: 1rem;
       padding: 4px 12px;
@@ -176,7 +153,6 @@
       opacity: 0.5;
     }
 
-    /* Plain text page counter */
     .page-counter {
       font-size: 0.95rem;
       color: #33281a;
@@ -188,18 +164,37 @@
       color: #665235;
       margin: 0;
     }
+    
+    .text-overlay {
+      position: absolute;
+      background-color: rgba(255 255 255 / 0.92);
+      border: 1px solid #33281a;
+      color: #111;
+      font-family: serif;
+      font-size: 0.85em;
+      line-height: 1.4;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      z-index: 5;
+      border-radius: 2px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    body.overlay-hidden .text-overlay {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>SAAM-1978.108 Collection</h1>
-    <p class="subtitle">Image Viewer</p>
+    <h1>Rubáiyát of Omar Khayyám, the Astronomer-Poet of Persia</h1>
+    <p class="subtitle">While looking at works by <a href="3.html">Elihu Vedder</a> I found that his most famous work is a collection of drawings for an edition of this book.<br>To allow readers to experience these drawings in their original contet I've used high quality scans from the Smithsonian with an optional overlay that makes the text of the poetry more readable.<br>Note: in the orignal Persian these poems were not compiled into a single volume. When Edward FitzGerald compiled and translated these he took poems from many places the poet wrote.</p>
   </header>
 
   <div class="viewport">
     <div id="book" class="book">
-      <!-- Dynamic pages will be injected here -->
     </div>
   </div>
 
@@ -208,10 +203,13 @@
       <button id="btn-first" title="First Page">|&lt;</button>
       <button id="btn-prev" title="Previous Page">&lt;</button>
       
-      <span id="page-counter" class="page-counter">Sheet 1 of 27</span>
+      <span id="page-counter" class="page-counter">Sheet 0 of 27</span>
       
       <button id="btn-next" title="Next Page">&gt;</button>
       <button id="btn-last" title="Last Page">&gt;|</button>
+    </div>
+    <div class="secondary-controls">
+      <button id="btn-toggle-overlay" title="Toggle Text Overlay">Toggle Text Overlay</button>
     </div>
 
     <p class="nav-hint">Use buttons, click pages, or press Left / Right arrows</p>
@@ -223,12 +221,46 @@
     const SUFFIX = "_2.jpg";
     const FOLDER = "2/";
 
+    /* Configure overlay text boxes per image index.
+    Coordinates are percentage values realtive to page dimensions:
+    top, left, width, height
+    text is plain html
+    */
+   const PAGE_OVERLAYS = {
+    // Example for image 12
+    4: {
+      top: "40%",
+      left: "35%",
+      width: "50%",
+      height: "30%",
+      text: `
+      11<br>
+          Ah, Moon of my Delight who know'st no wane,<br>
+          The Moon when I again shall look upon—<br>
+          How oft hereafter rising shall she look<br>
+          Through this same Garden after me—in vain!<br><br>
+          12<br>
+          A Book of Verses underneath the Bough,<br>
+          A Jug of Wine, a Loaf of Bread—and Thou<br>
+          Beside me singing in the Wilderness—<br>
+          Oh, Wilderness were Paradise enow!
+          `
+    }
+   }
+
     const book = document.getElementById('book');
     const btnFirst = document.getElementById('btn-first');
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
     const btnLast = document.getElementById('btn-last');
     const pageCounter = document.getElementById('page-counter');
+    const btnToggleOverlay = document.getElementById('btn-toggle-overlay');
+
+    let overlaysVisible = true;
+    btnToggleOverlay.addEventListener('click', () => {
+      overlaysVisible = !overlaysVisible;
+      document.body.classList.toggle('overlay-hidden', !overlaysVisible);
+    })
 
     // 54 images on 27 double-sided sheets
     const totalSheets = Math.ceil(TOTAL_IMAGES / 2);
@@ -265,6 +297,19 @@
         };
         frontFace.appendChild(frontImg);
 
+        // Add overlay for front image if defined
+        if (PAGE_OVERLAYS[frontIndex]) {
+          const config = PAGE_OVERLAYS[frontIndex];
+          const overlay = document.createElement('div');
+          overlay.className = 'text-overlay';
+          overlay.style.top = config.top;
+          overlay.style.left = config.left;
+          overlay.style.width = config.width;
+          overlay.style.height = config.height;
+          overlay.innerHTML = config.text;
+          frontFace.appendChild(overlay);
+        }
+
         // Back Face
         const backFace = document.createElement('div');
         backFace.className = 'page-face back';
@@ -278,6 +323,18 @@
             this.src = `https://placehold.co/600x800/fcf8ec/33281a?text=${FOLDER}${PREFIX}${backIndex}${SUFFIX}`;
           };
           backFace.appendChild(backImg);
+          // add overlay for back image if defined (it won't)
+          if (PAGE_OVERLAYS[backIndex]) {
+            const config = PAGE_OVERLAYS[backIndex];
+            const overlay = document.createElement('div');
+            overlay.className = 'text-overlay';
+            overlay.style.top = config.top;
+            overlay.style.left = config.left;
+            overlay.style.width = config.width;
+            overlay.style.height = config.height;
+            overlay.innerHTML = config.text;
+            frontFace.appendChild(overlay);
+          }
         }
 
         sheet.appendChild(frontFace);
@@ -285,7 +342,7 @@
 
         // Direct page clicking logic
         sheet.addEventListener('click', () => {
-          if (isFlipping) return;
+          //if (isFlipping) return;
           if (i === currentSheet) {
             goNext();
           } else if (i === currentSheet - 1) {
