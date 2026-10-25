@@ -190,65 +190,133 @@
 
   <header>
     <h1>Rubáiyát of Omar Khayyám, the Astronomer-Poet of Persia</h1>
-    <p class="subtitle">While looking at works by <a href='3.html'>Elihu Vedder</a> I found that his most famous work is a collection of drawings for an edition of this book.<br>To allow readers to experience these drawings in their original content I've used high quality scans from the Smithsonian with an optional overlay that makes the text of the poetry more readable.<br>Note: in the original Persian these poems were not compiled into a single volume. When Edward FitzGerald compiled and translated these he took poems from many places the poet wrote.</p>
+    <p class="subtitle">While looking at works by <a href="3.html">Elihu Vedder</a> I found that his most famous work is a collection of drawings for an edition of this book.<br>To allow readers to experience these drawings in their original content I've used high quality scans from the Smithsonian with an optional overlay that makes the text of the poetry more readable.<br>Note: in the original Persian these poems were not compiled into a single volume. When Edward FitzGerald compiled and translated these he took poems from many places the poet wrote.</p>
   </header>
 
   <div class="viewport">
-    <div id='book' class='book'>
+    <div id="book" class="book">
     </div>
   </div>
 
   <footer>
-    <div class='controls'>
-      <button id='btn-first' title='First Page'>|&lt;</button>
-      <button id='btn-prev' title='Previous Page'>&lt;</button>
+    <div class="controls">
+      <button id="btn-first" title="First Page">|&lt;</button>
+      <button id="btn-prev" title="Previous Page">&lt;</button>
       
-      <span id='page-counter' class='page-counter'>Sheet 0 of 27</span>
+      <span id="page-counter" class="page-counter">Sheet 0 of 27</span>
       
-      <button id='btn-next' title='Next Page'>&gt;</button>
-      <button id='btn-last' title='Last Page'>&gt;|</button>
+      <button id="btn-next" title="Next Page">&gt;</button>
+      <button id="btn-last" title="Last Page">&gt;|</button>
     </div>
-    <div class='secondary-controls'>
-      <button id='btn-toggle-overlay' title='Toggle Text Overlay'>Toggle Text Overlay</button>
+    <div class="secondary-controls">
+      <button id="btn-toggle-overlay" title="Toggle Text Overlay">Toggle Text Overlay</button>
     </div>
 
-    <p class='nav-hint'>Use buttons, click pages, or press Left / Right arrows</p>
+    <p class="nav-hint">Use buttons, click pages, or press Left / Right arrows</p>
   </footer>
 
   <script>
     const TOTAL_IMAGES = 54;
-    const PREFIX = 'SAAM-1978.108.';
-    const SUFFIX = '_2.jpg';
-    const FOLDER = '2/';
+    const PREFIX = "SAAM-1978.108.";
+    const SUFFIX = "_2.jpg";
+    const FOLDER = "2/";
 
-    /* Configure overlay text boxes per image index using Project Gutenberg 5th Edition text. */
+    /* Full 5th Edition Project Gutenberg text mapped across image indices starting at 7 */
    const PAGE_OVERLAYS = {
-    '7': { 
-      'top': '30%', 'left': '13%', 'width': '50%', 'height': '45%', 
-      'text': '1<br>WAKE! For the Sun, who scatter\'d into flight<br>The Stars before him from the Field of Night,<br>Drives Night along with them from Heav\'n, and strikes<br>The Sultan\'s Turret with a Shaft of Light.<br><br>2<br>Before the phantom of False morning died,<br>Methought a Voice within the Tavern cried,<br>\'When all the Temple is prepared within,\'<br>\'Why nods the drowsy Worshiper outside?\'' 
+    "7": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "1<br>WAKE! For the Sun, who scatter'd into flight<br>The Stars before him from the Field of Night,<br>Drives Night along with them from Heav'n, and strikes<br>The Sultan's Turret with a Shaft of Light.<br><br>2<br>Before the phantom of False morning died,<br>Methought a Voice within the Tavern cried,<br>'When all the Temple is prepared within,'<br>'Why nods the drowsy Worshiper outside?'<br><br>3<br>And, as the Cock crew, those who stood before<br>The Tavern shouted—'Open then the Door!'<br>You know how little while we have to stay,<br>And, once departed, may return no more.'<br><br>"
     },
-    '8': {
-      'top': '30%', 'left': '13%', 'width': '50%', 'height': '45%',
-      'text': '3<br>And, as the Cock crew, those who stood before<br>The Tavern shouted—\'Open then the Door!\'<br>You know how little while we have to stay,<br>And, once departed, may return no more.\'<br><br>4<br>Now the New Year reviving old Desires,<br>The thoughtful Soul to Solitude retires,<br>Where the WHITE HAND OF MOSES on the Bough<br>Puts out, and Jesus from the Ground suspires.'
+    "8": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "4<br>Now the New Year reviving old Desires,<br>The thoughtful Soul to Solitude retires,<br>Where the WHITE HAND OF MOSES on the Bough<br>Puts out, and Jesus from the Ground suspires.<br><br>5<br>Iram indeed is gone with all his Rose,<br>And Jamshyd's Sev'n-ring'd Cup where no one knows;<br>But still a Ruby kindles in the Vine,<br>And many a Garden by the Water blows.<br><br>6<br>And David's lips are lock'd; but in divine<br>High piping Lehra, with uncover'd twine,<br>The monumental Sasan rings—'Behold<br>Of Man's dominion how the fleeting Line!'"
     },
-    '9': {
-      'top': '30%', 'left': '13%', 'width': '50%', 'height': '45%',
-      'text': '5<br>Iram indeed is gone with all his Rose,<br>And Jamshyd\'s Sev\'n-ring\'d Cup where no one knows;<br>But still a Ruby kindles in the Vine,<br>And many a Garden by the Water blows.<br><br>6<br>And David\'s lips are lock\'d; but in divine<br>High piping Lehra, with uncover\'d twine,<br>The monumental Sasan rings—\'Behold<br>Of Man\'s dominion how the fleeting Line!\''
+    "9": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "7<br>Come, fill the Cup, and in the fire of Spring<br>Your Winter-garment of Repentance fling:<br>The Bird of Time has but a little way<br>To flutter—and the Bird is on the Wing.<br><br>8<br>Whether at Naishapur or Babylon,<br>Whether the Cup with sweet or bitter run,<br>The Wine of Life keeps oozing drop by drop,<br>The Leaves of Life keep falling one by one.<br><br>9<br>Each Morn a thousand roses brings, you say;<br>Yes, but where leaves the rose of Yesterday?<br>And this first Summer month that brings the Rose<br>Shall take Jamshyd and Kaikobad away.<br><br>10<br>Well, let it take them! What have we to do<br>With Kaikobad the Great, or Kaikhosru?<br>Let Zal and Rustum bluster as they will,<br>Or Hatim Tai cry supper—heed not you."
+    },
+    "10": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "11<br>With me along the strip of Herbage strow'd<br>That just divides the desert from the sown,<br>Where name of Slave and Sultan is forgot—<br>And Peace to Mahmud on his golden Throne!<br><br>12<br>A Book of Verses underneath the Bough,<br>A Jug of Wine, a Loaf of Bread—and Thou<br>Beside me singing in the Wilderness—<br>Oh, Wilderness were Paradise enow!"
+    },
+    "11": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "13<br>Some for the Glories of This World; and some<br>Sigh for the Prophet's Paradise to come;<br>Ah, take the Cash, and let the Credit go,<br>Nor heed the rumble of a distant Drum!<br><br>14<br>Look to the blowing Rose about us—'Lo,<br>Laughing,' she says, 'into the world I blow,<br>At once the silken tassel of my purse<br>Tear, and its treasure on the garden throw.'<br><br>15<br>And those who husbanded the Golden grain,<br>And those who flung it to the winds like Rain,<br>Alike to no such aureate Earth are turn'd<br>As, buried once, Men want dug up again.<br><br>16<br>The Worldly Hope men set their Hearts upon<br>Turns Ashes—or it prospers; and anon,<br>Like Snow upon the desert's dusty Face,<br>Lighting a little hour or two—is gone."
+    },
+    "12": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "17<br>Think, in this batter'd Caravanserai<br>Whose Portals are alternate Night and Day,<br>How Sultan after Sultan with his Pomp<br>Abode his destined Hour or Two, and went.<br><br>18<br>They say the Lion and the Lizard keep<br>The Courts where Jamshyd gloried and drank deep:<br>And Bahram, that great Hunter—the wild Ass<br>Stamps o'er his Head, but cannot break his sleep."
+    },
+    "13": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "19<br>I sometimes think that never blows so red<br>The Rose as where some buried Caesar bled;<br>That every Hyacinth the Garden wears<br>Dropped in her Lap from some once lovely Head.<br><br>20<br>And this reviving Herb whose tender Green<br>Flares glowing-green over the river's brink,<br>Ah, lightly step, ye kinsmen of the soil,<br>For it was born of some sweet beauty's lip.<br><br>21<br>Ah, my Beloved, fill the Cup that clears<br>To-day of past Regret and future Fears:<br>To-morrow?—Why, To-morrow I may be<br>With Yesterday's Sev'n Thousand Years."
+    },
+    "14": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "22<br>For some for Knowing, some for Wind, and some<br>Gasp for the Dubious Gold to come:<br>Ah, take the Cash, and let the Credit go,<br>Nor heed the music of a distant Drum!<br><br>23<br>And we, that now make merry in the Room<br>They left, and Summer dresses in new bloom,<br>Ourselves must we beneath the ground descend,<br>And o'er our heads forgetfulness consume.<br><br>24<br>Ah, make the most of what we yet may spend,<br>Before we too into the Dust descend;<br>Dust into Dust, and under Dust, to lie,<br>Sans Wine, sans Song, sans Singer, and—sans End!"
+    },
+    "15": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "25<br>Alike for those who for To-day prepare,<br>And those that after a To-morrow stare,<br>A Muezzin from the Tower of Darkness cries,<br>'Fools, your reward is neither Here nor There.'<br><br>26<br>Why, all the Saints and Sages who discuss<br>Of the Two Worlds so learnedly are such<br>As swaggering Prophets; through the door they scorn<br>Their Lives unto the dust are given—and run away.<br><br>27<br>Myself when young did eagerly frequent<br>Doctor and Saint, and heard great argument<br>About it and about: but evermore<br>Came out by the same door where in I went.<br><br>28<br>With them the seed of Wisdom did I sow,<br>And with my own hand wrought to make it grow;<br>And this was all the Harvest that I reap'd—<br>'I came like Water, and like Wind I go.'"
+    },
+    "16": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "29<br>Into this Universe, and why not knowing,<br>And waking, wind-like, as the water flowing,<br>Out of the wasteful Deep, and homeward bent,<br>There is no knowing whence, and whither going.<br><br>30<br>What, without asking, hither hurried Whence?<br>And, without asking, Whither hurried hence!<br>Oh, many a Cup of this forbidden Wine<br>Must drown the memory of that insolence!"
+    },
+    "17": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "31<br>???"
+    },
+    "18": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": ""
+    },
+    "19": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": ""
+    },
+    "20": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": ""
+    },
+    "21": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": ""
+    },
+    "22": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": ""
+    },
+    "23": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "32<br>There was the Door to which I found no Key;<br>There was the Veil through which I might not see:<br>Some little talk awhile of ME and THEE<br>There seemed—and then no more of THEE and ME.<br><br>33<br>Earth could not answer; nor the Seas that mourn<br>In flowing Purple, of their Lord forlorn;<br>And Taurus crying o'er his bulks of Hell<br>And Sunset streaming on the silent Horn."
+    },
+    "24": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "34<br>Then of the Thee in Me who works behind<br>The Veil, I lifted up my hands to find<br>A Lamp amid the Darkness; and I heard,<br>'As Hers from thine, thine eyes distinct are blind.'<br><br>35<br>Then unto Heaven erected doth appeal<br>The Secret Alchemist that turns the Wheel,<br>And on the Dust with prayerful hand doth trace<br>'I am the Potter, and I am the Clay.'"
+    },
+    "25": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "36<br>Ah, Love! could you and I with Fate conspire<br>To grasp this sorry Scheme of Things entire,<br>Would not we shatter it to bits—and then<br>Re-mould it nearer to the Heart's Desire!<br><br>37<br>Ah, Moon of my Delight who know'st no wane,<br>The Moon of Heav'n is rising once again:<br>How oft hereafter rising shall she look<br>Through this same Garden after us—in vain!"
+    },
+    "26": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "38<br>And when thyself with shining foot shall pass<br>Among the Guests Star-scattered on the Grass,<br>And in thy blissful errand reach the spot<br>Where I made One—turn down an empty Glass!'<br><br>39<br>TAMAM SHUD"
     }
    };
 
-    const book = document.getElementById('book');
-    const btnFirst = document.getElementById('btn-first');
-    const btnPrev = document.getElementById('btn-prev');
-    const btnNext = document.getElementById('btn-next');
-    const btnLast = document.getElementById('btn-last');
-    const pageCounter = document.getElementById('page-counter');
-    const btnToggleOverlay = document.getElementById('btn-toggle-overlay');
+    const book = document.getElementById("book");
+    const btnFirst = document.getElementById("btn-first");
+    const btnPrev = document.getElementById("btn-prev");
+    const btnNext = document.getElementById("btn-next");
+    const btnLast = document.getElementById("btn-last");
+    const pageCounter = document.getElementById("page-counter");
+    const btnToggleOverlay = document.getElementById("btn-toggle-overlay");
 
     let overlaysVisible = true;
-    btnToggleOverlay.addEventListener('click', () => {
+    btnToggleOverlay.addEventListener("click", () => {
       overlaysVisible = !overlaysVisible;
-      document.body.classList.toggle('overlay-hidden', !overlaysVisible);
+      document.body.classList.toggle("overlay-hidden", !overlaysVisible);
     });
 
     const totalSheets = Math.ceil(TOTAL_IMAGES / 2);
@@ -276,30 +344,30 @@
       const newHash = `#sheet=${currentSheet}`;
       if (window.location.hash !== newHash) {
         if (push) {
-          history.pushState({ sheet: currentSheet }, '', newHash);
+          history.pushState({ sheet: currentSheet }, "", newHash);
         } else {
-          history.replaceState({ sheet: currentSheet }, '', newHash);
+          history.replaceState({ sheet: currentSheet }, "", newHash);
         }
       }
     }
 
     function buildBook() {
-      book.innerHTML = '';
+      book.innerHTML = "";
 
       for (let i = 0; i < totalSheets; i++) {
         const frontIndex = i * 2 + 1;
         const backIndex = i * 2 + 2;
 
-        const sheet = document.createElement('div');
-        sheet.className = 'page';
+        const sheet = document.createElement("div");
+        sheet.className = "page";
         sheet.style.zIndex = totalSheets - i;
 
         // Front Face
-        const frontFace = document.createElement('div');
-        frontFace.className = 'page-face front';
+        const frontFace = document.createElement("div");
+        frontFace.className = "page-face front";
 
-        const frontImg = document.createElement('img');
-        frontImg.className = 'page-img';
+        const frontImg = document.createElement("img");
+        frontImg.className = "page-img";
         frontImg.src = getImageUrl(frontIndex);
         frontImg.alt = `Image ${frontIndex}`;
         frontImg.onerror = function() {
@@ -309,8 +377,8 @@
 
         if (PAGE_OVERLAYS[frontIndex]) {
           const config = PAGE_OVERLAYS[frontIndex];
-          const overlay = document.createElement('div');
-          overlay.className = 'text-overlay';
+          const overlay = document.createElement("div");
+          overlay.className = "text-overlay";
           overlay.style.top = config.top;
           overlay.style.left = config.left;
           overlay.style.width = config.width;
@@ -320,12 +388,12 @@
         }
 
         // Back Face
-        const backFace = document.createElement('div');
-        backFace.className = 'page-face back';
+        const backFace = document.createElement("div");
+        backFace.className = "page-face back";
 
         if (backIndex <= TOTAL_IMAGES) {
-          const backImg = document.createElement('img');
-          backImg.className = 'page-img';
+          const backImg = document.createElement("img");
+          backImg.className = "page-img";
           backImg.src = getImageUrl(backIndex);
           backImg.alt = `Image ${backIndex}`;
           backImg.onerror = function() {
@@ -335,8 +403,8 @@
 
           if (PAGE_OVERLAYS[backIndex]) {
             const config = PAGE_OVERLAYS[backIndex];
-            const overlay = document.createElement('div');
-            overlay.className = 'text-overlay';
+            const overlay = document.createElement("div");
+            overlay.className = "text-overlay";
             overlay.style.top = config.top;
             overlay.style.left = config.left;
             overlay.style.width = config.width;
@@ -349,7 +417,7 @@
         sheet.appendChild(frontFace);
         sheet.appendChild(backFace);
 
-        sheet.addEventListener('click', () => {
+        sheet.addEventListener("click", () => {
           if (i === currentSheet) {
             goNext();
           } else if (i === currentSheet - 1) {
@@ -362,13 +430,13 @@
     }
 
     function updateBookState(pushHistory = true) {
-      const sheets = document.querySelectorAll('.page');
+      const sheets = document.querySelectorAll(".page");
 
       sheets.forEach((sheet, index) => {
         if (index < currentSheet) {
-          sheet.classList.add('flipped');
+          sheet.classList.add("flipped");
         } else {
-          sheet.classList.remove('flipped');
+          sheet.classList.remove("flipped");
         }
 
         if (isFlipping && (index === currentSheet - 1 || index === currentSheet)) {
@@ -381,11 +449,11 @@
       });
 
       if (currentSheet === 0) {
-        book.style.transform = 'translateX(-25%)';
+        book.style.transform = "translateX(-25%)";
       } else if (currentSheet === totalSheets) {
-        book.style.transform = 'translateX(25%)';
+        book.style.transform = "translateX(25%)";
       } else {
-        book.style.transform = 'translateX(0%)';
+        book.style.transform = "translateX(0%)";
       }
 
       btnFirst.disabled = (currentSheet === 0 || isFlipping);
@@ -433,7 +501,7 @@
       }
     }
 
-    window.addEventListener('popstate', (e) => {
+    window.addEventListener("popstate", (e) => {
       const targetSheet = getSheetFromUrl();
       if (targetSheet !== currentSheet && !isFlipping) {
         currentSheet = targetSheet;
@@ -441,20 +509,20 @@
       }
     });
 
-    btnFirst.addEventListener('click', goFirst);
-    btnPrev.addEventListener('click', goPrev);
-    btnNext.addEventListener('click', goNext);
-    btnLast.addEventListener('click', goLast);
+    btnFirst.addEventListener("click", goFirst);
+    btnPrev.addEventListener("click", goPrev);
+    btnNext.addEventListener("click", goNext);
+    btnLast.addEventListener("click", goLast);
 
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener("keydown", (e) => {
       if (isFlipping) return;
-      if (e.key === 'ArrowRight') {
+      if (e.key === "ArrowRight") {
         goNext();
-      } else if (e.key === 'ArrowLeft') {
+      } else if (e.key === "ArrowLeft") {
         goPrev();
-      } else if (e.key === 'Home') {
+      } else if (e.key === "Home") {
         goFirst();
-      } else if (e.key === 'End') {
+      } else if (e.key === "End") {
         goLast();
       }
     });
