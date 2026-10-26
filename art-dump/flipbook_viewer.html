@@ -47,8 +47,8 @@
 
     /* Fixed size for a single page sheet */
     :root {
-      --page-width: 320px;
-      --page-height: 420px;
+      --page-width: 300px;
+      --page-height: 400px;
     }
 
     @media (min-width: 640px) {
@@ -190,7 +190,10 @@
 
   <header>
     <h1>Rubáiyát of Omar Khayyám, the Astronomer-Poet of Persia</h1>
-    <p class="subtitle">While looking at works by <a href="3.html">Elihu Vedder</a> I found that his most famous work is a collection of drawings for an edition of this book.<br>To allow readers to experience these drawings in their original content I've used high quality scans from the Smithsonian with an optional overlay that makes the text of the poetry more readable.<br>Note: in the original Persian these poems were not compiled into a single volume. When Edward FitzGerald compiled and translated these he took poems from many places the poet wrote.</p>
+    <p class="subtitle"><a href="1.html">Elihu Vedder's</a> most famous work may be his illustrations for Edward FitzGerald's translation of Omar Khayyám's poems. <br>
+    I wanted to experience Vedder's work in the original context so I read through the entire thing. I think Vedder's art really elevates the reading experience. Every page turn gave me something new and wonderful I didn't expect.<br>
+    When I read it I did find the text hard to make out, frequently reading the text off a second monitor (thanks Project Gutenburg!). For anyone else who finds text hard to read I've created an overlay that shows the words on the page in plain html, using high quality scans from the Smithsonian. I've added the page turning to keep the "surprise with every page".<br>
+    Note: each of these 55 four-line poems was originally written in Persian as totally self-contained poems. When FitzGerald translated them he purposely changed the wording and placed the poems in a specific order to tell one continuous story.
   </header>
 
   <div class="viewport">
@@ -223,26 +226,26 @@
 
     /* Full 5th Edition Project Gutenberg text mapped across image indices starting at 7 */
    const PAGE_OVERLAYS = {
-    "7": {
-      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": "1<br>WAKE! For the Sun, who scatter'd into flight<br>The Stars before him from the Field of Night,<br>Drives Night along with them from Heav'n, and strikes<br>The Sultan's Turret with a Shaft of Light.<br><br>2<br>Before the phantom of False morning died,<br>Methought a Voice within the Tavern cried,<br>'When all the Temple is prepared within,'<br>'Why nods the drowsy Worshiper outside?'<br><br>3<br>And, as the Cock crew, those who stood before<br>The Tavern shouted—'Open then the Door!'<br>You know how little while we have to stay,<br>And, once departed, may return no more.'<br><br>"
-    },
-    "8": {
-      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": "4<br>Now the New Year reviving old Desires,<br>The thoughtful Soul to Solitude retires,<br>Where the WHITE HAND OF MOSES on the Bough<br>Puts out, and Jesus from the Ground suspires.<br><br>5<br>Iram indeed is gone with all his Rose,<br>And Jamshyd's Sev'n-ring'd Cup where no one knows;<br>But still a Ruby kindles in the Vine,<br>And many a Garden by the Water blows.<br><br>6<br>And David's lips are lock'd; but in divine<br>High piping Lehra, with uncover'd twine,<br>The monumental Sasan rings—'Behold<br>Of Man's dominion how the fleeting Line!'"
-    },
-    "9": {
-      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": "7<br>Come, fill the Cup, and in the fire of Spring<br>Your Winter-garment of Repentance fling:<br>The Bird of Time has but a little way<br>To flutter—and the Bird is on the Wing.<br><br>8<br>Whether at Naishapur or Babylon,<br>Whether the Cup with sweet or bitter run,<br>The Wine of Life keeps oozing drop by drop,<br>The Leaves of Life keep falling one by one.<br><br>9<br>Each Morn a thousand roses brings, you say;<br>Yes, but where leaves the rose of Yesterday?<br>And this first Summer month that brings the Rose<br>Shall take Jamshyd and Kaikobad away.<br><br>10<br>Well, let it take them! What have we to do<br>With Kaikobad the Great, or Kaikhosru?<br>Let Zal and Rustum bluster as they will,<br>Or Hatim Tai cry supper—heed not you."
-    },
-    "10": {
-      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": "11<br>With me along the strip of Herbage strow'd<br>That just divides the desert from the sown,<br>Where name of Slave and Sultan is forgot—<br>And Peace to Mahmud on his golden Throne!<br><br>12<br>A Book of Verses underneath the Bough,<br>A Jug of Wine, a Loaf of Bread—and Thou<br>Beside me singing in the Wilderness—<br>Oh, Wilderness were Paradise enow!"
-    },
-    "11": {
-      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": "13<br>Some for the Glories of This World; and some<br>Sigh for the Prophet's Paradise to come;<br>Ah, take the Cash, and let the Credit go,<br>Nor heed the rumble of a distant Drum!<br><br>14<br>Look to the blowing Rose about us—'Lo,<br>Laughing,' she says, 'into the world I blow,<br>At once the silken tassel of my purse<br>Tear, and its treasure on the garden throw.'<br><br>15<br>And those who husbanded the Golden grain,<br>And those who flung it to the winds like Rain,<br>Alike to no such aureate Earth are turn'd<br>As, buried once, Men want dug up again.<br><br>16<br>The Worldly Hope men set their Hearts upon<br>Turns Ashes—or it prospers; and anon,<br>Like Snow upon the desert's dusty Face,<br>Lighting a little hour or two—is gone."
-    },
+  "7": {
+    "top": "31.5%", "left": "11.6%", "width": "29.2%", "height": "43.5%",
+    "text": "1<br>WAKE! For the Sun, who scatter'd into flight<br>The Stars before him from the Field of Night,<br>Drives Night along with them from Heav'n, and strikes<br>The Sultan's Turret with a Shaft of Light.<br><br>2<br>Before the phantom of False morning died,<br>Methought a Voice within the Tavern cried,<br>'When all the Temple is prepared within,'<br>'Why nods the drowsy Worshiper outside?'<br><br>3<br>And, as the Cock crew, those who stood before<br>The Tavern shouted—'Open then the Door!'<br>You know how little while we have to stay,<br>And, once departed, may return no more.'<br><br>"
+  },
+  "8": {
+    "top": "21.5%", "left": "38.5%", "width": "31.2%", "height": "39.5%",
+    "text": "4<br>Now the New Year reviving old Desires,<br>The thoughtful Soul to Solitude retires,<br>Where the WHITE HAND OF MOSES on the Bough<br>Puts out, and Jesus from the Ground suspires.<br><br>5<br>Iram indeed is gone with all his Rose,<br>And Jamshyd's Sev'n-ring'd Cup where no one knows;<br>But still a Ruby kindles in the Vine,<br>And many a Garden by the Water blows.<br><br>6<br>And David's lips are lock'd; but in divine<br>High piping Lehra, with uncover'd twine,<br>The monumental Sasan rings—'Behold<br>Of Man's dominion how the fleeting Line!'"
+  },
+  "9": {
+    "top": "17.5%", "left": "13.2%", "width": "31.0%", "height": "56.0%",
+    "text": "7<br>Come, fill the Cup, and in the fire of Spring<br>Your Winter-garment of Repentance fling:<br>The Bird of Time has but a little way<br>To flutter—and the Bird is on the Wing.<br><br>8<br>Whether at Naishapur or Babylon,<br>Whether the Cup with sweet or bitter run,<br>The Wine of Life keeps oozing drop by drop,<br>The Leaves of Life keep falling one by one.<br><br>9<br>Each Morn a thousand roses brings, you say;<br>Yes, but where leaves the rose of Yesterday?<br>And this first Summer month that brings the Rose<br>Shall take Jamshyd and Kaikobad away.<br><br>10<br>Well, let it take them! What have we to do<br>With Kaikobad the Great, or Kaikhosru?<br>Let Zal and Rustum bluster as they will,<br>Or Hatim Tai cry supper—heed not you."
+  },
+  "10": {
+    "top": "41.5%", "left": "36.5%", "width": "35.2%", "height": "29.2%",
+    "text": "11<br>With me along the strip of Herbage strow'd<br>That just divides the desert from the sown,<br>Where name of Slave and Sultan is forgot—<br>And Peace to Mahmud on his golden Throne!<br><br>12<br>A Book of Verses underneath the Bough,<br>A Jug of Wine, a Loaf of Bread—and Thou<br>Beside me singing in the Wilderness—<br>Oh, Wilderness were Paradise enow!"
+  },
+  "11": {
+    "top": "20.5%", "left": "20.2%", "width": "23.5%", "height": "52.8%",
+    "text": "13<br>Some for the Glories of This World; and some<br>Sigh for the Prophet's Paradise to come;<br>Ah, take the Cash, and let the Credit go,<br>Nor heed the rumble of a distant Drum!<br><br>14<br>Look to the blowing Rose about us—'Lo,<br>Laughing,' she says, 'into the world I blow,<br>At once the silken tassel of my purse<br>Tear, and its treasure on the garden throw.'<br><br>15<br>And those who husbanded the Golden grain,<br>And those who flung it to the winds like Rain,<br>Alike to no such aureate Earth are turn'd<br>As, buried once, Men want dug up again.<br><br>16<br>The Worldly Hope men set their Hearts upon<br>Turns Ashes—or it prospers; and anon,<br>Like Snow upon the desert's dusty Face,<br>Lighting a little hour or two—is gone."
+  },
     "12": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
       "text": "17<br>Think, in this batter'd Caravanserai<br>Whose Portals are alternate Night and Day,<br>How Sultan after Sultan with his Pomp<br>Abode his destined Hour or Two, and went.<br><br>18<br>They say the Lion and the Lizard keep<br>The Courts where Jamshyd gloried and drank deep:<br>And Bahram, that great Hunter—the wild Ass<br>Stamps o'er his Head, but cannot break his sleep."
@@ -269,39 +272,39 @@
     },
     "18": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": ""
+      "text": "32<br>But if in vain, down on the stubborn floor<br>Of Earth, an dup to Heav'n's unopening Door,<br>You gaze To-day, while You are You-how then<br>Tomorrow, You when shall be You no more?<br><br>33<br>Waste not your Hour, nor in the vain pursuit<br> Of This and That and endeavor and dispute;<br>Better be jocund with the fruitful Grape<br>Than sadden after none, or bitter, Fruit."
     },
     "19": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": ""
+      "text": "34<br>I tell you this—When started from Coal,<br>Over the flaming shoulders of the Foal<br>Of Heav'n Parwin and Mushtari they flung,<br>In my predestined Plot of Dust and Soul<br><br>35<br>The Vine had struck a fibre: which about<br>It clings my Being—let the Dervish flour;<br>Of my Base metal may be filed a Key,<br>That shall unlock the Door he howls without.<br><br>36<br>And this I know: whether the one True Light<br>Kindle to Love, or Wrath-Consume me quite,<br>One Flash of It within the Tavern caught<br>Better than in the Temple lost outright."
     },
     "20": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": ""
-    },
-    "21": {
-      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": ""
+      "text": "37<br>Up from Earth's Centre through the Servant's Care<br>I rose, and on the Throne of Saturn safe,<br>And many a KNot unravel'd by the Road;<br>But not the Master-knot of Human Fate.<br><br>38<br>There was the Door to which I found no Key;<br>There was the Veil through which I could not see:<br>Some little talk awhile of Me and Thee<br>There was-and then no more of Thee and Me.<br><br>39<br>Earth could not answer; nor Seas that mourn<br>In flowing Purple of their Lord forlorn;<br>Nor rolling Heaven with all his Signs reveal'd<br>ANd hidden by the sleeve of Night and Morn."
     },
     "22": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": ""
+      "text": "40<br>Then of the Thee in Me who works behind<br>The Veil, I lifted up my hands to find<br>A Lamp amid the Darkness; and I heard,<br>Astram Without-'The Me within Thee blind!'<br><br>41<br>Then to the lip of this poor earthen Urn<br>I lean'd, the Secret of my Life to learn:<br>And Lip to Lip it murmur'd—'While you live<br>Drink!—for, once dead, you never shall return.'<br><br>42<br>I think the Vessel, that with fugitive<br>Articulation answer'd, once did live,<br>And drink; and Ah! The passive Lip I kiss'd,<br>How many kisses might it take–and give!'"
     },
     "23": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": "32<br>There was the Door to which I found no Key;<br>There was the Veil through which I might not see:<br>Some little talk awhile of ME and THEE<br>There seemed—and then no more of THEE and ME.<br><br>33<br>Earth could not answer; nor the Seas that mourn<br>In flowing Purple, of their Lord forlorn;<br>And Taurus crying o'er his bulks of Hell<br>And Sunset streaming on the silent Horn."
+      "text": "43<br>For I remember stopping by the way<br>To watch a Potter thumping his wet Clay,<br>And with its all-obliteratied Tongue<br>It murmur'd-'Gently, Brother, gently, pray.'<br><br>44<br>Listen-a moment listen!-Of the same<br>Poor Earth from which that Human Whisper came<br>The luckless Mould in which Mankind was cast<br>They did compose and call'd hiim by the name.<br><br>45<br>And not a drop that from our Cups we throw<br>For Earth to drink of, but may steal below<br>To quench the fire of Anguish in some Eye<br>There hidden–far beneath, and long ago."
     },
     "24": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": "34<br>Then of the Thee in Me who works behind<br>The Veil, I lifted up my hands to find<br>A Lamp amid the Darkness; and I heard,<br>'As Hers from thine, thine eyes distinct are blind.'<br><br>35<br>Then unto Heaven erected doth appeal<br>The Secret Alchemist that turns the Wheel,<br>And on the Dust with prayerful hand doth trace<br>'I am the Potter, and I am the Clay.'"
+      "text": "46<br>As then th eTuip for her morning sup<br>Of Heav'nly Vintage from the soil looks up,<br>Do you devoutly do the like, till Heav'n<br>To Earth invert you like an empty Cup.<br><br>47<br>Perplext no more with Human or Divine,<br>To-morrow's tanlg eot the winds resign,<br>And lose your fingers in the tresses of<br>The Cypress-slender Minisiter of Wine.<br><br>48<br>And if the Wine you drink, the Lip you press,<br>End in what All begins and ends in—Yes;<br>Think then you are To-day what Yesterday<br>You were—To-morrow You shall not be less."
     },
     "25": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": "36<br>Ah, Love! could you and I with Fate conspire<br>To grasp this sorry Scheme of Things entire,<br>Would not we shatter it to bits—and then<br>Re-mould it nearer to the Heart's Desire!<br><br>37<br>Ah, Moon of my Delight who know'st no wane,<br>The Moon of Heav'n is rising once again:<br>How oft hereafter rising shall she look<br>Through this same Garden after us—in vain!"
+      "text": "49<br>So when the Angel of the Darker Drink<br>At last shall find you by the river-brink,<br>And, offering his Cup, invite your Soul<br>Forth to your Lips to quaff—you shall not strink."
     },
     "26": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": "38<br>And when thyself with shining foot shall pass<br>Among the Guests Star-scattered on the Grass,<br>And in thy blissful errand reach the spot<br>Where I made One—turn down an empty Glass!'<br><br>39<br>TAMAM SHUD"
+      "text": "50<br>Why if the Soul can fling the Dust aside,<br>And naked on the Air of Heaven ride,<br>Wer't not a Sham-wer't not a Shame for him<br>In this clay carvase crippled to abide?<br><br>51<br>'Tis but a Tent where takes his one-day's rest<br>A sultan to the realm of Death adrest;<br>The Sultan rises, and the dark Ferrash<br>Strikes, and prepares it for another Guest."
+    },
+    "27": {
+      "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+      "text": "lorem ipsum"
     }
    };
 
