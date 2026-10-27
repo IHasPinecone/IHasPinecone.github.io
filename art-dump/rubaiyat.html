@@ -84,7 +84,7 @@
       height: var(--page-height);
       transform-origin: left center;
       transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: transform var(--page-transition-duration) cubic-bezier(0.645, 0.045, 0.355, 1);
       cursor: pointer;
       user-select: none;
       will-change: transform;
@@ -238,6 +238,10 @@
     const PREFIX = "SAAM-1978.108.";
     const SUFFIX = "_2.jpg";
     const FOLDER = "2/";
+    const FLIP_DURATION = 50; //(ms)
+    
+    // Automatically sync the JS flip duration with CSS
+    document.documentElement.style.setProperty('--page-transition-duration', `${FLIP_DURATION}ms`);
 
    const PAGE_OVERLAYS = {
   "7": {
@@ -589,7 +593,7 @@ function updateBookState(targetpage, pushHistory = true) {
   totalpagesDisplay.textContent = totalpages;
   updateUrl(pushHistory);
 
-  // 3. Keep z-indexes stable during animation, then re-stack after 800ms
+  // Keep z-indexes stable during animation, then re-stack after the flip completes
   setTimeout(() => {
     pages.forEach((page, index) => {
       if (index === currentpage - 1 || index === currentpage) {
@@ -600,7 +604,7 @@ function updateBookState(targetpage, pushHistory = true) {
         page.style.zIndex = totalpages - index;
       }
     });
-  }, ANIMATION_DURATION);
+  }, FLIP_DURATION);
 }
 
 function triggerFlip(newpage) {
