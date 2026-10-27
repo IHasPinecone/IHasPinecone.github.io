@@ -45,7 +45,7 @@
       padding: 20px 0;
     }
 
-    /* Fixed size for a single page sheet */
+    /* Fixed size for a single page page */
     :root {
       --page-width: 300px;
       --page-height: 400px;
@@ -70,7 +70,7 @@
       transition: transform 0.6s ease-in-out;
     }
 
-    /* Individual sheet */
+    /* Individual page */
     .page {
       position: absolute;
       top: 0;
@@ -159,12 +159,12 @@
       user-select: none;
     }
 
-    #current-sheet-display {
+    #current-page-display {
       cursor: pointer;
       border-bottom: 1px dashed #33281a;
       padding: 0 2px;
     }
-    #current-sheet-display:hover {
+    #current-page-display:hover {
       background-color: rgba(140, 118, 83, 0.15);
     }
 
@@ -215,7 +215,7 @@
       <button id="btn-prev" title="Previous Page">&lt;</button>
       
       <span id="page-counter" class="page-counter">
-        Sheet <span id="current-sheet-display" title="Click to type sheet number">0</span> of <span id="total-sheets-display">27</span>
+        page <span id="current-page-display" title="Click to type page number">0</span> of <span id="total-pages-display">27</span>
       </span>
       
       <button id="btn-next" title="Next Page">&gt;</button>
@@ -323,8 +323,8 @@
     const btnPrev = document.getElementById("btn-prev");
     const btnNext = document.getElementById("btn-next");
     const btnLast = document.getElementById("btn-last");
-    const currentSheetDisplay = document.getElementById("current-sheet-display");
-    const totalSheetsDisplay = document.getElementById("total-sheets-display");
+    const currentpageDisplay = document.getElementById("current-page-display");
+    const totalpagesDisplay = document.getElementById("total-pages-display");
     const btnToggleOverlay = document.getElementById("btn-toggle-overlay");
 
     let overlaysVisible = true;
@@ -333,34 +333,34 @@
       document.body.classList.toggle("overlay-hidden", !overlaysVisible);
     });
 
-    const totalSheets = Math.ceil(TOTAL_IMAGES / 2);
-    let currentSheet = 0; 
-    let isEditingSheet = false;
+    const totalpages = Math.ceil(TOTAL_IMAGES / 2);
+    let currentpage = 0; 
+    let isEditingpage = false;
     const ANIMATION_DURATION = 800;
 
     function getImageUrl(index) {
       return `${FOLDER}${PREFIX}${index}${SUFFIX}`;
     }
 
-    function getSheetFromUrl() {
+    function getpageFromUrl() {
       const hash = window.location.hash;
-      const match = hash.match(/#sheet=(\d+)/);
+      const match = hash.match(/#page=(\d+)/);
       if (match) {
-        const sheetNum = parseInt(match[1], 10);
-        if (sheetNum >= 0 && sheetNum <= totalSheets) {
-          return sheetNum;
+        const pageNum = parseInt(match[1], 10);
+        if (pageNum >= 0 && pageNum <= totalpages) {
+          return pageNum;
         }
       }
       return 0;
     }
 
     function updateUrl(push = true) {
-      const newHash = `#sheet=${currentSheet}`;
+      const newHash = `#page=${currentpage}`;
       if (window.location.hash !== newHash) {
         if (push) {
-          history.pushState({ sheet: currentSheet }, "", newHash);
+          history.pushState({ page: currentpage }, "", newHash);
         } else {
-          history.replaceState({ sheet: currentSheet }, "", newHash);
+          history.replaceState({ page: currentpage }, "", newHash);
         }
       }
     }
@@ -368,13 +368,13 @@
     function buildBook() {
       book.innerHTML = "";
 
-      for (let i = 0; i < totalSheets; i++) {
+      for (let i = 0; i < totalpages; i++) {
         const frontIndex = i * 2 + 1;
         const backIndex = i * 2 + 2;
 
-        const sheet = document.createElement("div");
-        sheet.className = "page";
-        sheet.style.zIndex = totalSheets - i;
+        const page = document.createElement("div");
+        page.className = "page";
+        page.style.zIndex = totalpages - i;
 
         // Front Face
         const frontFace = document.createElement("div");
@@ -428,110 +428,110 @@
           }
         }
 
-        sheet.appendChild(frontFace);
-        sheet.appendChild(backFace);
+        page.appendChild(frontFace);
+        page.appendChild(backFace);
 
-        sheet.addEventListener("click", () => {
-          if (i === currentSheet) {
+        page.addEventListener("click", () => {
+          if (i === currentpage) {
             goNext();
-          } else if (i === currentSheet - 1) {
+          } else if (i === currentpage - 1) {
             goPrev();
           }
         });
 
-        book.appendChild(sheet);
+        book.appendChild(page);
       }
     }
 
-    function updateBookState(targetSheet, pushHistory = true) {
-      currentSheet = targetSheet;
-      const sheets = document.querySelectorAll(".page");
+    function updateBookState(targetpage, pushHistory = true) {
+      currentpage = targetpage;
+      const pages = document.querySelectorAll(".page");
 
-      sheets.forEach((sheet, index) => {
-        if (index < currentSheet) {
-          sheet.classList.add("flipped");
+      pages.forEach((page, index) => {
+        if (index < currentpage) {
+          page.classList.add("flipped");
         } else {
-          sheet.classList.remove("flipped");
+          page.classList.remove("flipped");
         }
 
-        if (index === currentSheet - 1 || index === currentSheet) {
-          sheet.style.zIndex = totalSheets + 10;
-        } else if (index < currentSheet) {
-          sheet.style.zIndex = index + 1;
+        if (index === currentpage - 1 || index === currentpage) {
+          page.style.zIndex = totalpages + 10;
+        } else if (index < currentpage) {
+          page.style.zIndex = index + 1;
         } else {
-          sheet.style.zIndex = totalSheets - index;
+          page.style.zIndex = totalpages - index;
         }
       });
 
-      if (currentSheet === 0) {
+      if (currentpage === 0) {
         book.style.transform = "translateX(-25%)";
-      } else if (currentSheet === totalSheets) {
+      } else if (currentpage === totalpages) {
         book.style.transform = "translateX(25%)";
       } else {
         book.style.transform = "translateX(0%)";
       }
 
-      btnFirst.disabled = (currentSheet === 0);
-      btnPrev.disabled = (currentSheet === 0);
-      btnNext.disabled = (currentSheet === totalSheets);
-      btnLast.disabled = (currentSheet === totalSheets);
+      btnFirst.disabled = (currentpage === 0);
+      btnPrev.disabled = (currentpage === 0);
+      btnNext.disabled = (currentpage === totalpages);
+      btnLast.disabled = (currentpage === totalpages);
 
-      currentSheetDisplay.textContent = currentSheet;
-      totalSheetsDisplay.textContent = totalSheets;
+      currentpageDisplay.textContent = currentpage;
+      totalpagesDisplay.textContent = totalpages;
       updateUrl(pushHistory);
     }
 
-    function triggerFlip(newSheet) {
-      if (newSheet < 0 || newSheet > totalSheets || newSheet === currentSheet) return;
+    function triggerFlip(newpage) {
+      if (newpage < 0 || newpage > totalpages || newpage === currentpage) return;
 
-      const sheets = document.querySelectorAll(".page");
-      if (newSheet > currentSheet) {
-        sheets[currentSheet].style.zIndex = totalSheets + 20;
+      const pages = document.querySelectorAll(".page");
+      if (newpage > currentpage) {
+        pages[currentpage].style.zIndex = totalpages + 20;
       } else {
-        sheets[newSheet].style.zIndex = totalSheets + 20;
+        pages[newpage].style.zIndex = totalpages + 20;
       }
 
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          updateBookState(newSheet, true);
+          updateBookState(newpage, true);
         });
       });
     }
 
     function goNext() {
-      if (currentSheet < totalSheets) {
-        triggerFlip(currentSheet + 1);
+      if (currentpage < totalpages) {
+        triggerFlip(currentpage + 1);
       }
     }
 
     function goPrev() {
-      if (currentSheet > 0) {
-        triggerFlip(currentSheet - 1);
+      if (currentpage > 0) {
+        triggerFlip(currentpage - 1);
       }
     }
 
     function goFirst() {
-      if (currentSheet > 0) {
+      if (currentpage > 0) {
         triggerFlip(0);
       }
     }
 
     function goLast() {
-      if (currentSheet < totalSheets) {
-        triggerFlip(totalSheets);
+      if (currentpage < totalpages) {
+        triggerFlip(totalpages);
       }
     }
 
-    // Editable Sheet Counter Logic
-    currentSheetDisplay.addEventListener("click", () => {
-      if (isEditingSheet) return;
-      isEditingSheet = true;
+    // Editable page Counter Logic
+    currentpageDisplay.addEventListener("click", () => {
+      if (isEditingpage) return;
+      isEditingpage = true;
 
       const input = document.createElement("input");
       input.type = "number";
       input.min = 0;
-      input.max = totalSheets;
-      input.value = currentSheet;
+      input.max = totalpages;
+      input.value = currentpage;
       input.style.width = "50px";
       input.style.textAlign = "center";
       input.style.font = "inherit";
@@ -539,26 +539,26 @@
       input.style.border = "1px solid #8c7653";
       input.style.borderRadius = "2px";
 
-      currentSheetDisplay.replaceWith(input);
+      currentpageDisplay.replaceWith(input);
       input.focus();
       input.select();
 
       const commitChange = () => {
-        if (!isEditingSheet) return;
-        isEditingSheet = false;
+        if (!isEditingpage) return;
+        isEditingpage = false;
 
         let val = parseInt(input.value, 10);
         if (isNaN(val)) {
-          val = currentSheet;
+          val = currentpage;
         } else {
-          val = Math.max(0, Math.min(totalSheets, val));
+          val = Math.max(0, Math.min(totalpages, val));
         }
 
-        input.replaceWith(currentSheetDisplay);
-        if (val !== currentSheet) {
+        input.replaceWith(currentpageDisplay);
+        if (val !== currentpage) {
           triggerFlip(val);
         } else {
-          updateBookState(currentSheet, false);
+          updateBookState(currentpage, false);
         }
       };
 
@@ -567,17 +567,17 @@
         if (e.key === "Enter") {
           input.blur();
         } else if (e.key === "Escape") {
-          isEditingSheet = false;
-          input.replaceWith(currentSheetDisplay);
-          updateBookState(currentSheet, false);
+          isEditingpage = false;
+          input.replaceWith(currentpageDisplay);
+          updateBookState(currentpage, false);
         }
       });
     });
 
     window.addEventListener("popstate", (e) => {
-      const targetSheet = getSheetFromUrl();
-      if (targetSheet !== currentSheet) {
-        updateBookState(targetSheet, false);
+      const targetpage = getpageFromUrl();
+      if (targetpage !== currentpage) {
+        updateBookState(targetpage, false);
       }
     });
 
@@ -601,9 +601,9 @@
       }
     });
 
-    currentSheet = getSheetFromUrl();
+    currentpage = getpageFromUrl();
     buildBook();
-    updateBookState(currentSheet, false);
+    updateBookState(currentpage, false);
   </script>
 </body>
 </html>
