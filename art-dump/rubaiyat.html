@@ -240,8 +240,8 @@
     const FOLDER = "2/";
     const FLIP_DURATION = 50; //(ms)
     
-    // Automatically sync the JS flip duration with CSS
-    document.documentElement.style.setProperty('--page-transition-duration', `${FLIP_DURATION}ms`);
+    // Automatically sync the CSS transition duration with ANIMATION_DURATION
+    document.documentElement.style.setProperty('--page-transition-duration', `${ANIMATION_DURATION}ms`);
 
    const PAGE_OVERLAYS = {
   "7": {
@@ -562,70 +562,76 @@
 
     let isAnimating = false;
 
-function updateBookState(targetpage, pushHistory = true) {
-  const previouspage = currentpage;
-  currentpage = targetpage;
-  const pages = document.querySelectorAll(".page");
+let currentpage = 0; 
+    let isEditingpage = false;
+    let lastFlipTime = 0; // Track when the last flip was triggered
 
-  // 1. Immediately trigger the flip transform on the turning page
-  pages.forEach((page, index) => {
-    if (index < currentpage) {
-      page.classList.add("flipped");
-    } else {
-      page.classList.remove("flipped");
-    }
-  });
+    // ... (keep buildBook, updateUrl, getImageUrl, etc.)
 
-  // 2. Adjust overall book alignment & buttons immediately
-  if (currentpage === 0) {
-    book.style.transform = "translateX(-25%)";
-  } else if (currentpage === totalpages) {
-    book.style.transform = "translateX(25%)";
-  } else {
-    book.style.transform = "translateX(0%)";
-  }
+    function updateBookState(targetpage, pushHistory = true) {
+      currentpage = targetpage;
+      const pages = document.querySelectorAll(".page");
 
-  btnFirst.disabled = (currentpage === 0);
-  btnPrev.disabled = (currentpage === 0);
-  btnNext.disabled = (currentpage === totalpages);
-  btnLast.disabled = (currentpage === totalpages);
+      pages.forEach((page, index) => {
+        if (index < currentpage) {
+          page.classList.add("flipped");
+        } else {
+          page.classList.remove("flipped");
+        }
+      });
 
-  currentpageDisplay.textContent = currentpage;
-  totalpagesDisplay.textContent = totalpages;
-  updateUrl(pushHistory);
-
-  // Keep z-indexes stable during animation, then re-stack after the flip completes
-  setTimeout(() => {
-    pages.forEach((page, index) => {
-      if (index === currentpage - 1 || index === currentpage) {
-        page.style.zIndex = totalpages + 10;
-      } else if (index < currentpage) {
-        page.style.zIndex = index + 1;
+      if (currentpage === 0) {
+        book.style.transform = "translateX(-25%)";
+      } else if (currentpage === totalpages) {
+        book.style.transform = "translateX(25%)";
       } else {
-        page.style.zIndex = totalpages - index;
+        book.style.transform = "translateX(0%)";
       }
-    });
-  }, FLIP_DURATION);
-}
 
-function triggerFlip(newpage) {
-  if (newpage < 0 || newpage > totalpages || newpage === currentpage) return;
+      btnFirst.disabled = (currentpage === 0);
+      btnPrev.disabled = (currentpage === 0);
+      btnNext.disabled = (currentpage === totalpages);
+      btnLast.disabled = (currentpage === totalpages);
 
-  const pages = document.querySelectorAll(".page");
-  
-  // Elevate ONLY the active turning page to top z-index before animating
-  if (newpage > currentpage) {
-    pages[currentpage].style.zIndex = totalpages + 20;
-  } else {
-    pages[newpage].style.zIndex = totalpages + 20;
-  }
+      currentpageDisplay.textContent = currentpage;
+      totalpagesDisplay.textContent = totalpages;
+      updateUrl(pushHistory);
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      updateBookState(newpage, true);
-    });
-  });
-}
+      // Re-stack z-indexes after the visual animation finishes
+      setTimeout(() => {
+        pages.forEach((page, index) => {
+          if (index === currentpage - 1 || index === currentpage) {
+            page.style.zIndex = totalpages + 10;
+          } else if (index < currentpage) {
+            page.style.zIndex = index + 1;
+          } else {
+            page.style.zIndex = totalpages - index;
+          }
+        });
+      }, ANIMATION_DURATION);
+    }
+
+    function triggerFlip(newpage) {
+      if (newpage < 0 || newpage > totalpages || newpage === currentpage) return;
+
+      const now = Date.now();
+      // Enforce the independent flip rate limit / cooldown
+      if (now - lastFlipTime < FLIP_RATE_LIMIT) return;
+      lastFlipTime = now;
+
+      const pages = document.querySelectorAll(".page");
+      if (newpage > currentpage) {
+        pages[currentpage].style.zIndex = totalpages + 20;
+      } else {
+        pages[newpage].style.zIndex = totalpages + 20;
+      }
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          updateBookState(newpage, true);
+        });
+      });
+    }
     
     function goNext() {
       if (currentpage < totalpages) {
