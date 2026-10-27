@@ -159,6 +159,15 @@
       user-select: none;
     }
 
+    #current-sheet-display {
+      cursor: pointer;
+      border-bottom: 1px dashed #33281a;
+      padding: 0 2px;
+    }
+    #current-sheet-display:hover {
+      background-color: rgba(140, 118, 83, 0.15);
+    }
+
     .nav-hint {
       font-size: 0.8rem;
       color: #665235;
@@ -205,7 +214,9 @@
       <button id="btn-first" title="First Page">|&lt;</button>
       <button id="btn-prev" title="Previous Page">&lt;</button>
       
-      <span id="page-counter" class="page-counter">Sheet 0 of 27</span>
+      <span id="page-counter" class="page-counter">
+        Sheet <span id="current-sheet-display" title="Click to type sheet number">0</span> of <span id="total-sheets-display">27</span>
+      </span>
       
       <button id="btn-next" title="Next Page">&gt;</button>
       <button id="btn-last" title="Last Page">&gt;|</button>
@@ -283,7 +294,7 @@
     },
     "22": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": "40<br>Then of the Thee in Me who works behind<br>The Veil, I lifted up my hands to find<br>A Lamp amid the Darkness; and I heard,<br>Astram Without-'The Me within Thee blind!'<br><br>41<br>Then to the lip of this poor earthen Urn<br>I lean'd, the Secret of my Life to learn:<br>And Lip to Lip it murmur'd—'While you live<br>Drink!—for, once dead, you never shall return.'<br><br>42<br>I think the Vessel, that with fugitive<br>Articulation answer'*d, once did live,<br>And drink; and Ah! The passive Lip I kiss'd,<br>How many kisses might it take–and give!'"
+      "text": "40<br>Then of the Thee in Me who works behind<br>The Veil, I lifted up my hands to find<br>A Lamp amid the Darkness; and I heard,<br>Astram Without-'The Me within Thee blind!'<br><br>41<br>Then to the lip of this poor earthen Urn<br>I lean'd, the Secret of my Life to learn:<br>And Lip to Lip it murmur'd—'While you live<br>Drink!—for, once dead, you never shall return.'<br><br>42<br>I think the Vessel, that with fugitive<br>Articulation answer'd, once did live,<br>And drink; and Ah! The passive Lip I kiss'd,<br>How many kisses might it take–and give!'"
     },
     "23": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
@@ -312,7 +323,8 @@
     const btnPrev = document.getElementById("btn-prev");
     const btnNext = document.getElementById("btn-next");
     const btnLast = document.getElementById("btn-last");
-    const pageCounter = document.getElementById("page-counter");
+    const currentSheetDisplay = document.getElementById("current-sheet-display");
+    const totalSheetsDisplay = document.getElementById("total-sheets-display");
     const btnToggleOverlay = document.getElementById("btn-toggle-overlay");
 
     let overlaysVisible = true;
@@ -323,6 +335,7 @@
 
     const totalSheets = Math.ceil(TOTAL_IMAGES / 2);
     let currentSheet = 0; 
+    let isEditingSheet = false;
     const ANIMATION_DURATION = 800;
 
     function getImageUrl(index) {
@@ -463,14 +476,14 @@
       btnNext.disabled = (currentSheet === totalSheets);
       btnLast.disabled = (currentSheet === totalSheets);
 
-      pageCounter.textContent = `Sheet ${currentSheet} of ${totalSheets}`;
+      currentSheetDisplay.textContent = currentSheet;
+      totalSheetsDisplay.textContent = totalSheets;
       updateUrl(pushHistory);
     }
 
     function triggerFlip(newSheet) {
       if (newSheet < 0 || newSheet > totalSheets || newSheet === currentSheet) return;
 
-      // Temporarily adjust stacking order of the active turning sheet to guarantee correct overlap during transition
       const sheets = document.querySelectorAll(".page");
       if (newSheet > currentSheet) {
         sheets[currentSheet].style.zIndex = totalSheets + 20;
@@ -478,8 +491,6 @@
         sheets[newSheet].style.zIndex = totalSheets + 20;
       }
 
-      // Allow the current layout frame to paint completely before adding/modifying classes,
-      // fixing the immediate image switch flash frame before animation starts.
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           updateBookState(newSheet, true);
@@ -511,6 +522,58 @@
       }
     }
 
+    // Editable Sheet Counter Logic
+    currentSheetDisplay.addEventListener("click", () => {
+      if (isEditingSheet) return;
+      isEditingSheet = true;
+
+      const input = document.createElement("input");
+      input.type = "number";
+      input.min = 0;
+      input.max = totalSheets;
+      input.value = currentSheet;
+      input.style.width = "50px";
+      input.style.textAlign = "center";
+      input.style.font = "inherit";
+      input.style.background = "#fcf8ec";
+      input.style.border = "1px solid #8c7653";
+      input.style.borderRadius = "2px";
+
+      currentSheetDisplay.replaceWith(input);
+      input.focus();
+      input.select();
+
+      const commitChange = () => {
+        if (!isEditingSheet) return;
+        isEditingSheet = false;
+
+        let val = parseInt(input.value, 10);
+        if (isNaN(val)) {
+          val = currentSheet;
+        } else {
+          val = Math.max(0, Math.min(totalSheets, val));
+        }
+
+        input.replaceWith(currentSheetDisplay);
+        if (val !== currentSheet) {
+          triggerFlip(val);
+        } else {
+          updateBookState(currentSheet, false);
+        }
+      };
+
+      input.addEventListener("blur", commitChange);
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          input.blur();
+        } else if (e.key === "Escape") {
+          isEditingSheet = false;
+          input.replaceWith(currentSheetDisplay);
+          updateBookState(currentSheet, false);
+        }
+      });
+    });
+
     window.addEventListener("popstate", (e) => {
       const targetSheet = getSheetFromUrl();
       if (targetSheet !== currentSheet) {
@@ -524,6 +587,9 @@
     btnLast.addEventListener("click", goLast);
 
     document.addEventListener("keydown", (e) => {
+      // Don't trigger book navigation shortcuts if user is typing in an input
+      if (e.target.tagName === "INPUT") return;
+
       if (e.key === "ArrowRight") {
         goNext();
       } else if (e.key === "ArrowLeft") {
