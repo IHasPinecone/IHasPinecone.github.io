@@ -283,7 +283,7 @@
     },
     "22": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-      "text": "40<br>Then of the Thee in Me who works behind<br>The Veil, I lifted up my hands to find<br>A Lamp amid the Darkness; and I heard,<br>Astram Without-'The Me within Thee blind!'<br><br>41<br>Then to the lip of this poor earthen Urn<br>I lean'd, the Secret of my Life to learn:<br>And Lip to Lip it murmur'd—'While you live<br>Drink!—for, once dead, you never shall return.'<br><br>42<br>I think the Vessel, that with fugitive<br>Articulation answer'd, once did live,<br>And drink; and Ah! The passive Lip I kiss'd,<br>How many kisses might it take–and give!'"
+      "text": "40<br>Then of the Thee in Me who works behind<br>The Veil, I lifted up my hands to find<br>A Lamp amid the Darkness; and I heard,<br>Astram Without-'The Me within Thee blind!'<br><br>41<br>Then to the lip of this poor earthen Urn<br>I lean'd, the Secret of my Life to learn:<br>And Lip to Lip it murmur'd—'While you live<br>Drink!—for, once dead, you never shall return.'<br><br>42<br>I think the Vessel, that with fugitive<br>Articulation answer'*d, once did live,<br>And drink; and Ah! The passive Lip I kiss'd,<br>How many kisses might it take–and give!'"
     },
     "23": {
       "top": "25%", "left": "13%", "width": "75%", "height": "60%",
@@ -323,7 +323,6 @@
 
     const totalSheets = Math.ceil(TOTAL_IMAGES / 2);
     let currentSheet = 0; 
-    let isFlipping = false; 
     const ANIMATION_DURATION = 800;
 
     function getImageUrl(index) {
@@ -431,7 +430,8 @@
       }
     }
 
-    function updateBookState(pushHistory = true) {
+    function updateBookState(targetSheet, pushHistory = true) {
+      currentSheet = targetSheet;
       const sheets = document.querySelectorAll(".page");
 
       sheets.forEach((sheet, index) => {
@@ -441,7 +441,7 @@
           sheet.classList.remove("flipped");
         }
 
-        if (isFlipping && (index === currentSheet - 1 || index === currentSheet)) {
+        if (index === currentSheet - 1 || index === currentSheet) {
           sheet.style.zIndex = totalSheets + 10;
         } else if (index < currentSheet) {
           sheet.style.zIndex = index + 1;
@@ -458,56 +458,63 @@
         book.style.transform = "translateX(0%)";
       }
 
-      btnFirst.disabled = (currentSheet === 0 || isFlipping);
-      btnPrev.disabled = (currentSheet === 0 || isFlipping);
-      btnNext.disabled = (currentSheet === totalSheets || isFlipping);
-      btnLast.disabled = (currentSheet === totalSheets || isFlipping);
+      btnFirst.disabled = (currentSheet === 0);
+      btnPrev.disabled = (currentSheet === 0);
+      btnNext.disabled = (currentSheet === totalSheets);
+      btnLast.disabled = (currentSheet === totalSheets);
 
       pageCounter.textContent = `Sheet ${currentSheet} of ${totalSheets}`;
       updateUrl(pushHistory);
     }
 
-    function triggerFlip(action) {
-      if (isFlipping) return;
-      isFlipping = true;
-      action();
-      updateBookState(true);
-      
-      setTimeout(() => {
-        isFlipping = false;
-        updateBookState(false);
-      }, ANIMATION_DURATION);
+    function triggerFlip(newSheet) {
+      if (newSheet < 0 || newSheet > totalSheets || newSheet === currentSheet) return;
+
+      // Temporarily adjust stacking order of the active turning sheet to guarantee correct overlap during transition
+      const sheets = document.querySelectorAll(".page");
+      if (newSheet > currentSheet) {
+        sheets[currentSheet].style.zIndex = totalSheets + 20;
+      } else {
+        sheets[newSheet].style.zIndex = totalSheets + 20;
+      }
+
+      // Allow the current layout frame to paint completely before adding/modifying classes,
+      // fixing the immediate image switch flash frame before animation starts.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          updateBookState(newSheet, true);
+        });
+      });
     }
 
     function goNext() {
-      if (currentSheet < totalSheets && !isFlipping) {
-        triggerFlip(() => { currentSheet++; });
+      if (currentSheet < totalSheets) {
+        triggerFlip(currentSheet + 1);
       }
     }
 
     function goPrev() {
-      if (currentSheet > 0 && !isFlipping) {
-        triggerFlip(() => { currentSheet--; });
+      if (currentSheet > 0) {
+        triggerFlip(currentSheet - 1);
       }
     }
 
     function goFirst() {
-      if (currentSheet > 0 && !isFlipping) {
-        triggerFlip(() => { currentSheet = 0; });
+      if (currentSheet > 0) {
+        triggerFlip(0);
       }
     }
 
     function goLast() {
-      if (currentSheet < totalSheets && !isFlipping) {
-        triggerFlip(() => { currentSheet = totalSheets; });
+      if (currentSheet < totalSheets) {
+        triggerFlip(totalSheets);
       }
     }
 
     window.addEventListener("popstate", (e) => {
       const targetSheet = getSheetFromUrl();
-      if (targetSheet !== currentSheet && !isFlipping) {
-        currentSheet = targetSheet;
-        updateBookState(false);
+      if (targetSheet !== currentSheet) {
+        updateBookState(targetSheet, false);
       }
     });
 
@@ -517,7 +524,6 @@
     btnLast.addEventListener("click", goLast);
 
     document.addEventListener("keydown", (e) => {
-      if (isFlipping) return;
       if (e.key === "ArrowRight") {
         goNext();
       } else if (e.key === "ArrowLeft") {
@@ -531,7 +537,7 @@
 
     currentSheet = getSheetFromUrl();
     buildBook();
-    updateBookState(false);
+    updateBookState(currentSheet, false);
   </script>
 </body>
 </html>
