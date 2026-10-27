@@ -239,6 +239,8 @@
     const SUFFIX = "_2.jpg";
     const FOLDER = "2/";
     const FLIP_DURATION = 50; //(ms)
+    const ANIMATION_DURATION = 800;
+    const FLIP_RATE_LIMIT = 200;
     
     // Automatically sync the CSS transition duration with ANIMATION_DURATION
     document.documentElement.style.setProperty('--page-transition-duration', `${ANIMATION_DURATION}ms`);
@@ -452,8 +454,7 @@
     const totalpages = Math.ceil(TOTAL_IMAGES / 2);
     let currentpage = 0; 
     let isEditingpage = false;
-    const ANIMATION_DURATION = 800;
-    const FLIP_RATE_LIMIT = 200;
+    
 
     function getImageUrl(index) {
       return `${FOLDER}${PREFIX}${index}${SUFFIX}`;
