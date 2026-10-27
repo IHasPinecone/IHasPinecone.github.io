@@ -128,8 +128,7 @@ window.extraTables_November2026 = {
     "at Costco",
     "at Hobby Lobby",
     "at a local brewery that almost went out of business due to backtaxes",
-    "between night and day".
-    
+    "between night and day"    
   ],
   topic: [
     "my English copy of the voynich manuscript",
