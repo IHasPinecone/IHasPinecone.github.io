@@ -77,7 +77,7 @@ const baseTables = {
     "my friend that has a boat",
     "my friend that doesn't have a car",
     "my boss",
-    "my AI girlfriend",
+    "my LLM",
     "a redditor",
     "a professional singer",
     "my old professor",
