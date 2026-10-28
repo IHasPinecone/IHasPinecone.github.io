@@ -246,7 +246,7 @@
     // Automatically sync the CSS transition duration with ANIMATION_DURATION
     document.documentElement.style.setProperty('--page-transition-duration', `${ANIMATION_DURATION}ms`);
 
-   const PAGE_OVERLAYS = {
+    const PAGE_OVERLAYS = {
   "7": {
     "top": "31.5%", "left": "11.6%", "width": "60%", "height": "43.5%",
     "text": "1<br>WAKE! For the Sun, who scatter'd into flight<br>The Stars before him from the Field of Night,<br>Drives Night along with them from Heav'n, and strikes<br>The Sultan's Turret with a Shaft of Light.<br><br>2<br>Before the phantom of False morning died,<br>Methought a Voice within the Tavern cried,<br>'When all the Temple is prepared within,'<br>'Why nods the drowsy Worshiper outside?'<br><br>3<br>And, as the Cock crew, those who stood before<br>The Tavern shouted—'Open then the Door!'<br>You know how little while we have to stay,<br>And, once departed, may return no more.'<br><br>"
@@ -264,67 +264,182 @@
     "text": "11<br>With me along the strip of Herbage strow'd<br>That just divides the desert from the sown,<br>Where name of Slave and Sultan is forgot—<br>And Peace to Mahmud on his golden Throne!<br><br>12<br>A Book of Verses underneath the Bough,<br>A Jug of Wine, a Loaf of Bread—and Thou<br>Beside me singing in the Wilderness—<br>Oh, Wilderness were Paradise enow!"
   },
   "11": {
-    "top": "21%", "left": "20%", "width": "36%", "height": "51%",
+    "top": "21.0%", "left": "20.0%", "width": "36.0%", "height": "51.0%",
     "text": "13<br>Some for the Glories of This World; and some<br>Sigh for the Prophet's Paradise to come;<br>Ah, take the Cash, and let the Credit go,<br>Nor heed the rumble of a distant Drum!<br><br>14<br>Look to the blowing Rose about us—'Lo,<br>Laughing,' she says, 'into the world I blow,<br>At once the silken tassel of my purse<br>Tear, and its treasure on the garden throw.'<br><br>15<br>And those who husbanded the Golden grain,<br>And those who flung it to the winds like Rain,<br>Alike to no such aureate Earth are turn'd<br>As, buried once, Men want dug up again.<br><br>16<br>The Worldly Hope men set their Hearts upon<br>Turns Ashes—or it prospers; and anon,<br>Like Snow upon the desert's dusty Face,<br>Lighting a little hour or two—is gone."
   },
   "12": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
     "text": "17<br>Think, in this batter'd Caravanserai<br>Whose Portals are alternate Night and Day,<br>How Sultan after Sultan with his Pomp<br>Abode his destined Hour or Two, and went.<br><br>18<br>They say the Lion and the Lizard keep<br>The Courts where Jamshyd gloried and drank deep:<br>And Bahram, that great Hunter—the wild Ass<br>Stamps o'er his Head, but cannot break his sleep."
   },
   "13": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
     "text": "19<br>I sometimes think that never blows so red<br>The Rose as where some buried Caesar bled;<br>That every Hyacinth the Garden wears<br>Dropped in her Lap from some once lovely Head.<br><br>20<br>And this reviving Herb whose tender Green<br>Flares glowing-green over the river's brink,<br>Ah, lightly step, ye kinsmen of the soil,<br>For it was born of some sweet beauty's lip.<br><br>21<br>Ah, my Beloved, fill the Cup that clears<br>To-day of past Regret and future Fears:<br>To-morrow?—Why, To-morrow I may be<br>With Yesterday's Sev'n Thousand Years."
   },
   "14": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
     "text": "22<br>For some for Knowing, some for Wind, and some<br>Gasp for the Dubious Gold to come:<br>Ah, take the Cash, and let the Credit go,<br>Nor heed the music of a distant Drum!<br><br>23<br>And we, that now make merry in the Room<br>They left, and Summer dresses in new bloom,<br>Ourselves must we beneath the ground descend,<br>And o'er our heads forgetfulness consume.<br><br>24<br>Ah, make the most of what we yet may spend,<br>Before we too into the Dust descend;<br>Dust into Dust, and under Dust, to lie,<br>Sans Wine, sans Song, sans Singer, and—sans End!"
   },
   "15": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
     "text": "25<br>Alike for those who for To-day prepare,<br>And those that after a To-morrow stare,<br>A Muezzin from the Tower of Darkness cries,<br>'Fools, your reward is neither Here nor There.'<br><br>26<br>Why, all the Saints and Sages who discuss<br>Of the Two Worlds so learnedly are such<br>As swaggering Prophets; through the door they scorn<br>Their Lives unto the dust are given—and run away.<br><br>27<br>Myself when young did eagerly frequent<br>Doctor and Saint, and heard great argument<br>About it and about: but evermore<br>Came out by the same door where in I went.<br><br>28<br>With them the seed of Wisdom did I sow,<br>And with my own hand wrought to make it grow;<br>And this was all the Harvest that I reap'd—<br>'I came like Water, and like Wind I go.'"
   },
   "16": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
     "text": "29<br>Into this Universe, and why not knowing,<br>And waking, wind-like, as the water flowing,<br>Out of the wasteful Deep, and homeward bent,<br>There is no knowing whence, and whither going.<br><br>30<br>What, without asking, hither hurried Whence?<br>And, without asking, Whither hurried hence!<br>Oh, many a Cup of this forbidden Wine<br>Must drown the memory of that insolence!"
   },
   "17": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
     "text": "31<br>???"
   },
   "18": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-    "text": "32<br>But if in vain, down on the stubborn floor<br>Of Earth, an dup to Heav'n's unopening Door,<br>You gaze To-day, while You are You-how then<br>Tomorrow, You when shall be You no more?<br><br>33<br>Waste not your Hour, nor in the vain pursuit<br> Of This and That and endeavor and dispute;<br>Better be jocund with the fruitful Grape<br>Than sadden after none, or bitter, Fruit."
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "32<br>But if in vain, down on the stubborn floor<br>Of Earth, an dup to Heav'n's unopening Door,<br>You gaze To-day, while You are You-how then<br>Tomorrow, You when shall be You no more?<br><br>33<br>Waste not your Hour, nor in the vain pursuit<br>Of This and That and endeavor and dispute;<br>Better be jocund with the fruitful Grape<br>Than sadden after none, or bitter, Fruit."
   },
   "19": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
     "text": "34<br>I tell you this—When started from Coal,<br>Over the flaming shoulders of the Foal<br>Of Heav'n Parwin and Mushtari they flung,<br>In my predestined Plot of Dust and Soul<br><br>35<br>The Vine had struck a fibre: which about<br>It clings my Being—let the Dervish flour;<br>Of my Base metal may be filed a Key,<br>That shall unlock the Door he howls without.<br><br>36<br>And this I know: whether the one True Light<br>Kindle to Love, or Wrath-Consume me quite,<br>One Flash of It within the Tavern caught<br>Better than in the Temple lost outright."
   },
   "20": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
     "text": "37<br>Up from Earth's Centre through the Servant's Care<br>I rose, and on the Throne of Saturn safe,<br>And many a KNot unravel'd by the Road;<br>But not the Master-knot of Human Fate.<br><br>38<br>There was the Door to which I found no Key;<br>There was the Veil through which I could not see:<br>Some little talk awhile of Me and Thee<br>There was-and then no more of Thee and Me.<br><br>39<br>Earth could not answer; nor Seas that mourn<br>In flowing Purple of their Lord forlorn;<br>Nor rolling Heaven with all his Signs reveal'd<br>ANd hidden by the sleeve of Night and Morn."
   },
+  "21": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "39.5<br>And if indeed the Dust, o'er which we trod,<br>In Kingburn met, was bullion once and god,<br>Ah, lightly step, ye kinsmen of the soil,<br>For it was born of some sweet beauty's lip."
+  },
   "22": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-    "text": "40<br>Then of the Thee in Me who works behind<br>The Veil, I lifted up my hands to find<br>A Lamp amid the Darkness; and I heard,<br>Astram Without-'The Me within Thee blind!'<br><br>41<br>Then to the lip of this poor earthen Urn<br>I lean'd, the Secret of my Life to learn:<br>And Lip to Lip it murmur'd—'While you live<br>Drink!—for, once dead, you never shall return.'<br><br>42<br>I think the Vessel, that with fugitive<br>Articulation answer'd, once did live,<br>And drink; and Ah! The passive Lip I kiss'ž,<br>How many kisses might it take–and give!'"
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "40<br>Then of the Thee in Me who works behind<br>The Veil, I lifted up my hands to find<br>A Lamp amid the Darkness; and I heard,<br>Astram Without-'The Me within Thee blind!'<br><br>41<br>Then to the lip of this poor earthen Urn<br>I lean'd, the Secret of my Life to learn:<br>And Lip to Lip it murmur'd—'While you live<br>Drink!—for, once dead, you never shall return.'<br><br>42<br>I think the Vessel, that with fugitive<br>Articulation answer'd, once did live,<br>And drink; and Ah! The passive Lip I kiss'd,<br>How many kisses might it take—and give!'"
   },
   "23": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-    "text": "43<br>For I remember stopping by the way<br>To watch a Potter thumping his wet Clay,<br>And with its all-obliteratied Tongue<br>It murmur'd—'Gently, Brother, gently, pray.'<br><br>44<br>Listen-a moment listen!-Of the same<br>Poor Earth from which that Human Whisper came<br>The luckless Mould in which Mankind was cast<br>They did compose and call'd hiim by the name.<br><br>45<br>And not a drop that from our Cups we throw<br>For Earth to drink of, but may steal below<br>To quench the fire of Anguish in some Eye<br>There hidden–far beneath, and long ago."
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "43<br>For I remember stopping by the way<br>To watch a Potter thumping his wet Clay,<br>And with its all-obliterated Tongue<br>It murmur'd—'Gently, Brother, gently, pray.'<br><br>44<br>Listen—a moment listen!—Of the same<br>Poor Earth from which that Human Whisper came<br>The luckless Mould in which Mankind was cast<br>They did compose and call'd him by the name.<br><br>45<br>And not a drop that from our Cups we throw<br>For Earth to drink of, but may steal below<br>To quench the fire of Anguish in some Eye<br>There hidden—far beneath, and long ago."
   },
   "24": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-    "text": "46<br>As then th eTuip for her morning sup<br>Of Heav'nly Vintage from the soil looks up,<br>Do you devoutly do the like, till Heav'n<br>To Earth invert you like an empty Cup.<br><br>47<br>Perplext no more with Human or Divine,<br>To-morrow's tanlg eot the winds resign,<br>And lose your fingers in the tresses of<br>The Cypress-slender Minisiter of Wine.<br><br>48<br>And if the Wine you drink, the Lip you press,<br>End in what All begins and ends in—Yes;<br>Think then you are To-day what Yesterday<br>You were—To-morrow You shall not be less."
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "46<br>As then the Tulip for her morning sup<br>Of Heav'nly Vintage from the soil looks up,<br>Do you devoutly do the like, till Heav'n<br>To Earth invert you like an empty Cup.<br><br>47<br>Perplext no more with Human or Divine,<br>To-morrow's tangle to the winds resign,<br>And lose your fingers in the tresses of<br>The Cypress-slender Minister of Wine.<br><br>48<br>And if the Wine you drink, the Lip you press,<br>End in what All begins and ends in—Yes;<br>Think then you are To-day what Yesterday<br>You were—To-morrow You shall not be less."
   },
   "25": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-    "text": "49<br>So when the Angel of the Darker Drink<br>At last shall find you by the river-brink,<br>And, offering his Cup, invite your Soul<br>Forth to your Lips to quaff—you shall not strink."
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "49<br>So when the Angel of the Darker Drink<br>At last shall find you by the river-brink,<br>And, offering his Cup, invite your Soul<br>Forth to your Lips to quaff—you shall not shrink."
   },
   "26": {
-    "top": "25%", "left": "13%", "width": "75%", "height": "60%",
-    "text": "50<br>Why if the Soul can fling the Dust aside,<br>And naked on the Air of Heaven ride,<br>Wer't not a Sham-wer't not a Shame for him<br>In this clay carvase crippled to abide?<br><br>51<br>'Tis but a Tent where takes his one-day's rest<br>A sultan to the realm of Death adrest;<br>The Sultan rises, and the dark Ferrash<br>Strikes, and prepares it for another Guest."
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "50<br>Why if the Soul can fling the Dust aside,<br>And naked on the Air of Heaven ride,<br>Wer't not a Shame—wer't not a Shame for him<br>In this clay carcase crippled to abide?<br><br>51<br>'Tis but a Tent where takes his one-day's rest<br>A Sultan to the realm of Death adrest;<br>The Sultan rises, and the dark Ferrash<br>Strikes, and prepares it for another Guest."
+  },
+  "27": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "52<br>And David's lips are lock'd; but in divine<br>High piping Lehra, with uncover'd twine,<br>The monumental Sasan rings—'Behold<br>Of Man's dominion how the fleeting Line!'"
+  },
+  "28": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "53<br>The Ball no question makes of Ayes and Noes,<br>But Right or Left as strikes the Player goes;<br>And He that toss'd you down into the Field,<br>He knows about it all—HE knows—HE knows!"
+  },
+  "29": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "54<br>The Moving Finger writes; and, having writ,<br>Moves on: nor all your Piety nor Wit<br>Shall lure it back to cancel half a Line,<br>Nor all your Tears wash out a Word of it."
+  },
+  "30": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "55<br>And that inverted Bowl they call the Sky,<br>Whereunder crawling coop'd we live and die,<br>Lift not your hands to It for help—for It<br>As impotently rolls as you or I."
+  },
+  "31": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "56<br>With Earth's first Clay They did the Last Man knead,<br>And there of the Last Harvest sow'd the Seed:<br>And the first Morning of Creation wrote<br>What the Last Dawn of Reckoning shall read."
+  },
+  "32": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "57<br>Yesterday This Day's Madness did prepare;<br>To-morrow's Silence, Triumph, or Despair:<br>Drink! for you know not whence you came, nor why:<br>Drink! for you know not why you go, nor where."
+  },
+  "33": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "58<br>I tell you this—When, started from the Goal,<br>Over the flaming shoulders of the Foal<br>Of Heav'n Parwin and Mushtari they flung,<br>In my predestined Plot of Dust and Soul"
+  },
+  "34": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "59<br>The Vine had struck a fibre: which about<br>It clings my Being—let the Dervish flout;<br>Of my Base metal may be filed a Key,<br>That shall unlock the Door he howls without."
+  },
+  "35": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "60<br>And this I know: whether the one True Light<br>Kindle to Love, or Wrath-consume me quite,<br>One Flash of It within the Tavern caught<br>Better than in the Temple lost outright."
+  },
+  "36": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "61<br>What! out of senseless Nothing to provoke<br>A conscious Something to resent the yoke<br>Of unpermitted Pleasure, under pain<br>Of Everlasting Penalties, if broke!"
+  },
+  "37": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "62<br>What! did the General Contractors pay<br>The Postage on the Packet desolate,<br>And send me back to be a part of That<br>Which made me?"
+  },
+  "38": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "63<br>The Palace that to Heav'n his pillars threw,<br>And Kings the footstool of whose royalty<br>Stood at his threshold, groov'd in ignorance,<br>Are gone—and Dust is over all."
+  },
+  "39": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "64<br>Be wise in time, and take the golden cup,<br>And drink the crystal vintage of the vine,<br>Ere yet the hand of Death shall strike thee down,<br>And cast thee to the void."
+  },
+  "40": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "65<br>As under cover of departing day,<br>Slunk hungry in the night, the beasts of prey,<br>Seek out the resting place of silent souls,<br>And mock the dreamer's sleep."
+  },
+  "41": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "66<br>Ah, take the Cash, and let the Credit go,<br>Nor heed the rumble of a distant Drum!<br>The Bird of Time has but a little way<br>To flutter—and the Bird is on the Wing."
+  },
+  "42": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "67<br>Waste not your Hour, nor in the vain pursuit<br>Of This and That endeavor and dispute;<br>Better be jocund with the fruitful Grape<br>Than sadden after none, or bitter, Fruit."
+  },
+  "43": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "68<br>A Book of Verses underneath the Bough,<br>A Jug of Wine, a Loaf of Bread—and Thou<br>Beside me singing in the Wilderness—<br>Oh, Wilderness were Paradise enow!"
+  },
+  "44": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "69<br>Some for the Glories of This World; and some<br>Sigh for the Prophet's Paradise to come;<br>Ah, take the Cash, and let the Credit go,<br>Nor heed the rumble of a distant Drum!"
+  },
+  "45": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "70<br>The Worldly Hope men set their Hearts upon<br>Turns Ashes—or it prospers; and anon,<br>Like Snow upon the desert's dusty Face,<br>Lighting a little hour or two—is gone."
+  },
+  "46": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "71<br>Think, in this batter'd Caravanserai<br>Whose Portals are alternate Night and Day,<br>How Sultan after Sultan with his Pomp<br>Abode his destined Hour or Two, and went."
+  },
+  "47": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "72<br>They say the Lion and the Lizard keep<br>The Courts where Jamshyd gloried and drank deep:<br>And Bahram, that great Hunter—the wild Ass<br>Stamps o'er his Head, but cannot break his sleep."
+  },
+  "48": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "73<br>I sometimes think that never blows so red<br>The Rose as where some buried Caesar bled;<br>That every Hyacinth the Garden wears<br>Dropped in her Lap from some once lovely Head."
+  },
+  "49": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "74<br>Ah, my Beloved, fill the Cup that clears<br>To-day of past Regret and future Fears:<br>To-morrow?—Why, To-morrow I may be<br>With Yesterday's Sev'n Thousand Years."
+  },
+  "50": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "75<br>And we, that now make merry in the Room<br>They left, and Summer dresses in new bloom,<br>Ourselves must we beneath the ground descend,<br>And o'er our heads forgetfulness consume."
+  },
+  "51": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "76<br>Ah, make the most of what we yet may spend,<br>Before we too into the Dust descend;<br>Dust into Dust, and under Dust, to lie,<br>Sans Wine, sans Song, sans Singer, and—sans End!"
+  },
+  "52": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "77<br>Alike for those who for To-day prepare,<br>And those that after a To-morrow stare,<br>A Muezzin from the Tower of Darkness cries,<br>'Fools, your reward is neither Here nor There.'"
+  },
+  "53": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "78<br>Myself when young did eagerly frequent<br>Doctor and Saint, and heard great argument<br>About it and about: but evermore<br>Came out by the same door where in I went."
+  },
+  "54": {
+    "top": "25.0%", "left": "15.0%", "width": "70.0%", "height": "55.0%",
+    "text": "79<br>The Sun goes down, and with him falls the night,<br>And all the stars awake to guide our flight;<br>Drink, while the cup is full and life is sweet,<br>Ere darkness claims the light."
   }
 };
-
     const book = document.getElementById("book");
     const btnFirst = document.getElementById("btn-first");
     const btnPrev = document.getElementById("btn-prev");
