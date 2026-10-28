@@ -140,5 +140,13 @@
     "link": "guestbook.html",
     "topic": "",
     "summary": "After looking at a ton of hosting services I decided to just use the one my brother used. Go figure."
+  },
+  {
+    "title": "Rubáiyát of Omar Khayyám",
+    "datetime": "10/28/2026",
+    "coverImage": "art-dump/2/SAAM-1978.108.39_2.jpg",
+    "link": "art-dump/rubaiyat.html",
+    "topic": "Art",
+    "summary": "I found Elihu Vedder's art really elevates this collection of poems. However, the Internet Archive's scan was very low quality, and the Smithsonian doesn't have their higher quality scans in order. This does that and also has a text overlay for those who find the text hard to read."
   }
 ]
