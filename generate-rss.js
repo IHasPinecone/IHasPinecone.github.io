@@ -58,6 +58,31 @@ function extractBodyContent(html = "") {
   return content.replace(/]]>/g, "]]]]><![CDATA[>");
 }
 
+function makeUrlsAbsolute(html, postUrl) {
+  // Matches src="..." or src='...' or href="..." or href='...'
+  return html.replace(/(src|href)=["']([^"']+)["']/gi, (match, attr, val) => {
+    // Skip already absolute URLs, data URIs, anchors, mailto links, etc.
+    if (
+      val.startsWith("http://") ||
+      val.startsWith("https://") ||
+      val.startsWith("data:") ||
+      val.startsWith("#") ||
+      val.startsWith("mailto:") ||
+      val.startsWith("javascript:")
+    ) {
+      return match;
+    }
+    try {
+      // Normalize Windows-style backslashes to forward slashes just in case
+      const normalizedVal = val.replace(/\\/g, "/");
+      const absoluteUrl = new URL(normalizedVal, postUrl).href;
+      return `${attr}="${absoluteUrl}"`;
+    } catch (err) {
+      return match;
+    }
+  });
+}
+
 function buildNormalItems(feedPosts) {
   return feedPosts.map(post => {
     if (!post || !post.link) {
@@ -73,6 +98,8 @@ function buildNormalItems(feedPosts) {
       if (fs.existsSync(cleanLink)) {
         const fullHtml = fs.readFileSync(cleanLink, "utf8");
         htmlContent = extractBodyContent(fullHtml);
+        // Automatically parse and convert relative paths to absolute URLs
+        htmlContent = makeUrlsAbsolute(htmlContent, postUrl);
       } else {
         console.warn(`File not found on disk: ${cleanLink}`);
       }
@@ -121,4 +148,4 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/"
 </rss>`;
 
 fs.writeFileSync("rss.xml", rssFeed);
-console.log("rss.xml generated successfully");
+console.log("rss.xml generated successfully[cite: 3]");
