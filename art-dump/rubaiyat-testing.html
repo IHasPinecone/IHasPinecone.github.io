@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
+  <title>Rubáiyát of Omar Khayyám</title>
+  <meta content="Rubáiyát of Omar Khayyám" property="og:title" />
+  <meta content="I couldn't find anywhere on the internet that had high quality scans of this book all on one page. I really think Elihu Vedder's art elevates the text so I made a flippable book using high quality scans. I also have a text overlay for those who find the script hard to read." property="og:description" />
+  <meta content="https://pinecone.rodeo/art-dump/rubaiyat.html" property="og:url" />
+  <meta content="https://pinecone.rodeo/art-dump/2/SAAM-1978.108.39_2.jpg" property="og:image" />
+  <meta content="#f4ecd8" data-react-helmet="true" name="theme-color" />
+  <style>
+    body {
+      font-family: serif;
+      background-color: #f4ecd8;
+      color: #33281a;
+      margin: 0;
+      padding: 16px 16px 140px 16px; /* Extra bottom padding so dev tool doesn't cover footer */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 4px 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    p.subtitle {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #665235;
+      max-width: 60vw;
+    }
+
+    /* Outer perspective container */
+    .viewport {
+      perspective: 2000px;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 20px 0;
+    }
+
+    /* Fixed size for a single page page */
+    :root {
+      --page-width: 300px;
+      --page-height: 400px;
+    }
+
+    @media (min-width: 640px) {
+      :root {
+        --page-width: 500px;
+        --page-height: 650px;
+      }
+    }
+
+    /* 
+      Book wrapper: centered dynamically using transform: translateX().
+      Width is 2 * page-width so full open book spread fits centrally.
+    */
+    .book {
+      position: relative;
+      width: calc(var(--page-width) * 2);
+      height: var(--page-height);
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    /* Individual page */
+    .page {
+      position: absolute;
+      top: 0;
+      left: 50%; /* Anchored at center spine */
+      width: var(--page-width);
+      height: var(--page-height);
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      transition: transform var(--page-transition-duration) cubic-bezier(0.645, 0.045, 0.355, 1);
+      cursor: pointer;
+      user-select: none;
+      will-change: transform;
+    }
+
+    .page-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background-color: #fcf8ec;
+      border: 1px solid #8c7653;
+      box-sizing: border-box;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Prevent webkit flicker during 3D transform */
+      transform: translateZ(0);
+    }
+
+    .page-face.back {
+      transform: rotateY(180deg) translateZ(0);
+    }
+
+    /* Flipped state */
+    .page.flipped {
+      transform: rotateY(-180deg);
+    }
+
+    /* Page Image */
+    .page-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-color: #fcf8ec;
+    }
+
+    /* Controls bar at bottom */
+    footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .secondary-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    button {
+      font-size: 1rem;
+      padding: 4px 12px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .page-counter {
+      font-size: 0.95rem;
+      color: #33281a;
+      user-select: none;
+    }
+
+    #current-page-display {
+      cursor: pointer;
+      border-bottom: 1px dashed #33281a;
+      padding: 0 2px;
+    }
+    #current-page-display:hover {
+      background-color: rgba(140, 118, 83, 0.15);
+    }
+
+    .nav-hint {
+      font-size: 0.8rem;
+      color: #665235;
+      margin: 0;
+    }
+    
+    .text-overlay {
+      position: absolute;
+      background-color: rgba(210 180 140 / 0.92);
+      border: 1px solid #33281a;
+      color: #111;
+      font-family: serif;
+      font-size: 0.75em;
+      line-height: 1.4;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      z-index: 5;
+      border-radius: 2px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    body.overlay-hidden .text-overlay {
+      display: none !important;
+    }
+
+    /* Dev Tool Menu Bar */
+    #dev-menu {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #222;
+      color: #fff;
+      font-family: monospace;
+      padding: 10px 16px;
+      z-index: 1000;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      border-top: 2px solid #8c7653;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    }
+
+    .dev-page-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #333;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+
+    .dev-page-title {
+      font-weight: bold;
+      color: #ffca28;
+      margin-right: 4px;
+    }
+
+    .dev-input-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.85rem;
+    }
+
+    .dev-input-label input {
+      width: 60px;
+      padding: 2px 4px;
+      background: #111;
+      color: #00ff66;
+      border: 1px solid #555;
+      border-radius: 2px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Rubáiyát of Omar Khayyám, the Astronomer-Poet of Persia</h1>
+    <p class="subtitle">Elihu Vedder's most famous work may be his illustrations for Edward FitzGerald's translation of Omar Khayyám's poems. I found Vedder's art really elevated the words on the page, every page turn gave me something wonderful I didn't expect. However, the Internet Archive's scan of the book was very low quality, and the Smithsonian doesn't put their higher quality scans in order. So, I threw this together with a text overlay for those who find the text hard to read. While working on this it's possible I'm the first person in history ever to proofread a transcription of this text while inside a Taco Bell.<br>
+    Note: These 100 four-line stanzas were not originally written as one large work, but 100 small self-contained poems. Edward Fitzgerald, half a world away and 700 years later, rearanged the poems to create the narrative of a single long day. He only included poems he could make fit and discarded ones he could not, drastically changing words/sentence structure to make it happen. Different editions of this book would even swap out entire stanzas for a different poem he thought fit better.<br>
+    I still believe it's worth reading, just realize this is not what you'd call a good-faith translation.
+  </header>
+
+  <div class="viewport">
+    <div id="book" class="book">
+    </div>
+  </div>
+
+  <footer>
+    <div class="controls">
+      <button id="btn-first" title="First Page">|&lt;</button>
+      <button id="btn-prev" title="Previous Page">&lt;</button>
+      
+      <span id="page-counter" class="page-counter">
+        page <span id="current-page-display" title="Click to type page number">0</span> of <span id="total-pages-display">27</span>
+      </span>
+      
+      <button id="btn-next" title="Next Page">&gt;</button>
+      <button id="btn-last" title="Last Page">&gt;|</button>
+    </div>
+    <div class="secondary-controls">
+      <button id="btn-toggle-overlay" title="Toggle Text Overlay">Toggle Text Overlay</button>
+    </div>
+
+    <p class="nav-hint">Use buttons, click pages, or press Left / Right arrows</p>
+    <p> <a href="../index.html">
+      <img class="secondary-controls" src="..\bg\RWAssets\back.gif"/>
+    </a> </p>
+  </footer>
+
+  <!-- Dev Tool Menu -->
+  <div id="dev-menu">
+    <div class="dev-page-group">
+      <span class="dev-page-title" id="dev-left-title">Left (Img -)</span>
+      <label class="dev-input-label">Top <input type="text" id="dev-left-top"></label>
+      <label class="dev-input-label">Left <input type="text" id="dev-left-left"></label>
+      <label class="dev-input-label">Width <input type="text" id="dev-left-width"></label>
+      <label class="dev-input-label">Height <input type="text" id="dev-left-height"></label>
+    </div>
+
+    <div class="dev-page-group">
+      <span class="dev-page-title" id="dev-right-title">Right (Img -)</span>
+      <label class="dev-input-label">Top <input type="text" id="dev-right-top"></label>
+      <label class="dev-input-label">Left <input type="text" id="dev-right-left"></label>
+      <label class="dev-input-label">Width <input type="text" id="dev-right-width"></label>
+      <label class="dev-input-label">Height <input type="text" id="dev-right-height"></label>
+    </div>
+  </div>
+
+  <script>
+    const TOTAL_IMAGES = 54;
+    const PREFIX = "SAAM-1978.108.";
+    const SUFFIX = "_2.jpg";
+    const FOLDER = "2/";
+    const FLIP_DURATION = 50; //(ms)
+    const ANIMATION_DURATION = 800;
+    const FLIP_RATE_LIMIT = 100;
+    
+    // Automatically sync the CSS transition duration with ANIMATION_DURATION
+    document.documentElement.style.setProperty('--page-transition-duration', `${ANIMATION_DURATION}ms`);
+
+    const PAGE_OVERLAYS = {
+  "5": {
+    "top": "30.0%", "left": "51.5%", "width": "36.0%", "height": "12.5%",
+    "text": "IN AFFECTIONATE APPRECIATION<br>OF HER UNTIRING HELP AND SYMPATHY<br>I DEDICATE THESE DRAWINGS<br>TO MY WIFE"
+  },
+  "7": {
+    "top": "31%", "left": "12%", "width": "50.0%", "height": "44%",
+    "text": "1<br>Wake! for the Sun who scatter'd into flight<br>The Stars before him from the Field of Night,<br>Drives Night along with them from Heav'n, and strikes<br>The Sultan's Turret with a Shaft of Light.<br><br>2<br>Before the phantom of False morning died,<br>Methought a Voice within the Tavern cried,<br>'When all the Temple is prepared within,'<br>'Why nods the drowsy Worshipper outside?'<br><br>3<br>And, as the Cock crew, those who stood before<br>The Tavern shouted—'Open then the door!'<br>'You know how little while we have to stay,<br>And, once departed, may return no more.'"
+  },
+  "8": {
+    "top": "21%", "left": "38.5%", "width": "40%", "height": "38%",
+    "text": "4<br>Now the New Year reviving old Desires,<br>The thoughtful Soul to Solitude retires,<br>Where the White Hand of Moses on the Bough<br>Puts out, and Jesus from the Ground suspires.<br><br>5<br>Iram indeed is gone with all his Rose,<br>And Jamshyd's Sev'n-ring'd Cup where no one knows;<br>But still a Ruby gushes from the Vine,<br>And many a Garden by the Water blows.<br><br>6<br>And David's lips are lockt; but in divine<br>High-piping Pêhlevi, with 'Wine! Wine! Wine!<br>Red Wine!'—the Nightingale cries to the Rose<br>'That sallow cheek of her's t'incarnadine.'"
+  },
+  "9": {
+    "top": "17.5%", "left": "13.2%", "width": "40.0%", "height": "56.0%",
+    "text": "7<br>Come, fill the Cup and in the fire of Spring<br>Your Winter-garment of Repentance fling:<br>The Bird of Time has but a little way<br>To flutter—and the Bird is on the Wing.<br><br>8<br>Whether at Naishápur or Babylon,<br>Whether the Cup with sweet or bitter run,<br>The Wine of Life keeps oozing drop by drop,<br>The Leaves of Life keep falling one by one.<br><br>9<br>Each Morn a thousand Roses brings, you say;<br>Yes, but where leaves the Rose of Yesterday?<br>And this first Summer month that brings the Rose<br>Shall take Jamshyd and Kaikobad away.<br><br>10<br>Well, let it take them! What have we to do<br>With Kaikobad the Great, or Kaikhosrú?<br>Let Zál and Rustum thunder as they will,<br>Or Hátim call to Supper—heed not you."
+  },
+  "10": {
+    "top": "41.5%", "left": "36.5%", "width": "35.2%", "height": "29.2%",
+    "text": "11<br>With me along the strip of Herbage strow'd<br>That just divides the desert from the sown,<br>Where name of Slave and Sultan is forgot—<br>And Peace to Máhmúd on his golden Throne!<br><br>12<br>A Book of Verses underneath the Bough,<br>A Jug of Wine, a Loaf of Bread—and Thou<br>Beside me singing in the Wilderness—<br>Oh, Wilderness were Paradise enow!"
+  },
+  "11": {
+    "top": "21.0%", "left": "20.0%", "width": "36.0%", "height": "51.0%",
+    "text": "13<br>Some for the Glories of This World; and some<br>Sigh for the Prophet's Paradise to come;<br>Ah, take the Cash, and let the Credit go,<br>Nor heed the rumble of a distant Drum!<br><br>14<br>Look to the blowing Rose about us—'Lo,<br>'Laughing,' she says, 'into the world I blow,<br>'At once the silken tassel of my purse<br>'Tear, and its treasure on the Garden throw.'<br><br>15<br>And those who husbanded the Golden grain,<br>And those who flung it to the winds like Rain,<br>Alike to no such aureate Earth are turn'd<br>As, buried once, Men want dug up again.<br><br>16<br>The Worldly Hope men set their Hearts upon<br>Turns Ashes—or it prospers; and anon,<br>Like Snow upon the desert's dusty Face,<br>Lighting a little hour or two—is gone."
+  },
+  "12": {
+    "top": "32.5%", "left": "38.5%", "width": "43.5%", "height": "24.5%",
+    "text": "17<br>Think, in this batter'd Caravanserai<br>Whose Portals are alternate Night and Day,<br>How Sultán after Sultán with his Pomp<br>Abode his destin'd Hour and went his way.<br><br>18<br>They say the Lion and the Lizard keep<br>The Courts where Jamshyd gloried and drank deep;<br>And Bahrám, that great Hunter—the Wild Ass<br>Stamps o'er his Head, but cannot break his Sleep."
+  },
+  "13": {
+    "top": "29.0%", "left": "19.5%", "width": "46.0%", "height": "43.5%",
+    "text": "19<br>I sometimes think that never blows so red<br>The Rose as where some buried Cæsar bled;<br>That every Hyacinth the Garden wears<br>Dropt in her Lap from some once lovely Head.<br><br>20<br>And this reviving Herb whose tender Green<br>Fledges the River-Lip on which we lean—<br>Ah, lean upon it lightly! for who knows<br>From what once lovely Lip it springs unseen!<br><br>21<br>Ah, my Beloved, fill the Cup that clears<br>To-day of past Regret and future Fears:<br>To-morrow!—Why, To-morrow may be<br>Myself with Yesterday's Sev'n thousand Years."
+  },
+  "14": {
+    "top": "20.5%", "left": "38.0%", "width": "43.5%", "height": "35.5%",
+    "text": "22<br>For some we loved, the loveliest and the best<br>That from his Vintage rolling Time has prest,<br>Have drunk their Cup a Round or two before,<br>And one by one crept silently to rest.<br><br>23<br>And we, that now make merry in the Room<br>They left, and Summer dresses in new bloom,<br>Ourselves must we beneath the Couch of Earth<br>Descend—ourselves to make a Couch—for whom?<br><br>24<br>Ah, make the most of what we yet may spend,<br>Before we too into the Dust descend;<br>Dust into Dust, and under Dust, to lie,<br>Sans Wine, sans Song, sans Singer, and—sans End!"
+  },
+  "15": {
+    "top": "19.8%", "left": "18.0%", "width": "45.0%", "height": "51.0%",
+    "text": "25<br>Alike for those who for To-day prepare,<br>And those that after some To-morrow stare,<br>A Muezzin from the Tower of Darkness cries,<br>'Fools! your Reward is neither Here nor There.'<br><br>26<br>Why, all the Saints and Sages who discuss'd<br>Of the Two Worlds so learnedly are thrust<br>Like foolish Prophets forth; their Words to Scorn<br>Are scatter'd, and their Mouths are stopt with Dust.<br><br>27<br>Myself when young did eagerly frequent<br>Doctor and Saint, and heard great argument<br>About it and about: but evermore<br>Came out by the same door where in I went.<br><br>28<br>With them the seed of Wisdom did I sow,<br>And with my own hand wrought to make it grow;<br>And this was all the Harvest that I reap'd—<br>'I came like Water, and like Wind I go.'"
+  },
+  "16": {
+    "top": "28.8%", "left": "38.0%", "width": "43.0%", "height": "24.5%",
+    "text": "29<br>Into this Universe, and Why not knowing,<br>And Whence, like Water willy-nilly flowing;<br>And out of it, as Wind along the Waste,<br>I know not Whither, willy-nilly blowing.<br><br>30<br>What, without asking, hither hurried Whence?<br>And, without asking, Whither hurried hence!<br>Oh, many a Cup of this forbidden Wine<br>Must drown the memory of that insolence!"
+  },
+  "17": {
+    "top": "52.0%", "left": "18.5%", "width": "47.0%", "height": "14.5%",
+    "text": "31<br>Yesterday This Day's Madness did prepare;<br>To-Morrow's Silence, Triumph, or Despair:<br>Drink! for you know not whence you came, nor why:<br>Drink! for you know not why you go, nor where."
+  },
+  "18": {
+    "top": "18.5%", "left": "38.5%", "width": "43.5%", "height": "28.5%",
+    "text": "32<br>But if in vain, down on the stubborn floor<br>Of Earth, and up to Heav'n's unopening Door,<br>You gaze To-day, while You are You—how then<br>To-morrow, You when shall be You no more?<br><br>33<br>Waste not your Hour, nor in the vain pursuit<br>Of This and That endeavour and dispute;<br>Better be jocund with the fruitful Grape<br>Than sadden after none, or bitter, Fruit."
+  },
+  "19": {
+    "top": "44.0%", "left": "21.8%", "width": "41.5%", "height": "39.5%",
+    "text": "34<br>I tell you this—When, started from the Goal,<br>Over the flaming shoulders of the Foal<br>Of Heav'n Parwin and Mushtari they flung,<br>In my predestined Plot of Dust and Soul<br><br>35<br>The Vine had struck a fibre: which about<br>It clings my Being—let the Dervish flout;<br>Of my Base metal may be filed a Key,<br>That shall unlock the Door he howls without.<br><br>36<br>And this I know: whether the one True Light<br>Kindle to Love, or Wrath-consume me quite,<br>One Flash of It within the Tavern caught<br>Better than in the Temple lost outright."
+  },
+  "20": {
+    "top": "30.8%", "left": "39.5%", "width": "39.5%", "height": "35.0%",
+    "text": "37<br>Up from Earth's Centre through the Seventh Gate<br>I rose, and on the Throne of Saturn sate,<br>And many a Knot unravel'd by the Road;<br>But not the Master-knot of Human Fate.<br><br>38<br>There was the Door to which I found no Key;<br>There was the Veil through which I could not see:<br>Some little talk awhile of Me and Thee<br>There was—and then no more of Thee and Me.<br><br>39<br>Earth could not answer; nor the Seas that mourn<br>In flowing Purple, of their Lord forlorn;<br>Nor rolling Heaven, with all his Signs reveal'd<br>And hidden by the sleeve of Night and Morn."
+  },
+  "22": {
+    "top": "21.0%", "left": "39.5%", "width": "39.5%", "height": "40.5%",
+    "text": "40<br>Then of the Thee in Me who works behind<br>The Veil, I lifted up my hands to find<br>A Lamp amid the Darkness; and I heard,<br>As from Without—'The Me within Thee blind!'<br><br>41<br>Then to the Lip of this poor earthen Urn<br>I lean'd, the Secret of my Life to learn:<br>And Lip to Lip it murmur'd—'While you live,<br>Drink!—for, once dead, you never shall return.'<br><br>42<br>I think the Vessel, that with fugitive<br>Articulation answer'd, once did live,<br>And drink; and Ah! the passive Lip I kiss'd,<br>How many Kisses might it take—and give!"
+  },
+  "23": {
+    "top": "22.2%", "left": "18.0%", "width": "45.0%", "height": "41.5%",
+    "text": "43<br>For I remember stopping by the way<br>To watch a Potter thumping his wet Clay,<br>And with its all-obliterated Tongue<br>It murmur'd—'Gently, Brother, gently, pray.'<br><br>44<br>Listen—a moment listen!—Of the same<br>Poor Earth from which that Human Whisper came<br>The luckless Mould in which Mankind was cast<br>They did compose, and call'd him by the name.<br><br>45<br>And not a drop that from our Cups we throw<br>For Earth to drink of, but may steal below<br>To quench the fire of Anguish in some Eye<br>There hidden—far beneath, and long ago."
+  },
+  "24": {
+    "top": "33.2%", "left": "37.5%", "width": "44.0%", "height": "40.0%",
+    "text": "46<br>As then the Tulip for her morning sup<br>Of Heav'nly Vintage from the soil looks up,<br>Do you devoutly do the like, till Heav'n<br>To Earth invert you like an empty Cup.<br><br>47<br>Perplext no more with Human or Divine,<br>To-morrow's tangle to the winds resign,<br>And lose your fingers in the tresses of<br>The Cypress-slender Minister of Wine.<br><br>48<br>And if the Wine you drink, the Lip you press,<br>End in what All begins and ends in—Yes;<br>Think then you are To-day what Yesterday<br>You were—To-morrow you shall not be less."
+  },
+  "25": {
+    "top": "14.5%", "left": "12.8%", "width": "51.5%", "height": "20.5%",
+    "text": "49<br>So when the Angel of the darker Drink<br>At last shall find you by the river-brink,<br>And, offering his Cup, invite your Soul<br>Forth to your Lips to quaff—you shall not shrink."
+  },
+  "26": {
+    "top": "32.5%", "left": "38.2%", "width": "43.5%", "height": "27.5%",
+    "text": "50<br>Why, if the Soul can fling the Dust aside,<br>And naked on the Air of Heaven ride,<br>Wer't not a Shame—wer't not a Shame for him<br>In this clay carcase crippled to abide?<br><br>51<br>'Tis but a Tent where takes his one-day's rest<br>A Sultan to the realm of Death addrest;<br>The Sultan rises, and the dark Ferrash<br>Strikes, and prepares it for another Guest."
+  },
+  "27": {
+    "top": "17.2%", "left": "16.0%", "width": "46.0%", "height": "42.0%",
+    "text": "52<br>And fear not lest Existence closing your<br>Account, and mine, should know the like no more;<br>The Eternal Sāki from that Bowl has pour'd<br>Millions of Bubbles like us, and will pour.<br><br>53<br>When You and I behind the Veil are past,<br>Oh but the long long while the World shall last,<br>Which of our Coming and Departure heeds<br>As the Sev'n Seas should heed a pebble-cast.<br><br>54<br>A Moment's Halt—a momentary taste<br>Of Being from the Well amid the Waste—<br>And Lo!—the phantom Caravan has reach'd<br>The Nothing it set out from—Oh, make haste!"
+  },
+  "28": {
+    "top": "24.2%", "left": "35.5%", "width": "52.0%", "height": "61.5%",
+    "text": "55<br>Would you that spangle of Existence spend<br>About The Secret—quick about-it Friend!<br>A Hair perhaps divides the False and True—<br>And upon what, prithee, does Life depend?<br><br>56<br>A Hair perhaps divides the False and True;<br>Yes; and a single Alif were the clue—<br>Could you but find it—to the Treasure-house,<br>And peradventure to The Master too;<br><br>57<br>Whose secret Presence, through Creation's veins<br>Running Quicksilver-like eludes your pains;<br>Taking all shapes from Māh to Māhi; and<br>They change and perish all—but He remains;<br><br>58<br>A moment guess'd—then back behind the Fold<br>Immerst of Darkness round the Drama roll'd<br>Which for the Pastime of Eternity,<br>He does Himself contrive, enact, behold."
+  },
+  "30": {
+    "top": "14.6%", "left": "36.2%", "width": "51.5%", "height": "16.0%",
+    "text": "59<br>You know, my Friends, with what a brave Carouse<br>I made a Second Marriage in my house;<br>Divorced old barren Reason from my Bed,<br>And took the Daughter of the Vine to Spouse."
+  },
+  "31": {
+    "top": "48.0%", "left": "13.5%", "width": "49.0%", "height": "32.0%",
+    "text": "60<br>For 'Is and 'Is-not' though with Rule and Line,<br>And 'Up-and-down' by Logic I define<br>Of all that one should care to fathom, I<br>Was never deep in anything but—Wine.<br><br>61<br>Ah, but my Computations, People say,<br>Reduced the Year to better reckoning?—Nay,<br>'Twas only striking from the Calendar<br>Unborn To-morrow, and dead Yesterday."
+  },
+  "32": {
+    "top": "22.2%", "left": "36.2%", "width": "50.0%", "height": "29.5%",
+    "text": "62<br>And lately, by the Tavern Door agape,<br>Came shining through the Dusk an Angel Shape<br>Bearing a Vessel on his Shoulder; and<br>He bid me taste of it; and 'twas—The Grape!<br><br>63<br>The Grape that can with Logic absolute<br>The Two-and-Seventy jarring Sects confute:<br>The sovereign Alchemist that in a trice<br>Life's leaden metal into Gold transmute:"
+  },
+  "33": {
+    "top": "60.8%", "left": "14.8%", "width": "48.5%", "height": "14.0%",
+    "text": "64<br>The mighty Mahmūd, Allah-breathing Lord,<br>That all the misbelieving and black Horde<br>Of Fears and Sorrows that infest the Soul<br>Scatters before him with his whirlwind Sword."
+  },
+  "34": {
+    "top": "46.0%", "left": "35.0%", "width": "54.5%", "height": "30.0%",
+    "text": "65<br>Why be this Juice the growth of God, who dare<br>Blaspheme the twisted tendril as a Snare?<br>A Blessing, we should use it, should we not?<br>And if a Curse—why, then, Who set it there?<br><br>66<br>I must abjure the Balm of Life, I must,<br>Scared by some After-reckoning ta'en on trust,<br>Or lured with Hope of some Diviner Drink,<br>To fill the Cup—when crumbled into Dust!"
+  },
+  "35": {
+    "top": "13.4%", "left": "11.8%", "width": "51.5%", "height": "46.5%",
+    "text": "67<br>Oh threats of Hell and Hopes of Paradise!<br>One thing at least is certain—This Life flies;<br>One thing is certain and the rest is Lies;<br>The Flower that once has blown for ever dies.<br><br>68<br>Strange, is it not? that of the myriads who<br>Before us pass'd the door of Darkness through<br>Not one returns to tell us of the Road,<br>Which to discover we must travel too.<br><br>69<br>The Revelations of Devout and Learn'd<br>Who rose before us, and as Prophets burn'd,<br>Are all but Stories, which, awoke from Sleep<br>They told their fellows, and to Sleep return'd."
+  },
+  "36": {
+    "top": "31.5%", "left": "38.2%", "width": "42.5%", "height": "25.0%",
+    "text": "70<br>I sent my Soul through the Invisible,<br>Some letter of that After-life to spell:<br>And by and by my Soul return'd to me,<br>And answer'd 'Myself am Heav'n and Hell:'<br><br>71<br>Heav'n but the Vision of fulfill'd Desire,<br>And Hell the Shadow of a Soul on fire,<br>Cast on the Darkness into which Ourselves,<br>So late emerg'd from, shall so soon expire."
+  },
+  "37": {
+    "top": "32.2%", "left": "15.0%", "width": "48.5%", "height": "42.0%",
+    "text": "72<br>We are no other than a moving row<br>Of Magic Shadow-shapes that come and go<br>Round with this Sun-illumined Lantern held<br>In Midnight by the Master of the Show;<br><br>73<br>Impotent Pieces of the Game He plays<br>Upon this Chequer-board of Nights and Days;<br>Hither and thither moves, and checks, and slays,<br>And one by one back in the Closet lays.<br><br>74<br>The Ball no question makes of Ayes and Noes,<br>But Right or Left as strikes the Player goes;<br>And He that toss'd you down into the Field,<br>He knows about it all—HE knows—HE knows!"
+  },
+  "38": {
+    "top": "48.0%", "left": "38.0%", "width": "43.5%", "height": "24.5%",
+    "text": "75<br>The Moving Finger writes; and, having writ,<br>Moves on: nor all your Piety nor Wit<br>Shall lure it back to cancel half a Line,<br>Nor all your Tears wash out a Word of it.<br><br>76<br>And that inverted Bowl they call the Sky,<br>Whereunder crawling coop'd we live and die,<br>Lift not your hands to It for help—for It<br>As impotently rolls as you or I."
+  },
+  "40": {
+    "top": "17.2%", "left": "37.5%", "width": "40.5%", "height": "14.5%",
+    "text": "77<br>With Earth's first Clay They did the Last Man knead,<br>And there of the Last Harvest sow'd the Seed:<br>And the first Morning of Creation wrote<br>What the Last Dawn of Reckoning shall read."
+  },
+  "41": {
+    "top": "50.0%", "left": "9.8%", "width": "48.5%", "height": "17.0%",
+    "text": "78<br>What! out of senseless Nothing to provoke<br>A conscious Something to resent the yoke<br>Of unpermitted Pleasure, under pain<br>Of Everlasting Penalties, if broke!"
+  },
+  "42": {
+    "top": "9.5%", "left": "35.8%", "width": "50.0%", "height": "30.0%",
+    "text": "79<br>What! from his helpless Creature be repaid<br>Pure Gold for what he lent us dross-allayed—<br>Sue for a Debt we never did contract,<br>And cannot answer—Oh the sorry trade!<br><br>80<br>Oh Thou, who didst with pitfall and with gin<br>Beset the Road I was to wander in,<br>Thou wilt not with Predestin'd Evil round<br>Enmesh, and then impute my Fall to Sin!"
+  },
+  "43": {
+    "top": "60.2%", "left": "4.5%", "width": "51.0%", "height": "17.0%",
+    "text": "81<br>Oh Thou, who Man of baser Earth didst make,<br>And ev'n with Paradise devise the Snake:<br>For all the Sin wherewith the Face of Man<br>Is blacken'd—Man's Forgiveness give—and take!"
+  },
+  "45": {
+    "top": "44.2%", "left": "7.1%", "width": "44.5%", "height": "27.5%",
+    "text": "82<br>As under cover of departing Day<br>Slunk hunger-stricken Ramazán away,<br>Once more within the Potter's house alone<br>I stood, surrounded by the Shapes of Clay.<br><br>83<br>Shapes of all Sorts and Sizes, great and small,<br>That stood along the floor and by the wall;<br>And some loquacious Vessels were; and some<br>Listen'd perhaps, but never talk'd at all."
+  },
+  "46": {
+    "top": "16.3%", "left": "35.4%", "width": "50.0%", "height": "39.0%",
+    "text": "84<br>Said one among them—'Surely not in vain<br>'My substance of the common Earth was ta'en<br>'And to this Figure moulded, to be broke,<br>'Or trampled back to shapeless Earth again.'<br><br>85<br>Then said a Second—'Ne'er a peevish Boy<br>'Would break the Bowl from which he drank in joy;<br>'And He that with his hand the Vessel made<br>'Will surely not in after Wrath destroy.'<br><br>86<br>After a momentary silence spake<br>Some Vessel of a more ungainly Make;<br>'They sneer at me for leaning all awry:<br>'What! did the Hand then of the Potter shake?'"
+  },
+  "47": {
+    "top": "17.2%", "left": "13.6%", "width": "47.5%", "height": "40.5%",
+    "text": "87<br>Whereat some one of the loquacious Lot—<br>I think a Súfi pipkin—waxing hot—<br>'All this of Pot and Potter—Tell me then,<br>'Who makes—Who sells—Who buys—Who is the Pot?'<br><br>88<br>'Why,' said another, 'Some there are who tell<br>'Of one who threatens he will toss to Hell<br>'The luckless Pots he marr'd in making—Pish!<br>'He's a Good Fellow, and 'twill all be well?'<br><br>89<br>'Well,' murmur'd one, 'Let whoso make or buy,<br>'My Clay with long Oblivion is gone dry:<br>'But fill me with the old familiar Juice,<br>'Methinks I might recover by and by.'"
+  },
+  "48": {
+    "top": "33.2%", "left": "39.2%", "width": "43.5%", "height": "11.0%",
+    "text": "90<br>So while the Vessels one by one were speaking,<br>The little Moon look'd in that all were seeking:<br>And then they jogg'th each other, 'Brother! Brother!<br>'Now for the Porter's shoulder-knot a-creaking!'"
+  },
+  "49": {
+    "top": "32.1%", "left": "15.2%", "width": "47.0%", "height": "25.0%",
+    "text": "91<br>Ah, with the Grape my failing Life provide,<br>And wash the Body whence the Life has died,<br>And lay me, shrouded in the Living Leaf,<br>By some not unfrequented Garden-side.<br><br>92<br>That ev'n my buried Ashes such a snare<br>Of Vintage shall fling up into the Air<br>As not a True-believer passing by<br>But shall be overtaken unaware."
+  },
+  "50": {
+    "top": "30.4%", "left": "38.0%", "width": "51.5%", "height": "41.5%",
+    "text": "93<br>Indeed the Idols I have loved so long<br>Have done my credit in Men's eye much wrong:<br>Have drown'd my Glory in a shallow Cup,<br>And sold my Reputation for a Song.<br><br>94<br>Indeed, indeed, Repentance oft before<br>I swore—but was I sober when I swore?<br>And then and then came Spring, and Rose-in-hand<br>My thread-bare Penitence apieces tore.<br><br>95<br>And much as Wine has play'd the Infidel,<br>And robb'd me of my Robe of Honour—Well,<br>I wonder often what the Vintners buy<br>One half so precious as the stuff they sell."
+  },
+  "51": {
+    "top": "38.0%", "left": "9.5%", "width": "52.5%", "height": "22.5%",
+    "text": "96<br>Yet Ah, that Spring should vanish with the Rose!<br>That Youth's sweet-scented manuscript should close!<br>The Nightingale that in the branches sang,<br>Ah whence, and whither flown again, who knows!"
+  },
+  "52": {
+    "top": "18.5%", "left": "46.2%", "width": "48.0%", "height": "49.0%",
+    "text": "97<br>Would but the Desert of the Fountain yield<br>One glimpse—if dimly, yet indeed, reveal'd,<br>To which the fainting Traveller might spring,<br>As springs the trampled herbage of the field!<br><br>98<br>Would but some wingéd Angel ere too late<br>Arrest the yet unfolded Roll of Fate,<br>And make the stern Recorder otherwise<br>Enregister, or quite obliterate!<br><br>99<br>Ah Love! could you and I with Him conspire<br>To grasp this sorry Scheme of Things entire,<br>Would not we shatter it to bits—and then<br>Re-mould it nearer to the Heart's Desire!"
+  },
+  "53": {
+    "top": "14.0%", "left": "11.5%", "width": "52.0%", "height": "38.0%",
+    "text": "100<br>Yon rising Moon that looks for us again—<br>How oft hereafter will she wax and wane;<br>How oft hereafter rising look for us<br>Through this same Garden—and for one in vain!<br><br>101<br>And when like her, oh Sāki, you shall pass<br>Among the Guests Star-scatter'd on the Grass,<br>And in your blissful errand reach the spot<br>Where I made One—turn down an empty Glass!"
+  }
+};
+    
+    const book = document.getElementById("book");
+    const btnFirst = document.getElementById("btn-first");
+    const btnPrev = document.getElementById("btn-prev");
+    const btnNext = document.getElementById("btn-next");
+    const btnLast = document.getElementById("btn-last");
+    const currentpageDisplay = document.getElementById("current-page-display");
+    const totalpagesDisplay = document.getElementById("total-pages-display");
+    const btnToggleOverlay = document.getElementById("btn-toggle-overlay");
+
+    let overlaysVisible = true;
+    btnToggleOverlay.addEventListener("click", () => {
+      overlaysVisible = !overlaysVisible;
+      document.body.classList.toggle("overlay-hidden", !overlaysVisible);
+    });
+
+    const totalpages = Math.ceil(TOTAL_IMAGES / 2);
+    let currentpage = 0; 
+    let isEditingpage = false;
+    
+
+    function getImageUrl(index) {
+      return `${FOLDER}${PREFIX}${index}${SUFFIX}`;
+    }
+
+    function getpageFromUrl() {
+      const hash = window.location.hash;
+      const match = hash.match(/#page=(\d+)/);
+      if (match) {
+        const pageNum = parseInt(match[1], 10);
+        if (pageNum >= 0 && pageNum <= totalpages) {
+          return pageNum;
+        }
+      }
+      return 0;
+    }
+
+    function updateUrl(push = true) {
+      const newHash = `#page=${currentpage}`;
+      if (window.location.hash !== newHash) {
+        if (push) {
+          history.pushState({ page: currentpage }, "", newHash);
+        } else {
+          history.replaceState({ page: currentpage }, "", newHash);
+        }
+      }
+    }
+
+    function buildBook() {
+      book.innerHTML = "";
+
+      for (let i = 0; i < totalpages; i++) {
+        const frontIndex = i * 2 + 1;
+        const backIndex = i * 2 + 2;
+
+        const page = document.createElement("div");
+        page.className = "page";
+        page.dataset.pageIndex = i;
+        page.style.zIndex = totalpages - i;
+
+        // Front Face
+        const frontFace = document.createElement("div");
+        frontFace.className = "page-face front";
+        frontFace.dataset.imgIndex = frontIndex;
+
+        const frontImg = document.createElement("img");
+        frontImg.className = "page-img";
+        frontImg.src = getImageUrl(frontIndex);
+        frontImg.alt = `Image ${frontIndex}`;
+        frontImg.onerror = function() {
+          this.src = `https://placehold.co/600x800/fcf8ec/33281a?text=${FOLDER}${PREFIX}${frontIndex}${SUFFIX}`;
+        };
+        frontFace.appendChild(frontImg);
+
+        if (PAGE_OVERLAYS[frontIndex]) {
+          const config = PAGE_OVERLAYS[frontIndex];
+          const overlay = document.createElement("div");
+          overlay.className = "text-overlay";
+          overlay.style.top = config.top;
+          overlay.style.left = config.left;
+          overlay.style.width = config.width;
+          overlay.style.height = config.height;
+          overlay.innerHTML = config.text;
+          frontFace.appendChild(overlay);
+        }
+
+        // Back Face
+        const backFace = document.createElement("div");
+        backFace.className = "page-face back";
+        backFace.dataset.imgIndex = backIndex;
+
+        if (backIndex <= TOTAL_IMAGES) {
+          const backImg = document.createElement("img");
+          backImg.className = "page-img";
+          backImg.src = getImageUrl(backIndex);
+          backImg.alt = `Image ${backIndex}`;
+          backImg.onerror = function() {
+            this.src = `https://placehold.co/600x800/fcf8ec/33281a?text=${FOLDER}${PREFIX}${backIndex}${SUFFIX}`;
+          };
+          backFace.appendChild(backImg);
+
+          if (PAGE_OVERLAYS[backIndex]) {
+            const config = PAGE_OVERLAYS[backIndex];
+            const overlay = document.createElement("div");
+            overlay.className = "text-overlay";
+            overlay.style.top = config.top;
+            overlay.style.left = config.left;
+            overlay.style.width = config.width;
+            overlay.style.height = config.height;
+            overlay.innerHTML = config.text;
+            backFace.appendChild(overlay);
+          }
+        }
+
+        page.appendChild(frontFace);
+        page.appendChild(backFace);
+
+        page.addEventListener("click", () => {
+          if (i === currentpage) {
+            goNext();
+          } else if (i === currentpage - 1) {
+            goPrev();
+          }
+        });
+
+        book.appendChild(page);
+      }
+    }
+
+    let isAnimating = false;
+    let lastFlipTime = 0; // Track when the last flip was triggered
+
+    function updateBookState(targetpage, pushHistory = true) {
+      currentpage = targetpage;
+      const pages = document.querySelectorAll(".page");
+
+      pages.forEach((page, index) => {
+        if (index < currentpage) {
+          page.classList.add("flipped");
+        } else {
+          page.classList.remove("flipped");
+        }
+      });
+
+      if (currentpage === 0) {
+        book.style.transform = "translateX(-25%)";
+      } else if (currentpage === totalpages) {
+        book.style.transform = "translateX(25%)";
+      } else {
+        book.style.transform = "translateX(0%)";
+      }
+
+      btnFirst.disabled = (currentpage === 0);
+      btnPrev.disabled = (currentpage === 0);
+      btnNext.disabled = (currentpage === totalpages);
+      btnLast.disabled = (currentpage === totalpages);
+
+      currentpageDisplay.textContent = currentpage;
+      totalpagesDisplay.textContent = totalpages;
+      updateUrl(pushHistory);
+
+      updateDevTools();
+
+      // Re-stack z-indexes after the visual animation finishes
+      setTimeout(() => {
+        pages.forEach((page, index) => {
+          if (index === currentpage - 1 || index === currentpage) {
+            page.style.zIndex = totalpages + 10;
+          } else if (index < currentpage) {
+            page.style.zIndex = index + 1;
+          } else {
+            page.style.zIndex = totalpages - index;
+          }
+        });
+      }, ANIMATION_DURATION);
+    }
+
+    function triggerFlip(newpage) {
+      if (newpage < 0 || newpage > totalpages || newpage === currentpage) return;
+
+      const now = Date.now();
+      if (now - lastFlipTime < FLIP_RATE_LIMIT) return;
+      lastFlipTime = now;
+
+      const pages = document.querySelectorAll(".page");
+      if (newpage > currentpage) {
+        pages[currentpage].style.zIndex = totalpages + 20;
+      } else {
+        pages[newpage].style.zIndex = totalpages + 20;
+      }
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          updateBookState(newpage, true);
+        });
+      });
+    }
+    
+    function goNext() {
+      if (currentpage < totalpages) {
+        triggerFlip(currentpage + 1);
+      }
+    }
+
+    function goPrev() {
+      if (currentpage > 0) {
+        triggerFlip(currentpage - 1);
+      }
+    }
+
+    function goFirst() {
+      if (currentpage > 0) {
+        triggerFlip(0);
+      }
+    }
+
+    function goLast() {
+      if (currentpage < totalpages) {
+        triggerFlip(totalpages);
+      }
+    }
+
+    // Dev Tool Logic
+    const devLeftTitle = document.getElementById("dev-left-title");
+    const devLeftTop = document.getElementById("dev-left-top");
+    const devLeftLeft = document.getElementById("dev-left-left");
+    const devLeftWidth = document.getElementById("dev-left-width");
+    const devLeftHeight = document.getElementById("dev-left-height");
+
+    const devRightTitle = document.getElementById("dev-right-title");
+    const devRightTop = document.getElementById("dev-right-top");
+    const devRightLeft = document.getElementById("dev-right-left");
+    const devRightWidth = document.getElementById("dev-right-width");
+    const devRightHeight = document.getElementById("dev-right-height");
+
+    let leftImgIndex = null;
+    let rightImgIndex = null;
+
+    function updateDevTools() {
+      // Left page of spread corresponds to back face of (currentpage - 1)
+      leftImgIndex = currentpage > 0 ? (currentpage - 1) * 2 + 2 : null;
+      // Right page of spread corresponds to front face of currentpage
+      rightImgIndex = currentpage < totalpages ? currentpage * 2 + 1 : null;
+
+      populateDevPage(leftImgIndex, devLeftTitle, devLeftTop, devLeftLeft, devLeftWidth, devLeftHeight, "Left");
+      populateDevPage(rightImgIndex, devRightTitle, devRightTop, devRightLeft, devRightWidth, devRightHeight, "Right");
+    }
+
+    function populateDevPage(imgIdx, titleEl, topEl, leftEl, widthEl, heightEl, sideLabel) {
+      if (!imgIdx || imgIdx > TOTAL_IMAGES) {
+        titleEl.textContent = `${sideLabel} (None)`;
+        topEl.value = "";
+        leftEl.value = "";
+        widthEl.value = "";
+        heightEl.value = "";
+        topEl.disabled = leftEl.disabled = widthEl.disabled = heightEl.disabled = true;
+        return;
+      }
+
+      titleEl.textContent = `${sideLabel} (Img ${imgIdx})`;
+      topEl.disabled = leftEl.disabled = widthEl.disabled = heightEl.disabled = false;
+
+      const overlayData = PAGE_OVERLAYS[imgIdx] || { top: "", left: "", width: "", height: "" };
+      topEl.value = overlayData.top || "";
+      leftEl.value = overlayData.left || "";
+      widthEl.value = overlayData.width || "";
+      heightEl.value = overlayData.height || "";
+    }
+
+    function applyDevChanges(imgIdx, prop, value) {
+      if (!imgIdx) return;
+
+      if (!PAGE_OVERLAYS[imgIdx]) {
+        PAGE_OVERLAYS[imgIdx] = { top: "10%", left: "10%", width: "50%", height: "50%", text: "New Overlay" };
+      }
+
+      PAGE_OVERLAYS[imgIdx][prop] = value;
+
+      const face = document.querySelector(`.page-face[data-img-index="${imgIdx}"]`);
+      if (face) {
+        let overlay = face.querySelector(".text-overlay");
+        if (!overlay) {
+          overlay = document.createElement("div");
+          overlay.className = "text-overlay";
+          overlay.innerHTML = PAGE_OVERLAYS[imgIdx].text || "";
+          face.appendChild(overlay);
+        }
+        overlay.style[prop] = value;
+      }
+    }
+
+    function attachDevListeners(imgIdxGetter, topEl, leftEl, widthEl, heightEl) {
+      topEl.addEventListener("input", (e) => applyDevChanges(imgIdxGetter(), "top", e.target.value));
+      leftEl.addEventListener("input", (e) => applyDevChanges(imgIdxGetter(), "left", e.target.value));
+      widthEl.addEventListener("input", (e) => applyDevChanges(imgIdxGetter(), "width", e.target.value));
+      heightEl.addEventListener("input", (e) => applyDevChanges(imgIdxGetter(), "height", e.target.value));
+    }
+
+    attachDevListeners(() => leftImgIndex, devLeftTop, devLeftLeft, devLeftWidth, devLeftHeight);
+    attachDevListeners(() => rightImgIndex, devRightTop, devRightLeft, devRightWidth, devRightHeight);
+
+    // Editable page Counter Logic
+    currentpageDisplay.addEventListener("click", () => {
+      if (isEditingpage) return;
+      isEditingpage = true;
+
+      const input = document.createElement("input");
+      input.type = "number";
+      input.min = 0;
+      input.max = totalpages;
+      input.value = currentpage;
+      input.style.width = "50px";
+      input.style.textAlign = "center";
+      input.style.font = "inherit";
+      input.style.background = "#fcf8ec";
+      input.style.border = "1px solid #8c7653";
+      input.style.borderRadius = "2px";
+
+      currentpageDisplay.replaceWith(input);
+      input.focus();
+      input.select();
+
+      const commitChange = () => {
+        if (!isEditingpage) return;
+        isEditingpage = false;
+
+        let val = parseInt(input.value, 10);
+        if (isNaN(val)) {
+          val = currentpage;
+        } else {
+          val = Math.max(0, Math.min(totalpages, val));
+        }
+
+        input.replaceWith(currentpageDisplay);
+        if (val !== currentpage) {
+          triggerFlip(val);
+        } else {
+          updateBookState(currentpage, false);
+        }
+      };
+
+      input.addEventListener("blur", commitChange);
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          input.blur();
+        } else if (e.key === "Escape") {
+          isEditingpage = false;
+          input.replaceWith(currentpageDisplay);
+          updateBookState(currentpage, false);
+        }
+      });
+    });
+
+    window.addEventListener("popstate", (e) => {
+      const targetpage = getpageFromUrl();
+      if (targetpage !== currentpage) {
+        updateBookState(targetpage, false);
+      }
+    });
+
+    btnFirst.addEventListener("click", goFirst);
+    btnPrev.addEventListener("click", goPrev);
+    btnNext.addEventListener("click", goNext);
+    btnLast.addEventListener("click", goLast);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.target.tagName === "INPUT") return;
+
+      if (e.key === "ArrowRight") {
+        goNext();
+      } else if (e.key === "ArrowLeft") {
+        goPrev();
+      } else if (e.key === "Home") {
+        goFirst();
+      } else if (e.key === "End") {
+        goLast();
+      }
+    });
+
+    currentpage = getpageFromUrl();
+    buildBook();
+    updateBookState(currentpage, false);
+  </script>
+</body>
+</html>
