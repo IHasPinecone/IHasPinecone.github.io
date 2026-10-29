@@ -228,10 +228,10 @@
       <button id="btn-last" title="Last Page">&gt;|</button>
     </div>
     <div class="secondary-controls">
-      <button id="btn-toggle-overlay" title="Toggle Text Overlay">Toggle Text Overlay</button>
+      <button id="btn-toggle-overlay" title="Toggle Text Overlay">Toggle Text Overlay (T)</button>
     </div>
 
-    <p class="nav-hint">Use buttons, click pages, or press Left / Right arrows</p>
+    <p class="nav-hint">Use buttons, click pages, or press Left / Right arrows.</p>
     <p> <a href="../index.html">
       <img class="secondary-controls" src="..\bg\RWAssets\back.gif"/>
     </a> </p>
@@ -723,6 +723,8 @@
         goFirst();
       } else if (e.key === "End") {
         goLast();
+      } else if (e.key.toLowerCase() === "t") {
+        btnToggleOverlay.click();
       }
     });
 
