@@ -40,16 +40,19 @@
     }
 
     /* Outer perspective container */
-    .viewport {
-      perspective: 2000px;
-      width: 100%;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: 20px 0;
-    }
+.viewport {
+  perspective: 2000px;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto; /* Allows horizontal scrolling when needed */
+  overflow-y: hidden;
+  padding: 20px 0;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
 
     /* Fixed size for a single page page */
     :root {
@@ -69,12 +72,13 @@
       Width is 2 * page-width so full open book spread fits centrally.
     */
     .book {
-      position: relative;
-      width: calc(var(--page-width) * 2);
-      height: var(--page-height);
-      transform-style: preserve-3d;
-      transition: transform 0.6s ease-in-out;
-    }
+  position: relative;
+  width: calc(var(--page-width) * 2);
+  height: var(--page-height);
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+  flex-shrink: 0; /* Prevents the book from shrinking smaller than calculated */
+}
 
     /* Individual page */
     .page {
