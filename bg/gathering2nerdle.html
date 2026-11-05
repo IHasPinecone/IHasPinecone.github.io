@@ -229,8 +229,9 @@
             <div class="space-y-3 text-sm text-slate-300 leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
                 <p><strong>1. Objective:</strong> Alternate turns naming MTG cards linked by shared sets.</p>
                 <p><strong>2. Centered Card Nodes:</strong> Each card displays its name on the left and art image on the right (using the card's original/first art).</p>
-                <p><strong>3. Connecting Set Node:</strong> Between two cards, a connecting box lists all shared sets with checkmark indicators (e.g. <span class="text-amber-400 font-mono">Alpha ✔ ✔ ◯</span>).</p>
-                <p><strong>4. The 3-Strike Rule:</strong></p>
+                <p><strong>3. Basic Lands Prohibited:</strong> Basic lands (Plains, Island, Swamp, Mountain, Forest, Wastes, and snow-covered basic lands) are not allowed.</p>
+                <p><strong>4. Connecting Set Node:</strong> Between two cards, a connecting box lists all shared sets with checkmark indicators (e.g. <span class="text-amber-400 font-mono">Alpha ✔ ✔ ◯</span>).</p>
+                <p><strong>5. The 3-Strike Rule:</strong></p>
                 <ul class="list-disc list-inside space-y-1 text-slate-400 pl-2">
                     <li>Each set can be used as a connection maximum <strong>3 times</strong> across the game.</li>
                     <li>When a valid connection is made, all shared active sets earn a checkmark <span class="text-emerald-400">✔</span>.</li>
@@ -304,6 +305,19 @@
         let turnTimer = null;
         let isTimerEnabled = false;
         let timeLeft = 30;
+
+        // Basic lands exclusion set
+        const basicLandNames = new Set([
+            'plains', 'island', 'swamp', 'mountain', 'forest', 'wastes',
+            'snow-covered plains', 'snow-covered island', 'snow-covered swamp',
+            'snow-covered mountain', 'snow-covered forest', 'snow-covered wastes'
+        ]);
+        
+        function isBasicLand(cardName, typeLine) {
+            if (basicLandNames.has(cardName.toLowerCase())) return true;
+            if (typeLine && typeLine.toLowerCase().includes('basic') && typeLine.toLowerCase().includes('land')) return true;
+            return false;
+        }
 
         // Modal state for storing full sets payload for currently opened set inspection
         let currentModalSetsPayload = [];
@@ -429,7 +443,7 @@
 
             if(history.length === 0) {
                 inputLabel.textContent = `${activeName}, Name Opening Card`;
-                inputHint.textContent = `Any valid Magic: The Gathering card`;
+                inputHint.textContent = `Any valid non-basic Magic: The Gathering card`;
             } else {
                 const prevCard = history[history.length - 1];
                 inputLabel.textContent = `${activeName}, Name Next Card`;
@@ -447,6 +461,13 @@
             if (query.length < 2) {
                 hideAutocomplete();
                 return;
+            }
+            // Filter out basic lands from autocomplete list
+            const filteredItems = data.data.filter(item => !basicLandNames.has(item.toLowerCase()));
+            if (filteredItems.length > 0) {
+                showAutocomplete(filteredItems.slice(0, 8));
+            } else {
+                hideAutocomplete();
             }
 
             autocompleteTimeout = setTimeout(() => {
@@ -536,6 +557,11 @@
 
                 const canonicalCard = cardPrintings[0];
                 const actualCardName = canonicalCard.name;
+                if (isBasicLand(actualCardName, typeLine)) {
+                    showError(`Basic lands like "${actualCardName}" are not allowed!`);
+                    cardInput.disabled = false;
+                    return;
+                }
 
                 if (usedCardNames.has(actualCardName.toLowerCase())) {
                     showError(`"${actualCardName}" has already been played!`);
@@ -551,6 +577,11 @@
                     imageUrl = canonicalCard.image_uris.normal;
                 } else if (canonicalCard.card_faces && canonicalCard.card_faces[0].image_uris) {
                     imageUrl = canonicalCard.card_faces[0].image_uris.art_crop || canonicalCard.card_faces[0].image_uris.normal;
+                }
+
+                if (basicLandNames.has(lowerName)) {
+                    showError(`Basic lands like "${cardNameQuery}" are not allowed!`);
+                    return;
                 }
 
                 const typeLine = canonicalCard.type_line || "Card";
