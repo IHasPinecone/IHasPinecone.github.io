@@ -32,4 +32,175 @@
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-purple-500 selection:text-white">
 
   <!-- TOP BAR / HEADER -->
-  <header class="border-b border-slate-800
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40 px-4 py-3">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-purple-900/50">
+          <i class="fa-solid me-0 fa-layer-group"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-300">
+            Gathering2Nerdle
+          </h1>
+          <p class="text-xs text-slate-400">Local 2-Player MTG Set Matching Game</p>
+        </div>
+      </div>
+      
+      <!-- Current Status Badge (In-Game) -->
+      <div id="header-game-info" class="hidden flex items-center gap-4">
+        <!-- Timer Badge -->
+        <div id="timer-badge" class="hidden flex items-center gap-2 bg-slate-800 border border-slate-700 px-3 py-1 rounded-full text-xs font-mono font-bold text-amber-400">
+          <i class="fa-solid fa-stopwatch animate-pulse"></i>
+          <span id="timer-display">30s</span>
+        </div>
+        
+        <!-- Turn Indicator -->
+        <div id="player-turn-badge" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-purple-950/80 text-purple-300 border border-purple-800 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+          <span id="player-turn-text">Player 1's Turn</span>
+        </div>
+        
+        <!-- Reset Button -->
+        <button id="btn-restart" class="text-slate-400 hover:text-white text-sm p-1.5 rounded-lg hover:bg-slate-800 transition" title="Restart Game">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-4xl w-full mx-auto p-4 flex flex-col">
+
+    <!-- 1. SETUP / START SCREEN -->
+    <div id="screen-setup" class="my-auto max-w-md w-full mx-auto bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-6">
+      <div class="text-center space-y-2">
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-purple-900/40 text-purple-400 border border-purple-700/50 mb-2">
+          <i class="fa-solid fa-wand-magic-sparkles text-2xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold">New Duel Setup</h2>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Take turns naming MTG cards. Each new card must share at least one print set with the previous card. Once a set is used as a connection 3 times, it locks out!
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold uppercase text-slate-400 mb-1">Player 1 Name</label>
+          <input type="text" id="p1-name-input" value="Player 1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-purple-500 transition">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase text-slate-400 mb-1">Player 2 Name</label>
+          <input type="text" id="p2-name-input" value="Player 2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-purple-500 transition">
+        </div>
+
+        <!-- Options -->
+        <div class="pt-2 border-t border-slate-800/80">
+          <label class="flex items-center justify-between cursor-pointer py-2">
+            <div class="space-y-0.5">
+              <div class="text-sm font-medium text-slate-200">30-Second Turn Timer</div>
+              <div class="text-xs text-slate-400">Time out automatically concedes turn</div>
+            </div>
+            <input type="checkbox" id="timer-toggle-input" class="w-5 h-5 accent-purple-600 rounded cursor-pointer">
+          </label>
+        </div>
+      </div>
+
+      <button id="btn-start-game" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-purple-950/50 transition duration-150 transform active:scale-95 flex items-center justify-center gap-2">
+        <i class="fa-solid fa-play"></i> Start
+      </button>
+
+      <div class="text-center">
+        <p class="text-[11px] text-slate-500">
+          Powered by Scryfall API
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. GAMEPLAY SCREEN -->
+    <div id="screen-game" class="hidden flex-1 flex flex-col justify-between space-y-6">
+
+      <!-- CARD CHAIN DISPLAY (Bottom-to-Top Layout: flex-col-reverse) -->
+      <div id="card-chain-container" class="flex-1 flex flex-col-reverse gap-4 overflow-y-auto py-4 px-2 max-h-[calc(100vh-250px)]">
+        <!-- Cards and Set Nodes get dynamically prepended here -->
+      </div>
+
+      <!-- INPUT BAR AT BOTTOM -->
+      <div id="input-zone" class="sticky bottom-0 bg-slate-950/95 backdrop-blur pt-3 pb-2 border-t border-slate-800">
+        <form id="card-form" class="relative max-w-xl mx-auto space-y-2">
+          
+          <div class="flex items-center gap-2">
+            <div class="relative flex-1">
+              <input 
+                type="text" 
+                id="card-input" 
+                placeholder="Type MTG card name (e.g. Grizzly Bears)..." 
+                autocomplete="off"
+                class="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-4 pr-10 py-3 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 shadow-inner"
+              />
+              <div id="input-spinner" class="hidden absolute right-3 top-3.5 text-slate-400">
+                <i class="fa-solid fa-circle-notch animate-spin"></i>
+              </div>
+            </div>
+
+            <button type="submit" id="btn-submit-card" class="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-5 py-3 rounded-xl transition flex items-center gap-2 shadow-lg shadow-purple-950">
+              <span>Play</span>
+              <i class="fa-solid fa-paper-plane text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Autocomplete Dropdown Menu -->
+          <div id="autocomplete-list" class="hidden absolute left-0 right-0 top-full mt-1 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl overflow-hidden z-50 max-h-48 overflow-y-auto">
+            <!-- Autocomplete items appended here -->
+          </div>
+
+          <!-- Error Alert Banner -->
+          <div id="error-banner" class="hidden flex items-center gap-2 text-xs text-rose-400 bg-rose-950/40 border border-rose-800/60 px-3 py-2 rounded-lg">
+            <i class="fa-solid fa-circle-exclamation shrink-0"></i>
+            <span id="error-text">Card invalid.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 3. GAME OVER MODAL / SCREEN -->
+    <div id="screen-gameover" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 text-center space-y-6 shadow-2xl animate-fade-in">
+        <div class="w-16 h-16 bg-amber-500/10 border border-amber-500/30 rounded-full flex items-center justify-center mx-auto text-amber-400 text-3xl">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+
+        <div>
+          <h3 class="text-xs uppercase font-bold tracking-widest text-slate-400 mb-1">Victory</h3>
+          <h2 id="winner-name" class="text-3xl font-black text-white">Player 1 Wins!</h2>
+          <p id="winner-reason" class="text-xs text-slate-400 mt-2">Opponent timed out or gave up.</p>
+        </div>
+
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800/80 text-left space-y-2">
+          <div class="flex justify-between text-xs text-slate-400">
+            <span>Total Cards Linked:</span>
+            <span id="stat-total-cards" class="font-bold text-slate-200">0</span>
+          </div>
+          <div class="flex justify-between text-xs text-slate-400">
+            <span>Unique Sets Connected:</span>
+            <span id="stat-total-sets" class="font-bold text-slate-200">0</span>
+          </div>
+        </div>
+
+        <div class="flex gap-3">
+          <button id="btn-play-again" class="flex-1 py-3 bg-purple-600 hover:bg-purple-500 font-bold rounded-xl text-white transition shadow-lg shadow-purple-900/50">
+            Play Again
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. ALL CONNECTING SETS MODAL -->
+    <div id="modal-all-sets" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full max-h-[80vh] flex flex-col shadow-2xl">
+        <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+          <div>
+            <h3 class="font-bold text-slate-100 text-sm">All Shared Connecting Sets</h3>
+            <p id="modal-sets-subtitle" class="text-xs text-slate-400">Card A ↔ Card B</p>
+          </div>
+          <button id="btn-close-sets-modal" class="text-slate-400 hover:text-white p-1 rounded-lg">
+            <i class="fa-solid fa-
