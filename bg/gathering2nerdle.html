@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gathering2Nerdle</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        mtg: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155',
+                            accent: '#d97706',
+                            accentHover: '#b45309',
+                            gold: '#fbbf24'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f8fafc;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        .card-glow {
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.2), 0 8px 10px -6px rgba(217, 119, 6, 0.1);
+        }
+        /* Vertical connecting line */
+        .chain-connector-line {
+            width: 3px;
+            background: linear-gradient(to bottom, #d97706, #3b82f6);
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-white">
+
+    <!-- Header -->
+    <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 px-4 py-3">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-900/30">
+                    <i class="fa-solid fa-wand-magic-sparkles text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wide bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">MTG Set Linker</h1>
+                    <p class="text-xs text-slate-400">Chain MTG cards • Max 3 connections per set</p>
+                </div>
+            </div>
+            <div id="game-actions-header" class="hidden flex items-center space-x-2">
+                <button onclick="openRulesModal()" class="px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 transition">
+                    <i class="fa-solid fa-book-open mr-1.5"></i> Rules
+                </button>
+                <button onclick="confirmResetGame()" class="px-3 py-1.5 text-xs font-medium text-rose-400 hover:text-rose-300 bg-rose-950/40 hover:bg-rose-900/50 rounded-lg border border-rose-800/50 transition">
+                    <i class="fa-solid fa-rotate-right mr-1.5"></i> Reset Game
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6 flex flex-col items-center">
+
+        <!-- SETUP SCREEN -->
+        <div id="setup-screen" class="w-full max-w-md bg-slate-900/90 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl card-glow my-auto">
+            <div class="text-center mb-6">
+                <div class="inline-flex p-3 rounded-full bg-amber-500/10 text-amber-400 mb-3 border border-amber-500/20">
+                    <i class="fa-solid fa-users text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Gathering2Nerdle</h2>
+                <p class="text-sm text-slate-400 mt-1">Enter Player Names</p>
+            </div>
+
+            <form id="setup-form" onsubmit="startGame(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Player 1 Name</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-amber-500 font-bold">1</span>
+                        <input type="text" id="player1-name" required value="Player 1" 
+                            class="w-full pl-9 pr-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Player 2 Name</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-blue-400 font-bold">2</span>
+                        <input type="text" id="player2-name" required value="Player 2" 
+                            class="w-full pl-9 pr-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm">
+                    </div>
+                </div>
+
+                <!-- Timer Toggle Option -->
+                <div class="p-3.5 bg-slate-950 border border-slate-800 rounded-xl flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 rounded-lg bg-amber-500/10 text-amber-400">
+                            <i class="fa-solid fa-stopwatch text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-sm font-semibold text-white block">30-Second Turn Timer</span>
+                            <span class="text-xs text-slate-400">Player loses if time runs out</span>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="timer-toggle" class="sr-only peer">
+                        <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                    </label>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3 px-4 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-600/20 transition transform active:scale-[0.99] flex items-center justify-center space-x-2">
+                        <span>Start Duel</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- GAMEPLAY SCREEN -->
+        <div id="game-screen" class="w-full hidden flex flex-col space-y-6 items-center">
+            
+            <!-- Sticky Turn Bar & Input Floating Container -->
+            <div class="w-full max-w-2xl sticky top-16 z-40 bg-slate-900/95 backdrop-blur-md border border-slate-800 rounded-2xl p-4 shadow-2xl">
+                <!-- Turn Banner & Optional Timer -->
+                <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 mb-3">
+                    <div class="flex items-center space-x-3">
+                        <div id="turn-indicator-badge" class="w-3 h-3 rounded-full bg-amber-500 animate-pulse"></div>
+                        <div>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Current Turn</span>
+                            <span id="current-player-display" class="text-base font-bold text-white">Player 1</span>
+                        </div>
+                    </div>
+
+                    <!-- Visual Turn Countdown Display -->
+                    <div id="timer-container" class="hidden flex items-center space-x-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+                        <i class="fa-solid fa-stopwatch text-amber-400 text-sm animate-pulse"></i>
+                        <span id="timer-display" class="font-mono text-base font-bold text-amber-400">30s</span>
+                    </div>
+
+                    <div class="flex items-center space-x-3 text-right">
+                        <div>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Cards Chained</span>
+                            <span id="chain-length" class="text-base font-bold text-amber-400">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Form -->
+                <form id="card-submit-form" onsubmit="submitCard(event)" class="relative">
+                    <div class="mb-1.5 flex items-center justify-between">
+                        <label id="input-label" for="card-input" class="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                            Name Next Magic Card
+                        </label>
+                        <span id="input-hint" class="text-[11px] text-slate-400">Must share an available set (<3 uses)</span>
+                    </div>
+                    
+                    <div class="relative">
+                        <input type="text" id="card-input" autocomplete="off" placeholder="Type a card name (e.g., Giant Spider, Grizzly Bears)..."
+                            class="w-full pl-4 pr-12 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm">
+                        <button type="submit" class="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg transition flex items-center justify-center">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+
+                    <!-- Autocomplete Dropdown -->
+                    <div id="autocomplete-list" class="absolute left-0 right-0 mt-1 bg-slate-950 border border-slate-700 rounded-xl shadow-2xl max-h-56 overflow-y-auto z-50 hidden"></div>
+                </form>
+
+                <div class="mt-2 flex justify-between items-center pt-2">
+                    <button onclick="confirmGiveUp()" class="text-xs text-rose-400 hover:text-rose-300 font-medium flex items-center transition">
+                        <i class="fa-solid fa-flag mr-1.5"></i> Concede Turn
+                    </button>
+                    <span id="error-feedback" class="text-xs text-rose-400 font-medium hidden"></span>
+                </div>
+            </div>
+
+            <!-- Centered Card Chain Feed -->
+            <div class="w-full max-w-xl flex flex-col items-center">
+                <div id="chain-container" class="w-full flex flex-col-reverse items-center">
+                    <!-- Chain items inserted dynamically here (newest at top via flex-col-reverse) -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900/60 border-t border-slate-800 py-3 text-center text-xs text-slate-500">
+        <p>Powered by Scryfall API.</p>
+    </footer>
+
+    <!-- Rules Modal -->
+    <div id="rules-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+                <h3 class="text-lg font-bold text-white flex items-center">
+                    <i class="fa-solid fa-book-open text-amber-500 mr-2"></i> MTG Set Linker Rules
+                </h3>
+                <button onclick="closeRulesModal()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="space-y-3 text-sm text-slate-300 leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
+                <p><strong>1. Objective:</strong> Alternate turns naming MTG cards linked by shared sets.</p>
+                <p><strong>2. Centered Card Nodes:</strong> Each card displays its name on the left and art image on the right.</p>
+                <p><strong>3. Connecting Set Node:</strong> Between two cards, a connecting box lists all shared sets with checkmark indicators (e.g. <span class="text-amber-400 font-mono">Alpha ✔ ✔ ◯</span>).</p>
+                <p><strong>4. The 3-Strike Rule:</strong></p>
+                <ul class="list-disc list-inside space-y-1 text-slate-400 pl-2">
+                    <li>Each set can be used as a connection maximum <strong>3 times</strong> across the game.</li>
+                    <li>When a valid connection is made, all shared active sets earn a checkmark <span class="text-emerald-400">✔</span>.</li>
+                    <li>Once a set reaches 3 checkmarks (<span class="text-amber-400 font-mono">✔ ✔ ✔</span>), it is <strong>exhausted</strong> and cannot be used to establish future connections.</li>
+                    <li>To play a card, it must share <strong>at least ONE set with fewer than 3 checkmarks</strong> with the previous card.</li>
+                </ul>
+            </div>
+            <div class="mt-6 pt-3 border-t border-slate-800 flex justify-end">
+                <button onclick="closeRulesModal()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-xl text-sm transition">
+                    Got it!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full Connecting Sets Modal -->
+    <div id="all-sets-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+                <h3 id="all-sets-modal-title" class="text-lg font-bold text-white flex items-center">
+                    <i class="fa-solid fa-link text-amber-500 mr-2"></i> Shared Connecting Sets
+                </h3>
+                <button onclick="closeAllSetsModal()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div id="all-sets-modal-list" class="space-y-2 text-xs max-h-[60vh] overflow-y-auto pr-2">
+                <!-- Full list dynamically populated here -->
+            </div>
+            <div class="mt-5 pt-3 border-t border-slate-800 flex justify-end">
+                <button onclick="closeAllSetsModal()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-xl text-sm transition">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over / Winner Modal -->
+    <div id="gameover-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl text-center relative">
+            <div class="inline-flex p-4 rounded-full bg-amber-500/10 text-amber-400 mb-4 border border-amber-500/20 shadow-lg">
+                <i class="fa-solid fa-trophy text-3xl"></i>
+            </div>
+            <h3 id="gameover-title" class="text-2xl font-bold text-white mb-2">Player 1 Wins!</h3>
+            <p id="gameover-subtitle" class="text-sm text-slate-400 mb-6">Chain completed successfully.</p>
+            
+            <div class="flex space-x-3">
+                <button onclick="closeGameOverModal(); resetGame();" class="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl text-sm transition border border-slate-700">
+                    Main Menu
+                </button>
+                <button onclick="closeGameOverModal(); restartSamePlayers();" class="flex-1 py-3 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-xl text-sm transition shadow-lg shadow-amber-600/20">
+                    Play Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <!-- JavaScript Game Logic -->
+    <script>
+        // Game State
+        let player1Name = "Player 1";
+        let player2Name = "Player 2";
+        let currentTurn = 1; 
+        let history = []; // Card objects
+        let usedCardNames = new Set();
+        let setUsageCounts = new Map(); // setCode -> count (0..3)
+        let autocompleteTimeout = null;
+
+        // Modal state for storing full sets payload for currently opened set inspection
+        let currentModalSetsPayload = [];
+
+        // DOM Elements
+        const setupScreen = document.getElementById('setup-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const gameActionsHeader = document.getElementById('game-actions-header');
+        const currentPlayerDisplay = document.getElementById('current-player-display');
+        const turnIndicatorBadge = document.getElementById('turn-indicator-badge');
+        const chainLengthEl = document.getElementById('chain-length');
+        const cardInput = document.getElementById('card-input');
+        const inputLabel = document.getElementById('input-label');
+        const inputHint = document.getElementById('input-hint');
+        const autocompleteList = document.getElementById('autocomplete-list');
+        const chainContainer = document.getElementById('chain-container');
+        const errorFeedback = document.getElementById('error-feedback');
+        const timerToggle = document.getElementById('timer-toggle');
+        const timerContainer = document.getElementById('timer-container');
+        const timerDisplay = document.getElementById('timer-display');
+
+        function startGame(e) {
+            e.preventDefault();
+            const p1 = document.getElementById('player1-name').value.trim();
+            const p2 = document.getElementById('player2-name').value.trim();
+            if(p1) player1Name = p1;
+            if(p2) player2Name = p2;
+
+            isTimerEnabled = timerToggle.checked;
+
+            setupScreen.classList.add('hidden');
+            gameScreen.classList.remove('hidden');
+            gameActionsHeader.classList.remove('hidden');
+
+            resetGameStateData();
+            updateUI();
+            cardInput.focus();
+        }
+
+        function resetGameStateData() {
+            stopTimer();
+            currentTurn = 1;
+            history = [];
+            usedCardNames.clear();
+            setUsageCounts.clear();
+            chainContainer.innerHTML = '';
+            chainLengthEl.textContent = '0';
+            hideError();
+        }
+
+        function resetGame() {
+            stopTimer();
+            gameScreen.classList.add('hidden');
+            gameActionsHeader.classList.add('hidden');
+            setupScreen.classList.remove('hidden');
+        }
+
+        function confirmResetGame() {
+            if(confirm("Are you sure you want to reset the game and return to setup?")) {
+                resetGame();
+            }
+        }
+
+        function restartSamePlayers() {
+            resetGameStateData();
+            updateUI();
+            cardInput.focus();
+        }
+
+        function startTurnTimer() {
+            stopTimer();
+            if (!isTimerEnabled) {
+                timerContainer.classList.add('hidden');
+                return;
+            }
+
+            timerContainer.classList.remove('hidden');
+            timeLeft = 30;
+            updateTimerDisplay();
+
+            turnTimer = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+
+                if (timeLeft <= 0) {
+                    stopTimer();
+                    const losingPlayer = currentTurn === 1 ? player1Name : player2Name;
+                    const winningPlayer = currentTurn === 1 ? player2Name : player1Name;
+                    triggerGameOver(winningPlayer, `${losingPlayer} ran out of time (30s timer expired)!`);
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (turnTimer) {
+                clearInterval(turnTimer);
+                turnTimer = null;
+            }
+        }
+
+        function updateTimerDisplay() {
+            timerDisplay.textContent = `${timeLeft}s`;
+            if (timeLeft <= 5) {
+                timerDisplay.className = "font-mono text-base font-bold text-rose-500 animate-ping";
+            } else if (timeLeft <= 10) {
+                timerDisplay.className = "font-mono text-base font-bold text-rose-400";
+            } else {
+                timerDisplay.className = "font-mono text-base font-bold text-amber-400";
+            }
+        }
+
+        function updateUI() {
+            const activeName = currentTurn === 1 ? player1Name : player2Name;
+            currentPlayerDisplay.textContent = activeName;
+            
+            if(currentTurn === 1) {
+                turnIndicatorBadge.className = 'w-3 h-3 rounded-full bg-amber-500 animate-pulse';
+                currentPlayerDisplay.className = 'text-base font-bold text-amber-400';
+            } else {
+                turnIndicatorBadge.className = 'w-3 h-3 rounded-full bg-blue-500 animate-pulse';
+                currentPlayerDisplay.className = 'text-base font-bold text-blue-400';
+            }
+
+            if(history.length === 0) {
+                inputLabel.textContent = `${activeName}, Name Opening Card`;
+                inputHint.textContent = `Any valid Magic: The Gathering card`;
+            } else {
+                const prevCard = history[history.length - 1];
+                inputLabel.textContent = `${activeName}, Name Next Card`;
+                inputHint.textContent = `Must share an available set (<3 uses) with "${prevCard.name}"`;
+            }
+
+            startTurnTimer();
+        }
+
+        // Autocomplete
+        cardInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            clearTimeout(autocompleteTimeout);
+
+            if (query.length < 2) {
+                hideAutocomplete();
+                return;
+            }
+
+            autocompleteTimeout = setTimeout(() => {
+                fetch(`https://api.scryfall.com/cards/autocomplete?q=${encodeURIComponent(query)}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data && data.data && data.data.length > 0) {
+                            showAutocomplete(data.data.slice(0, 8));
+                        } else {
+                            hideAutocomplete();
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Autocomplete error:", err);
+                        hideAutocomplete();
+                    });
+            }, 250);
+        });
+
+        function showAutocomplete(items) {
+            autocompleteList.innerHTML = '';
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 hover:text-amber-400 cursor-pointer border-b border-slate-900 last:border-b-0 transition';
+                div.textContent = item;
+                div.onmousedown = (e) => {
+                    e.preventDefault();
+                    cardInput.value = item;
+                    hideAutocomplete();
+                    cardInput.focus();
+                };
+                autocompleteList.appendChild(div);
+            });
+            autocompleteList.classList.remove('hidden');
+        }
+
+        function hideAutocomplete() {
+            autocompleteList.classList.add('hidden');
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!cardInput.contains(e.target) && !autocompleteList.contains(e.target)) {
+                hideAutocomplete();
+            }
+        });
+
+        // Main Logic: Card Submission
+        async function submitCard(e) {
+            e.preventDefault();
+            hideError();
+            hideAutocomplete();
+
+            const cardNameQuery = cardInput.value.trim();
+            if (!cardNameQuery) return;
+
+            const lowerName = cardNameQuery.toLowerCase();
+
+            if (usedCardNames.has(lowerName)) {
+                showError(`"${cardNameQuery}" has already been played in this match!`);
+                return;
+            }
+
+            cardInput.disabled = true;
+
+            try {
+                // Scryfall Exact Card Search with exact name quotes
+                const response = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardNameQuery + '"')}`);
+                
+                if (!response.ok) {
+                    throw new Error("Card not found on Scryfall. Check exact spelling.");
+                }
+
+                const searchData = await response.json();
+                if (!searchData || !searchData.data || searchData.data.length === 0) {
+                    throw new Error(`Card "${cardNameQuery}" could not be found.`);
+                }
+
+                // Strict filtering for exact name matching (separates single-faced vs dual-faced cards like "//")
+                let cardPrintings = searchData.data.filter(c => c.name.toLowerCase() === lowerName);
+                if (cardPrintings.length === 0) {
+                    // Fallback to primary search data if no exact name case match
+                    cardPrintings = searchData.data;
+                }
+
+                const canonicalCard = cardPrintings[0];
+                const actualCardName = canonicalCard.name;
+
+                if (usedCardNames.has(actualCardName.toLowerCase())) {
+                    showError(`"${actualCardName}" has already been played!`);
+                    cardInput.disabled = false;
+                    return;
+                }
+
+                // Extract Art Image
+                let imageUrl = '';
+                if (canonicalCard.image_uris && canonicalCard.image_uris.art_crop) {
+                    imageUrl = canonicalCard.image_uris.art_crop;
+                } else if (canonicalCard.image_uris && canonicalCard.image_uris.normal) {
+                    imageUrl = canonicalCard.image_uris.normal;
+                } else if (canonicalCard.card_faces && canonicalCard.card_faces[0].image_uris) {
+                    imageUrl = canonicalCard.card_faces[0].image_uris.art_crop || canonicalCard.card_faces[0].image_uris.normal;
+                }
+
+                const typeLine = canonicalCard.type_line || "Card";
+
+                // Map of sets for this card along with released_at dates
+                const setCodes = new Set();
+                const setNamesMap = new Map();
+                const setReleaseDatesMap = new Map();
+
+                cardPrintings.forEach(printing => {
+                    if (printing.set) {
+                        const code = printing.set.toLowerCase();
+                        setCodes.add(code);
+                        if (printing.set_name) {
+                            setNamesMap.set(code, printing.set_name);
+                        }
+                        if (printing.released_at) {
+                            // Store newest release date per set
+                            const existingDate = setReleaseDatesMap.get(code);
+                            if (!existingDate || printing.released_at > existingDate) {
+                                setReleaseDatesMap.set(code, printing.released_at);
+                            }
+                        }
+                    }
+                });
+
+                // Validation against previous card & 3-strike set cap rule
+                let connectingSets = [];
+                if (history.length > 0) {
+                    const prevCard = history[history.length - 1];
+
+                    // Find all common sets
+                    const allCommonSets = [];
+                    for (const sCode of prevCard.sets) {
+                        if (setCodes.has(sCode)) {
+                            allCommonSets.push(sCode);
+                        }
+                    }
+
+                    if (allCommonSets.length === 0) {
+                        showError(`Invalid! "${actualCardName}" shares NO sets with "${prevCard.name}".`);
+                        cardInput.disabled = false;
+                        return;
+                    }
+
+                    // Check which common sets are available (< 3 uses)
+                    const availableSets = allCommonSets.filter(code => (setUsageCounts.get(code) || 0) < 3);
+
+                    if (availableSets.length === 0) {
+                        showError(`Invalid! Connecting set(s) [${allCommonSets.map(c => c.toUpperCase()).join(', ')}] have reached the maximum 3-strike limit!`);
+                        cardInput.disabled = false;
+                        return;
+                    }
+
+                    // Increment usages for non-exhausted common sets used in this connection
+                    allCommonSets.forEach(code => {
+                        const currCount = setUsageCounts.get(code) || 0;
+                        if (currCount < 3) {
+                            setUsageCounts.set(code, currCount + 1);
+                        }
+                    });
+
+                    // Prepare connecting sets data for display node
+                    connectingSets = allCommonSets.map(code => ({
+                        code: code,
+                        name: setNamesMap.get(code) || prevCard.setNames.get(code) || code.toUpperCase(),
+                        releaseDate: setReleaseDatesMap.get(code) || prevCard.setReleaseDates.get(code) || "0000-00-00",
+                        usageCount: setUsageCounts.get(code)
+                    }));
+
+                    // Sort sets in REVERSE CHRONOLOGICAL ORDER (most recently released set at the top)
+                    connectingSets.sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
+                }
+
+                // Stop current timer upon successful play
+                stopTimer();
+
+                // Card valid! Push to history
+                const activePlayerName = currentTurn === 1 ? player1Name : player2Name;
+                const newCardObj = {
+                    name: actualCardName,
+                    sets: setCodes,
+                    setNames: setNamesMap,
+                    setReleaseDates: setReleaseDatesMap,
+                    imageUrl: imageUrl,
+                    typeLine: typeLine,
+                    playerName: activePlayerName
+                };
+
+                history.push(newCardObj);
+                usedCardNames.add(actualCardName.toLowerCase());
+
+                // Render centered vertical chain node (placed at top of chain via flex-col-reverse container)
+                renderChainNode(newCardObj, connectingSets);
+
+                // Update UI state
+                chainLengthEl.textContent = history.length;
+                cardInput.value = '';
+                cardInput.disabled = false;
+                cardInput.focus();
+
+                // Switch player turn
+                currentTurn = currentTurn === 1 ? 2 : 1;
+                updateUI();
+
+            } catch (err) {
+                console.error(err);
+                showError(err.message || "Error validating card.");
+                cardInput.disabled = false;
+                cardInput.focus();
+            }
+        }
+
+        // Render card node and connector matching sketch
+        function renderChainNode(card, connectingSets) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'w-full flex flex-col items-center animate-fade-in';
+
+            // Card Node Box: Name on Left, Card Artwork Image on Right
+            const cardBox = document.createElement('div');
+            cardBox.className = 'w-full max-w-md bg-slate-900 border border-slate-700/80 rounded-2xl p-4 shadow-xl flex items-center justify-between space-x-4 relative overflow-hidden group hover:border-amber-500/50 transition';
+
+            // Left Side: Name and Type
+            const leftContent = document.createElement('div');
+            leftContent.className = 'flex flex-col justify-center overflow-hidden flex-grow';
+
+            const playerTag = document.createElement('span');
+            playerTag.className = 'text-[10px] font-bold text-amber-500/90 uppercase tracking-wider mb-1';
+            playerTag.textContent = `${card.playerName}'s Card`;
+
+            const cardTitle = document.createElement('h3');
+            cardTitle.className = 'text-lg font-bold text-white tracking-wide truncate mb-1';
+            cardTitle.textContent = card.name;
+
+            const cardType = document.createElement('p');
+            cardType.className = 'text-xs text-slate-400 truncate';
+            cardType.textContent = card.typeLine;
+
+            leftContent.appendChild(playerTag);
+            leftContent.appendChild(cardTitle);
+            leftContent.appendChild(cardType);
+
+            // Right Side: Card Artwork Image Box
+            const rightArtBox = document.createElement('div');
+            rightArtBox.className = 'w-24 h-24 md:w-28 md:h-28 rounded-xl bg-slate-950 border border-slate-800 overflow-hidden flex-shrink-0 flex items-center justify-center relative shadow-md';
+
+            if (card.imageUrl) {
+                const img = document.createElement('img');
+                img.src = card.imageUrl;
+                img.alt = card.name;
+                img.className = 'w-full h-full object-cover transition transform group-hover:scale-105 duration-300';
+                img.onerror = () => {
+                    img.remove();
+                    rightArtBox.innerHTML = `<div class="text-slate-600 text-center p-2"><i class="fa-solid fa-image text-2xl"></i></div>`;
+                };
+                rightArtBox.appendChild(img);
+            } else {
+                rightArtBox.innerHTML = `<div class="text-slate-600 text-center p-2"><i class="fa-solid fa-id-card text-2xl"></i></div>`;
+            }
+
+            cardBox.appendChild(leftContent);
+            cardBox.appendChild(rightArtBox);
+            wrapper.appendChild(cardBox);
+
+            // If there are connecting sets connecting to the previous card, render connection node below this card
+            if (connectingSets && connectingSets.length > 0) {
+                // Top line segment
+                const topConnectorLine = document.createElement('div');
+                topConnectorLine.className = 'chain-connector-line h-6';
+                wrapper.appendChild(topConnectorLine);
+
+                // Connector Node Box
+                const connectorBox = document.createElement('div');
+                connectorBox.className = 'w-full max-w-sm bg-slate-900 border border-amber-500/40 rounded-xl p-3 shadow-lg flex flex-col items-center text-center';
+
+                const headerTitle = document.createElement('span');
+                headerTitle.className = 'text-[10px] uppercase font-bold tracking-wider text-amber-400 mb-1.5 flex items-center';
+                headerTitle.innerHTML = `<i class="fa-solid fa-link mr-1"></i> Shared Sets (${connectingSets.length}) • Reverse Chronological`;
+                connectorBox.appendChild(headerTitle);
+
+                const setsList = document.createElement('div');
+                setsList.className = 'w-full space-y-1.5 text-xs';
+
+                // Render each set (sorted reverse-chronologically) with checkmark indicators (✔ ✔ ◯)
+                const displayMax = 4;
+                const visibleSets = connectingSets.slice(0, displayMax);
+                const hiddenCount = connectingSets.length - displayMax;
+
+                visibleSets.forEach(setObj => {
+                    const setRow = document.createElement('div');
+                    setRow.className = 'flex items-center justify-between px-2.5 py-1 bg-slate-950 rounded-lg border border-slate-800';
+
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'font-semibold text-slate-200 truncate mr-2';
+                    nameSpan.textContent = setObj.name;
+
+                    // Checkmarks container (up to 3)
+                    const checkmarksContainer = document.createElement('div');
+                    checkmarksContainer.className = 'flex items-center space-x-1 font-mono text-xs flex-shrink-0';
+                    
+                    const count = setObj.usageCount; // 1, 2, or 3
+                    for (let i = 1; i <= 3; i++) {
+                        const mark = document.createElement('span');
+                        if (i <= count) {
+                            mark.className = count === 3 ? 'text-rose-400 font-bold' : 'text-emerald-400 font-bold';
+                            mark.textContent = '✔';
+                        } else {
+                            mark.className = 'text-slate-600';
+                            mark.textContent = '◯';
+                        }
+                        checkmarksContainer.appendChild(mark);
+                    }
+
+                    setRow.appendChild(nameSpan);
+                    setRow.appendChild(checkmarksContainer);
+                    setsList.appendChild(setRow);
+                });
+
+                if (hiddenCount > 0) {
+                    const extraButton = document.createElement('button');
+                    extraButton.type = 'button';
+                    extraButton.className = 'w-full mt-1 py-1 text-[11px] text-amber-400 hover:text-amber-300 font-semibold italic bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-lg transition flex items-center justify-center space-x-1';
+                    extraButton.innerHTML = `<span>+${hiddenCount} more connection${hiddenCount > 1 ? 's' : ''} (click to view all ${connectingSets.length})</span> <i class="fa-solid fa-chevron-right text-[9px]"></i>`;
+                    
+                    // Attach click handler to launch modal with full connecting sets list
+                    extraButton.onclick = () => openAllSetsModal(connectingSets, history.length >= 2 ? `${history[history.length - 2].name} ↔ ${card.name}` : 'Shared Sets');
+                    setsList.appendChild(extraButton);
+                }
+
+                connectorBox.appendChild(setsList);
+                wrapper.appendChild(connectorBox);
+
+                // Bottom line segment
+                const bottomConnectorLine = document.createElement('div');
+                bottomConnectorLine.className = 'chain-connector-line h-6';
+                wrapper.appendChild(bottomConnectorLine);
+            }
+
+            // Append to chain container (will appear at the top due to flex-col-reverse)
+            chainContainer.appendChild(wrapper);
+
+            // Smooth scroll into view for newest move
+            wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Full Connecting Sets Modal Functions
+        function openAllSetsModal(connectingSets, cardConnectionTitle) {
+            const listEl = document.getElementById('all-sets-modal-list');
+            const titleEl = document.getElementById('all-sets-modal-title');
+            listEl.innerHTML = '';
+
+            titleEl.innerHTML = `<i class="fa-solid fa-link text-amber-500 mr-2"></i> Shared Sets (${connectingSets.length})`;
+
+            connectingSets.forEach(setObj => {
+                const setRow = document.createElement('div');
+                setRow.className = 'flex items-center justify-between px-3 py-2 bg-slate-950 rounded-xl border border-slate-800 hover:border-slate-700 transition';
+
+                const nameCol = document.createElement('div');
+                nameCol.className = 'flex flex-col truncate mr-2';
+
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'font-semibold text-slate-200 truncate text-xs';
+                nameSpan.textContent = setObj.name;
+
+                const codeSpan = document.createElement('span');
+                codeSpan.className = 'text-[10px] text-slate-400 font-mono uppercase';
+                codeSpan.textContent = `Set Code: ${setObj.code.toUpperCase()} • ${setObj.releaseDate}`;
+
+                nameCol.appendChild(nameSpan);
+                nameCol.appendChild(codeSpan);
+
+                // Checkmarks container (up to 3)
+                const checkmarksContainer = document.createElement('div');
+                checkmarksContainer.className = 'flex items-center space-x-1.5 font-mono text-xs flex-shrink-0';
+                
+                const count = setObj.usageCount; // 1, 2, or 3
+                for (let i = 1; i <= 3; i++) {
+                    const mark = document.createElement('span');
+                    if (i <= count) {
+                        mark.className = count === 3 ? 'text-rose-400 font-bold' : 'text-emerald-400 font-bold';
+                        mark.textContent = '✔';
+                    } else {
+                        mark.className = 'text-slate-600';
+                        mark.textContent = '◯';
+                    }
+                    checkmarksContainer.appendChild(mark);
+                }
+
+                setRow.appendChild(nameCol);
+                setRow.appendChild(checkmarksContainer);
+                listEl.appendChild(setRow);
+            });
+
+            document.getElementById('all-sets-modal').classList.remove('hidden');
+        }
+
+        function closeAllSetsModal() {
+            document.getElementById('all-sets-modal').classList.add('hidden');
+        }
+
+        // Concede Turn
+        function confirmGiveUp() {
+            if (history.length === 0) {
+                showToast("Cannot concede before playing the first card!", "error");
+                return;
+            }
+
+            const concedingPlayer = currentTurn === 1 ? player1Name : player2Name;
+            const winningPlayer = currentTurn === 1 ? player2Name : player1Name;
+
+            if (confirm(`${concedingPlayer}, do you want to concede? ${winningPlayer} will win!`)) {
+                stopTimer();
+                triggerGameOver(winningPlayer, `${concedingPlayer} conceded.`);
+            }
+        }
+
+        function triggerGameOver(winnerName, subtitleText) {
+            stopTimer();
+            document.getElementById('gameover-title').textContent = `${winnerName} Wins!`;
+            document.getElementById('gameover-subtitle').textContent = `${subtitleText} Final chain: ${history.length} cards.`;
+            document.getElementById('gameover-modal').classList.remove('hidden');
+        }
+
+        function closeGameOverModal() {
+            document.getElementById('gameover-modal').classList.add('hidden');
+        }
+
+        function openRulesModal() {
+            document.getElementById('rules-modal').classList.remove('hidden');
+        }
+
+        function closeRulesModal() {
+            document.getElementById('rules-modal').classList.add('hidden');
+        }
+
+        function showError(msg) {
+            errorFeedback.textContent = msg;
+            errorFeedback.classList.remove('hidden');
+            showToast(msg, "error");
+        }
+
+        function hideError() {
+            errorFeedback.textContent = '';
+            errorFeedback.classList.add('hidden');
+        }
+
+        function showToast(message, type = "info") {
+            const toastContainer = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let bgClass = "bg-slate-900 border-slate-700 text-slate-200";
+            let icon = "fa-circle-info text-blue-400";
+            
+            if(type === "error") {
+                bgClass = "bg-rose-950 border-rose-800 text-rose-200";
+                icon = "fa-triangle-exclamation text-rose-400";
+            }
+
+            toast.className = `pointer-events-auto px-4 py-3 rounded-xl border shadow-xl flex items-center space-x-3 text-xs md:text-sm transition transform translate-y-2 opacity-0 animate-fade-in ${bgClass}`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-base flex-shrink-0"></i><span class="font-medium">${message}</span>`;
+            
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
