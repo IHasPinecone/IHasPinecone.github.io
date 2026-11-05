@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gathering2Nerdle</title>
+    <title>MTG Set Linker - Two Player Card Game</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -93,7 +93,7 @@
                     <i class="fa-solid fa-users text-2xl"></i>
                 </div>
                 <h2 class="text-2xl font-bold text-white">Gathering2Nerdle</h2>
-                <p class="text-sm text-slate-400 mt-1">Enter Player Names</p>
+                <p class="text-sm text-slate-400 mt-1">Enter player names to start chaining cards!</p>
             </div>
 
             <form id="setup-form" onsubmit="startGame(event)" class="space-y-4">
@@ -134,7 +134,7 @@
 
                 <div class="pt-2">
                     <button type="submit" class="w-full py-3 px-4 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-600/20 transition transform active:scale-[0.99] flex items-center justify-center space-x-2">
-                        <span>Start Duel</span>
+                        <span>Start</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
@@ -301,6 +301,9 @@
         let usedCardNames = new Set();
         let setUsageCounts = new Map(); // setCode -> count (0..3)
         let autocompleteTimeout = null;
+        let turnTimer = null;
+        let isTimerEnabled = false;
+        let timeLeft = 30;
 
         // Modal state for storing full sets payload for currently opened set inspection
         let currentModalSetsPayload = [];
