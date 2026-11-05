@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gathering2Nerdle - Duel Variant</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        mtg: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155',
+                            accent: '#d97706',
+                            accentHover: '#b45309',
+                            gold: '#fbbf24'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f8fafc;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        .card-glow {
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.2), 0 8px 10px -6px rgba(217, 119, 6, 0.1);
+        }
+        .chain-connector-line {
+            width: 3px;
+            background: linear-gradient(to bottom, #d97706, #3b82f6);
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-white">
+
+    <!-- Header -->
+    <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 px-4 py-3">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-900/30">
+                    <i class="fa-solid fa-swords text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wide bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">MTG Duel Linker</h1>
+                    <p class="text-xs text-slate-400">Combat Variant • Individual Type/Subtype Scoring • 20 Life</p>
+                </div>
+            </div>
+            <div id="game-actions-header" class="hidden flex items-center space-x-2">
+                <button onclick="openRulesModal()" class="px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 transition">
+                    <i class="fa-solid fa-book-open mr-1.5"></i> Rules
+                </button>
+                <button onclick="confirmResetGame()" class="px-3 py-1.5 text-xs font-medium text-rose-400 hover:text-rose-300 bg-rose-950/40 hover:bg-rose-900/50 rounded-lg border border-rose-800/50 transition">
+                    <i class="fa-solid fa-rotate-right mr-1.5"></i> Reset Game
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6 flex flex-col items-center">
+
+        <!-- SETUP SCREEN -->
+        <div id="setup-screen" class="w-full max-w-md bg-slate-900/90 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl card-glow my-auto">
+            <div class="text-center mb-6">
+                <div class="inline-flex p-3 rounded-full bg-amber-500/10 text-amber-400 mb-3 border border-amber-500/20">
+                    <i class="fa-solid fa-shield-halved text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Gathering2Nerdle Duel</h2>
+                <p class="text-sm text-slate-400 mt-1">Configure players to start combat!</p>
+            </div>
+
+            <form id="setup-form" onsubmit="startGame(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Player 1 Name</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-amber-500 font-bold">1</span>
+                        <input type="text" id="player1-name" required value="Player 1" 
+                            class="w-full pl-9 pr-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Player 2 Name</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-blue-400 font-bold">2</span>
+                        <input type="text" id="player2-name" required value="Player 2" 
+                            class="w-full pl-9 pr-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm">
+                    </div>
+                </div>
+
+                <!-- 2-Minute Timer Toggle Option -->
+                <div class="p-3.5 bg-slate-950 border border-slate-800 rounded-xl flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 rounded-lg bg-amber-500/10 text-amber-400">
+                            <i class="fa-solid fa-stopwatch text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-sm font-semibold text-white block">2-Minute Turn Timer</span>
+                            <span class="text-xs text-slate-400">Player loses if time runs out</span>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="timer-toggle" class="sr-only peer" checked>
+                        <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                    </label>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3 px-4 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-600/20 transition transform active:scale-[0.99] flex items-center justify-center space-x-2">
+                        <span>Start Duel</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- GAMEPLAY SCREEN -->
+        <div id="game-screen" class="w-full hidden flex flex-col space-y-6 items-center">
+            
+            <!-- Life Totals Bar (Health displayed directly under player names) -->
+            <div class="w-full max-w-2xl grid grid-cols-2 gap-4">
+                <div id="p1-card-box" class="bg-slate-900 border border-slate-800 rounded-2xl p-3.5 flex items-center justify-between shadow-lg transition">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-sm">1</div>
+                        <div>
+                            <span id="p1-display-name" class="text-xs font-semibold text-slate-400 block truncate">Player 1</span>
+                            <span id="p1-life-display" class="font-mono text-xl font-bold text-amber-400 block">20</span>
+                        </div>
+                    </div>
+                    <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Life</span>
+                </div>
+
+                <div id="p2-card-box" class="bg-slate-900 border border-slate-800 rounded-2xl p-3.5 flex items-center justify-between shadow-lg transition">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-sm">2</div>
+                        <div>
+                            <span id="p2-display-name" class="text-xs font-semibold text-slate-400 block truncate">Player 2</span>
+                            <span id="p2-life-display" class="font-mono text-xl font-bold text-blue-400 block">20</span>
+                        </div>
+                    </div>
+                    <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Life</span>
+                </div>
+            </div>
+
+            <!-- Sticky Turn Bar & Input Floating Container -->
+            <div id="control-panel" class="w-full max-w-2xl sticky top-16 z-40 bg-slate-900/95 backdrop-blur-md border border-slate-800 rounded-2xl p-4 shadow-2xl">
+                <!-- Turn Banner & Timer -->
+                <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 mb-3">
+                    <div class="flex items-center space-x-3">
+                        <div id="turn-indicator-badge" class="w-3 h-3 rounded-full bg-amber-500 animate-pulse"></div>
+                        <div>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Current Turn</span>
+                            <span id="current-player-display" class="text-base font-bold text-white">Player 1</span>
+                        </div>
+                    </div>
+
+                    <!-- Countdown Display -->
+                    <div id="timer-container" class="hidden flex items-center space-x-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+                        <i class="fa-solid fa-stopwatch text-amber-400 text-sm animate-pulse"></i>
+                        <span id="timer-display" class="font-mono text-base font-bold text-amber-400">2:00</span>
+                    </div>
+
+                    <div class="flex items-center space-x-3 text-right">
+                        <div>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Chain Length</span>
+                            <span id="chain-length" class="text-base font-bold text-amber-400">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Form -->
+                <form id="card-submit-form" onsubmit="submitCard(event)" class="relative">
+                    <div class="mb-1.5 flex items-center justify-between">
+                        <label id="input-label" for="card-input" class="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                            Name Next Magic Card
+                        </label>
+                        <span id="input-hint" class="text-[11px] text-slate-400">Must share at least 2 connections</span>
+                    </div>
+                    
+                    <div class="relative">
+                        <input type="text" id="card-input" autocomplete="off" placeholder="Type a card name (e.g., Lightning Bolt)..."
+                            class="w-full pl-4 pr-12 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm">
+                        <button type="submit" id="submit-btn" class="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg transition flex items-center justify-center">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+
+                    <!-- Live Preview Box -->
+                    <div id="live-preview-box" class="mt-3 p-3 bg-slate-950/80 border border-slate-800 rounded-xl hidden">
+                        <div class="flex items-center justify-between text-xs">
+                            <span id="preview-card-name" class="font-bold text-amber-400 truncate">Card Name</span>
+                            <span id="preview-damage-badge" class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 font-mono font-bold">0 Dmg</span>
+                        </div>
+                        <div id="preview-details" class="mt-2 text-[11px] text-slate-400 space-y-1 max-h-24 overflow-y-auto"></div>
+                    </div>
+
+                    <!-- Autocomplete Dropdown -->
+                    <div id="autocomplete-list" class="absolute left-0 right-0 mt-1 bg-slate-950 border border-slate-700 rounded-xl shadow-2xl max-h-56 overflow-y-auto z-50 hidden"></div>
+                </form>
+
+                <div class="mt-2 flex justify-between items-center pt-2">
+                    <button type="button" onclick="confirmGiveUp()" class="text-xs text-rose-400 hover:text-rose-300 font-medium flex items-center transition">
+                        <i class="fa-solid fa-flag mr-1.5"></i> Concede Duel
+                    </button>
+                    <span id="error-feedback" class="text-xs text-rose-400 font-medium hidden"></span>
+                </div>
+            </div>
+
+            <!-- Centered Card Chain Feed & Victory Card Container -->
+            <div class="w-full max-w-xl flex flex-col items-center">
+                <div id="victory-card-container" class="w-full flex flex-col items-center mb-4"></div>
+                <div id="chain-container" class="w-full flex flex-col-reverse items-center">
+                    <!-- Chain items inserted dynamically here -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900/60 border-t border-slate-800 py-3 text-center text-xs text-slate-500">
+        <p>Powered by Scryfall API • Original Printing Art Rule Enabled</p>
+    </footer>
+
+    <!-- Rules Modal -->
+    <div id="rules-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+                <h3 class="text-lg font-bold text-white flex items-center">
+                    <i class="fa-solid fa-book-open text-amber-500 mr-2"></i> Duel Variant Rules
+                </h3>
+                <button onclick="closeRulesModal()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="space-y-3 text-sm text-slate-300 leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
+                <p><strong>1. Objective:</strong> Both players start at <strong>20 Life</strong>. Deal damage to your opponent by connecting cards. First to 0 life loses.</p>
+                <p><strong>2. Connection Rules:</strong> Each individually matching <strong>Type</strong> and <strong>Subtype</strong> counts as a separate connection! (e.g. Artifact Creature counts as 2 type connections).</p>
+                <p><strong>3. Minimum Connections:</strong> Submitted cards must share <strong>at least 2 connections</strong> with the previous card.</p>
+                <p><strong>4. Damage & Expansion Bonus:</strong> Each valid connection deals <strong>1 damage</strong>. If the cards share a <strong>Shared Expansion / Set</strong>, damage is doubled!</p>
+                <p><strong>5. Live Preview:</strong> As you type or select a card, the game instantly previews incoming damage and matching connections so you can refine your play.</p>
+            </div>
+            <div class="mt-6 pt-3 border-t border-slate-800 flex justify-end">
+                <button onclick="closeRulesModal()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-xl text-sm transition">
+                    Got it!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full Card Image Modal -->
+    <div id="card-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeCardModal()">
+        <div class="relative max-w-lg w-full flex flex-col items-center" onclick="event.stopPropagation()">
+            <button onclick="closeCardModal()" class="absolute -top-10 right-0 text-slate-300 hover:text-white p-2 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="modal-card-image" src="" alt="Full Card" class="rounded-xl shadow-2xl max-h-[80vh] w-auto border border-slate-700">
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <!-- JavaScript Game Logic -->
+    <script>
+        let player1Name = "Player 1";
+        let player2Name = "Player 2";
+        let p1Life = 20;
+        let p2Life = 20;
+        let currentTurn = 1; 
+        let history = []; 
+        let usedCardNames = new Set();
+        let autocompleteTimeout = null;
+        let previewTimeout = null;
+        let turnTimer = null;
+        let isTimerEnabled = true;
+        let timeLeft = 120;
+        let isGameOver = false;
+
+        const basicLandNames = new Set([
+            'plains', 'island', 'swamp', 'mountain', 'forest', 'wastes',
+            'snow-covered plains', 'snow-covered island', 'snow-covered swamp',
+            'snow-covered mountain', 'snow-covered forest', 'snow-covered wastes'
+        ]);
+
+        function isBasicLand(cardName, typeLine) {
+            if (basicLandNames.has(cardName.toLowerCase())) return true;
+            if (typeLine && typeLine.toLowerCase().includes('basic') && typeLine.toLowerCase().includes('land')) return true;
+            return false;
+        }
+
+        const setupScreen = document.getElementById('setup-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const gameActionsHeader = document.getElementById('game-actions-header');
+        const currentPlayerDisplay = document.getElementById('current-player-display');
+        const turnIndicatorBadge = document.getElementById('turn-indicator-badge');
+        const chainLengthEl = document.getElementById('chain-length');
+        const cardInput = document.getElementById('card-input');
+        const inputLabel = document.getElementById('input-label');
+        const inputHint = document.getElementById('input-hint');
+        const autocompleteList = document.getElementById('autocomplete-list');
+        const chainContainer = document.getElementById('chain-container');
+        const victoryCardContainer = document.getElementById('victory-card-container');
+        const errorFeedback = document.getElementById('error-feedback');
+        const timerToggle = document.getElementById('timer-toggle');
+        const timerContainer = document.getElementById('timer-container');
+        const timerDisplay = document.getElementById('timer-display');
+        const p1LifeDisplay = document.getElementById('p1-life-display');
+        const p2LifeDisplay = document.getElementById('p2-life-display');
+        const p1DisplayName = document.getElementById('p1-display-name');
+        const p2DisplayName = document.getElementById('p2-display-name');
+        const controlPanel = document.getElementById('control-panel');
+        const livePreviewBox = document.getElementById('live-preview-box');
+        const previewCardName = document.getElementById('preview-card-name');
+        const previewDamageBadge = document.getElementById('preview-damage-badge');
+        const previewDetails = document.getElementById('preview-details');
+
+        async function startGame(e) {
+            e.preventDefault();
+            const p1 = document.getElementById('player1-name').value.trim();
+            const p2 = document.getElementById('player2-name').value.trim();
+            if(p1) player1Name = p1;
+            if(p2) player2Name = p2;
+
+            p1DisplayName.textContent = player1Name;
+            p2DisplayName.textContent = player2Name;
+            isTimerEnabled = timerToggle.checked;
+
+            setupScreen.classList.add('hidden');
+            gameScreen.classList.remove('hidden');
+            gameActionsHeader.classList.remove('hidden');
+
+            await resetGameStateData();
+        }
+
+        async function resetGameStateData() {
+            stopTimer();
+            isGameOver = false;
+            p1Life = 20;
+            p2Life = 20;
+            p1LifeDisplay.textContent = p1Life;
+            p2LifeDisplay.textContent = p2Life;
+            currentTurn = 1;
+            history = [];
+            usedCardNames.clear();
+            chainContainer.innerHTML = '';
+            victoryCardContainer.innerHTML = '';
+            chainLengthEl.textContent = '0';
+            hideError();
+            hideLivePreview();
+
+            controlPanel.style.display = 'block';
+            const cardInputEl = document.getElementById('card-input');
+            if (cardInputEl) cardInputEl.disabled = false;
+
+            showToast("Selecting random starting card...", "info");
+            try {
+                const res = await fetch('https://api.scryfall.com/cards/random?q=-type:basic+-type:land');
+                if(!res.ok) throw new Error("Failed to fetch random starting card");
+                const cardData = await res.json();
+                
+                const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '"')}`);
+                const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
+
+                const cardObj = await parseCardObject(cardData, printsData.data || [cardData], "System (Starter)");
+                history.push(cardObj);
+                usedCardNames.add(cardObj.name.toLowerCase());
+
+                renderChainNode(cardObj, [], 0);
+                updateUI();
+                cardInput.focus();
+            } catch (err) {
+                console.error(err);
+                showToast("Using fallback starter card: Lightning Bolt", "info");
+                const fallbackRes = await fetch('https://api.scryfall.com/cards/named?exact=Lightning+Bolt');
+                const fallbackData = await fallbackRes.json();
+                const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"Lightning Bolt"')}`);
+                const printsData = printsRes.ok ? await printsRes.json() : { data: [fallbackData] };
+
+                const cardObj = await parseCardObject(fallbackData, printsData.data || [fallbackData], "System (Starter)");
+                history.push(cardObj);
+                usedCardNames.add(cardObj.name.toLowerCase());
+
+                renderChainNode(cardObj, [], 0);
+                updateUI();
+                cardInput.focus();
+            }
+        }
+
+        function rebindControlPanelElements() {
+            window.cardInput = document.getElementById('card-input');
+            window.inputLabel = document.getElementById('input-label');
+            window.inputHint = document.getElementById('input-hint');
+            window.autocompleteList = document.getElementById('autocomplete-list');
+            window.errorFeedback = document.getElementById('error-feedback');
+            window.timerContainer = document.getElementById('timer-container');
+            window.timerDisplay = document.getElementById('timer-display');
+            window.turnIndicatorBadge = document.getElementById('turn-indicator-badge');
+            window.currentPlayerDisplay = document.getElementById('current-player-display');
+            window.chainLengthEl = document.getElementById('chain-length');
+            window.livePreviewBox = document.getElementById('live-preview-box');
+            window.previewCardName = document.getElementById('preview-card-name');
+            window.previewDamageBadge = document.getElementById('preview-damage-badge');
+            window.previewDetails = document.getElementById('preview-details');
+
+            cardInput.addEventListener('input', handleCardInputEvent);
+        }
+
+        function handleCardInputEvent() {
+            const query = this.value.trim();
+            clearTimeout(autocompleteTimeout);
+            clearTimeout(previewTimeout);
+
+            if (query.length < 2) {
+                hideAutocomplete();
+                hideLivePreview();
+                return;
+            }
+
+            // Autocomplete fetch
+            autocompleteTimeout = setTimeout(() => {
+                fetch(`https://api.scryfall.com/cards/autocomplete?q=${encodeURIComponent(query)}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data && data.data && data.data.length > 0) {
+                            const filteredItems = data.data.filter(item => !basicLandNames.has(item.toLowerCase()));
+                            if (filteredItems.length > 0) {
+                                showAutocomplete(filteredItems.slice(0, 8));
+                            } else {
+                                hideAutocomplete();
+                            }
+                        } else {
+                            hideAutocomplete();
+                        }
+                    })
+                    .catch(err => console.error("Autocomplete error:", err));
+            }, 250);
+
+            // Live Preview fetch
+            previewTimeout = setTimeout(async () => {
+                try {
+                    const res = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${encodeURIComponent(query)}`);
+                    if (res.ok) {
+                        const cardData = await res.json();
+                        if (cardData && cardData.name) {
+                            const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '"')}`);
+                            const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
+                            const candidateObj = await parseCardObject(cardData, printsData.data || [cardData], "Preview");
+                            
+                            const prevCard = history[history.length - 1];
+                            const connections = evaluateConnections(prevCard, candidateObj);
+                            let dmg = connections.totalCount;
+                            if (connections.hasSharedExpansion) dmg *= 2;
+
+                            showLivePreview(candidateObj.name, dmg, connections);
+                        } else {
+                            hideLivePreview();
+                        }
+                    } else {
+                        hideLivePreview();
+                    }
+                } catch (e) {
+                    hideLivePreview();
+                }
+            }, 350);
+        }
+
+        cardInput.addEventListener('input', handleCardInputEvent);
+
+        function showLivePreview(cardName, damage, connections) {
+            if (!livePreviewBox) return;
+            previewCardName.textContent = cardName;
+            previewDamageBadge.textContent = `${damage} Dmg`;
+            
+            if (connections.totalCount < 2) {
+                previewDamageBadge.className = "px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 font-mono font-bold";
+                previewDamageBadge.textContent = `Invalid (${connections.totalCount} conn)`;
+            } else {
+                previewDamageBadge.className = "px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 font-mono font-bold";
+            }
+
+            previewDetails.innerHTML = '';
+            connections.details.forEach(det => {
+                const row = document.createElement('div');
+                row.className = 'flex justify-between';
+                row.innerHTML = `<span class="text-slate-300">${det.category}:</span> <span class="text-amber-400 font-mono">${det.match}</span>`;
+                previewDetails.appendChild(row);
+            });
+            if (connections.hasSharedExpansion) {
+                const bonusRow = document.createElement('div');
+                bonusRow.className = 'text-amber-300 font-bold text-right pt-0.5';
+                bonusRow.textContent = '★ Shared Expansion: Damage Doubled!';
+                previewDetails.appendChild(bonusRow);
+            }
+
+            livePreviewBox.classList.remove('hidden');
+        }
+
+        function hideLivePreview() {
+            if (livePreviewBox) livePreviewBox.classList.add('hidden');
+        }
+
+        function showAutocomplete(items) {
+            if (!autocompleteList) return;
+            autocompleteList.innerHTML = '';
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 hover:text-amber-400 cursor-pointer border-b border-slate-900 last:border-b-0 transition';
+                div.textContent = item;
+                div.onmousedown = (e) => {
+                    e.preventDefault();
+                    cardInput.value = item;
+                    hideAutocomplete();
+                    cardInput.focus();
+                    // trigger preview update
+                    cardInput.dispatchEvent(new Event('input'));
+                };
+                autocompleteList.appendChild(div);
+            });
+            autocompleteList.classList.remove('hidden');
+        }
+
+        function hideAutocomplete() {
+            if (autocompleteList) autocompleteList.classList.add('hidden');
+        }
+
+        document.addEventListener('click', function(e) {
+            const inputEl = document.getElementById('card-input');
+            const listEl = document.getElementById('autocomplete-list');
+            if (inputEl && listEl && !inputEl.contains(e.target) && !listEl.contains(e.target)) {
+                hideAutocomplete();
+            }
+        });
+
+        async function parseCardObject(canonicalCard, cardPrintings, playerName) {
+            const actualCardName = canonicalCard.name;
+            const typeLine = canonicalCard.type_line || "Card";
+            
+            let imageUrl = '';
+            let normalImageUrl = '';
+            if (canonicalCard.image_uris) {
+                imageUrl = canonicalCard.image_uris.normal || canonicalCard.image_uris.large || canonicalCard.image_uris.small;
+                normalImageUrl = canonicalCard.image_uris.normal || imageUrl;
+            } else if (canonicalCard.card_faces && canonicalCard.card_faces[0].image_uris) {
+                imageUrl = canonicalCard.card_faces[0].image_uris.normal || canonicalCard.card_faces[0].image_uris.large;
+                normalImageUrl = imageUrl;
+            }
+
+            const rarity = canonicalCard.rarity || 'common';
+            const colorIdentity = (canonicalCard.color_identity || []).sort().join('');
+            const power = canonicalCard.power !== undefined ? String(canonicalCard.power) : null;
+            const toughness = canonicalCard.toughness !== undefined ? String(canonicalCard.toughness) : null;
+            const manaCost = canonicalCard.mana_cost || '';
+            const setName = canonicalCard.set_name || canonicalCard.set || '';
+
+            const setCodes = new Set();
+            const setNamesMap = new Map();
+            cardPrintings.forEach(p => {
+                if (p.set) {
+                    setCodes.add(p.set.toLowerCase());
+                    if (p.set_name) setNamesMap.set(p.set.toLowerCase(), p.set_name);
+                }
+            });
+
+            // Parse types and subtypes individually for separate connections
+            let rawTypesList = [];
+            let rawSubtypesList = [];
+            if (typeLine.includes('—')) {
+                const parts = typeLine.split('—');
+                rawTypesList = parts[0].trim().toLowerCase().split(/\s+/).filter(Boolean);
+                rawSubtypesList = parts[1].trim().toLowerCase().split(/\s+/).filter(Boolean);
+            } else {
+                rawTypesList = typeLine.trim().toLowerCase().split(/\s+/).filter(Boolean);
+            }
+
+            const keywords = (canonicalCard.keywords || []).map(k => k.toLowerCase());
+
+            return {
+                name: actualCardName,
+                typeLine: typeLine,
+                imageUrl: imageUrl,
+                normalImageUrl: normalImageUrl,
+                rarity: rarity,
+                colorIdentity: colorIdentity,
+                power: power,
+                toughness: toughness,
+                manaCost: manaCost,
+                setName: setName,
+                sets: setCodes,
+                setNames: setNamesMap,
+                typesList: rawTypesList,
+                subtypesList: rawSubtypesList,
+                keywords: new Set(keywords),
+                playerName: playerName
+            };
+        }
+
+        function resetGame() {
+            stopTimer();
+            gameScreen.classList.add('hidden');
+            gameActionsHeader.classList.add('hidden');
+            setupScreen.classList.remove('hidden');
+        }
+
+        function confirmResetGame() {
+            if(confirm("Are you sure you want to reset the duel?")) {
+                resetGame();
+            }
+        }
+
+        async function restartSamePlayers() {
+            setupScreen.classList.add('hidden');
+            gameScreen.classList.remove('hidden');
+            gameActionsHeader.classList.remove('hidden');
+            await resetGameStateData();
+        }
+
+        function startTurnTimer() {
+            stopTimer();
+            if (!isTimerEnabled || isGameOver) {
+                if (timerContainer) timerContainer.classList.add('hidden');
+                return;
+            }
+
+            if (timerContainer) timerContainer.classList.remove('hidden');
+            timeLeft = 120;
+            updateTimerDisplay();
+
+            turnTimer = setInterval(() => {
+                if (isGameOver) {
+                    stopTimer();
+                    return;
+                }
+                timeLeft--;
+                updateTimerDisplay();
+
+                if (timeLeft <= 0) {
+                    stopTimer();
+                    const losingPlayer = currentTurn === 1 ? player1Name : player2Name;
+                    const winningPlayer = currentTurn === 1 ? player2Name : player1Name;
+                    triggerGameOver(winningPlayer, `${losingPlayer} ran out of time (2-minute timer expired)!`);
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (turnTimer) {
+                clearInterval(turnTimer);
+                turnTimer = null;
+            }
+        }
+
+        function updateTimerDisplay() {
+            if (!timerDisplay) return;
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            timerDisplay.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            
+            if (timeLeft <= 15) {
+                timerDisplay.className = "font-mono text-base font-bold text-rose-500 animate-ping";
+            } else if (timeLeft <= 30) {
+                timerDisplay.className = "font-mono text-base font-bold text-rose-400";
+            } else {
+                timerDisplay.className = "font-mono text-base font-bold text-amber-400";
+            }
+        }
+
+        function updateUI() {
+            if (isGameOver) return;
+            const activeName = currentTurn === 1 ? player1Name : player2Name;
+            if (currentPlayerDisplay) currentPlayerDisplay.textContent = activeName;
+            
+            if(currentTurn === 1) {
+                if (turnIndicatorBadge) turnIndicatorBadge.className = 'w-3 h-3 rounded-full bg-amber-500 animate-pulse';
+                if (currentPlayerDisplay) currentPlayerDisplay.className = 'text-base font-bold text-amber-400';
+            } else {
+                if (turnIndicatorBadge) turnIndicatorBadge.className = 'w-3 h-3 rounded-full bg-blue-500 animate-pulse';
+                if (currentPlayerDisplay) currentPlayerDisplay.className = 'text-base font-bold text-blue-400';
+            }
+
+            const prevCard = history[history.length - 1];
+            if (inputLabel) inputLabel.textContent = `${activeName}, Name Next Card`;
+            if (inputHint) inputHint.textContent = `Must share at least 2 connections with "${prevCard.name}"`;
+
+            startTurnTimer();
+        }
+
+        async function submitCard(e) {
+            e.preventDefault();
+            if (isGameOver) return;
+            hideError();
+            hideAutocomplete();
+            hideLivePreview();
+
+            const cardInputEl = document.getElementById('card-input');
+            if (!cardInputEl) return;
+
+            const cardNameQuery = cardInputEl.value.trim();
+            if (!cardNameQuery) return;
+
+            const lowerName = cardNameQuery.toLowerCase();
+
+            if (basicLandNames.has(lowerName)) {
+                showError(`Basic lands like "${cardNameQuery}" are not allowed!`);
+                return;
+            }
+
+            if (usedCardNames.has(lowerName)) {
+                showError(`"${cardNameQuery}" has already been played in this duel!`);
+                return;
+            }
+
+            cardInputEl.disabled = true;
+
+            try {
+                const response = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardNameQuery + '"')}`);
+                
+                if (!response.ok) {
+                    throw new Error("Card not found on Scryfall. Check exact spelling.");
+                }
+
+                const searchData = await response.json();
+                if (!searchData || !searchData.data || searchData.data.length === 0) {
+                    throw new Error(`Card "${cardNameQuery}" could not be found.`);
+                }
+
+                let cardPrintings = searchData.data.filter(c => c.name.toLowerCase() === lowerName);
+                if (cardPrintings.length === 0) {
+                    cardPrintings = searchData.data;
+                }
+
+                cardPrintings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
+                const originalCard = cardPrintings[0];
+                const actualCardName = originalCard.name;
+                const typeLine = originalCard.type_line || "Card";
+
+                if (isBasicLand(actualCardName, typeLine)) {
+                    showError(`Basic lands like "${actualCardName}" are not allowed!`);
+                    cardInputEl.disabled = false;
+                    return;
+                }
+
+                if (usedCardNames.has(actualCardName.toLowerCase())) {
+                    showError(`"${actualCardName}" has already been played!`);
+                    cardInputEl.disabled = false;
+                    return;
+                }
+
+                const activePlayerName = currentTurn === 1 ? player1Name : player2Name;
+                const newCardObj = await parseCardObject(originalCard, cardPrintings, activePlayerName);
+
+                const prevCard = history[history.length - 1];
+                const connections = evaluateConnections(prevCard, newCardObj);
+
+                if (connections.totalCount < 2) {
+                    showError(`Invalid! "${actualCardName}" only shares ${connections.totalCount} connection(s) with "${prevCard.name}" (minimum 2 required).`);
+                    cardInputEl.disabled = false;
+                    cardInputEl.focus();
+                    return;
+                }
+
+                stopTimer();
+
+                let baseDamage = connections.totalCount;
+                let damageDealt = baseDamage;
+                if (connections.hasSharedExpansion) {
+                    damageDealt *= 2;
+                }
+
+                if (currentTurn === 1) {
+                    p2Life = Math.max(0, p2Life - damageDealt);
+                    if (p2LifeDisplay) p2LifeDisplay.textContent = p2Life;
+                } else {
+                    p1Life = Math.max(0, p1Life - damageDealt);
+                    if (p1LifeDisplay) p1LifeDisplay.textContent = p1Life;
+                }
+
+                history.push(newCardObj);
+                usedCardNames.add(actualCardName.toLowerCase());
+
+                renderChainNode(newCardObj, connections.details, damageDealt, connections.hasSharedExpansion);
+
+                if (chainLengthEl) chainLengthEl.textContent = history.length;
+                cardInputEl.value = '';
+                cardInputEl.disabled = false;
+
+                if (p1Life <= 0) {
+                    triggerGameOver(player2Name, `${player1Name} reached 0 life.`);
+                    return;
+                } else if (p2Life <= 0) {
+                    triggerGameOver(player1Name, `${player2Name} reached 0 life.`);
+                    return;
+                }
+
+                currentTurn = currentTurn === 1 ? 2 : 1;
+                updateUI();
+                cardInputEl.focus();
+
+            } catch (err) {
+                console.error(err);
+                showError(err.message || "Error validating card.");
+                cardInputEl.disabled = false;
+                cardInputEl.focus();
+            }
+        }
+
+        function evaluateConnections(cardA, cardB) {
+            let details = [];
+            let hasSharedExpansion = false;
+
+            // 1. Each individually matching Type counts as a separate connection
+            let matchedTypes = [];
+            cardA.typesList.forEach(t => {
+                if (cardB.typesList.includes(t)) {
+                    matchedTypes.push(t);
+                }
+            });
+            matchedTypes.forEach(t => {
+                details.push({ category: "Card Type", match: t.charAt(0).toUpperCase() + t.slice(1) });
+            });
+
+            // 2. Each individually matching Subtype counts as a separate connection
+            let matchedSubtypes = [];
+            cardA.subtypesList.forEach(st => {
+                if (cardB.subtypesList.includes(st)) {
+                    matchedSubtypes.push(st);
+                }
+            });
+            matchedSubtypes.forEach(st => {
+                details.push({ category: "Subtype", match: st.charAt(0).toUpperCase() + st.slice(1) });
+            });
+
+            // 3. Power / Toughness
+            if (cardA.power !== null && cardA.toughness !== null && cardA.power === cardB.power && cardA.toughness === cardB.toughness) {
+                details.push({ category: "Power / Toughness", match: `${cardA.power}/${cardA.toughness}` });
+            }
+
+            // 4. Rarity
+            if (cardA.rarity === cardB.rarity) {
+                details.push({ category: "Rarity", match: cardA.rarity.toUpperCase() });
+            }
+
+            // 5. Keywords
+            cardA.keywords.forEach(kw => {
+                if (cardB.keywords.has(kw)) {
+                    details.push({ category: "Keyword", match: kw.charAt(0).toUpperCase() + kw.slice(1) });
+                }
+            });
+
+            // 6. Color Identity
+            if (cardA.colorIdentity === cardB.colorIdentity) {
+                details.push({ category: "Color Identity", match: cardA.colorIdentity || "Colorless" });
+            }
+
+            // 7. Expansion / Set
+            let sharedSets = [];
+            cardA.sets.forEach(setCode => {
+                if (cardB.sets.has(setCode)) {
+                    hasSharedExpansion = true;
+                    sharedSets.push((cardA.setNames.get(setCode) || setCode).toUpperCase());
+                }
+            });
+            if (hasSharedExpansion) {
+                details.push({ category: "Expansion / Set", match: sharedSets.slice(0, 2).join(', ') + (sharedSets.length > 2 ? ' +' + (sharedSets.length - 2) + ' more' : '') });
+            }
+
+            return {
+                totalCount: details.length,
+                details: details,
+                hasSharedExpansion: hasSharedExpansion
+            };
+        }
+
+        function renderChainNode(card, connectionDetails, damageDealt, hasSharedExpansion) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'w-full flex flex-col items-center animate-fade-in';
+
+            const cardBox = document.createElement('div');
+            cardBox.className = 'w-full max-w-md bg-slate-900 border border-slate-700/80 rounded-2xl p-4 shadow-xl flex items-center justify-between space-x-4 relative overflow-hidden group hover:border-amber-500/50 transition';
+
+            const leftContent = document.createElement('div');
+            leftContent.className = 'flex flex-col justify-center overflow-hidden flex-grow';
+
+            const playerTag = document.createElement('span');
+            playerTag.className = 'text-[10px] font-bold text-amber-500/90 uppercase tracking-wider mb-1';
+            playerTag.textContent = `${card.playerName}'s Card (Original Art)`;
+
+            const cardTitle = document.createElement('h3');
+            cardTitle.className = 'text-lg font-bold text-white tracking-wide truncate mb-1';
+            cardTitle.textContent = card.name;
+
+            let statsParts = [card.typeLine];
+            if (card.manaCost) statsParts.push(`Mana: ${card.manaCost}`);
+            if (card.power !== null && card.toughness !== null) statsParts.push(`P/T: ${card.power}/${card.toughness}`);
+
+            const cardStats = document.createElement('p');
+            cardStats.className = 'text-xs text-slate-400 break-words whitespace-normal leading-relaxed';
+            cardStats.textContent = statsParts.join(' • ');
+
+            leftContent.appendChild(playerTag);
+            leftContent.appendChild(cardTitle);
+            leftContent.appendChild(cardStats);
+
+            if (card.setName) {
+                const cardSet = document.createElement('p');
+                cardSet.className = 'text-xs text-amber-400/90 font-medium break-words whitespace-normal mt-1';
+                cardSet.textContent = `Set: ${card.setName}`;
+                leftContent.appendChild(cardSet);
+            }
+
+            const rightArtBox = document.createElement('div');
+            rightArtBox.className = 'w-24 h-32 md:w-28 md:h-36 rounded-xl bg-slate-950 border border-slate-800 overflow-hidden flex-shrink-0 flex items-center justify-center relative shadow-md cursor-pointer group-hover:border-amber-500/50 transition';
+
+            if (card.imageUrl) {
+                const img = document.createElement('img');
+                img.src = card.imageUrl;
+                img.alt = card.name;
+                img.className = 'w-full h-full object-cover transition transform group-hover:scale-105 duration-300';
+                img.onclick = () => openCardModal(card.imageUrl);
+                img.onerror = () => {
+                    img.remove();
+                    rightArtBox.innerHTML = `<div class="text-slate-600 text-center p-2"><i class="fa-solid fa-image text-2xl"></i></div>`;
+                };
+                rightArtBox.appendChild(img);
+            } else {
+                rightArtBox.innerHTML = `<div class="text-slate-600 text-center p-2"><i class="fa-solid fa-id-card text-2xl"></i></div>`;
+            }
+
+            cardBox.appendChild(leftContent);
+            cardBox.appendChild(rightArtBox);
+            wrapper.appendChild(cardBox);
+
+            if (connectionDetails && connectionDetails.length > 0) {
+                const topConnectorLine = document.createElement('div');
+                topConnectorLine.className = 'chain-connector-line h-6';
+                wrapper.appendChild(topConnectorLine);
+
+                const connectorBox = document.createElement('div');
+                connectorBox.className = 'w-full max-w-sm bg-slate-900 border border-amber-500/40 rounded-xl p-3 shadow-lg flex flex-col items-center text-center';
+
+                let headerHtml = `<i class="fa-solid fa-fire text-rose-500 mr-1"></i> ${connectionDetails.length} Connections • Dealt <span class="text-rose-400 font-bold ml-1">${damageDealt} Damage</span>`;
+                if (hasSharedExpansion) {
+                    headerHtml += ` <span class="text-amber-400 font-bold ml-1.5 block sm:inline">(Set Matched: Damage Doubled!)</span>`;
+                }
+
+                const headerTitle = document.createElement('div');
+                headerTitle.className = 'text-[10px] uppercase font-bold tracking-wider text-amber-400 mb-1.5 flex flex-wrap items-center justify-center';
+                headerTitle.innerHTML = headerHtml;
+                connectorBox.appendChild(headerTitle);
+
+                const listEl = document.createElement('div');
+                listEl.className = 'w-full space-y-1 text-xs';
+
+                connectionDetails.forEach(det => {
+                    const row = document.createElement('div');
+                    row.className = 'flex items-center justify-between px-2.5 py-1 bg-slate-950 rounded-lg border border-slate-800';
+                    row.innerHTML = `<span class="text-slate-300 font-medium">${det.category}</span><span class="text-amber-400 font-mono break-all ml-2">${det.match}</span>`;
+                    listEl.appendChild(row);
+                });
+
+                connectorBox.appendChild(listEl);
+                wrapper.appendChild(connectorBox);
+
+                const bottomConnectorLine = document.createElement('div');
+                bottomConnectorLine.className = 'chain-connector-line h-6';
+                wrapper.appendChild(bottomConnectorLine);
+            }
+
+            chainContainer.appendChild(wrapper);
+            wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function openCardModal(imageUrl) {
+            document.getElementById('modal-card-image').src = imageUrl;
+            document.getElementById('card-modal').classList.remove('hidden');
+        }
+
+        function closeCardModal() {
+            document.getElementById('card-modal').classList.add('hidden');
+        }
+
+        function confirmGiveUp() {
+            if (isGameOver) return;
+            const concedingPlayer = currentTurn === 1 ? player1Name : player2Name;
+            const winningPlayer = currentTurn === 1 ? player2Name : player1Name;
+
+            if (confirm(`${concedingPlayer}, do you want to concede? ${winningPlayer} wins!`)) {
+                stopTimer();
+                triggerGameOver(winningPlayer, `${concedingPlayer} conceded.`);
+            }
+        }
+
+        function triggerGameOver(winnerName, subtitleText) {
+            isGameOver = true;
+            stopTimer();
+            hideLivePreview();
+
+            controlPanel.style.display = 'none';
+
+            victoryCardContainer.innerHTML = `
+                <div class="w-full max-w-md bg-slate-900 border border-amber-500/60 rounded-2xl p-6 shadow-2xl text-center space-y-4 animate-fade-in card-glow mb-6">
+                    <div class="inline-flex p-3 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 shadow-lg">
+                        <i class="fa-solid fa-trophy text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-1">${winnerName} Wins!</h3>
+                        <p class="text-xs text-slate-400">${subtitleText} Scroll down to recap the game chain.</p>
+                    </div>
+                    <div class="flex space-x-3 pt-2">
+                        <button onclick="resetGame()" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl text-xs transition border border-slate-700">
+                            Main Menu
+                        </button>
+                        <button onclick="restartSamePlayers()" class="flex-1 py-2.5 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-xl text-xs transition shadow-lg shadow-amber-600/20">
+                            Play Again
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            showToast(`${winnerName} wins the duel!`, "info");
+        }
+
+        function openRulesModal() {
+            document.getElementById('rules-modal').classList.remove('hidden');
+        }
+
+        function closeRulesModal() {
+            document.getElementById('rules-modal').classList.add('hidden');
+        }
+
+        function showError(msg) {
+            if (errorFeedback) {
+                errorFeedback.textContent = msg;
+                errorFeedback.classList.remove('hidden');
+            }
+            showToast(msg, "error");
+        }
+
+        function hideError() {
+            if (errorFeedback) {
+                errorFeedback.textContent = '';
+                errorFeedback.classList.add('hidden');
+            }
+        }
+
+        function showToast(message, type = "info") {
+            const toastContainer = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let bgClass = "bg-slate-900 border-slate-700 text-slate-200";
+            let icon = "fa-circle-info text-blue-400";
+            
+            if(type === "error") {
+                bgClass = "bg-rose-950 border-rose-800 text-rose-200";
+                icon = "fa-triangle-exclamation text-rose-400";
+            }
+
+            toast.className = `pointer-events-auto px-4 py-3 rounded-xl border shadow-xl flex items-center space-x-3 text-xs md:text-sm transition transform translate-y-2 opacity-0 animate-fade-in ${bgClass}`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-base flex-shrink-0"></i><span class="font-medium">${message}</span>`;
+            
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
