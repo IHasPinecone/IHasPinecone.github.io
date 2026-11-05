@@ -462,20 +462,19 @@
                 hideAutocomplete();
                 return;
             }
-            // Filter out basic lands from autocomplete list
-            const filteredItems = data.data.filter(item => !basicLandNames.has(item.toLowerCase()));
-            if (filteredItems.length > 0) {
-                showAutocomplete(filteredItems.slice(0, 8));
-            } else {
-                hideAutocomplete();
-            }
 
             autocompleteTimeout = setTimeout(() => {
                 fetch(`https://api.scryfall.com/cards/autocomplete?q=${encodeURIComponent(query)}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data && data.data && data.data.length > 0) {
-                            showAutocomplete(data.data.slice(0, 8));
+                            // Filter out basic lands from autocomplete list
+                            const filteredItems = data.data.filter(item => !basicLandNames.has(item.toLowerCase()));
+                            if (filteredItems.length > 0) {
+                                showAutocomplete(filteredItems.slice(0, 8));
+                            } else {
+                                hideAutocomplete();
+                            }
                         } else {
                             hideAutocomplete();
                         }
@@ -525,6 +524,11 @@
 
             const lowerName = cardNameQuery.toLowerCase();
 
+            if (basicLandNames.has(lowerName)) {
+                showError(`Basic lands like "${cardNameQuery}" are not allowed!`);
+                return;
+            }
+
             if (usedCardNames.has(lowerName)) {
                 showError(`"${cardNameQuery}" has already been played in this match!`);
                 return;
@@ -557,6 +561,8 @@
 
                 const canonicalCard = cardPrintings[0];
                 const actualCardName = canonicalCard.name;
+                const typeLine = canonicalCard.type_line || "Card";
+
                 if (isBasicLand(actualCardName, typeLine)) {
                     showError(`Basic lands like "${actualCardName}" are not allowed!`);
                     cardInput.disabled = false;
@@ -578,13 +584,6 @@
                 } else if (canonicalCard.card_faces && canonicalCard.card_faces[0].image_uris) {
                     imageUrl = canonicalCard.card_faces[0].image_uris.art_crop || canonicalCard.card_faces[0].image_uris.normal;
                 }
-
-                if (basicLandNames.has(lowerName)) {
-                    showError(`Basic lands like "${cardNameQuery}" are not allowed!`);
-                    return;
-                }
-
-                const typeLine = canonicalCard.type_line || "Card";
 
                 // Map of sets for this card along with released_at dates
                 const setCodes = new Set();
@@ -874,7 +873,6 @@
                 listEl.appendChild(setRow);
             });
 
-            document.getElementById('all-sets-modal').classList.add('hidden'); // Wait, modal class remove
             document.getElementById('all-sets-modal').classList.remove('hidden');
         }
 
@@ -959,3 +957,4 @@
     </script>
 </body>
 </html>
+```[cite: 2]
