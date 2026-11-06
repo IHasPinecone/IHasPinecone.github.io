@@ -76,7 +76,7 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-bold tracking-wide blue-gradient-text">Battle of Wits</h1>
-                    <p class="text-xs text-blue-300/80">Persistent Date-Seeded Starter • Blue Arcane Duel • 20 Life</p>
+                    <p class="text-xs text-blue-300/80">Vintage Legal Cardpool • Date-Seeded Starter • 20 Life</p>
                 </div>
             </div>
             <div id="game-actions-header" class="hidden flex items-center space-x-2">
@@ -108,6 +108,9 @@
                     <p class="text-xs text-blue-300/90 mt-1 italic px-2">
                         "The wizard who reads 34,000 cards is powerful. The wizard who memorizes 34,000 cards is insane."
                     </p>
+                    <span class="inline-block mt-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-blue-500/20 text-blue-300 border border-blue-400/30">
+                        <i class="fa-solid fa-scale-balanced mr-1"></i> Vintage Legal Cards Only
+                    </span>
                 </div>
 
                 <!-- Daily Seeded Starter Preview Box (Clickable to Fullscreen) -->
@@ -229,13 +232,13 @@
                 <form id="card-submit-form" onsubmit="submitCard(event)" class="relative">
                     <div class="mb-1.5 flex items-center justify-between">
                         <label id="input-label" for="card-input" class="text-xs font-semibold text-blue-200 uppercase tracking-wider">
-                            Name Next Magic Card
+                            Name Next Vintage Magic Card
                         </label>
                         <span id="input-hint" class="text-[11px] text-blue-300/70">Select card to preview damage, press Enter again to lock!</span>
                     </div>
                     
                     <div class="relative">
-                        <input type="text" id="card-input" autocomplete="off" placeholder="Type a card name (e.g., Counterspell)..."
+                        <input type="text" id="card-input" autocomplete="off" placeholder="Type a card name (e.g., Counterspell, Brainstorm)..."
                             class="w-full pl-4 pr-24 py-2.5 bg-slate-900 border border-blue-900/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm">
                         <button type="submit" id="submit-btn" class="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-lg transition flex items-center justify-center text-xs shadow-md border border-blue-400/30">
                             <span id="submit-btn-text">Preview</span>
@@ -280,7 +283,7 @@
 
     <!-- Footer -->
     <footer class="bg-slate-950/80 border-t border-blue-900/50 py-3 text-center text-xs text-blue-300/60">
-        <p>Battle of Wits • Scryfall API • Date-Seeded Persistent Starter & Arcane Multipliers</p>
+        <p>Battle of Wits • Scryfall API • Vintage Format Legal Cardpool</p>
     </footer>
 
     <!-- Rules Modal -->
@@ -298,10 +301,11 @@
                 <p class="italic text-blue-300/90 border-l-2 border-blue-500 pl-3 py-1">
                     "The wizard who reads 34,000 cards is powerful. The wizard who memorizes 34,000 cards is insane."
                 </p>
-                <p><strong>1. Persistent Date-Seeded Starter:</strong> All games on a given calendar day start with the exact same deterministic starter card that persists across reloads.</p>
-                <p><strong>2. Two-Step Submission:</strong> Select a card to preview damage. The first Enter/Click previews the arcane damage; the second Enter/Click locks it in.</p>
-                <p><strong>3. Set vs Block Multipliers:</strong> Exact matching set grants a <strong>2x multiplier</strong>. Set group or block matching grants a <strong>1.5x multiplier (rounded down)</strong>.</p>
-                <p><strong>4. Commander Associated Pairing:</strong> Standalone Commander sets have no parent set, while set-associated Commander products pair with their parent set.</p>
+                <p><strong>1. Vintage Legal Cardpool:</strong> Cards played must be legal or restricted in Magic's Vintage format (banned cards like silver-bordered/un-sets and illegal cards are prohibited).</p>
+                <p><strong>2. Persistent Date-Seeded Starter:</strong> All games on a given calendar day start with the exact same deterministic starter card that persists across reloads.</p>
+                <p><strong>3. Two-Step Submission:</strong> Select a card to preview damage. The first Enter/Click previews the arcane damage; the second Enter/Click locks it in.</p>
+                <p><strong>4. Set vs Block Multipliers:</strong> Exact matching set grants a <strong>2x multiplier</strong>. Set group or block matching grants a <strong>1.5x multiplier (rounded down)</strong>.</p>
+                <p><strong>5. Commander Associated Pairing:</strong> Standalone Commander sets have no parent set, while set-associated Commander products pair with their parent set.</p>
             </div>
             <div class="mt-6 pt-3 border-t border-blue-900/60 flex justify-end">
                 <button onclick="closeRulesModal()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition shadow-md">
@@ -407,13 +411,12 @@
             const todayStr = getTodayDateString();
             setupDateLabel.textContent = `Today's Starter (${todayStr})`;
 
-            const storageKey = `wits_daily_starter_${todayStr}`;
+            const storageKey = `wits_vintage_daily_starter_${todayStr}`;
             const cachedCardName = localStorage.getItem(storageKey);
 
             try {
                 await preloadSetMetadata();
 
-                // Fetch Battle of Wits art specifically to theme the setup screen background!
                 try {
                     const bowRes = await fetch('https://api.scryfall.com/cards/named?exact=Battle+of+Wits');
                     if (bowRes.ok) {
@@ -433,7 +436,8 @@
                         hash = (hash * 31 + todayStr.charCodeAt(i)) % 100000;
                     }
 
-                    const res = await fetch(`https://api.scryfall.com/cards/search?q=-type:basic+-type:land+is:first&page=${(hash % 20) + 1}`);
+                    // Query strictly vintage-legal cards
+                    const res = await fetch(`https://api.scryfall.com/cards/search?q=-type:basic+-type:land+is:first+f:vintage&page=${(hash % 20) + 1}`);
                     if (res.ok) {
                         const searchData = await res.json();
                         if (searchData && searchData.data && searchData.data.length > 0) {
@@ -586,6 +590,7 @@
                 return;
             }
 
+            // Autocomplete strictly vintage legal cards
             autocompleteTimeout = setTimeout(() => {
                 fetch(`https://api.scryfall.com/cards/autocomplete?q=${encodeURIComponent(query)}`)
                     .then(res => res.json())
@@ -613,6 +618,14 @@
                 if (res.ok) {
                     const cardData = await res.json();
                     if (cardData && cardData.name) {
+                        // Check Vintage legality
+                        const vintageLegality = cardData.legalities ? cardData.legalities.vintage : null;
+                        if (vintageLegality !== 'legal' && vintageLegality !== 'restricted') {
+                            showError(`"${cardData.name}" is not legal in Vintage format!`);
+                            hideLivePreview();
+                            return;
+                        }
+
                         const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '"')}`);
                         const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
                         const printings = printsData.data || [cardData];
@@ -744,6 +757,7 @@
             const manaCost = firstPrinting.mana_cost || '';
             const setName = firstPrinting.set_name || firstPrinting.set || '';
             const setCode = firstPrinting.set ? firstPrinting.set.toLowerCase() : '';
+            const legalities = canonicalCard.legalities || firstPrinting.legalities || {};
 
             let rawTypesList = [];
             let rawSubtypesList = [];
@@ -769,6 +783,7 @@
                 manaCost: manaCost,
                 setName: setName,
                 firstSetCode: setCode,
+                legalities: legalities,
                 typesList: rawTypesList,
                 subtypesList: rawSubtypesList,
                 keywords: new Set(keywords),
@@ -897,6 +912,16 @@
         async function commitCardSubmission(cardObj) {
             const cardInputEl = document.getElementById('card-input');
             const lowerName = cardObj.name.toLowerCase();
+
+            // Format check: Vintage Legality
+            if (cardObj.legalities) {
+                const vintageLegality = cardObj.legalities.vintage;
+                if (vintageLegality !== 'legal' && vintageLegality !== 'restricted') {
+                    showError(`"${cardObj.name}" is not legal in Vintage format!`);
+                    if (cardInputEl) cardInputEl.disabled = false;
+                    return;
+                }
+            }
 
             if (basicLandNames.has(lowerName) || isBasicLand(cardObj.name, cardObj.typeLine)) {
                 showError(`Basic lands like "${cardObj.name}" are not allowed!`);
