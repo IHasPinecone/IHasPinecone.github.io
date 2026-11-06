@@ -76,7 +76,7 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-bold tracking-wide blue-gradient-text">Battle of Wits</h1>
-                    <p class="text-xs text-blue-300/80">Vintage Legal Cardpool • Date-Seeded Starter • 20 Life</p>
+                    <p class="text-xs text-blue-300/80">Vintage Legal • Artist Connection Added • 40 Life</p>
                 </div>
             </div>
             <div id="game-actions-header" class="hidden flex items-center space-x-2">
@@ -100,7 +100,7 @@
             <div id="setup-bg-art" class="absolute inset-0 opacity-10 bg-cover bg-center pointer-events-none filter blur-[1px]"></div>
 
             <div class="relative z-10">
-                <div class="text-center mb-4">
+                <div class="text-center mb-6">
                     <div class="inline-flex p-3 rounded-full bg-blue-500/10 text-blue-400 mb-2 border border-blue-500/30 shadow-lg shadow-blue-500/10">
                         <i class="fa-solid fa-scroll text-2xl"></i>
                     </div>
@@ -108,23 +108,16 @@
                     <p class="text-xs text-blue-300/90 mt-1 italic px-2">
                         "The wizard who reads 34,000 cards is powerful. The wizard who memorizes 34,000 cards is insane."
                     </p>
-                    <span class="inline-block mt-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-blue-500/20 text-blue-300 border border-blue-400/30">
-                        <i class="fa-solid fa-scale-balanced mr-1"></i> Vintage Legal Cards Only
-                    </span>
-                </div>
-
-                <!-- Daily Seeded Starter Preview Box (Clickable to Fullscreen) -->
-                <div id="daily-starter-preview" onclick="openSetupStarterModal()" class="mb-5 p-3.5 bg-slate-900/90 border border-blue-800/70 hover:border-blue-500 cursor-pointer rounded-xl flex items-center space-x-3 relative overflow-hidden transition group shadow-inner">
-                    <div class="w-14 h-20 rounded-lg bg-slate-950 flex-shrink-0 overflow-hidden border border-blue-900/60 flex items-center justify-center relative">
-                        <i class="fa-solid fa-spinner animate-spin text-blue-400 text-sm"></i>
-                    </div>
-                    <div class="flex-grow min-w-0">
-                        <span class="text-[10px] text-blue-400 font-bold uppercase tracking-wider block flex items-center justify-between">
-                            <span id="setup-date-label">Today's Starter Card</span>
-                            <i class="fa-solid fa-expand text-blue-300/60 group-hover:text-blue-400 transition"></i>
+                    <div class="flex flex-wrap justify-center gap-2 mt-3">
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-blue-500/20 text-blue-300 border border-blue-400/30">
+                            <i class="fa-solid fa-scale-balanced mr-1"></i> Vintage Legal
                         </span>
-                        <span id="setup-starter-name" class="text-sm font-bold text-white truncate block">Loading daily card...</span>
-                        <span id="setup-starter-set" class="text-xs text-blue-300/70 truncate block">Please wait</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
+                            <i class="fa-solid fa-heart mr-1"></i> 40 Life
+                        </span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
+                            <i class="fa-solid fa-palette mr-1"></i> Artist Match Active
+                        </span>
                     </div>
                 </div>
 
@@ -165,8 +158,8 @@
                     </div>
 
                     <div class="pt-1">
-                        <button type="submit" id="start-btn" disabled class="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-blue-600/30 transition transform active:scale-[0.99] flex items-center justify-center space-x-2 opacity-50 cursor-not-allowed border border-blue-400/30">
-                            <span>Loading Starter...</span>
+                        <button type="submit" id="start-btn" class="w-full py-3.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-blue-600/30 transition transform active:scale-[0.99] flex items-center justify-center space-x-2 border border-blue-400/30 text-base">
+                            <span>Start Battle of Wits</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
@@ -184,7 +177,7 @@
                         <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-sm border border-blue-500/30">1</div>
                         <div>
                             <span id="p1-display-name" class="text-xs font-semibold text-blue-300/80 block truncate">Player 1</span>
-                            <span id="p1-life-display" class="font-mono text-xl font-bold text-blue-400 block">20</span>
+                            <span id="p1-life-display" class="font-mono text-xl font-bold text-blue-400 block">40</span>
                         </div>
                     </div>
                     <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Life</span>
@@ -195,7 +188,7 @@
                         <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold text-sm border border-cyan-500/30">2</div>
                         <div>
                             <span id="p2-display-name" class="text-xs font-semibold text-blue-300/80 block truncate">Player 2</span>
-                            <span id="p2-life-display" class="font-mono text-xl font-bold text-cyan-400 block">20</span>
+                            <span id="p2-life-display" class="font-mono text-xl font-bold text-cyan-400 block">40</span>
                         </div>
                     </div>
                     <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Life</span>
@@ -283,7 +276,7 @@
 
     <!-- Footer -->
     <footer class="bg-slate-950/80 border-t border-blue-900/50 py-3 text-center text-xs text-blue-300/60">
-        <p>Battle of Wits • Scryfall API • Vintage Format Legal Cardpool</p>
+        <p>Battle of Wits • Scryfall API • Vintage Format Legal Cardpool • 40 Life</p>
     </footer>
 
     <!-- Rules Modal -->
@@ -301,11 +294,11 @@
                 <p class="italic text-blue-300/90 border-l-2 border-blue-500 pl-3 py-1">
                     "The wizard who reads 34,000 cards is powerful. The wizard who memorizes 34,000 cards is insane."
                 </p>
-                <p><strong>1. Vintage Legal Cardpool:</strong> Cards played must be legal or restricted in Magic's Vintage format (banned cards like silver-bordered/un-sets and illegal cards are prohibited).</p>
-                <p><strong>2. Persistent Date-Seeded Starter:</strong> All games on a given calendar day start with the exact same deterministic starter card that persists across reloads.</p>
-                <p><strong>3. Two-Step Submission:</strong> Select a card to preview damage. The first Enter/Click previews the arcane damage; the second Enter/Click locks it in.</p>
-                <p><strong>4. Set vs Block Multipliers:</strong> Exact matching set grants a <strong>2x multiplier</strong>. Set group or block matching grants a <strong>1.5x multiplier (rounded down)</strong>.</p>
-                <p><strong>5. Commander Associated Pairing:</strong> Standalone Commander sets have no parent set, while set-associated Commander products pair with their parent set.</p>
+                <p><strong>1. Random Surprise Starter:</strong> Each game starts with a fully random first-printing starter card revealed only when the battle begins.</p>
+                <p><strong>2. 40 Starting Life:</strong> Each player starts with 40 life points.</p>
+                <p><strong>3. Vintage Legal Cardpool:</strong> Cards played must be legal or restricted in Magic's Vintage format.</p>
+                <p><strong>4. Connection Criteria:</strong> Cards must share at least 2 connections (Types, Subtypes, P/T, Rarity, Keywords, Color Identity, Artist, or Set/Expansion).</p>
+                <p><strong>5. Set vs Block Multipliers:</strong> Exact matching main set grants a <strong>2x multiplier</strong>. Set group, block matching, or associated set pairing grants a <strong>1.5x multiplier (rounded down)</strong>.</p>
             </div>
             <div class="mt-6 pt-3 border-t border-blue-900/60 flex justify-end">
                 <button onclick="closeRulesModal()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition shadow-md">
@@ -332,8 +325,8 @@
     <script>
         let player1Name = "Player 1";
         let player2Name = "Player 2";
-        let p1Life = 20;
-        let p2Life = 20;
+        let p1Life = 40;
+        let p2Life = 40;
         let currentTurn = 1; 
         let history = []; 
         let usedCardNames = new Set();
@@ -347,7 +340,7 @@
 
         // Scryfall set metadata map
         const setMetadataCache = new Map();
-        let dailyStarterCardObj = null;
+        let startingCardObj = null;
 
         const basicLandNames = new Set([
             'plains', 'island', 'swamp', 'mountain', 'forest', 'wastes',
@@ -387,113 +380,24 @@
         const previewSpellingNote = document.getElementById('preview-spelling-note');
         const previewDamageBadge = document.getElementById('preview-damage-badge');
         const previewDetails = document.getElementById('preview-details');
-        const dailyStarterPreview = document.getElementById('daily-starter-preview');
-        const setupStarterName = document.getElementById('setup-starter-name');
-        const setupStarterSet = document.getElementById('setup-starter-set');
-        const setupDateLabel = document.getElementById('setup-date-label');
         const setupBgArt = document.getElementById('setup-bg-art');
         const startBtn = document.getElementById('start-btn');
         const submitBtnText = document.getElementById('submit-btn-text');
 
         window.addEventListener('DOMContentLoaded', async () => {
-            await initDailyStarter();
-        });
-
-        function getTodayDateString() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        }
-
-        async function initDailyStarter() {
-            const todayStr = getTodayDateString();
-            setupDateLabel.textContent = `Today's Starter (${todayStr})`;
-
-            const storageKey = `wits_vintage_daily_starter_${todayStr}`;
-            const cachedCardName = localStorage.getItem(storageKey);
-
+            await preloadSetMetadata();
             try {
-                await preloadSetMetadata();
-
-                try {
-                    const bowRes = await fetch('https://api.scryfall.com/cards/named?exact=Battle+of+Wits');
-                    if (bowRes.ok) {
-                        const bowData = await bowRes.json();
-                        if (bowData && bowData.image_uris && bowData.image_uris.art_crop) {
-                            setupBgArt.style.backgroundImage = `url('${bowData.image_uris.art_crop}')`;
-                        }
-                    }
-                } catch (e) {
-                    console.error("Could not load Battle of Wits background art:", e);
-                }
-
-                let cardNameQuery = cachedCardName;
-                if (!cardNameQuery) {
-                    let hash = 0;
-                    for (let i = 0; i < todayStr.length; i++) {
-                        hash = (hash * 31 + todayStr.charCodeAt(i)) % 100000;
-                    }
-
-                    // Query strictly vintage-legal cards
-                    const res = await fetch(`https://api.scryfall.com/cards/search?q=-type:basic+-type:land+is:first+f:vintage&page=${(hash % 20) + 1}`);
-                    if (res.ok) {
-                        const searchData = await res.json();
-                        if (searchData && searchData.data && searchData.data.length > 0) {
-                            const selectedCard = searchData.data[hash % searchData.data.length];
-                            cardNameQuery = selectedCard.name;
-                        }
+                const bowRes = await fetch('https://api.scryfall.com/cards/named?exact=Battle+of+Wits');
+                if (bowRes.ok) {
+                    const bowData = await bowRes.json();
+                    if (bowData && bowData.image_uris && bowData.image_uris.art_crop) {
+                        setupBgArt.style.backgroundImage = `url('${bowData.image_uris.art_crop}')`;
                     }
                 }
-
-                if (!cardNameQuery) {
-                    cardNameQuery = "Battle of Wits";
-                }
-
-                const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardNameQuery + '"')}`);
-                const printsData = printsRes.ok ? await printsRes.json() : null;
-                const printings = printsData && printsData.data ? printsData.data : [];
-                printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
-                
-                const firstPrintingCard = printings[0] || (printsData ? printsData.data[0] : null);
-                if (!firstPrintingCard) {
-                    throw new Error("Could not load starter card printings.");
-                }
-
-                dailyStarterCardObj = await parseCardObject(firstPrintingCard, printings, "System (Starter)");
-                localStorage.setItem(storageKey, dailyStarterCardObj.name);
-
-                let imgHtml = `<i class="fa-solid fa-image text-blue-400"></i>`;
-                if (dailyStarterCardObj.imageUrl) {
-                    imgHtml = `<img src="${dailyStarterCardObj.imageUrl}" alt="${dailyStarterCardObj.name}" class="w-full h-full object-cover">`;
-                }
-                dailyStarterPreview.querySelector('div:first-child').innerHTML = imgHtml;
-                setupStarterName.textContent = dailyStarterCardObj.name;
-                setupStarterSet.textContent = `${dailyStarterCardObj.setName} (${dailyStarterCardObj.typeLine})`;
-
-                startBtn.disabled = false;
-                startBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                startBtn.querySelector('span').textContent = 'Start Battle';
-            } catch (err) {
-                console.error("Error loading daily starter:", err);
-                const fallbackRes = await fetch('https://api.scryfall.com/cards/named?exact=Battle+of+Wits');
-                const fallbackData = await fallbackRes.json();
-                dailyStarterCardObj = await parseCardObject(fallbackData, [fallbackData], "System (Starter)");
-
-                setupStarterName.textContent = dailyStarterCardObj.name;
-                setupStarterSet.textContent = `${dailyStarterCardObj.setName} (${dailyStarterCardObj.typeLine})`;
-                startBtn.disabled = false;
-                startBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                startBtn.querySelector('span').textContent = 'Start Battle';
+            } catch (e) {
+                console.error("Could not load Battle of Wits background art:", e);
             }
-        }
-
-        function openSetupStarterModal() {
-            if (dailyStarterCardObj && dailyStarterCardObj.imageUrl) {
-                openCardModal(dailyStarterCardObj.imageUrl);
-            }
-        }
+        });
 
         async function preloadSetMetadata() {
             try {
@@ -527,6 +431,30 @@
             }
         }
 
+        async function fetchRandomVintageStarter() {
+            try {
+                const randomPage = Math.floor(Math.random() * 25) + 1;
+                const res = await fetch(`https://api.scryfall.com/cards/search?q=-type:basic+-type:land+is:first+f:vintage&page=${randomPage}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.data && data.data.length > 0) {
+                        const cardData = data.data[Math.floor(Math.random() * data.data.length)];
+                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '"')}`);
+                        const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
+                        const printings = printsData.data || [cardData];
+                        printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
+                        return await parseCardObject(printings[0], printings, "System (Starter)");
+                    }
+                }
+            } catch (e) {
+                console.error("Error fetching random starter:", e);
+            }
+
+            const fallbackRes = await fetch('https://api.scryfall.com/cards/named?exact=Counterspell');
+            const fallbackData = await fallbackRes.json();
+            return await parseCardObject(fallbackData, [fallbackData], "System (Starter)");
+        }
+
         async function startGame(e) {
             e.preventDefault();
             const p1 = document.getElementById('player1-name').value.trim();
@@ -538,9 +466,17 @@
             p2DisplayName.textContent = player2Name;
             isTimerEnabled = timerToggle.checked;
 
+            startBtn.disabled = true;
+            startBtn.innerHTML = `<span>Summoning Random Starter...</span> <i class="fa-solid fa-spinner animate-spin"></i>`;
+
+            startingCardObj = await fetchRandomVintageStarter();
+
             setupScreen.classList.add('hidden');
             gameScreen.classList.remove('hidden');
             gameActionsHeader.classList.remove('hidden');
+
+            startBtn.disabled = false;
+            startBtn.innerHTML = `<span>Start Battle of Wits</span> <i class="fa-solid fa-arrow-right"></i>`;
 
             await resetGameStateData();
         }
@@ -548,8 +484,8 @@
         async function resetGameStateData() {
             stopTimer();
             isGameOver = false;
-            p1Life = 20;
-            p2Life = 20;
+            p1Life = 40;
+            p2Life = 40;
             p1LifeDisplay.textContent = p1Life;
             p2LifeDisplay.textContent = p2Life;
             currentTurn = 1;
@@ -565,14 +501,14 @@
             const cardInputEl = document.getElementById('card-input');
             if (cardInputEl) cardInputEl.disabled = false;
 
-            if (!dailyStarterCardObj) {
-                await initDailyStarter();
+            if (!startingCardObj) {
+                startingCardObj = await fetchRandomVintageStarter();
             }
 
-            history.push(dailyStarterCardObj);
-            usedCardNames.add(dailyStarterCardObj.name.toLowerCase());
+            history.push(startingCardObj);
+            usedCardNames.add(startingCardObj.name.toLowerCase());
 
-            renderChainNode(dailyStarterCardObj, [], 0, false);
+            renderChainNode(startingCardObj, [], 0, false, false);
             updateUI();
             cardInput.focus();
         }
@@ -590,7 +526,6 @@
                 return;
             }
 
-            // Autocomplete strictly vintage legal cards
             autocompleteTimeout = setTimeout(() => {
                 fetch(`https://api.scryfall.com/cards/autocomplete?q=${encodeURIComponent(query)}`)
                     .then(res => res.json())
@@ -618,7 +553,6 @@
                 if (res.ok) {
                     const cardData = await res.json();
                     if (cardData && cardData.name) {
-                        // Check Vintage legality
                         const vintageLegality = cardData.legalities ? cardData.legalities.vintage : null;
                         if (vintageLegality !== 'legal' && vintageLegality !== 'restricted') {
                             showError(`"${cardData.name}" is not legal in Vintage format!`);
@@ -688,7 +622,7 @@
             if (connections.hasSharedExpansion) {
                 const bonusRow = document.createElement('div');
                 bonusRow.className = 'text-blue-300 font-bold text-right pt-0.5';
-                bonusRow.textContent = connections.isExactSetMatch ? '★ Exact Set Match: x2 Damage!' : '★ Set Group/Block Match: 1.5x Damage (Rounded Down)!';
+                bonusRow.textContent = connections.isExactSetMatch ? '★ Exact Set Match: x2 Damage!' : '★ Set Group/Block/Associated Match: 1.5x Damage (Rounded Down)!';
                 previewDetails.appendChild(bonusRow);
             }
 
@@ -757,6 +691,7 @@
             const manaCost = firstPrinting.mana_cost || '';
             const setName = firstPrinting.set_name || firstPrinting.set || '';
             const setCode = firstPrinting.set ? firstPrinting.set.toLowerCase() : '';
+            const artist = firstPrinting.artist || '';
             const legalities = canonicalCard.legalities || firstPrinting.legalities || {};
 
             let rawTypesList = [];
@@ -783,6 +718,7 @@
                 manaCost: manaCost,
                 setName: setName,
                 firstSetCode: setCode,
+                artist: artist,
                 legalities: legalities,
                 typesList: rawTypesList,
                 subtypesList: rawSubtypesList,
@@ -808,6 +744,7 @@
             setupScreen.classList.add('hidden');
             gameScreen.classList.remove('hidden');
             gameActionsHeader.classList.remove('hidden');
+            startingCardObj = await fetchRandomVintageStarter();
             await resetGameStateData();
         }
 
@@ -913,7 +850,6 @@
             const cardInputEl = document.getElementById('card-input');
             const lowerName = cardObj.name.toLowerCase();
 
-            // Format check: Vintage Legality
             if (cardObj.legalities) {
                 const vintageLegality = cardObj.legalities.vintage;
                 if (vintageLegality !== 'legal' && vintageLegality !== 'restricted') {
@@ -1035,6 +971,11 @@
                 details.push({ category: "Color Identity", match: cardA.colorIdentity || "Colorless" });
             }
 
+            // Artist Connection (using first printing artist)
+            if (cardA.artist && cardB.artist && cardA.artist.toLowerCase() === cardB.artist.toLowerCase()) {
+                details.push({ category: "Artist", match: cardA.artist });
+            }
+
             const metaA = setMetadataCache.get(cardA.firstSetCode);
             const metaB = setMetadataCache.get(cardB.firstSetCode);
 
@@ -1049,20 +990,25 @@
 
                 if (effectiveA === effectiveB) {
                     hasSharedExpansion = true;
-                    isExactSetMatch = true;
-                    sharedSetLabel = `Associated Set Pairing`;
+                    if (metaA.parent_set_code || metaB.parent_set_code || metaA.setType === 'commander' || metaB.setType === 'commander') {
+                        isExactSetMatch = false;
+                        sharedSetLabel = `Associated Set Pairing (${cardA.setName} & ${cardB.setName})`;
+                    } else {
+                        isExactSetMatch = true;
+                        sharedSetLabel = cardA.setName;
+                    }
                 } else if (metaA.block && metaA.block === metaB.block) {
                     hasSharedExpansion = true;
                     isExactSetMatch = false;
                     sharedSetLabel = `${metaA.block.charAt(0).toUpperCase() + metaA.block.slice(1)} Block`;
                 } else if (metaA.parent_set_code && metaA.parent_set_code === metaB.code) {
                     hasSharedExpansion = true;
-                    isExactSetMatch = true;
-                    sharedSetLabel = `Parent Set (${metaB.name})`;
+                    isExactSetMatch = false;
+                    sharedSetLabel = `Associated Set Pairing`;
                 } else if (metaB.parent_set_code && metaB.parent_set_code === metaA.code) {
                     hasSharedExpansion = true;
-                    isExactSetMatch = true;
-                    sharedSetLabel = `Parent Set (${metaA.name})`;
+                    isExactSetMatch = false;
+                    sharedSetLabel = `Associated Set Pairing`;
                 }
             }
 
@@ -1115,6 +1061,13 @@
                 leftContent.appendChild(cardSet);
             }
 
+            if (card.artist) {
+                const cardArtist = document.createElement('p');
+                cardArtist.className = 'text-xs text-blue-400/80 font-medium break-words whitespace-normal mt-0.5';
+                cardArtist.textContent = `Artist: ${card.artist}`;
+                leftContent.appendChild(cardArtist);
+            }
+
             const rightArtBox = document.createElement('div');
             rightArtBox.className = 'w-24 h-32 md:w-28 md:h-36 rounded-xl bg-slate-900 border border-blue-900/60 overflow-hidden flex-shrink-0 flex items-center justify-center relative shadow-md cursor-pointer group-hover:border-blue-500/50 transition';
 
@@ -1145,7 +1098,7 @@
                 const connectorBox = document.createElement('div');
                 connectorBox.className = 'w-full max-w-sm bg-slate-950 border border-blue-500/40 rounded-xl p-3 shadow-lg flex flex-col items-center text-center';
 
-                let bonusText = isExactSetMatch ? 'Exact Set Match: x2 Damage!' : 'Set Group/Block Match: 1.5x Damage!';
+                let bonusText = isExactSetMatch ? 'Exact Set Match: x2 Damage!' : 'Set Group/Block/Associated Match: 1.5x Damage!';
                 let headerHtml = `<i class="fa-solid fa-fire text-blue-400 mr-1"></i> ${connectionDetails.length} Connections • Dealt <span class="text-blue-300 font-bold ml-1">${damageDealt} Damage</span>`;
                 if (hasSharedExpansion) {
                     headerHtml += ` <span class="text-blue-400 font-bold ml-1.5 block sm:inline">(${bonusText})</span>`;
