@@ -76,7 +76,7 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-bold tracking-wide blue-gradient-text">Battle of Wits</h1>
-                    <p class="text-xs text-blue-300/80">Vintage Legal • Artist Connection Added • 40 Life</p>
+                    <p class="text-xs text-blue-300/80">Vintage Legal • Core Sets Group Isolated • 40 Life</p>
                 </div>
             </div>
             <div id="game-actions-header" class="hidden flex items-center space-x-2">
@@ -116,7 +116,7 @@
                             <i class="fa-solid fa-heart mr-1"></i> 40 Life
                         </span>
                         <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
-                            <i class="fa-solid fa-palette mr-1"></i> Artist Match Active
+                            <i class="fa-solid fa-box-archive mr-1"></i> Random Surprise Starter
                         </span>
                     </div>
                 </div>
@@ -298,7 +298,8 @@
                 <p><strong>2. 40 Starting Life:</strong> Each player starts with 40 life points.</p>
                 <p><strong>3. Vintage Legal Cardpool:</strong> Cards played must be legal or restricted in Magic's Vintage format.</p>
                 <p><strong>4. Connection Criteria:</strong> Cards must share at least 2 connections (Types, Subtypes, P/T, Rarity, Keywords, Color Identity, Artist, or Set/Expansion).</p>
-                <p><strong>5. Set vs Block Multipliers:</strong> Exact matching main set grants a <strong>2x multiplier</strong>. Set group, block matching, or associated set pairing grants a <strong>1.5x multiplier (rounded down)</strong>.</p>
+                <p><strong>5. Core Sets Isolation:</strong> Core sets do not group with other core sets or share set groups unless exact set codes match.</p>
+                <p><strong>6. Set vs Block Multipliers:</strong> Exact matching main set grants a <strong>2x multiplier</strong>. Set group, block matching, or associated set pairing grants a <strong>1.5x multiplier (rounded down)</strong>.</p>
             </div>
             <div class="mt-6 pt-3 border-t border-blue-900/60 flex justify-end">
                 <button onclick="closeRulesModal()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition shadow-md">
@@ -971,7 +972,6 @@
                 details.push({ category: "Color Identity", match: cardA.colorIdentity || "Colorless" });
             }
 
-            // Artist Connection (using first printing artist)
             if (cardA.artist && cardB.artist && cardA.artist.toLowerCase() === cardB.artist.toLowerCase()) {
                 details.push({ category: "Artist", match: cardA.artist });
             }
@@ -985,30 +985,36 @@
                 isExactSetMatch = true;
                 sharedSetLabel = cardA.setName;
             } else if (metaA && metaB) {
-                const effectiveA = metaA.parent_set_code || metaA.code;
-                const effectiveB = metaB.parent_set_code || metaB.code;
+                // Core sets should not be part of the same set group (isolated from each other unless exact set matches)
+                const isCoreA = metaA.setType === 'core';
+                const isCoreB = metaB.setType === 'core';
 
-                if (effectiveA === effectiveB) {
-                    hasSharedExpansion = true;
-                    if (metaA.parent_set_code || metaB.parent_set_code || metaA.setType === 'commander' || metaB.setType === 'commander') {
+                if (!(isCoreA && isCoreB)) {
+                    const effectiveA = metaA.parent_set_code || metaA.code;
+                    const effectiveB = metaB.parent_set_code || metaB.code;
+
+                    if (effectiveA === effectiveB) {
+                        hasSharedExpansion = true;
+                        if (metaA.parent_set_code || metaB.parent_set_code || metaA.setType === 'commander' || metaB.setType === 'commander') {
+                            isExactSetMatch = false;
+                            sharedSetLabel = `Associated Set Pairing (${cardA.setName} & ${cardB.setName})`;
+                        } else {
+                            isExactSetMatch = true;
+                            sharedSetLabel = cardA.setName;
+                        }
+                    } else if (metaA.block && metaA.block === metaB.block) {
+                        hasSharedExpansion = true;
                         isExactSetMatch = false;
-                        sharedSetLabel = `Associated Set Pairing (${cardA.setName} & ${cardB.setName})`;
-                    } else {
-                        isExactSetMatch = true;
-                        sharedSetLabel = cardA.setName;
+                        sharedSetLabel = `${metaA.block.charAt(0).toUpperCase() + metaA.block.slice(1)} Block`;
+                    } else if (metaA.parent_set_code && metaA.parent_set_code === metaB.code) {
+                        hasSharedExpansion = true;
+                        isExactSetMatch = false;
+                        sharedSetLabel = `Associated Set Pairing`;
+                    } else if (metaB.parent_set_code && metaB.parent_set_code === metaA.code) {
+                        hasSharedExpansion = true;
+                        isExactSetMatch = false;
+                        sharedSetLabel = `Associated Set Pairing`;
                     }
-                } else if (metaA.block && metaA.block === metaB.block) {
-                    hasSharedExpansion = true;
-                    isExactSetMatch = false;
-                    sharedSetLabel = `${metaA.block.charAt(0).toUpperCase() + metaA.block.slice(1)} Block`;
-                } else if (metaA.parent_set_code && metaA.parent_set_code === metaB.code) {
-                    hasSharedExpansion = true;
-                    isExactSetMatch = false;
-                    sharedSetLabel = `Associated Set Pairing`;
-                } else if (metaB.parent_set_code && metaB.parent_set_code === metaA.code) {
-                    hasSharedExpansion = true;
-                    isExactSetMatch = false;
-                    sharedSetLabel = `Associated Set Pairing`;
                 }
             }
 
