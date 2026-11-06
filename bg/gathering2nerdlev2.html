@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gathering2Nerdle - Duel Variant</title>
+    <title>Battle of Wits - MTG Duel Variant</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -12,13 +12,13 @@
             theme: {
                 extend: {
                     colors: {
-                        mtg: {
-                            dark: '#0f172a',
-                            card: '#1e293b',
-                            border: '#334155',
-                            accent: '#d97706',
-                            accentHover: '#b45309',
-                            gold: '#fbbf24'
+                        wits: {
+                            dark: '#030712',
+                            card: '#0f172a',
+                            border: '#1e3a8a',
+                            accent: '#3b82f6',
+                            accentHover: '#2563eb',
+                            glow: '#60a5fa'
                         }
                     }
                 }
@@ -30,7 +30,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0b0f19;
+            background-color: #020617;
             color: #f8fafc;
         }
         ::-webkit-scrollbar {
@@ -38,44 +38,52 @@
             height: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #1e293b;
+            background: #0f172a;
         }
         ::-webkit-scrollbar-thumb {
-            background: #475569;
+            background: #1e3a8a;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #64748b;
+            background: #2563eb;
         }
         .card-glow {
-            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.2), 0 8px 10px -6px rgba(217, 119, 6, 0.1);
+            box-shadow: 0 10px 30px -5px rgba(59, 130, 246, 0.3), 0 8px 10px -6px rgba(59, 130, 246, 0.15);
         }
         .chain-connector-line {
             width: 3px;
-            background: linear-gradient(to bottom, #d97706, #3b82f6);
+            background: linear-gradient(to bottom, #3b82f6, #6366f1);
             margin: 0 auto;
+        }
+        .blue-gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-wits-pattern {
+            background-image: radial-gradient(circle at 50% 0%, rgba(30, 58, 138, 0.25) 0%, transparent 70%);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-white">
+<body class="min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white bg-wits-pattern">
 
     <!-- Header -->
-    <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 px-4 py-3">
+    <header class="bg-slate-950/85 backdrop-blur-md border-b border-blue-900/50 sticky top-0 z-50 px-4 py-3">
         <div class="max-w-6xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-900/30">
-                    <i class="fa-solid fa-swords text-white text-lg"></i>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center shadow-lg shadow-blue-900/40 border border-blue-400/30">
+                    <i class="fa-solid fa-brain text-blue-200 text-lg"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold tracking-wide bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">MTG Duel Linker</h1>
-                    <p class="text-xs text-slate-400">Combat Variant • Individual Type/Subtype Scoring • 20 Life</p>
+                    <h1 class="text-xl font-bold tracking-wide blue-gradient-text">Battle of Wits</h1>
+                    <p class="text-xs text-blue-300/80">Persistent Date-Seeded Starter • Blue Arcane Duel • 20 Life</p>
                 </div>
             </div>
             <div id="game-actions-header" class="hidden flex items-center space-x-2">
-                <button onclick="openRulesModal()" class="px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 transition">
+                <button onclick="openRulesModal()" class="px-3 py-1.5 text-xs font-medium text-blue-200 hover:text-white bg-blue-950/60 hover:bg-blue-900/70 rounded-lg border border-blue-800/60 transition">
                     <i class="fa-solid fa-book-open mr-1.5"></i> Rules
                 </button>
-                <button onclick="confirmResetGame()" class="px-3 py-1.5 text-xs font-medium text-rose-400 hover:text-rose-300 bg-rose-950/40 hover:bg-rose-900/50 rounded-lg border border-rose-800/50 transition">
+                <button onclick="confirmResetGame()" class="px-3 py-1.5 text-xs font-medium text-rose-300 hover:text-rose-200 bg-rose-950/40 hover:bg-rose-900/50 rounded-lg border border-rose-800/50 transition">
                     <i class="fa-solid fa-rotate-right mr-1.5"></i> Reset Game
                 </button>
             </div>
@@ -86,82 +94,105 @@
     <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6 flex flex-col items-center">
 
         <!-- SETUP SCREEN -->
-        <div id="setup-screen" class="w-full max-w-md bg-slate-900/90 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl card-glow my-auto">
-            <div class="text-center mb-6">
-                <div class="inline-flex p-3 rounded-full bg-amber-500/10 text-amber-400 mb-3 border border-amber-500/20">
-                    <i class="fa-solid fa-shield-halved text-2xl"></i>
+        <div id="setup-screen" class="w-full max-w-lg bg-slate-950/90 border border-blue-900/60 rounded-2xl p-6 md:p-8 shadow-2xl card-glow my-auto relative overflow-hidden">
+            
+            <!-- Background Watermark Art from Battle of Wits -->
+            <div id="setup-bg-art" class="absolute inset-0 opacity-10 bg-cover bg-center pointer-events-none filter blur-[1px]"></div>
+
+            <div class="relative z-10">
+                <div class="text-center mb-4">
+                    <div class="inline-flex p-3 rounded-full bg-blue-500/10 text-blue-400 mb-2 border border-blue-500/30 shadow-lg shadow-blue-500/10">
+                        <i class="fa-solid fa-scroll text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white tracking-wide">Battle of Wits</h2>
+                    <p class="text-xs text-blue-300/90 mt-1 italic px-2">
+                        "The wizard who reads 34,000 cards is powerful. The wizard who memorizes 34,000 cards is insane."
+                    </p>
                 </div>
-                <h2 class="text-2xl font-bold text-white">Gathering2Nerdle Duel</h2>
-                <p class="text-sm text-slate-400 mt-1">Configure players to start combat!</p>
+
+                <!-- Daily Seeded Starter Preview Box (Clickable to Fullscreen) -->
+                <div id="daily-starter-preview" onclick="openSetupStarterModal()" class="mb-5 p-3.5 bg-slate-900/90 border border-blue-800/70 hover:border-blue-500 cursor-pointer rounded-xl flex items-center space-x-3 relative overflow-hidden transition group shadow-inner">
+                    <div class="w-14 h-20 rounded-lg bg-slate-950 flex-shrink-0 overflow-hidden border border-blue-900/60 flex items-center justify-center relative">
+                        <i class="fa-solid fa-spinner animate-spin text-blue-400 text-sm"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                        <span class="text-[10px] text-blue-400 font-bold uppercase tracking-wider block flex items-center justify-between">
+                            <span id="setup-date-label">Today's Starter Card</span>
+                            <i class="fa-solid fa-expand text-blue-300/60 group-hover:text-blue-400 transition"></i>
+                        </span>
+                        <span id="setup-starter-name" class="text-sm font-bold text-white truncate block">Loading daily card...</span>
+                        <span id="setup-starter-set" class="text-xs text-blue-300/70 truncate block">Please wait</span>
+                    </div>
+                </div>
+
+                <form id="setup-form" onsubmit="startGame(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-blue-200 uppercase tracking-wider mb-1.5">Player 1 Name</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-blue-400 font-bold">1</span>
+                            <input type="text" id="player1-name" required value="Player 1" 
+                                class="w-full pl-9 pr-4 py-2.5 bg-slate-900 border border-blue-900/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-blue-200 uppercase tracking-wider mb-1.5">Player 2 Name</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-cyan-400 font-bold">2</span>
+                            <input type="text" id="player2-name" required value="Player 2" 
+                                class="w-full pl-9 pr-4 py-2.5 bg-slate-900 border border-blue-900/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 text-sm">
+                        </div>
+                    </div>
+
+                    <!-- 2-Minute Timer Toggle Option -->
+                    <div class="p-3.5 bg-slate-900/90 border border-blue-900/80 rounded-xl flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-2 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                                <i class="fa-solid fa-stopwatch text-lg"></i>
+                            </div>
+                            <div>
+                                <span class="text-sm font-semibold text-white block">2-Minute Turn Timer</span>
+                                <span class="text-xs text-blue-300/70">Auto-submits preview if time expires</span>
+                            </div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="timer-toggle" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        </label>
+                    </div>
+
+                    <div class="pt-1">
+                        <button type="submit" id="start-btn" disabled class="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-blue-600/30 transition transform active:scale-[0.99] flex items-center justify-center space-x-2 opacity-50 cursor-not-allowed border border-blue-400/30">
+                            <span>Loading Starter...</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
-
-            <form id="setup-form" onsubmit="startGame(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Player 1 Name</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-amber-500 font-bold">1</span>
-                        <input type="text" id="player1-name" required value="Player 1" 
-                            class="w-full pl-9 pr-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Player 2 Name</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-blue-400 font-bold">2</span>
-                        <input type="text" id="player2-name" required value="Player 2" 
-                            class="w-full pl-9 pr-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm">
-                    </div>
-                </div>
-
-                <!-- 2-Minute Timer Toggle Option -->
-                <div class="p-3.5 bg-slate-950 border border-slate-800 rounded-xl flex items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                        <div class="p-2 rounded-lg bg-amber-500/10 text-amber-400">
-                            <i class="fa-solid fa-stopwatch text-lg"></i>
-                        </div>
-                        <div>
-                            <span class="text-sm font-semibold text-white block">2-Minute Turn Timer</span>
-                            <span class="text-xs text-slate-400">Player loses if time runs out</span>
-                        </div>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="timer-toggle" class="sr-only peer" checked>
-                        <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
-                    </label>
-                </div>
-
-                <div class="pt-2">
-                    <button type="submit" class="w-full py-3 px-4 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-600/20 transition transform active:scale-[0.99] flex items-center justify-center space-x-2">
-                        <span>Start Duel</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-            </form>
         </div>
 
         <!-- GAMEPLAY SCREEN -->
         <div id="game-screen" class="w-full hidden flex flex-col space-y-6 items-center">
             
-            <!-- Life Totals Bar (Health displayed directly under player names) -->
+            <!-- Life Totals Bar -->
             <div class="w-full max-w-2xl grid grid-cols-2 gap-4">
-                <div id="p1-card-box" class="bg-slate-900 border border-slate-800 rounded-2xl p-3.5 flex items-center justify-between shadow-lg transition">
+                <div id="p1-card-box" class="bg-slate-950 border border-blue-900/70 rounded-2xl p-3.5 flex items-center justify-between shadow-xl transition">
                     <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-sm">1</div>
+                        <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-sm border border-blue-500/30">1</div>
                         <div>
-                            <span id="p1-display-name" class="text-xs font-semibold text-slate-400 block truncate">Player 1</span>
-                            <span id="p1-life-display" class="font-mono text-xl font-bold text-amber-400 block">20</span>
+                            <span id="p1-display-name" class="text-xs font-semibold text-blue-300/80 block truncate">Player 1</span>
+                            <span id="p1-life-display" class="font-mono text-xl font-bold text-blue-400 block">20</span>
                         </div>
                     </div>
                     <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Life</span>
                 </div>
 
-                <div id="p2-card-box" class="bg-slate-900 border border-slate-800 rounded-2xl p-3.5 flex items-center justify-between shadow-lg transition">
+                <div id="p2-card-box" class="bg-slate-950 border border-blue-900/70 rounded-2xl p-3.5 flex items-center justify-between shadow-xl transition">
                     <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-sm">2</div>
+                        <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold text-sm border border-cyan-500/30">2</div>
                         <div>
-                            <span id="p2-display-name" class="text-xs font-semibold text-slate-400 block truncate">Player 2</span>
-                            <span id="p2-life-display" class="font-mono text-xl font-bold text-blue-400 block">20</span>
+                            <span id="p2-display-name" class="text-xs font-semibold text-blue-300/80 block truncate">Player 2</span>
+                            <span id="p2-life-display" class="font-mono text-xl font-bold text-cyan-400 block">20</span>
                         </div>
                     </div>
                     <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Life</span>
@@ -169,27 +200,27 @@
             </div>
 
             <!-- Sticky Turn Bar & Input Floating Container -->
-            <div id="control-panel" class="w-full max-w-2xl sticky top-16 z-40 bg-slate-900/95 backdrop-blur-md border border-slate-800 rounded-2xl p-4 shadow-2xl">
+            <div id="control-panel" class="w-full max-w-2xl sticky top-16 z-40 bg-slate-950/95 backdrop-blur-md border border-blue-900/80 rounded-2xl p-4 shadow-2xl">
                 <!-- Turn Banner & Timer -->
-                <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 mb-3">
+                <div class="flex items-center justify-between border-b border-blue-900/50 pb-3 mb-3">
                     <div class="flex items-center space-x-3">
-                        <div id="turn-indicator-badge" class="w-3 h-3 rounded-full bg-amber-500 animate-pulse"></div>
+                        <div id="turn-indicator-badge" class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
                         <div>
-                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Current Turn</span>
+                            <span class="text-[10px] text-blue-300/70 uppercase tracking-wider block">Current Turn</span>
                             <span id="current-player-display" class="text-base font-bold text-white">Player 1</span>
                         </div>
                     </div>
 
                     <!-- Countdown Display -->
-                    <div id="timer-container" class="hidden flex items-center space-x-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
-                        <i class="fa-solid fa-stopwatch text-amber-400 text-sm animate-pulse"></i>
-                        <span id="timer-display" class="font-mono text-base font-bold text-amber-400">2:00</span>
+                    <div id="timer-container" class="hidden flex items-center space-x-2 bg-slate-900 px-3 py-1.5 rounded-xl border border-blue-900/70">
+                        <i class="fa-solid fa-stopwatch text-blue-400 text-sm animate-pulse"></i>
+                        <span id="timer-display" class="font-mono text-base font-bold text-blue-400">2:00</span>
                     </div>
 
                     <div class="flex items-center space-x-3 text-right">
                         <div>
-                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Chain Length</span>
-                            <span id="chain-length" class="text-base font-bold text-amber-400">0</span>
+                            <span class="text-[10px] text-blue-300/70 uppercase tracking-wider block">Chain Length</span>
+                            <span id="chain-length" class="text-base font-bold text-blue-400">0</span>
                         </div>
                     </div>
                 </div>
@@ -197,31 +228,34 @@
                 <!-- Input Form -->
                 <form id="card-submit-form" onsubmit="submitCard(event)" class="relative">
                     <div class="mb-1.5 flex items-center justify-between">
-                        <label id="input-label" for="card-input" class="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                        <label id="input-label" for="card-input" class="text-xs font-semibold text-blue-200 uppercase tracking-wider">
                             Name Next Magic Card
                         </label>
-                        <span id="input-hint" class="text-[11px] text-slate-400">Must share at least 2 connections</span>
+                        <span id="input-hint" class="text-[11px] text-blue-300/70">Select card to preview damage, press Enter again to lock!</span>
                     </div>
                     
                     <div class="relative">
-                        <input type="text" id="card-input" autocomplete="off" placeholder="Type a card name (e.g., Lightning Bolt)..."
-                            class="w-full pl-4 pr-12 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm">
-                        <button type="submit" id="submit-btn" class="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg transition flex items-center justify-center">
-                            <i class="fa-solid fa-paper-plane"></i>
+                        <input type="text" id="card-input" autocomplete="off" placeholder="Type a card name (e.g., Counterspell)..."
+                            class="w-full pl-4 pr-24 py-2.5 bg-slate-900 border border-blue-900/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm">
+                        <button type="submit" id="submit-btn" class="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-lg transition flex items-center justify-center text-xs shadow-md border border-blue-400/30">
+                            <span id="submit-btn-text">Preview</span>
                         </button>
                     </div>
 
                     <!-- Live Preview Box -->
-                    <div id="live-preview-box" class="mt-3 p-3 bg-slate-950/80 border border-slate-800 rounded-xl hidden">
+                    <div id="live-preview-box" class="mt-3 p-3 bg-slate-900/90 border border-blue-900/80 rounded-xl hidden">
                         <div class="flex items-center justify-between text-xs">
-                            <span id="preview-card-name" class="font-bold text-amber-400 truncate">Card Name</span>
-                            <span id="preview-damage-badge" class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 font-mono font-bold">0 Dmg</span>
+                            <div class="flex items-center space-x-2 overflow-hidden pr-2">
+                                <span id="preview-card-name" class="font-bold text-blue-400 truncate">Card Name</span>
+                                <span id="preview-spelling-note" class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30 hidden">Spelling Fixed</span>
+                            </div>
+                            <span id="preview-damage-badge" class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono font-bold flex-shrink-0 border border-blue-500/30">0 Dmg</span>
                         </div>
-                        <div id="preview-details" class="mt-2 text-[11px] text-slate-400 space-y-1 max-h-24 overflow-y-auto"></div>
+                        <div id="preview-details" class="mt-2 text-[11px] text-blue-200/80 space-y-1 max-h-24 overflow-y-auto"></div>
                     </div>
 
                     <!-- Autocomplete Dropdown -->
-                    <div id="autocomplete-list" class="absolute left-0 right-0 mt-1 bg-slate-950 border border-slate-700 rounded-xl shadow-2xl max-h-56 overflow-y-auto z-50 hidden"></div>
+                    <div id="autocomplete-list" class="absolute left-0 right-0 mt-1 bg-slate-900 border border-blue-900 rounded-xl shadow-2xl max-h-56 overflow-y-auto z-50 hidden"></div>
                 </form>
 
                 <div class="mt-2 flex justify-between items-center pt-2">
@@ -245,30 +279,32 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900/60 border-t border-slate-800 py-3 text-center text-xs text-slate-500">
-        <p>Powered by Scryfall API • Original Printing Art Rule Enabled</p>
+    <footer class="bg-slate-950/80 border-t border-blue-900/50 py-3 text-center text-xs text-blue-300/60">
+        <p>Battle of Wits • Scryfall API • Date-Seeded Persistent Starter & Arcane Multipliers</p>
     </footer>
 
     <!-- Rules Modal -->
-    <div id="rules-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+    <div id="rules-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-950 border border-blue-900 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <div class="flex items-center justify-between pb-3 border-b border-blue-900/60 mb-4">
                 <h3 class="text-lg font-bold text-white flex items-center">
-                    <i class="fa-solid fa-book-open text-amber-500 mr-2"></i> Duel Variant Rules
+                    <i class="fa-solid fa-brain text-blue-400 mr-2"></i> Battle of Wits Rules
                 </h3>
-                <button onclick="closeRulesModal()" class="text-slate-400 hover:text-white p-1">
+                <button onclick="closeRulesModal()" class="text-blue-300/70 hover:text-white p-1">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
-            <div class="space-y-3 text-sm text-slate-300 leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
-                <p><strong>1. Objective:</strong> Both players start at <strong>20 Life</strong>. Deal damage to your opponent by connecting cards. First to 0 life loses.</p>
-                <p><strong>2. Connection Rules:</strong> Each individually matching <strong>Type</strong> and <strong>Subtype</strong> counts as a separate connection! (e.g. Artifact Creature counts as 2 type connections).</p>
-                <p><strong>3. Minimum Connections:</strong> Submitted cards must share <strong>at least 2 connections</strong> with the previous card.</p>
-                <p><strong>4. Damage & Expansion Bonus:</strong> Each valid connection deals <strong>1 damage</strong>. If the cards share a <strong>Shared Expansion / Set</strong>, damage is doubled!</p>
-                <p><strong>5. Live Preview:</strong> As you type or select a card, the game instantly previews incoming damage and matching connections so you can refine your play.</p>
+            <div class="space-y-3 text-sm text-blue-100/90 leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
+                <p class="italic text-blue-300/90 border-l-2 border-blue-500 pl-3 py-1">
+                    "The wizard who reads 34,000 cards is powerful. The wizard who memorizes 34,000 cards is insane."
+                </p>
+                <p><strong>1. Persistent Date-Seeded Starter:</strong> All games on a given calendar day start with the exact same deterministic starter card that persists across reloads.</p>
+                <p><strong>2. Two-Step Submission:</strong> Select a card to preview damage. The first Enter/Click previews the arcane damage; the second Enter/Click locks it in.</p>
+                <p><strong>3. Set vs Block Multipliers:</strong> Exact matching set grants a <strong>2x multiplier</strong>. Set group or block matching grants a <strong>1.5x multiplier (rounded down)</strong>.</p>
+                <p><strong>4. Commander Associated Pairing:</strong> Standalone Commander sets have no parent set, while set-associated Commander products pair with their parent set.</p>
             </div>
-            <div class="mt-6 pt-3 border-t border-slate-800 flex justify-end">
-                <button onclick="closeRulesModal()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-xl text-sm transition">
+            <div class="mt-6 pt-3 border-t border-blue-900/60 flex justify-end">
+                <button onclick="closeRulesModal()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition shadow-md">
                     Got it!
                 </button>
             </div>
@@ -276,12 +312,12 @@
     </div>
 
     <!-- Full Card Image Modal -->
-    <div id="card-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeCardModal()">
+    <div id="card-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden" onclick="closeCardModal()">
         <div class="relative max-w-lg w-full flex flex-col items-center" onclick="event.stopPropagation()">
-            <button onclick="closeCardModal()" class="absolute -top-10 right-0 text-slate-300 hover:text-white p-2 text-xl">
+            <button onclick="closeCardModal()" class="absolute -top-10 right-0 text-blue-300 hover:text-white p-2 text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <img id="modal-card-image" src="" alt="Full Card" class="rounded-xl shadow-2xl max-h-[80vh] w-auto border border-slate-700">
+            <img id="modal-card-image" src="" alt="Full Card" class="rounded-xl shadow-2xl max-h-[80vh] w-auto border border-blue-800/60">
         </div>
     </div>
 
@@ -298,11 +334,16 @@
         let history = []; 
         let usedCardNames = new Set();
         let autocompleteTimeout = null;
-        let previewTimeout = null;
         let turnTimer = null;
         let isTimerEnabled = true;
         let timeLeft = 120;
         let isGameOver = false;
+
+        let currentPreviewCardObj = null;
+
+        // Scryfall set metadata map
+        const setMetadataCache = new Map();
+        let dailyStarterCardObj = null;
 
         const basicLandNames = new Set([
             'plains', 'island', 'swamp', 'mountain', 'forest', 'wastes',
@@ -339,8 +380,148 @@
         const controlPanel = document.getElementById('control-panel');
         const livePreviewBox = document.getElementById('live-preview-box');
         const previewCardName = document.getElementById('preview-card-name');
+        const previewSpellingNote = document.getElementById('preview-spelling-note');
         const previewDamageBadge = document.getElementById('preview-damage-badge');
         const previewDetails = document.getElementById('preview-details');
+        const dailyStarterPreview = document.getElementById('daily-starter-preview');
+        const setupStarterName = document.getElementById('setup-starter-name');
+        const setupStarterSet = document.getElementById('setup-starter-set');
+        const setupDateLabel = document.getElementById('setup-date-label');
+        const setupBgArt = document.getElementById('setup-bg-art');
+        const startBtn = document.getElementById('start-btn');
+        const submitBtnText = document.getElementById('submit-btn-text');
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            await initDailyStarter();
+        });
+
+        function getTodayDateString() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        async function initDailyStarter() {
+            const todayStr = getTodayDateString();
+            setupDateLabel.textContent = `Today's Starter (${todayStr})`;
+
+            const storageKey = `wits_daily_starter_${todayStr}`;
+            const cachedCardName = localStorage.getItem(storageKey);
+
+            try {
+                await preloadSetMetadata();
+
+                // Fetch Battle of Wits art specifically to theme the setup screen background!
+                try {
+                    const bowRes = await fetch('https://api.scryfall.com/cards/named?exact=Battle+of+Wits');
+                    if (bowRes.ok) {
+                        const bowData = await bowRes.json();
+                        if (bowData && bowData.image_uris && bowData.image_uris.art_crop) {
+                            setupBgArt.style.backgroundImage = `url('${bowData.image_uris.art_crop}')`;
+                        }
+                    }
+                } catch (e) {
+                    console.error("Could not load Battle of Wits background art:", e);
+                }
+
+                let cardNameQuery = cachedCardName;
+                if (!cardNameQuery) {
+                    let hash = 0;
+                    for (let i = 0; i < todayStr.length; i++) {
+                        hash = (hash * 31 + todayStr.charCodeAt(i)) % 100000;
+                    }
+
+                    const res = await fetch(`https://api.scryfall.com/cards/search?q=-type:basic+-type:land+is:first&page=${(hash % 20) + 1}`);
+                    if (res.ok) {
+                        const searchData = await res.json();
+                        if (searchData && searchData.data && searchData.data.length > 0) {
+                            const selectedCard = searchData.data[hash % searchData.data.length];
+                            cardNameQuery = selectedCard.name;
+                        }
+                    }
+                }
+
+                if (!cardNameQuery) {
+                    cardNameQuery = "Battle of Wits";
+                }
+
+                const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardNameQuery + '"')}`);
+                const printsData = printsRes.ok ? await printsRes.json() : null;
+                const printings = printsData && printsData.data ? printsData.data : [];
+                printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
+                
+                const firstPrintingCard = printings[0] || (printsData ? printsData.data[0] : null);
+                if (!firstPrintingCard) {
+                    throw new Error("Could not load starter card printings.");
+                }
+
+                dailyStarterCardObj = await parseCardObject(firstPrintingCard, printings, "System (Starter)");
+                localStorage.setItem(storageKey, dailyStarterCardObj.name);
+
+                let imgHtml = `<i class="fa-solid fa-image text-blue-400"></i>`;
+                if (dailyStarterCardObj.imageUrl) {
+                    imgHtml = `<img src="${dailyStarterCardObj.imageUrl}" alt="${dailyStarterCardObj.name}" class="w-full h-full object-cover">`;
+                }
+                dailyStarterPreview.querySelector('div:first-child').innerHTML = imgHtml;
+                setupStarterName.textContent = dailyStarterCardObj.name;
+                setupStarterSet.textContent = `${dailyStarterCardObj.setName} (${dailyStarterCardObj.typeLine})`;
+
+                startBtn.disabled = false;
+                startBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                startBtn.querySelector('span').textContent = 'Start Battle';
+            } catch (err) {
+                console.error("Error loading daily starter:", err);
+                const fallbackRes = await fetch('https://api.scryfall.com/cards/named?exact=Battle+of+Wits');
+                const fallbackData = await fallbackRes.json();
+                dailyStarterCardObj = await parseCardObject(fallbackData, [fallbackData], "System (Starter)");
+
+                setupStarterName.textContent = dailyStarterCardObj.name;
+                setupStarterSet.textContent = `${dailyStarterCardObj.setName} (${dailyStarterCardObj.typeLine})`;
+                startBtn.disabled = false;
+                startBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                startBtn.querySelector('span').textContent = 'Start Battle';
+            }
+        }
+
+        function openSetupStarterModal() {
+            if (dailyStarterCardObj && dailyStarterCardObj.imageUrl) {
+                openCardModal(dailyStarterCardObj.imageUrl);
+            }
+        }
+
+        async function preloadSetMetadata() {
+            try {
+                const res = await fetch('https://api.scryfall.com/sets');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.data) {
+                        data.data.forEach(setObj => {
+                            const code = setObj.code.toLowerCase();
+                            const setType = setObj.set_type ? setObj.set_type.toLowerCase() : '';
+                            const parentCode = setObj.parent_set_code ? setObj.parent_set_code.toLowerCase() : null;
+
+                            let effectiveParent = parentCode;
+                            if (setType === 'commander' && !parentCode) {
+                                effectiveParent = null; 
+                            }
+
+                            setMetadataCache.set(code, {
+                                code: code,
+                                name: setObj.name,
+                                setType: setType,
+                                block: setObj.block ? setObj.block.toLowerCase() : null,
+                                block_code: setObj.block_code ? setObj.block_code.toLowerCase() : null,
+                                parent_set_code: effectiveParent
+                            });
+                        });
+                    }
+                }
+            } catch (e) {
+                console.error("Failed to preload set metadata:", e);
+            }
+        }
 
         async function startGame(e) {
             e.preventDefault();
@@ -380,71 +561,31 @@
             const cardInputEl = document.getElementById('card-input');
             if (cardInputEl) cardInputEl.disabled = false;
 
-            showToast("Selecting random starting card...", "info");
-            try {
-                const res = await fetch('https://api.scryfall.com/cards/random?q=-type:basic+-type:land');
-                if(!res.ok) throw new Error("Failed to fetch random starting card");
-                const cardData = await res.json();
-                
-                const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '"')}`);
-                const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
-
-                const cardObj = await parseCardObject(cardData, printsData.data || [cardData], "System (Starter)");
-                history.push(cardObj);
-                usedCardNames.add(cardObj.name.toLowerCase());
-
-                renderChainNode(cardObj, [], 0);
-                updateUI();
-                cardInput.focus();
-            } catch (err) {
-                console.error(err);
-                showToast("Using fallback starter card: Lightning Bolt", "info");
-                const fallbackRes = await fetch('https://api.scryfall.com/cards/named?exact=Lightning+Bolt');
-                const fallbackData = await fallbackRes.json();
-                const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"Lightning Bolt"')}`);
-                const printsData = printsRes.ok ? await printsRes.json() : { data: [fallbackData] };
-
-                const cardObj = await parseCardObject(fallbackData, printsData.data || [fallbackData], "System (Starter)");
-                history.push(cardObj);
-                usedCardNames.add(cardObj.name.toLowerCase());
-
-                renderChainNode(cardObj, [], 0);
-                updateUI();
-                cardInput.focus();
+            if (!dailyStarterCardObj) {
+                await initDailyStarter();
             }
-        }
 
-        function rebindControlPanelElements() {
-            window.cardInput = document.getElementById('card-input');
-            window.inputLabel = document.getElementById('input-label');
-            window.inputHint = document.getElementById('input-hint');
-            window.autocompleteList = document.getElementById('autocomplete-list');
-            window.errorFeedback = document.getElementById('error-feedback');
-            window.timerContainer = document.getElementById('timer-container');
-            window.timerDisplay = document.getElementById('timer-display');
-            window.turnIndicatorBadge = document.getElementById('turn-indicator-badge');
-            window.currentPlayerDisplay = document.getElementById('current-player-display');
-            window.chainLengthEl = document.getElementById('chain-length');
-            window.livePreviewBox = document.getElementById('live-preview-box');
-            window.previewCardName = document.getElementById('preview-card-name');
-            window.previewDamageBadge = document.getElementById('preview-damage-badge');
-            window.previewDetails = document.getElementById('preview-details');
+            history.push(dailyStarterCardObj);
+            usedCardNames.add(dailyStarterCardObj.name.toLowerCase());
 
-            cardInput.addEventListener('input', handleCardInputEvent);
+            renderChainNode(dailyStarterCardObj, [], 0, false);
+            updateUI();
+            cardInput.focus();
         }
 
         function handleCardInputEvent() {
             const query = this.value.trim();
             clearTimeout(autocompleteTimeout);
-            clearTimeout(previewTimeout);
+
+            currentPreviewCardObj = null;
+            submitBtnText.textContent = "Preview";
+            hideLivePreview();
 
             if (query.length < 2) {
                 hideAutocomplete();
-                hideLivePreview();
                 return;
             }
 
-            // Autocomplete fetch
             autocompleteTimeout = setTimeout(() => {
                 fetch(`https://api.scryfall.com/cards/autocomplete?q=${encodeURIComponent(query)}`)
                     .then(res => res.json())
@@ -462,61 +603,79 @@
                     })
                     .catch(err => console.error("Autocomplete error:", err));
             }, 250);
-
-            // Live Preview fetch
-            previewTimeout = setTimeout(async () => {
-                try {
-                    const res = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${encodeURIComponent(query)}`);
-                    if (res.ok) {
-                        const cardData = await res.json();
-                        if (cardData && cardData.name) {
-                            const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '"')}`);
-                            const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
-                            const candidateObj = await parseCardObject(cardData, printsData.data || [cardData], "Preview");
-                            
-                            const prevCard = history[history.length - 1];
-                            const connections = evaluateConnections(prevCard, candidateObj);
-                            let dmg = connections.totalCount;
-                            if (connections.hasSharedExpansion) dmg *= 2;
-
-                            showLivePreview(candidateObj.name, dmg, connections);
-                        } else {
-                            hideLivePreview();
-                        }
-                    } else {
-                        hideLivePreview();
-                    }
-                } catch (e) {
-                    hideLivePreview();
-                }
-            }, 350);
         }
 
         cardInput.addEventListener('input', handleCardInputEvent);
 
-        function showLivePreview(cardName, damage, connections) {
+        async function computeAndShowPreview(query) {
+            try {
+                const res = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${encodeURIComponent(query)}`);
+                if (res.ok) {
+                    const cardData = await res.json();
+                    if (cardData && cardData.name) {
+                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '"')}`);
+                        const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
+                        const printings = printsData.data || [cardData];
+                        printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
+                        const firstPrint = printings[0];
+
+                        const candidateObj = await parseCardObject(firstPrint, printings, "Preview");
+                        currentPreviewCardObj = candidateObj;
+                        submitBtnText.textContent = "Lock In";
+
+                        const prevCard = history[history.length - 1];
+                        const connections = evaluateConnections(prevCard, candidateObj);
+                        let dmg = connections.totalCount;
+                        if (connections.hasSharedExpansion) {
+                            if (connections.isExactSetMatch) {
+                                dmg *= 2;
+                            } else {
+                                dmg = Math.floor(dmg * 1.5);
+                            }
+                        }
+
+                        const isSpellingFixed = query.toLowerCase() !== candidateObj.name.toLowerCase();
+                        showLivePreview(candidateObj.name, dmg, connections, isSpellingFixed);
+                    } else {
+                        hideLivePreview();
+                    }
+                } else {
+                    hideLivePreview();
+                }
+            } catch (e) {
+                hideLivePreview();
+            }
+        }
+
+        function showLivePreview(cardName, damage, connections, spellingFixed) {
             if (!livePreviewBox) return;
             previewCardName.textContent = cardName;
             previewDamageBadge.textContent = `${damage} Dmg`;
             
+            if (spellingFixed) {
+                previewSpellingNote.classList.remove('hidden');
+            } else {
+                previewSpellingNote.classList.add('hidden');
+            }
+
             if (connections.totalCount < 2) {
-                previewDamageBadge.className = "px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 font-mono font-bold";
+                previewDamageBadge.className = "px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono font-bold flex-shrink-0 border border-rose-500/30";
                 previewDamageBadge.textContent = `Invalid (${connections.totalCount} conn)`;
             } else {
-                previewDamageBadge.className = "px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 font-mono font-bold";
+                previewDamageBadge.className = "px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono font-bold flex-shrink-0 border border-blue-500/30";
             }
 
             previewDetails.innerHTML = '';
             connections.details.forEach(det => {
                 const row = document.createElement('div');
                 row.className = 'flex justify-between';
-                row.innerHTML = `<span class="text-slate-300">${det.category}:</span> <span class="text-amber-400 font-mono">${det.match}</span>`;
+                row.innerHTML = `<span class="text-blue-200/80">${det.category}:</span> <span class="text-blue-400 font-mono">${det.match}</span>`;
                 previewDetails.appendChild(row);
             });
             if (connections.hasSharedExpansion) {
                 const bonusRow = document.createElement('div');
-                bonusRow.className = 'text-amber-300 font-bold text-right pt-0.5';
-                bonusRow.textContent = '★ Shared Expansion: Damage Doubled!';
+                bonusRow.className = 'text-blue-300 font-bold text-right pt-0.5';
+                bonusRow.textContent = connections.isExactSetMatch ? '★ Exact Set Match: x2 Damage!' : '★ Set Group/Block Match: 1.5x Damage (Rounded Down)!';
                 previewDetails.appendChild(bonusRow);
             }
 
@@ -525,6 +684,9 @@
 
         function hideLivePreview() {
             if (livePreviewBox) livePreviewBox.classList.add('hidden');
+            if (previewSpellingNote) previewSpellingNote.classList.add('hidden');
+            currentPreviewCardObj = null;
+            if (submitBtnText) submitBtnText.textContent = "Preview";
         }
 
         function showAutocomplete(items) {
@@ -532,15 +694,14 @@
             autocompleteList.innerHTML = '';
             items.forEach(item => {
                 const div = document.createElement('div');
-                div.className = 'px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 hover:text-amber-400 cursor-pointer border-b border-slate-900 last:border-b-0 transition';
+                div.className = 'px-4 py-2 text-sm text-blue-100 hover:bg-blue-950 hover:text-blue-300 cursor-pointer border-b border-blue-900/40 last:border-b-0 transition';
                 div.textContent = item;
-                div.onmousedown = (e) => {
+                div.onmousedown = async (e) => {
                     e.preventDefault();
                     cardInput.value = item;
                     hideAutocomplete();
                     cardInput.focus();
-                    // trigger preview update
-                    cardInput.dispatchEvent(new Event('input'));
+                    await computeAndShowPreview(item);
                 };
                 autocompleteList.appendChild(div);
             });
@@ -560,36 +721,30 @@
         });
 
         async function parseCardObject(canonicalCard, cardPrintings, playerName) {
-            const actualCardName = canonicalCard.name;
-            const typeLine = canonicalCard.type_line || "Card";
+            cardPrintings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
+            const firstPrinting = cardPrintings[0] || canonicalCard;
+
+            const actualCardName = firstPrinting.name;
+            const typeLine = firstPrinting.type_line || "Card";
             
             let imageUrl = '';
             let normalImageUrl = '';
-            if (canonicalCard.image_uris) {
-                imageUrl = canonicalCard.image_uris.normal || canonicalCard.image_uris.large || canonicalCard.image_uris.small;
-                normalImageUrl = canonicalCard.image_uris.normal || imageUrl;
-            } else if (canonicalCard.card_faces && canonicalCard.card_faces[0].image_uris) {
-                imageUrl = canonicalCard.card_faces[0].image_uris.normal || canonicalCard.card_faces[0].image_uris.large;
+            if (firstPrinting.image_uris) {
+                imageUrl = firstPrinting.image_uris.normal || firstPrinting.image_uris.large || firstPrinting.image_uris.small;
+                normalImageUrl = firstPrinting.image_uris.normal || imageUrl;
+            } else if (firstPrinting.card_faces && firstPrinting.card_faces[0].image_uris) {
+                imageUrl = firstPrinting.card_faces[0].image_uris.normal || firstPrinting.card_faces[0].image_uris.large;
                 normalImageUrl = imageUrl;
             }
 
-            const rarity = canonicalCard.rarity || 'common';
-            const colorIdentity = (canonicalCard.color_identity || []).sort().join('');
-            const power = canonicalCard.power !== undefined ? String(canonicalCard.power) : null;
-            const toughness = canonicalCard.toughness !== undefined ? String(canonicalCard.toughness) : null;
-            const manaCost = canonicalCard.mana_cost || '';
-            const setName = canonicalCard.set_name || canonicalCard.set || '';
+            const rarity = firstPrinting.rarity || 'common';
+            const colorIdentity = (firstPrinting.color_identity || []).sort().join('');
+            const power = firstPrinting.power !== undefined ? String(firstPrinting.power) : null;
+            const toughness = firstPrinting.toughness !== undefined ? String(firstPrinting.toughness) : null;
+            const manaCost = firstPrinting.mana_cost || '';
+            const setName = firstPrinting.set_name || firstPrinting.set || '';
+            const setCode = firstPrinting.set ? firstPrinting.set.toLowerCase() : '';
 
-            const setCodes = new Set();
-            const setNamesMap = new Map();
-            cardPrintings.forEach(p => {
-                if (p.set) {
-                    setCodes.add(p.set.toLowerCase());
-                    if (p.set_name) setNamesMap.set(p.set.toLowerCase(), p.set_name);
-                }
-            });
-
-            // Parse types and subtypes individually for separate connections
             let rawTypesList = [];
             let rawSubtypesList = [];
             if (typeLine.includes('—')) {
@@ -600,7 +755,7 @@
                 rawTypesList = typeLine.trim().toLowerCase().split(/\s+/).filter(Boolean);
             }
 
-            const keywords = (canonicalCard.keywords || []).map(k => k.toLowerCase());
+            const keywords = (firstPrinting.keywords || []).map(k => k.toLowerCase());
 
             return {
                 name: actualCardName,
@@ -613,8 +768,7 @@
                 toughness: toughness,
                 manaCost: manaCost,
                 setName: setName,
-                sets: setCodes,
-                setNames: setNamesMap,
+                firstSetCode: setCode,
                 typesList: rawTypesList,
                 subtypesList: rawSubtypesList,
                 keywords: new Set(keywords),
@@ -630,7 +784,7 @@
         }
 
         function confirmResetGame() {
-            if(confirm("Are you sure you want to reset the duel?")) {
+            if(confirm("Are you sure you want to reset the battle?")) {
                 resetGame();
             }
         }
@@ -653,7 +807,7 @@
             timeLeft = 120;
             updateTimerDisplay();
 
-            turnTimer = setInterval(() => {
+            turnTimer = setInterval(async () => {
                 if (isGameOver) {
                     stopTimer();
                     return;
@@ -663,9 +817,14 @@
 
                 if (timeLeft <= 0) {
                     stopTimer();
-                    const losingPlayer = currentTurn === 1 ? player1Name : player2Name;
-                    const winningPlayer = currentTurn === 1 ? player2Name : player1Name;
-                    triggerGameOver(winningPlayer, `${losingPlayer} ran out of time (2-minute timer expired)!`);
+                    if (currentPreviewCardObj) {
+                        showToast("Time expired! Automatically locking in preview card...", "info");
+                        await commitCardSubmission(currentPreviewCardObj);
+                    } else {
+                        const losingPlayer = currentTurn === 1 ? player1Name : player2Name;
+                        const winningPlayer = currentTurn === 1 ? player2Name : player1Name;
+                        triggerGameOver(winningPlayer, `${losingPlayer} ran out of time with no valid preview!`);
+                    }
                 }
             }, 1000);
         }
@@ -688,7 +847,7 @@
             } else if (timeLeft <= 30) {
                 timerDisplay.className = "font-mono text-base font-bold text-rose-400";
             } else {
-                timerDisplay.className = "font-mono text-base font-bold text-amber-400";
+                timerDisplay.className = "font-mono text-base font-bold text-blue-400";
             }
         }
 
@@ -698,16 +857,16 @@
             if (currentPlayerDisplay) currentPlayerDisplay.textContent = activeName;
             
             if(currentTurn === 1) {
-                if (turnIndicatorBadge) turnIndicatorBadge.className = 'w-3 h-3 rounded-full bg-amber-500 animate-pulse';
-                if (currentPlayerDisplay) currentPlayerDisplay.className = 'text-base font-bold text-amber-400';
-            } else {
                 if (turnIndicatorBadge) turnIndicatorBadge.className = 'w-3 h-3 rounded-full bg-blue-500 animate-pulse';
                 if (currentPlayerDisplay) currentPlayerDisplay.className = 'text-base font-bold text-blue-400';
+            } else {
+                if (turnIndicatorBadge) turnIndicatorBadge.className = 'w-3 h-3 rounded-full bg-cyan-400 animate-pulse';
+                if (currentPlayerDisplay) currentPlayerDisplay.className = 'text-base font-bold text-cyan-400';
             }
 
             const prevCard = history[history.length - 1];
             if (inputLabel) inputLabel.textContent = `${activeName}, Name Next Card`;
-            if (inputHint) inputHint.textContent = `Must share at least 2 connections with "${prevCard.name}"`;
+            if (inputHint) inputHint.textContent = `Select card to preview damage, press Enter again to lock!`;
 
             startTurnTimer();
         }
@@ -717,125 +876,102 @@
             if (isGameOver) return;
             hideError();
             hideAutocomplete();
-            hideLivePreview();
 
             const cardInputEl = document.getElementById('card-input');
             if (!cardInputEl) return;
 
-            const cardNameQuery = cardInputEl.value.trim();
-            if (!cardNameQuery) return;
+            const query = cardInputEl.value.trim();
+            if (!query) return;
 
-            const lowerName = cardNameQuery.toLowerCase();
+            if (!currentPreviewCardObj) {
+                await computeAndShowPreview(query);
+                if (currentPreviewCardObj) {
+                    showToast("Damage previewed! Press Enter or click Lock In again to confirm.", "info");
+                }
+                return;
+            }
 
-            if (basicLandNames.has(lowerName)) {
-                showError(`Basic lands like "${cardNameQuery}" are not allowed!`);
+            await commitCardSubmission(currentPreviewCardObj);
+        }
+
+        async function commitCardSubmission(cardObj) {
+            const cardInputEl = document.getElementById('card-input');
+            const lowerName = cardObj.name.toLowerCase();
+
+            if (basicLandNames.has(lowerName) || isBasicLand(cardObj.name, cardObj.typeLine)) {
+                showError(`Basic lands like "${cardObj.name}" are not allowed!`);
+                if (cardInputEl) cardInputEl.disabled = false;
                 return;
             }
 
             if (usedCardNames.has(lowerName)) {
-                showError(`"${cardNameQuery}" has already been played in this duel!`);
+                showError(`"${cardObj.name}" has already been played in this battle!`);
+                if (cardInputEl) cardInputEl.disabled = false;
                 return;
             }
 
-            cardInputEl.disabled = true;
+            const prevCard = history[history.length - 1];
+            const connections = evaluateConnections(prevCard, cardObj);
 
-            try {
-                const response = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardNameQuery + '"')}`);
-                
-                if (!response.ok) {
-                    throw new Error("Card not found on Scryfall. Check exact spelling.");
-                }
-
-                const searchData = await response.json();
-                if (!searchData || !searchData.data || searchData.data.length === 0) {
-                    throw new Error(`Card "${cardNameQuery}" could not be found.`);
-                }
-
-                let cardPrintings = searchData.data.filter(c => c.name.toLowerCase() === lowerName);
-                if (cardPrintings.length === 0) {
-                    cardPrintings = searchData.data;
-                }
-
-                cardPrintings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
-                const originalCard = cardPrintings[0];
-                const actualCardName = originalCard.name;
-                const typeLine = originalCard.type_line || "Card";
-
-                if (isBasicLand(actualCardName, typeLine)) {
-                    showError(`Basic lands like "${actualCardName}" are not allowed!`);
-                    cardInputEl.disabled = false;
-                    return;
-                }
-
-                if (usedCardNames.has(actualCardName.toLowerCase())) {
-                    showError(`"${actualCardName}" has already been played!`);
-                    cardInputEl.disabled = false;
-                    return;
-                }
-
-                const activePlayerName = currentTurn === 1 ? player1Name : player2Name;
-                const newCardObj = await parseCardObject(originalCard, cardPrintings, activePlayerName);
-
-                const prevCard = history[history.length - 1];
-                const connections = evaluateConnections(prevCard, newCardObj);
-
-                if (connections.totalCount < 2) {
-                    showError(`Invalid! "${actualCardName}" only shares ${connections.totalCount} connection(s) with "${prevCard.name}" (minimum 2 required).`);
+            if (connections.totalCount < 2) {
+                showError(`Invalid! "${cardObj.name}" only shares ${connections.totalCount} connection(s) with "${prevCard.name}" (minimum 2 required).`);
+                if (cardInputEl) {
                     cardInputEl.disabled = false;
                     cardInputEl.focus();
-                    return;
                 }
+                return;
+            }
 
-                stopTimer();
+            stopTimer();
 
-                let baseDamage = connections.totalCount;
-                let damageDealt = baseDamage;
-                if (connections.hasSharedExpansion) {
+            let baseDamage = connections.totalCount;
+            let damageDealt = baseDamage;
+            if (connections.hasSharedExpansion) {
+                if (connections.isExactSetMatch) {
                     damageDealt *= 2;
-                }
-
-                if (currentTurn === 1) {
-                    p2Life = Math.max(0, p2Life - damageDealt);
-                    if (p2LifeDisplay) p2LifeDisplay.textContent = p2Life;
                 } else {
-                    p1Life = Math.max(0, p1Life - damageDealt);
-                    if (p1LifeDisplay) p1LifeDisplay.textContent = p1Life;
+                    damageDealt = Math.floor(damageDealt * 1.5);
                 }
+            }
 
-                history.push(newCardObj);
-                usedCardNames.add(actualCardName.toLowerCase());
+            if (currentTurn === 1) {
+                p2Life = Math.max(0, p2Life - damageDealt);
+                if (p2LifeDisplay) p2LifeDisplay.textContent = p2Life;
+            } else {
+                p1Life = Math.max(0, p1Life - damageDealt);
+                if (p1LifeDisplay) p1LifeDisplay.textContent = p1Life;
+            }
 
-                renderChainNode(newCardObj, connections.details, damageDealt, connections.hasSharedExpansion);
+            history.push(cardObj);
+            usedCardNames.add(lowerName);
 
-                if (chainLengthEl) chainLengthEl.textContent = history.length;
+            renderChainNode(cardObj, connections.details, damageDealt, connections.hasSharedExpansion, connections.isExactSetMatch);
+
+            if (chainLengthEl) chainLengthEl.textContent = history.length;
+            if (cardInputEl) {
                 cardInputEl.value = '';
                 cardInputEl.disabled = false;
-
-                if (p1Life <= 0) {
-                    triggerGameOver(player2Name, `${player1Name} reached 0 life.`);
-                    return;
-                } else if (p2Life <= 0) {
-                    triggerGameOver(player1Name, `${player2Name} reached 0 life.`);
-                    return;
-                }
-
-                currentTurn = currentTurn === 1 ? 2 : 1;
-                updateUI();
-                cardInputEl.focus();
-
-            } catch (err) {
-                console.error(err);
-                showError(err.message || "Error validating card.");
-                cardInputEl.disabled = false;
-                cardInputEl.focus();
             }
+            hideLivePreview();
+
+            if (p1Life <= 0) {
+                triggerGameOver(player2Name, `${player1Name} reached 0 life.`);
+                return;
+            } else if (p2Life <= 0) {
+                triggerGameOver(player1Name, `${player2Name} reached 0 life.`);
+                return;
+            }
+
+            currentTurn = currentTurn === 1 ? 2 : 1;
+            updateUI();
+            if (cardInputEl) cardInputEl.focus();
         }
 
         function evaluateConnections(cardA, cardB) {
             let details = [];
             let hasSharedExpansion = false;
+            let isExactSetMatch = false;
 
-            // 1. Each individually matching Type counts as a separate connection
             let matchedTypes = [];
             cardA.typesList.forEach(t => {
                 if (cardB.typesList.includes(t)) {
@@ -846,7 +982,6 @@
                 details.push({ category: "Card Type", match: t.charAt(0).toUpperCase() + t.slice(1) });
             });
 
-            // 2. Each individually matching Subtype counts as a separate connection
             let matchedSubtypes = [];
             cardA.subtypesList.forEach(st => {
                 if (cardB.subtypesList.includes(st)) {
@@ -857,60 +992,80 @@
                 details.push({ category: "Subtype", match: st.charAt(0).toUpperCase() + st.slice(1) });
             });
 
-            // 3. Power / Toughness
             if (cardA.power !== null && cardA.toughness !== null && cardA.power === cardB.power && cardA.toughness === cardB.toughness) {
                 details.push({ category: "Power / Toughness", match: `${cardA.power}/${cardA.toughness}` });
             }
 
-            // 4. Rarity
             if (cardA.rarity === cardB.rarity) {
                 details.push({ category: "Rarity", match: cardA.rarity.toUpperCase() });
             }
 
-            // 5. Keywords
             cardA.keywords.forEach(kw => {
                 if (cardB.keywords.has(kw)) {
                     details.push({ category: "Keyword", match: kw.charAt(0).toUpperCase() + kw.slice(1) });
                 }
             });
 
-            // 6. Color Identity
             if (cardA.colorIdentity === cardB.colorIdentity) {
                 details.push({ category: "Color Identity", match: cardA.colorIdentity || "Colorless" });
             }
 
-            // 7. Expansion / Set
-            let sharedSets = [];
-            cardA.sets.forEach(setCode => {
-                if (cardB.sets.has(setCode)) {
+            const metaA = setMetadataCache.get(cardA.firstSetCode);
+            const metaB = setMetadataCache.get(cardB.firstSetCode);
+
+            let sharedSetLabel = null;
+            if (cardA.firstSetCode && cardA.firstSetCode === cardB.firstSetCode) {
+                hasSharedExpansion = true;
+                isExactSetMatch = true;
+                sharedSetLabel = cardA.setName;
+            } else if (metaA && metaB) {
+                const effectiveA = metaA.parent_set_code || metaA.code;
+                const effectiveB = metaB.parent_set_code || metaB.code;
+
+                if (effectiveA === effectiveB) {
                     hasSharedExpansion = true;
-                    sharedSets.push((cardA.setNames.get(setCode) || setCode).toUpperCase());
+                    isExactSetMatch = true;
+                    sharedSetLabel = `Associated Set Pairing`;
+                } else if (metaA.block && metaA.block === metaB.block) {
+                    hasSharedExpansion = true;
+                    isExactSetMatch = false;
+                    sharedSetLabel = `${metaA.block.charAt(0).toUpperCase() + metaA.block.slice(1)} Block`;
+                } else if (metaA.parent_set_code && metaA.parent_set_code === metaB.code) {
+                    hasSharedExpansion = true;
+                    isExactSetMatch = true;
+                    sharedSetLabel = `Parent Set (${metaB.name})`;
+                } else if (metaB.parent_set_code && metaB.parent_set_code === metaA.code) {
+                    hasSharedExpansion = true;
+                    isExactSetMatch = true;
+                    sharedSetLabel = `Parent Set (${metaA.name})`;
                 }
-            });
+            }
+
             if (hasSharedExpansion) {
-                details.push({ category: "Expansion / Set", match: sharedSets.slice(0, 2).join(', ') + (sharedSets.length > 2 ? ' +' + (sharedSets.length - 2) + ' more' : '') });
+                details.push({ category: "Expansion / Set (First Printing)", match: sharedSetLabel || cardA.setName });
             }
 
             return {
                 totalCount: details.length,
                 details: details,
-                hasSharedExpansion: hasSharedExpansion
+                hasSharedExpansion: hasSharedExpansion,
+                isExactSetMatch: isExactSetMatch
             };
         }
 
-        function renderChainNode(card, connectionDetails, damageDealt, hasSharedExpansion) {
+        function renderChainNode(card, connectionDetails, damageDealt, hasSharedExpansion, isExactSetMatch) {
             const wrapper = document.createElement('div');
             wrapper.className = 'w-full flex flex-col items-center animate-fade-in';
 
             const cardBox = document.createElement('div');
-            cardBox.className = 'w-full max-w-md bg-slate-900 border border-slate-700/80 rounded-2xl p-4 shadow-xl flex items-center justify-between space-x-4 relative overflow-hidden group hover:border-amber-500/50 transition';
+            cardBox.className = 'w-full max-w-md bg-slate-950 border border-blue-900/70 rounded-2xl p-4 shadow-xl flex items-center justify-between space-x-4 relative overflow-hidden group hover:border-blue-500/50 transition';
 
             const leftContent = document.createElement('div');
             leftContent.className = 'flex flex-col justify-center overflow-hidden flex-grow';
 
             const playerTag = document.createElement('span');
-            playerTag.className = 'text-[10px] font-bold text-amber-500/90 uppercase tracking-wider mb-1';
-            playerTag.textContent = `${card.playerName}'s Card (Original Art)`;
+            playerTag.className = 'text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-1';
+            playerTag.textContent = `${card.playerName}'s Card (First Printing)`;
 
             const cardTitle = document.createElement('h3');
             cardTitle.className = 'text-lg font-bold text-white tracking-wide truncate mb-1';
@@ -921,7 +1076,7 @@
             if (card.power !== null && card.toughness !== null) statsParts.push(`P/T: ${card.power}/${card.toughness}`);
 
             const cardStats = document.createElement('p');
-            cardStats.className = 'text-xs text-slate-400 break-words whitespace-normal leading-relaxed';
+            cardStats.className = 'text-xs text-blue-200/70 break-words whitespace-normal leading-relaxed';
             cardStats.textContent = statsParts.join(' • ');
 
             leftContent.appendChild(playerTag);
@@ -930,13 +1085,13 @@
 
             if (card.setName) {
                 const cardSet = document.createElement('p');
-                cardSet.className = 'text-xs text-amber-400/90 font-medium break-words whitespace-normal mt-1';
-                cardSet.textContent = `Set: ${card.setName}`;
+                cardSet.className = 'text-xs text-blue-300/90 font-medium break-words whitespace-normal mt-1';
+                cardSet.textContent = `First Print Set: ${card.setName}`;
                 leftContent.appendChild(cardSet);
             }
 
             const rightArtBox = document.createElement('div');
-            rightArtBox.className = 'w-24 h-32 md:w-28 md:h-36 rounded-xl bg-slate-950 border border-slate-800 overflow-hidden flex-shrink-0 flex items-center justify-center relative shadow-md cursor-pointer group-hover:border-amber-500/50 transition';
+            rightArtBox.className = 'w-24 h-32 md:w-28 md:h-36 rounded-xl bg-slate-900 border border-blue-900/60 overflow-hidden flex-shrink-0 flex items-center justify-center relative shadow-md cursor-pointer group-hover:border-blue-500/50 transition';
 
             if (card.imageUrl) {
                 const img = document.createElement('img');
@@ -946,11 +1101,11 @@
                 img.onclick = () => openCardModal(card.imageUrl);
                 img.onerror = () => {
                     img.remove();
-                    rightArtBox.innerHTML = `<div class="text-slate-600 text-center p-2"><i class="fa-solid fa-image text-2xl"></i></div>`;
+                    rightArtBox.innerHTML = `<div class="text-blue-400 text-center p-2"><i class="fa-solid fa-image text-2xl"></i></div>`;
                 };
                 rightArtBox.appendChild(img);
             } else {
-                rightArtBox.innerHTML = `<div class="text-slate-600 text-center p-2"><i class="fa-solid fa-id-card text-2xl"></i></div>`;
+                rightArtBox.innerHTML = `<div class="text-blue-400 text-center p-2"><i class="fa-solid fa-id-card text-2xl"></i></div>`;
             }
 
             cardBox.appendChild(leftContent);
@@ -963,15 +1118,16 @@
                 wrapper.appendChild(topConnectorLine);
 
                 const connectorBox = document.createElement('div');
-                connectorBox.className = 'w-full max-w-sm bg-slate-900 border border-amber-500/40 rounded-xl p-3 shadow-lg flex flex-col items-center text-center';
+                connectorBox.className = 'w-full max-w-sm bg-slate-950 border border-blue-500/40 rounded-xl p-3 shadow-lg flex flex-col items-center text-center';
 
-                let headerHtml = `<i class="fa-solid fa-fire text-rose-500 mr-1"></i> ${connectionDetails.length} Connections • Dealt <span class="text-rose-400 font-bold ml-1">${damageDealt} Damage</span>`;
+                let bonusText = isExactSetMatch ? 'Exact Set Match: x2 Damage!' : 'Set Group/Block Match: 1.5x Damage!';
+                let headerHtml = `<i class="fa-solid fa-fire text-blue-400 mr-1"></i> ${connectionDetails.length} Connections • Dealt <span class="text-blue-300 font-bold ml-1">${damageDealt} Damage</span>`;
                 if (hasSharedExpansion) {
-                    headerHtml += ` <span class="text-amber-400 font-bold ml-1.5 block sm:inline">(Set Matched: Damage Doubled!)</span>`;
+                    headerHtml += ` <span class="text-blue-400 font-bold ml-1.5 block sm:inline">(${bonusText})</span>`;
                 }
 
                 const headerTitle = document.createElement('div');
-                headerTitle.className = 'text-[10px] uppercase font-bold tracking-wider text-amber-400 mb-1.5 flex flex-wrap items-center justify-center';
+                headerTitle.className = 'text-[10px] uppercase font-bold tracking-wider text-blue-400 mb-1.5 flex flex-wrap items-center justify-center';
                 headerTitle.innerHTML = headerHtml;
                 connectorBox.appendChild(headerTitle);
 
@@ -980,8 +1136,8 @@
 
                 connectionDetails.forEach(det => {
                     const row = document.createElement('div');
-                    row.className = 'flex items-center justify-between px-2.5 py-1 bg-slate-950 rounded-lg border border-slate-800';
-                    row.innerHTML = `<span class="text-slate-300 font-medium">${det.category}</span><span class="text-amber-400 font-mono break-all ml-2">${det.match}</span>`;
+                    row.className = 'flex items-center justify-between px-2.5 py-1 bg-slate-900 rounded-lg border border-blue-950';
+                    row.innerHTML = `<span class="text-blue-200/90 font-medium">${det.category}</span><span class="text-blue-300 font-mono break-all ml-2">${det.match}</span>`;
                     listEl.appendChild(row);
                 });
 
@@ -1025,26 +1181,26 @@
             controlPanel.style.display = 'none';
 
             victoryCardContainer.innerHTML = `
-                <div class="w-full max-w-md bg-slate-900 border border-amber-500/60 rounded-2xl p-6 shadow-2xl text-center space-y-4 animate-fade-in card-glow mb-6">
-                    <div class="inline-flex p-3 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 shadow-lg">
+                <div class="w-full max-w-md bg-slate-950 border border-blue-500/60 rounded-2xl p-6 shadow-2xl text-center space-y-4 animate-fade-in card-glow mb-6">
+                    <div class="inline-flex p-3 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 shadow-lg">
                         <i class="fa-solid fa-trophy text-2xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-1">${winnerName} Wins!</h3>
-                        <p class="text-xs text-slate-400">${subtitleText} Scroll down to recap the game chain.</p>
+                        <h3 class="text-xl font-bold text-white mb-1">${winnerName} Wins the Battle of Wits!</h3>
+                        <p class="text-xs text-blue-300/80">${subtitleText} Scroll down to recap the arcane chain.</p>
                     </div>
                     <div class="flex space-x-3 pt-2">
-                        <button onclick="resetGame()" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl text-xs transition border border-slate-700">
+                        <button onclick="resetGame()" class="flex-1 py-2.5 bg-slate-900 hover:bg-slate-800 text-blue-200 font-semibold rounded-xl text-xs transition border border-blue-900">
                             Main Menu
                         </button>
-                        <button onclick="restartSamePlayers()" class="flex-1 py-2.5 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-xl text-xs transition shadow-lg shadow-amber-600/20">
+                        <button onclick="restartSamePlayers()" class="flex-1 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl text-xs transition shadow-lg shadow-blue-600/30">
                             Play Again
                         </button>
                     </div>
                 </div>
             `;
             
-            showToast(`${winnerName} wins the duel!`, "info");
+            showToast(`${winnerName} wins the battle of wits!`, "info");
         }
 
         function openRulesModal() {
@@ -1074,7 +1230,7 @@
             const toastContainer = document.getElementById('toast-container');
             const toast = document.createElement('div');
             
-            let bgClass = "bg-slate-900 border-slate-700 text-slate-200";
+            let bgClass = "bg-slate-950 border-blue-900 text-blue-200";
             let icon = "fa-circle-info text-blue-400";
             
             if(type === "error") {
