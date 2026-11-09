@@ -307,8 +307,9 @@
                 <p><strong>2. 40 Starting Life:</strong> Each player starts with 40 life points.</p>
                 <p><strong>3. Vintage Legal Cardpool (No Promos):</strong> Cards played must be legal in Vintage. Promo printings are excluded.</p>
                 <p><strong>4. Strict Connection Criteria:</strong> Must share at least 2 connections. Subtypes and Supertypes/Types require <strong>exact matches</strong>.</p>
-                <p><strong>5. Duel Decks & Associated Sets:</strong> Duel Decks (like Heroes vs Monsters) map directly to their contemporaneous block/set releases (e.g., Theros block).</p>
-                <p><strong>6. 45-Second Timer:</strong> You have 45 seconds per turn.</p>
+                <p><strong>5. Flavor Text Source Connection:</strong> Cards can connect if their flavor text is from the same source (e.g. The Theriad, Urza block lore, etc.).</p>
+                <p><strong>6. Wiki Preview Overrides:</strong> Specific cards mapped to preview sets from MTG Wiki (including Duel Decks preview associations, ignoring Zilortha for Commander Masters).</p>
+                <p><strong>7. 45-Second Timer:</strong> You have 45 seconds per turn.</p>
             </div>
             <div class="mt-6 pt-3 border-t border-blue-900/60 flex justify-end">
                 <button onclick="closeRulesModal()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition shadow-md">
@@ -352,25 +353,92 @@
         const setMetadataCache = new Map();
         let startingCardObj = null;
 
-        // Explicit manual mapping overrides for Duel Decks and special sets to their associated main block/set code
-        const manualDuelDeckBlockMap = {
-            'ddl': 'ths', // Heroes vs. Monsters -> Theros block
-            'ddh': 'zen', // Garruk vs. Liliana -> Zendikar block
-            'dde': 'ala', // Divine vs. Demonic -> Shards of Alara block
-            'ddf': 'zen', // Chandra vs. Jace -> Zendikar block
-            'ddg': 'som', // Knights vs. Dragons -> Scars of Mirrodin block
-            'ddi': 'isd', // Ajani vs. Nicol Bolas -> Innistrad block
-            'ddj': 'rtr', // Izzet vs. Golgari -> Return to Ravnica block
-            'ddk': 'rtr', // Sorika vs. Dimir -> Return to Ravnica block
-            'ddm': 'jou', // Jace vs. Vraska -> Theros block
-            'ddn': 'ktk', // Speed vs. Cunning -> Khans of Tarkir block
-            'ddo': 'dtk', // Elspeth vs. Kiora -> Dragons of Tarkir
-            'ddp': 'bfz', // Zendikar vs. Eldrazi -> Battle for Zendikar block
-            'ddq': 'soi', // Blessed vs. Cursed -> Shadows over Innistrad block
-            'ddr': 'kld', // Nissa vs. Ob Nixilis -> Kaladesh block
-            'dds': 'akh', // Mind vs. Might -> Amonkhet block
-            'ddt': 'XLN', // Meroblins vs. Pirates -> Ixalan block
-            'ddu': 'dom'  // Elves vs. Inventors -> Dominaria
+        // Explicit preview card mapping overrides based on the MTG Wiki preview list provided
+        // Maps card name (lowercase) to associated set code
+        const wikiPreviewSetMap = {
+            // Visions previewed in Multiverse Gift Box
+            'bull elephant': 'vis',
+            'dark privilege': 'vis',
+            'king cheetah': 'vis',
+            'necrosavant': 'vis',
+            'ovinomancer': 'vis',
+            'peace talks': 'vis',
+            'urborg mindsucker': 'vis',
+            'vampirism': 'vis',
+            'viashino sandstalker': 'vis',
+            'wicked reward': 'vis',
+
+            // Lorwyn basic lands previewed in Tenth Edition
+            // Shards of Alara
+            'hellkite overlord': 'ala',
+
+            // Zendikar previewed in Planechase
+            'beast hunt': 'zen',
+            'hideous end': 'zen',
+            'kor sanctifiers': 'zen',
+            'whiplash trap': 'zen',
+
+            // Scars of Mirrodin
+            'contagion clasp': 'som',
+            'kemba\'s skyguard': 'som',
+            'sword of body and mind': 'som',
+
+            // Innistrad
+            'mikaeus, the lunarch': 'isd',
+
+            // Return to Ravnica previewed in Duel Decks: Izzet vs. Golgari
+            'dreg mangler': 'rtr',
+            'goblin electromancer': 'rtr',
+            'izzet charm': 'rtr',
+            'jarad, golgari lich lord': 'rtr',
+            'korozda guildmage': 'rtr',
+            'street spasm': 'rtr',
+
+            // Theros previewed in Duel Decks: Heroes vs. Monsters
+            'anax and cymede': 'ths',
+            'cavalry pegasus': 'ths',
+            'destructive revelry': 'ths',
+            'ordeal of purphoros': 'ths',
+            'polukranos, world eater': 'ths',
+            'satyr hedonist': 'ths',
+
+            // Conspiracy
+            'magister of worth': 'cns',
+
+            // Khans of Tarkir previewed in Duel Decks: Speed vs. Cunning
+            'jeskai elder': 'ktk',
+            'mardu heart-piercer': 'ktk',
+            'mystic monastery': 'ktk',
+            'nomad outpost': 'ktk',
+            'thousand winds': 'ktk',
+            'zurgo helmsmasher': 'ktk',
+
+            // Battle for Zendikar previewed in Duel Decks: Zendikar vs. Eldrazi
+            'sheer drop': 'bfz',
+            'retreat to kazandu': 'bfz',
+            'veteran warleader': 'bfz',
+            'oblivion sower': 'bfz',
+            'dominator drone': 'bfz',
+            'forerunner of slaughter': 'bfz',
+
+            // Shadows over Innistrad previewed in Duel Decks: Blessed vs. Cursed
+            'topplegeist': 'soi',
+            'eerie interlude': 'soi',
+            'pore over the pages': 'soi',
+            'tooth collector': 'soi',
+            'mindwrack demon': 'soi',
+            'compelling deterrence': 'soi',
+
+            // Commander Masters (Zilortha correction: Ikoria card)
+            'zilortha, strength incarnate': 'iko',
+
+            // Modern Horizons 2 previewed in Mystical Archive (sta) -> or mh2
+            'abundant harvest': 'mh2',
+
+            // Avatar / Marvel etc.
+            'katara, the fearless': 'avatar',
+            'beta ray bill': 'mrd',
+            'doctor strange, master of magic': 'mrd'
         };
 
         const basicLandNames = new Set([
@@ -760,10 +828,24 @@
             const power = firstPrinting.power !== undefined ? String(firstPrinting.power) : null;
             const toughness = firstPrinting.toughness !== undefined ? String(firstPrinting.toughness) : null;
             const manaCost = firstPrinting.mana_cost || '';
-            const setName = firstPrinting.set_name || firstPrinting.set || '';
-            const setCode = firstPrinting.set ? firstPrinting.set.toLowerCase() : '';
             const artist = firstPrinting.artist || '';
             const legalities = canonicalCard.legalities || firstPrinting.legalities || {};
+            const flavorText = firstPrinting.flavor_text || canonicalCard.flavor_text || '';
+
+            // Determine effective set code using wiki preview map override if applicable
+            let setCode = firstPrinting.set ? firstPrinting.set.toLowerCase() : '';
+            const lowerName = actualCardName.toLowerCase();
+            if (wikiPreviewSetMap[lowerName]) {
+                setCode = wikiPreviewSetMap[lowerName];
+            }
+
+            let setName = firstPrinting.set_name || firstPrinting.set || '';
+            if (wikiPreviewSetMap[lowerName]) {
+                const overrideMeta = setMetadataCache.get(setCode);
+                if (overrideMeta && overrideMeta.name) {
+                    setName = overrideMeta.name;
+                }
+            }
 
             let fullTypes = "";
             let fullSubtypes = "";
@@ -792,6 +874,7 @@
                 firstSetCode: setCode,
                 artist: artist,
                 legalities: legalities,
+                flavorText: flavorText,
                 fullTypes: fullTypes,
                 fullSubtypes: fullSubtypes,
                 keywords: new Set(keywords),
@@ -1000,6 +1083,29 @@
             if (cardInputEl) cardInputEl.focus();
         }
 
+        function extractFlavorSource(flavorText) {
+            if (!flavorText) return null;
+            // Flavor text sources often appear in quotes or attribution lines at the end (e.g. —The Theriad, —Urza's Journal)
+            // Or explicit mentions of known sources like "The Theriad", "Urza", etc.
+            const lower = flavorText.toLowerCase();
+            if (lower.includes('theriad') || flavorText.includes('—The Theriad') || flavorText.includes('— “The Theriad')) return 'The Theriad';
+            if (lower.includes('urza') || lower.includes('gix') || lower.includes('tolaria')) {
+                // Check if it references Urza lore source
+                if (lower.includes('urza\'s') || lower.includes('urza notes') || lower.includes('urza')) return 'Urza Block Lore';
+            }
+            
+            // Check attribution after em-dash
+            const emDashIdx = flavorText.indexOf('—');
+            if (emDashIdx !== -1) {
+                return flavorText.substring(emDashIdx + 1).trim();
+            }
+            const dashIdx = flavorText.indexOf('-');
+            if (dashIdx !== -1 && dashIdx > flavorText.length / 2) {
+                return flavorText.substring(dashIdx + 1).trim();
+            }
+            return null;
+        }
+
         function evaluateConnections(cardA, cardB) {
             let details = [];
             let hasSharedExpansion = false;
@@ -1035,24 +1141,24 @@
                 details.push({ category: "Artist", match: cardA.artist });
             }
 
+            // Flavor text source connection check
+            const sourceA = extractFlavorSource(cardA.flavorText);
+            const sourceB = extractFlavorSource(cardB.flavorText);
+            if (sourceA && sourceB && sourceA.toLowerCase() === sourceB.toLowerCase()) {
+                details.push({ category: "Flavor Text Source", match: sourceA });
+            }
+
             const codeA = cardA.firstSetCode;
             const codeB = cardB.firstSetCode;
-            const mappedCodeA = manualDuelDeckBlockMap[codeA] || codeA;
-            const mappedCodeB = manualDuelDeckBlockMap[codeB] || codeB;
 
-            const metaA = setMetadataCache.get(mappedCodeA) || setMetadataCache.get(codeA);
-            const metaB = setMetadataCache.get(mappedCodeB) || setMetadataCache.get(codeB);
+            const metaA = setMetadataCache.get(codeA);
+            const metaB = setMetadataCache.get(codeB);
 
             let sharedSetLabel = null;
             if (codeA === codeB) {
                 hasSharedExpansion = true;
                 isExactSetMatch = true;
                 sharedSetLabel = cardA.setName;
-            } else if (mappedCodeA === mappedCodeB && manualDuelDeckBlockMap[codeA]) {
-                // Duel deck mapped to associated block/set
-                hasSharedExpansion = true;
-                isExactSetMatch = false;
-                sharedSetLabel = `Associated Duel Deck Pairing (${cardA.setName} & ${cardB.setName})`;
             } else if (metaA && metaB) {
                 const isSpecialIsolated = (type) => ['core', 'conspiracy', 'planechase', 'archenemy', 'vanguard'].includes(type);
                 const isolatedA = isSpecialIsolated(metaA.setType);
