@@ -67,16 +67,17 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white bg-wits-pattern">
 
-    <!-- Header -->
+    <!-- Minimal Header -->
     <header class="bg-slate-950/85 backdrop-blur-md border-b border-blue-900/50 sticky top-0 z-50 px-4 py-3">
         <div class="max-w-6xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center shadow-lg shadow-blue-900/40 border border-blue-400/30">
-                    <i class="fa-solid fa-brain text-blue-200 text-lg"></i>
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center shadow-lg shadow-blue-900/40 border border-blue-400/30">
+                    <i class="fa-solid fa-brain text-blue-200 text-sm"></i>
                 </div>
-                <div>
-                    <h1 class="text-xl font-bold tracking-wide blue-gradient-text">Battle of Wits</h1>
-                    <p class="text-xs text-blue-300/80">Vintage Legal • Core Sets Group Isolated • 40 Life</p>
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs font-bold uppercase tracking-widest blue-gradient-text">Battle of Wits</span>
+                    <span class="text-slate-600">•</span>
+                    <span class="text-[11px] text-blue-300/70 hidden sm:inline">Vintage Duel</span>
                 </div>
             </div>
             <div id="game-actions-header" class="hidden flex items-center space-x-2">
@@ -116,7 +117,7 @@
                             <i class="fa-solid fa-heart mr-1"></i> 40 Life
                         </span>
                         <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
-                            <i class="fa-solid fa-box-archive mr-1"></i> Random Surprise Starter
+                            <i class="fa-solid fa-stopwatch mr-1"></i> 45s Timer
                         </span>
                     </div>
                 </div>
@@ -140,14 +141,22 @@
                         </div>
                     </div>
 
-                    <!-- 2-Minute Timer Toggle Option -->
+                    <div>
+                        <label class="block text-xs font-semibold text-blue-200 uppercase tracking-wider mb-1.5">Starting Card (Optional)</label>
+                        <div class="relative">
+                            <input type="text" id="starting-card-input" placeholder="Leave blank for random starter..." 
+                                class="w-full px-4 py-2.5 bg-slate-900 border border-blue-900/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm">
+                        </div>
+                    </div>
+
+                    <!-- 45-Second Timer Toggle Option -->
                     <div class="p-3.5 bg-slate-900/90 border border-blue-900/80 rounded-xl flex items-center justify-between">
                         <div class="flex items-center space-x-3">
                             <div class="p-2 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20">
                                 <i class="fa-solid fa-stopwatch text-lg"></i>
                             </div>
                             <div>
-                                <span class="text-sm font-semibold text-white block">2-Minute Turn Timer</span>
+                                <span class="text-sm font-semibold text-white block">45-Second Turn Timer</span>
                                 <span class="text-xs text-blue-300/70">Auto-submits preview if time expires</span>
                             </div>
                         </div>
@@ -210,7 +219,7 @@
                     <!-- Countdown Display -->
                     <div id="timer-container" class="hidden flex items-center space-x-2 bg-slate-900 px-3 py-1.5 rounded-xl border border-blue-900/70">
                         <i class="fa-solid fa-stopwatch text-blue-400 text-sm animate-pulse"></i>
-                        <span id="timer-display" class="font-mono text-base font-bold text-blue-400">2:00</span>
+                        <span id="timer-display" class="font-mono text-base font-bold text-blue-400">0:45</span>
                     </div>
 
                     <div class="flex items-center space-x-3 text-right">
@@ -294,12 +303,12 @@
                 <p class="italic text-blue-300/90 border-l-2 border-blue-500 pl-3 py-1">
                     "The wizard who reads 34,000 cards is powerful. The wizard who memorizes 34,000 cards is insane."
                 </p>
-                <p><strong>1. Random Surprise Starter:</strong> Each game starts with a fully random first-printing starter card revealed only when the battle begins.</p>
+                <p><strong>1. Starter Card:</strong> Random surprise starter or custom typed starting card.</p>
                 <p><strong>2. 40 Starting Life:</strong> Each player starts with 40 life points.</p>
-                <p><strong>3. Vintage Legal Cardpool:</strong> Cards played must be legal or restricted in Magic's Vintage format.</p>
-                <p><strong>4. Connection Criteria:</strong> Cards must share at least 2 connections (Types, Subtypes, P/T, Rarity, Keywords, Color Identity, Artist, or Set/Expansion).</p>
-                <p><strong>5. Core Sets Isolation:</strong> Core sets do not group with other core sets or share set groups unless exact set codes match.</p>
-                <p><strong>6. Set vs Block Multipliers:</strong> Exact matching main set grants a <strong>2x multiplier</strong>. Set group, block matching, or associated set pairing grants a <strong>1.5x multiplier (rounded down)</strong>.</p>
+                <p><strong>3. Vintage Legal Cardpool (No Promos):</strong> Cards played must be legal in Vintage. Promo printings are excluded.</p>
+                <p><strong>4. Strict Connection Criteria:</strong> Must share at least 2 connections. Subtypes and Supertypes/Types require <strong>exact matches</strong> (e.g., "Human Soldier" does not match "Soldier", and "Creature" does not match "Legendary Creature").</p>
+                <p><strong>5. Set & Series Isolation:</strong> Core sets, Conspiracy sets, and Planechase sets are isolated from respective set groups.</p>
+                <p><strong>6. 45-Second Timer:</strong> You have 45 seconds per turn.</p>
             </div>
             <div class="mt-6 pt-3 border-t border-blue-900/60 flex justify-end">
                 <button onclick="closeRulesModal()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition shadow-md">
@@ -334,7 +343,7 @@
         let autocompleteTimeout = null;
         let turnTimer = null;
         let isTimerEnabled = true;
-        let timeLeft = 120;
+        let timeLeft = 45;
         let isGameOver = false;
 
         let currentPreviewCardObj = null;
@@ -435,14 +444,16 @@
         async function fetchRandomVintageStarter() {
             try {
                 const randomPage = Math.floor(Math.random() * 25) + 1;
-                const res = await fetch(`https://api.scryfall.com/cards/search?q=-type:basic+-type:land+is:first+f:vintage&page=${randomPage}`);
+                const res = await fetch(`https://api.scryfall.com/cards/search?q=-type:basic+-type:land+is:first+f:vintage+-is:promo&page=${randomPage}`);
                 if (res.ok) {
                     const data = await res.json();
                     if (data && data.data && data.data.length > 0) {
                         const cardData = data.data[Math.floor(Math.random() * data.data.length)];
-                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '"')}`);
+                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '" -is:promo')}`);
                         const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
-                        const printings = printsData.data || [cardData];
+                        let printings = printsData.data || [cardData];
+                        printings = printings.filter(p => p.set_type !== 'promo' && !p.promo);
+                        if (printings.length === 0) printings = [cardData];
                         printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
                         return await parseCardObject(printings[0], printings, "System (Starter)");
                     }
@@ -456,10 +467,42 @@
             return await parseCardObject(fallbackData, [fallbackData], "System (Starter)");
         }
 
+        async function fetchSpecificStartingCard(query) {
+            try {
+                const res = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${encodeURIComponent(query)}`);
+                if (res.ok) {
+                    const cardData = await res.json();
+                    if (cardData && cardData.name) {
+                        const vintageLegality = cardData.legalities ? cardData.legalities.vintage : null;
+                        if (vintageLegality !== 'legal' && vintageLegality !== 'restricted') {
+                            showToast(`Starting card "${cardData.name}" is not Vintage legal. Using random starter.`, "error");
+                            return await fetchRandomVintageStarter();
+                        }
+                        if (basicLandNames.has(cardData.name.toLowerCase()) || isBasicLand(cardData.name, cardData.type_line)) {
+                            showToast(`Basic lands cannot be starting cards. Using random starter.`, "error");
+                            return await fetchRandomVintageStarter();
+                        }
+                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '" -is:promo')}`);
+                        const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
+                        let printings = printsData.data || [cardData];
+                        printings = printings.filter(p => p.set_type !== 'promo' && !p.promo);
+                        if (printings.length === 0) printings = printsData.data || [cardData];
+                        printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
+                        return await parseCardObject(printings[0], printings, "System (Starter)");
+                    }
+                }
+            } catch (e) {
+                console.error("Error fetching specific starting card:", e);
+            }
+            showToast("Could not find starting card. Using random starter instead.", "error");
+            return await fetchRandomVintageStarter();
+        }
+
         async function startGame(e) {
             e.preventDefault();
             const p1 = document.getElementById('player1-name').value.trim();
             const p2 = document.getElementById('player2-name').value.trim();
+            const startingQuery = document.getElementById('starting-card-input').value.trim();
             if(p1) player1Name = p1;
             if(p2) player2Name = p2;
 
@@ -468,9 +511,13 @@
             isTimerEnabled = timerToggle.checked;
 
             startBtn.disabled = true;
-            startBtn.innerHTML = `<span>Summoning Random Starter...</span> <i class="fa-solid fa-spinner animate-spin"></i>`;
+            startBtn.innerHTML = `<span>Initializing Battle...</span> <i class="fa-solid fa-spinner animate-spin"></i>`;
 
-            startingCardObj = await fetchRandomVintageStarter();
+            if (startingQuery) {
+                startingCardObj = await fetchSpecificStartingCard(startingQuery);
+            } else {
+                startingCardObj = await fetchRandomVintageStarter();
+            }
 
             setupScreen.classList.add('hidden');
             gameScreen.classList.remove('hidden');
@@ -561,9 +608,11 @@
                             return;
                         }
 
-                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '"')}`);
+                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '" -is:promo')}`);
                         const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
-                        const printings = printsData.data || [cardData];
+                        let printings = printsData.data || [cardData];
+                        printings = printings.filter(p => p.set_type !== 'promo' && !p.promo);
+                        if (printings.length === 0) printings = [cardData];
                         printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
                         const firstPrint = printings[0];
 
@@ -695,14 +744,15 @@
             const artist = firstPrinting.artist || '';
             const legalities = canonicalCard.legalities || firstPrinting.legalities || {};
 
-            let rawTypesList = [];
-            let rawSubtypesList = [];
+            let fullTypes = "";
+            let fullSubtypes = "";
             if (typeLine.includes('—')) {
                 const parts = typeLine.split('—');
-                rawTypesList = parts[0].trim().toLowerCase().split(/\s+/).filter(Boolean);
-                rawSubtypesList = parts[1].trim().toLowerCase().split(/\s+/).filter(Boolean);
+                fullTypes = parts[0].trim().toLowerCase();
+                fullSubtypes = parts[1].trim().toLowerCase();
             } else {
-                rawTypesList = typeLine.trim().toLowerCase().split(/\s+/).filter(Boolean);
+                fullTypes = typeLine.trim().toLowerCase();
+                fullSubtypes = "";
             }
 
             const keywords = (firstPrinting.keywords || []).map(k => k.toLowerCase());
@@ -721,8 +771,8 @@
                 firstSetCode: setCode,
                 artist: artist,
                 legalities: legalities,
-                typesList: rawTypesList,
-                subtypesList: rawSubtypesList,
+                fullTypes: fullTypes,
+                fullSubtypes: fullSubtypes,
                 keywords: new Set(keywords),
                 playerName: playerName
             };
@@ -757,7 +807,7 @@
             }
 
             if (timerContainer) timerContainer.classList.remove('hidden');
-            timeLeft = 120;
+            timeLeft = 45;
             updateTimerDisplay();
 
             turnTimer = setInterval(async () => {
@@ -795,9 +845,9 @@
             const secs = timeLeft % 60;
             timerDisplay.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
             
-            if (timeLeft <= 15) {
+            if (timeLeft <= 10) {
                 timerDisplay.className = "font-mono text-base font-bold text-rose-500 animate-ping";
-            } else if (timeLeft <= 30) {
+            } else if (timeLeft <= 20) {
                 timerDisplay.className = "font-mono text-base font-bold text-rose-400";
             } else {
                 timerDisplay.className = "font-mono text-base font-bold text-blue-400";
@@ -934,25 +984,15 @@
             let hasSharedExpansion = false;
             let isExactSetMatch = false;
 
-            let matchedTypes = [];
-            cardA.typesList.forEach(t => {
-                if (cardB.typesList.includes(t)) {
-                    matchedTypes.push(t);
-                }
-            });
-            matchedTypes.forEach(t => {
-                details.push({ category: "Card Type", match: t.charAt(0).toUpperCase() + t.slice(1) });
-            });
+            // Strict exact match for full types / supertypes (e.g. "creature" != "legendary creature")
+            if (cardA.fullTypes && cardB.fullTypes && cardA.fullTypes === cardB.fullTypes) {
+                details.push({ category: "Card Type / Supertype", match: cardA.fullTypes.charAt(0).toUpperCase() + cardA.fullTypes.slice(1) });
+            }
 
-            let matchedSubtypes = [];
-            cardA.subtypesList.forEach(st => {
-                if (cardB.subtypesList.includes(st)) {
-                    matchedSubtypes.push(st);
-                }
-            });
-            matchedSubtypes.forEach(st => {
-                details.push({ category: "Subtype", match: st.charAt(0).toUpperCase() + st.slice(1) });
-            });
+            // Strict exact match for full subtype string (e.g. "human soldier" != "soldier")
+            if (cardA.fullSubtypes && cardB.fullSubtypes && cardA.fullSubtypes === cardB.fullSubtypes) {
+                details.push({ category: "Subtype", match: cardA.fullSubtypes.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') });
+            }
 
             if (cardA.power !== null && cardA.toughness !== null && cardA.power === cardB.power && cardA.toughness === cardB.toughness) {
                 details.push({ category: "Power / Toughness", match: `${cardA.power}/${cardA.toughness}` });
@@ -985,11 +1025,12 @@
                 isExactSetMatch = true;
                 sharedSetLabel = cardA.setName;
             } else if (metaA && metaB) {
-                // Core sets should not be part of the same set group (isolated from each other unless exact set matches)
-                const isCoreA = metaA.setType === 'core';
-                const isCoreB = metaB.setType === 'core';
+                // Isolated sets: Core sets, Conspiracy sets, Planechase sets, Archenemy sets do not group with other sets
+                const isSpecialIsolated = (type) => ['core', 'conspiracy', 'planechase', 'archenemy', 'vanguard'].includes(type);
+                const isolatedA = isSpecialIsolated(metaA.setType);
+                const isolatedB = isSpecialIsolated(metaB.setType);
 
-                if (!(isCoreA && isCoreB)) {
+                if (!(isolatedA || isolatedB)) {
                     const effectiveA = metaA.parent_set_code || metaA.code;
                     const effectiveB = metaB.parent_set_code || metaB.code;
 
