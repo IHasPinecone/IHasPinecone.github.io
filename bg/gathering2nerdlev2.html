@@ -306,8 +306,8 @@
                 <p><strong>1. Starter Card:</strong> Random surprise starter or custom typed starting card.</p>
                 <p><strong>2. 40 Starting Life:</strong> Each player starts with 40 life points.</p>
                 <p><strong>3. Vintage Legal Cardpool (No Promos):</strong> Cards played must be legal in Vintage. Promo printings are excluded.</p>
-                <p><strong>4. Strict Connection Criteria:</strong> Must share at least 2 connections. Subtypes and Supertypes/Types require <strong>exact matches</strong> (e.g., "Human Soldier" does not match "Soldier", and "Creature" does not match "Legendary Creature").</p>
-                <p><strong>5. Set & Series Isolation:</strong> Core sets, Conspiracy sets, and Planechase sets are isolated from respective set groups.</p>
+                <p><strong>4. Strict Connection Criteria:</strong> Must share at least 2 connections. Subtypes and Supertypes/Types require <strong>exact matches</strong>.</p>
+                <p><strong>5. Duel Decks & Associated Sets:</strong> Duel Decks (like Heroes vs Monsters) map directly to their contemporaneous block/set releases (e.g., Theros block).</p>
                 <p><strong>6. 45-Second Timer:</strong> You have 45 seconds per turn.</p>
             </div>
             <div class="mt-6 pt-3 border-t border-blue-900/60 flex justify-end">
@@ -351,6 +351,27 @@
         // Scryfall set metadata map
         const setMetadataCache = new Map();
         let startingCardObj = null;
+
+        // Explicit manual mapping overrides for Duel Decks and special sets to their associated main block/set code
+        const manualDuelDeckBlockMap = {
+            'ddl': 'ths', // Heroes vs. Monsters -> Theros block
+            'ddh': 'zen', // Garruk vs. Liliana -> Zendikar block
+            'dde': 'ala', // Divine vs. Demonic -> Shards of Alara block
+            'ddf': 'zen', // Chandra vs. Jace -> Zendikar block
+            'ddg': 'som', // Knights vs. Dragons -> Scars of Mirrodin block
+            'ddi': 'isd', // Ajani vs. Nicol Bolas -> Innistrad block
+            'ddj': 'rtr', // Izzet vs. Golgari -> Return to Ravnica block
+            'ddk': 'rtr', // Sorika vs. Dimir -> Return to Ravnica block
+            'ddm': 'jou', // Jace vs. Vraska -> Theros block
+            'ddn': 'ktk', // Speed vs. Cunning -> Khans of Tarkir block
+            'ddo': 'dtk', // Elspeth vs. Kiora -> Dragons of Tarkir
+            'ddp': 'bfz', // Zendikar vs. Eldrazi -> Battle for Zendikar block
+            'ddq': 'soi', // Blessed vs. Cursed -> Shadows over Innistrad block
+            'ddr': 'kld', // Nissa vs. Ob Nixilis -> Kaladesh block
+            'dds': 'akh', // Mind vs. Might -> Amonkhet block
+            'ddt': 'XLN', // Meroblins vs. Pirates -> Ixalan block
+            'ddu': 'dom'  // Elves vs. Inventors -> Dominaria
+        };
 
         const basicLandNames = new Set([
             'plains', 'island', 'swamp', 'mountain', 'forest', 'wastes',
@@ -984,12 +1005,10 @@
             let hasSharedExpansion = false;
             let isExactSetMatch = false;
 
-            // Strict exact match for full types / supertypes (e.g. "creature" != "legendary creature")
             if (cardA.fullTypes && cardB.fullTypes && cardA.fullTypes === cardB.fullTypes) {
                 details.push({ category: "Card Type / Supertype", match: cardA.fullTypes.charAt(0).toUpperCase() + cardA.fullTypes.slice(1) });
             }
 
-            // Strict exact match for full subtype string (e.g. "human soldier" != "soldier")
             if (cardA.fullSubtypes && cardB.fullSubtypes && cardA.fullSubtypes === cardB.fullSubtypes) {
                 details.push({ category: "Subtype", match: cardA.fullSubtypes.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') });
             }
@@ -1016,16 +1035,25 @@
                 details.push({ category: "Artist", match: cardA.artist });
             }
 
-            const metaA = setMetadataCache.get(cardA.firstSetCode);
-            const metaB = setMetadataCache.get(cardB.firstSetCode);
+            const codeA = cardA.firstSetCode;
+            const codeB = cardB.firstSetCode;
+            const mappedCodeA = manualDuelDeckBlockMap[codeA] || codeA;
+            const mappedCodeB = manualDuelDeckBlockMap[codeB] || codeB;
+
+            const metaA = setMetadataCache.get(mappedCodeA) || setMetadataCache.get(codeA);
+            const metaB = setMetadataCache.get(mappedCodeB) || setMetadataCache.get(codeB);
 
             let sharedSetLabel = null;
-            if (cardA.firstSetCode && cardA.firstSetCode === cardB.firstSetCode) {
+            if (codeA === codeB) {
                 hasSharedExpansion = true;
                 isExactSetMatch = true;
                 sharedSetLabel = cardA.setName;
+            } else if (mappedCodeA === mappedCodeB && manualDuelDeckBlockMap[codeA]) {
+                // Duel deck mapped to associated block/set
+                hasSharedExpansion = true;
+                isExactSetMatch = false;
+                sharedSetLabel = `Associated Duel Deck Pairing (${cardA.setName} & ${cardB.setName})`;
             } else if (metaA && metaB) {
-                // Isolated sets: Core sets, Conspiracy sets, Planechase sets, Archenemy sets do not group with other sets
                 const isSpecialIsolated = (type) => ['core', 'conspiracy', 'planechase', 'archenemy', 'vanguard'].includes(type);
                 const isolatedA = isSpecialIsolated(metaA.setType);
                 const isolatedB = isSpecialIsolated(metaB.setType);
