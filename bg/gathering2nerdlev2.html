@@ -239,12 +239,19 @@
                         <span id="input-hint" class="text-[11px] text-blue-300/70">Select card to preview damage, press Enter again to lock!</span>
                     </div>
                     
-                    <div class="relative">
-                        <input type="text" id="card-input" autocomplete="off" placeholder="Type a card name (e.g., Counterspell, Brainstorm)..."
-                            class="w-full pl-4 pr-24 py-2.5 bg-slate-900 border border-blue-900/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm">
-                        <button type="submit" id="submit-btn" class="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-lg transition flex items-center justify-center text-xs shadow-md border border-blue-400/30">
-                            <span id="submit-btn-text">Preview</span>
-                        </button>
+                    <div class="relative flex flex-col space-y-1">
+                        <div class="relative flex">
+                            <input type="text" id="card-input" autocomplete="off" placeholder="Type a card name (e.g., Counterspell, Brainstorm)..."
+                                class="w-full pl-4 pr-24 py-2.5 bg-slate-900 border border-blue-900/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm">
+                            <button type="submit" id="submit-btn" class="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-lg transition flex items-center justify-center text-xs shadow-md border border-blue-400/30">
+                                <span id="submit-btn-text">Preview</span>
+                            </button>
+                        </div>
+                        <!-- Fetching Status Message Under Button / Input -->
+                        <div id="fetching-indicator" class="hidden flex items-center space-x-1.5 text-[11px] text-blue-400 pl-1">
+                            <i class="fa-solid fa-spinner animate-spin"></i>
+                            <span class="italic">(fetching...)</span>
+                        </div>
                     </div>
 
                     <!-- Live Preview Box -->
@@ -272,9 +279,10 @@
             </div>
 
             <!-- Centered Card Chain Feed & Victory Card Container -->
-            <div class="w-full max-w-xl flex flex-col items-center">
+            <div class="w-full max-w-xl flex flex-col items-center pt-4">
                 <div id="victory-card-container" class="w-full flex flex-col items-center mb-4"></div>
-                <div id="chain-container" class="w-full flex flex-col-reverse items-center">
+                <!-- Chain Container set to column (newest card appears at top of feed below control panel) -->
+                <div id="chain-container" class="w-full flex flex-col items-center space-y-4">
                     <!-- Chain items inserted dynamically here -->
                 </div>
             </div>
@@ -348,13 +356,13 @@
         let isGameOver = false;
 
         let currentPreviewCardObj = null;
+        let isFetchingApi = false;
 
         // Scryfall set metadata map
         const setMetadataCache = new Map();
         let startingCardObj = null;
 
         // Explicit preview card mapping overrides based on MTG Wiki preview list provided
-        // Maps card name (lowercase) to associated set code and whether it was previewed in a supplementary set (like Duel Decks)
         const wikiPreviewSetMap = {
             'bull elephant': { setCode: 'vis', isSupplementaryPreview: true },
             'dark privilege': { setCode: 'vis', isSupplementaryPreview: true },
@@ -464,6 +472,7 @@
         const previewSpellingNote = document.getElementById('preview-spelling-note');
         const previewDamageBadge = document.getElementById('preview-damage-badge');
         const previewDetails = document.getElementById('preview-details');
+        const fetchingIndicator = document.getElementById('fetching-indicator');
         const setupBgArt = document.getElementById('setup-bg-art');
         const startBtn = document.getElementById('start-btn');
         const submitBtnText = document.getElementById('submit-btn-text');
@@ -515,7 +524,19 @@
             }
         }
 
+        function setFetching(status) {
+            isFetchingApi = status;
+            if (fetchingIndicator) {
+                if (status) {
+                    fetchingIndicator.classList.remove('hidden');
+                } else {
+                    fetchingIndicator.classList.add('hidden');
+                }
+            }
+        }
+
         async function fetchRandomVintageStarter() {
+            setFetching(true);
             try {
                 const randomPage = Math.floor(Math.random() * 25) + 1;
                 const res = await fetch(`https://api.scryfall.com/cards/search?q=-type:basic+-type:land+is:first+f:vintage+-is:promo&page=${randomPage}`);
@@ -529,6 +550,7 @@
                         printings = printings.filter(p => p.set_type !== 'promo' && !p.promo);
                         if (printings.length === 0) printings = [cardData];
                         printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
+                        setFetching(false);
                         return await parseCardObject(printings[0], printsData.data || printings, "System (Starter)");
                     }
                 }
@@ -538,10 +560,12 @@
 
             const fallbackRes = await fetch('https://api.scryfall.com/cards/named?exact=Counterspell');
             const fallbackData = await fallbackRes.json();
+            setFetching(false);
             return await parseCardObject(fallbackData, [fallbackData], "System (Starter)");
         }
 
         async function fetchSpecificStartingCard(query) {
+            setFetching(true);
             try {
                 const res = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${encodeURIComponent(query)}`);
                 if (res.ok) {
@@ -550,10 +574,12 @@
                         const vintageLegality = cardData.legalities ? cardData.legalities.vintage : null;
                         if (vintageLegality !== 'legal' && vintageLegality !== 'restricted') {
                             showToast(`Starting card "${cardData.name}" is not Vintage legal. Using random starter.`, "error");
+                            setFetching(false);
                             return await fetchRandomVintageStarter();
                         }
                         if (basicLandNames.has(cardData.name.toLowerCase()) || isBasicLand(cardData.name, cardData.type_line)) {
                             showToast(`Basic lands cannot be starting cards. Using random starter.`, "error");
+                            setFetching(false);
                             return await fetchRandomVintageStarter();
                         }
                         const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '" -is:promo')}`);
@@ -562,12 +588,14 @@
                         printings = printings.filter(p => p.set_type !== 'promo' && !p.promo);
                         if (printings.length === 0) printings = printsData.data || [cardData];
                         printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
+                        setFetching(false);
                         return await parseCardObject(printings[0], printsData.data || printings, "System (Starter)");
                     }
                 }
             } catch (e) {
                 console.error("Error fetching specific starting card:", e);
             }
+            setFetching(false);
             showToast("Could not find starting card. Using random starter instead.", "error");
             return await fetchRandomVintageStarter();
         }
@@ -670,6 +698,7 @@
         cardInput.addEventListener('input', handleCardInputEvent);
 
         async function computeAndShowPreview(query) {
+            setFetching(true);
             try {
                 const res = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${encodeURIComponent(query)}`);
                 if (res.ok) {
@@ -679,6 +708,7 @@
                         if (vintageLegality !== 'legal' && vintageLegality !== 'restricted') {
                             showError(`"${cardData.name}" is not legal in Vintage format!`);
                             hideLivePreview();
+                            setFetching(false);
                             return;
                         }
 
@@ -709,6 +739,7 @@
             } catch (e) {
                 hideLivePreview();
             }
+            setFetching(false);
         }
 
         function showLivePreview(cardName, damage, connections, spellingFixed) {
@@ -818,10 +849,8 @@
                 setCode = wikiPreviewSetMap[lowerName].setCode;
                 isSupplementaryPreview = wikiPreviewSetMap[lowerName].isSupplementaryPreview;
             } else {
-                // Check if any printing in cardPrintings was released in a supplementary set (like duel decks, promo, box topper, etc.) prior to or as a preview
                 for (const p of cardPrintings) {
                     if (p.set_type === 'duel_deck' || p.set_type === 'box_topper' || p.set_type === 'masterpiece' || p.promo) {
-                        // If the first printing is normal set, but there is a supplementary printing, check release dates
                         if (p.released_at && firstPrinting.released_at && p.released_at < firstPrinting.released_at) {
                             setCode = p.set;
                             isSupplementaryPreview = true;
@@ -1044,6 +1073,7 @@
             history.push(cardObj);
             usedCardNames.add(lowerName);
 
+            // Prepend new card to the top of the chain feed with connection bubble and scroll to new card top
             renderChainNode(cardObj, connections.details, damageDealt, connections.hasSharedExpansion, connections.isExactSetMatch, connections.multiplier);
 
             if (chainLengthEl) chainLengthEl.textContent = history.length;
@@ -1068,7 +1098,6 @@
 
         function extractFlavorSource(flavorText) {
             if (!flavorText) return null;
-            // Simply check the end of the flavor text after the em-dash (—) or hyphen (-)
             const emDashIdx = flavorText.lastIndexOf('—');
             if (emDashIdx !== -1) {
                 return flavorText.substring(emDashIdx + 1).trim();
@@ -1116,7 +1145,6 @@
                 details.push({ category: "Artist", match: cardA.artist });
             }
 
-            // Flavor text source connection check (checks if text after – or — is identical)
             const sourceA = extractFlavorSource(cardA.flavorText);
             const sourceB = extractFlavorSource(cardB.flavorText);
             if (sourceA && sourceB && sourceA.toLowerCase() === sourceB.toLowerCase()) {
@@ -1150,6 +1178,7 @@
             const wrapper = document.createElement('div');
             wrapper.className = 'w-full flex flex-col items-center animate-fade-in';
 
+            // Render Card Frame
             const cardBox = document.createElement('div');
             cardBox.className = 'w-full max-w-md bg-slate-950 border border-blue-900/70 rounded-2xl p-4 shadow-xl flex items-center justify-between space-x-4 relative overflow-hidden group hover:border-blue-500/50 transition';
 
@@ -1212,6 +1241,7 @@
             cardBox.appendChild(rightArtBox);
             wrapper.appendChild(cardBox);
 
+            // Render Connection Bubble Card directly underneath the card inside the same wrapper node
             if (connectionDetails && connectionDetails.length > 0) {
                 const topConnectorLine = document.createElement('div');
                 topConnectorLine.className = 'chain-connector-line h-6';
@@ -1243,19 +1273,18 @@
 
                 connectorBox.appendChild(listEl);
                 wrapper.appendChild(connectorBox);
-
-                const bottomConnectorLine = document.createElement('div');
-                bottomConnectorLine.className = 'chain-connector-line h-6';
-                wrapper.appendChild(bottomConnectorLine);
             }
 
-            chainContainer.appendChild(wrapper);
-            wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Insert newest card unit at the top of the feed container
+            chainContainer.insertBefore(wrapper, chainContainer.firstChild);
+
+            // Smoothly scroll to top of window so control panel remains visible and new card appears cleanly below it
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function openCardModal(imageUrl) {
             document.getElementById('modal-card-image').src = imageUrl;
-            document.getElementById('card-modal').classList.remove('hidden');
+            document.getElementById('card-modal').classList.add('hidden');
         }
 
         function closeCardModal() {
