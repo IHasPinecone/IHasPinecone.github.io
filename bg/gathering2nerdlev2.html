@@ -307,8 +307,8 @@
                 <p><strong>2. 40 Starting Life:</strong> Each player starts with 40 life points.</p>
                 <p><strong>3. Vintage Legal Cardpool (No Promos):</strong> Cards played must be legal in Vintage. Promo printings are excluded.</p>
                 <p><strong>4. Strict Connection Criteria:</strong> Must share at least 2 connections. Subtypes and Supertypes/Types require <strong>exact matches</strong>.</p>
-                <p><strong>5. Flavor Text Source Connection:</strong> Cards can connect if their flavor text is from the same source (e.g. The Theriad, Urza block lore, etc.).</p>
-                <p><strong>6. Wiki Preview Overrides:</strong> Specific cards mapped to preview sets from MTG Wiki (including Duel Decks preview associations, ignoring Zilortha for Commander Masters).</p>
+                <p><strong>5. Flavor Text Source Connection:</strong> Cards can connect if their flavor text attribution (after the – dash) is identical.</p>
+                <p><strong>6. Set Multipliers (Non-additive):</strong> Exact set match gives x2 damage multiplier. Partial/supplementary preview match (such as preview in a Duel Deck) gives 1.5x damage multiplier. Set matches do not contribute to the connection count (+1).</p>
                 <p><strong>7. 45-Second Timer:</strong> You have 45 seconds per turn.</p>
             </div>
             <div class="mt-6 pt-3 border-t border-blue-900/60 flex justify-end">
@@ -353,92 +353,77 @@
         const setMetadataCache = new Map();
         let startingCardObj = null;
 
-        // Explicit preview card mapping overrides based on the MTG Wiki preview list provided
-        // Maps card name (lowercase) to associated set code
+        // Explicit preview card mapping overrides based on MTG Wiki preview list provided
+        // Maps card name (lowercase) to associated set code and whether it was previewed in a supplementary set (like Duel Decks)
         const wikiPreviewSetMap = {
-            // Visions previewed in Multiverse Gift Box
-            'bull elephant': 'vis',
-            'dark privilege': 'vis',
-            'king cheetah': 'vis',
-            'necrosavant': 'vis',
-            'ovinomancer': 'vis',
-            'peace talks': 'vis',
-            'urborg mindsucker': 'vis',
-            'vampirism': 'vis',
-            'viashino sandstalker': 'vis',
-            'wicked reward': 'vis',
+            'bull elephant': { setCode: 'vis', isSupplementaryPreview: true },
+            'dark privilege': { setCode: 'vis', isSupplementaryPreview: true },
+            'king cheetah': { setCode: 'vis', isSupplementaryPreview: true },
+            'necrosavant': { setCode: 'vis', isSupplementaryPreview: true },
+            'ovinomancer': { setCode: 'vis', isSupplementaryPreview: true },
+            'peace talks': { setCode: 'vis', isSupplementaryPreview: true },
+            'urborg mindsucker': { setCode: 'vis', isSupplementaryPreview: true },
+            'vampirism': { setCode: 'vis', isSupplementaryPreview: true },
+            'viashino sandstalker': { setCode: 'vis', isSupplementaryPreview: true },
+            'wicked reward': { setCode: 'vis', isSupplementaryPreview: true },
 
-            // Lorwyn basic lands previewed in Tenth Edition
-            // Shards of Alara
-            'hellkite overlord': 'ala',
+            'hellkite overlord': { setCode: 'ala', isSupplementaryPreview: true },
 
-            // Zendikar previewed in Planechase
-            'beast hunt': 'zen',
-            'hideous end': 'zen',
-            'kor sanctifiers': 'zen',
-            'whiplash trap': 'zen',
+            'beast hunt': { setCode: 'zen', isSupplementaryPreview: true },
+            'hideous end': { setCode: 'zen', isSupplementaryPreview: true },
+            'kor sanctifiers': { setCode: 'zen', isSupplementaryPreview: true },
+            'whiplash trap': { setCode: 'zen', isSupplementaryPreview: true },
 
-            // Scars of Mirrodin
-            'contagion clasp': 'som',
-            'kemba\'s skyguard': 'som',
-            'sword of body and mind': 'som',
+            'contagion clasp': { setCode: 'som', isSupplementaryPreview: true },
+            'kemba\'s skyguard': { setCode: 'som', isSupplementaryPreview: true },
+            'sword of body and mind': { setCode: 'som', isSupplementaryPreview: true },
 
-            // Innistrad
-            'mikaeus, the lunarch': 'isd',
+            'mikaeus, the lunarch': { setCode: 'isd', isSupplementaryPreview: true },
 
-            // Return to Ravnica previewed in Duel Decks: Izzet vs. Golgari
-            'dreg mangler': 'rtr',
-            'goblin electromancer': 'rtr',
-            'izzet charm': 'rtr',
-            'jarad, golgari lich lord': 'rtr',
-            'korozda guildmage': 'rtr',
-            'street spasm': 'rtr',
+            'dreg mangler': { setCode: 'rtr', isSupplementaryPreview: true },
+            'goblin electromancer': { setCode: 'rtr', isSupplementaryPreview: true },
+            'izzet charm': { setCode: 'rtr', isSupplementaryPreview: true },
+            'jarad, golgari lich lord': { setCode: 'rtr', isSupplementaryPreview: true },
+            'korozda guildmage': { setCode: 'rtr', isSupplementaryPreview: true },
+            'street spasm': { setCode: 'rtr', isSupplementaryPreview: true },
 
-            // Theros previewed in Duel Decks: Heroes vs. Monsters
-            'anax and cymede': 'ths',
-            'cavalry pegasus': 'ths',
-            'destructive revelry': 'ths',
-            'ordeal of purphoros': 'ths',
-            'polukranos, world eater': 'ths',
-            'satyr hedonist': 'ths',
+            'anax and cymede': { setCode: 'ths', isSupplementaryPreview: true },
+            'cavalry pegasus': { setCode: 'ths', isSupplementaryPreview: true },
+            'destructive revelry': { setCode: 'ths', isSupplementaryPreview: true },
+            'ordeal of purphoros': { setCode: 'ths', isSupplementaryPreview: true },
+            'polukranos, world eater': { setCode: 'ths', isSupplementaryPreview: true },
+            'satyr hedonist': { setCode: 'ths', isSupplementaryPreview: true },
 
-            // Conspiracy
-            'magister of worth': 'cns',
+            'magister of worth': { setCode: 'cns', isSupplementaryPreview: true },
 
-            // Khans of Tarkir previewed in Duel Decks: Speed vs. Cunning
-            'jeskai elder': 'ktk',
-            'mardu heart-piercer': 'ktk',
-            'mystic monastery': 'ktk',
-            'nomad outpost': 'ktk',
-            'thousand winds': 'ktk',
-            'zurgo helmsmasher': 'ktk',
+            'jeskai elder': { setCode: 'ktk', isSupplementaryPreview: true },
+            'mardu heart-piercer': { setCode: 'ktk', isSupplementaryPreview: true },
+            'mystic monastery': { setCode: 'ktk', isSupplementaryPreview: true },
+            'nomad outpost': { setCode: 'ktk', isSupplementaryPreview: true },
+            'thousand winds': { setCode: 'ktk', isSupplementaryPreview: true },
+            'zurgo helmsmasher': { setCode: 'ktk', isSupplementaryPreview: true },
 
-            // Battle for Zendikar previewed in Duel Decks: Zendikar vs. Eldrazi
-            'sheer drop': 'bfz',
-            'retreat to kazandu': 'bfz',
-            'veteran warleader': 'bfz',
-            'oblivion sower': 'bfz',
-            'dominator drone': 'bfz',
-            'forerunner of slaughter': 'bfz',
+            'sheer drop': { setCode: 'bfz', isSupplementaryPreview: true },
+            'retreat to kazandu': { setCode: 'bfz', isSupplementaryPreview: true },
+            'veteran warleader': { setCode: 'bfz', isSupplementaryPreview: true },
+            'oblivion sower': { setCode: 'bfz', isSupplementaryPreview: true },
+            'dominator drone': { setCode: 'bfz', isSupplementaryPreview: true },
+            'forerunner of slaughter': { setCode: 'bfz', isSupplementaryPreview: true },
 
-            // Shadows over Innistrad previewed in Duel Decks: Blessed vs. Cursed
-            'topplegeist': 'soi',
-            'eerie interlude': 'soi',
-            'pore over the pages': 'soi',
-            'tooth collector': 'soi',
-            'mindwrack demon': 'soi',
-            'compelling deterrence': 'soi',
+            'topplegeist': { setCode: 'soi', isSupplementaryPreview: true },
+            'eerie interlude': { setCode: 'soi', isSupplementaryPreview: true },
+            'pore over the pages': { setCode: 'soi', isSupplementaryPreview: true },
+            'tooth collector': { setCode: 'soi', isSupplementaryPreview: true },
+            'mindwrack demon': { setCode: 'soi', isSupplementaryPreview: true },
+            'compelling deterrence': { setCode: 'soi', isSupplementaryPreview: true },
 
-            // Commander Masters (Zilortha correction: Ikoria card)
-            'zilortha, strength incarnate': 'iko',
+            'zilortha, strength incarnate': { setCode: 'iko', isSupplementaryPreview: false },
 
-            // Modern Horizons 2 previewed in Mystical Archive (sta) -> or mh2
-            'abundant harvest': 'mh2',
+            'abundant harvest': { setCode: 'mh2', isSupplementaryPreview: true },
 
-            // Avatar / Marvel etc.
-            'katara, the fearless': 'avatar',
-            'beta ray bill': 'mrd',
-            'doctor strange, master of magic': 'mrd'
+            'katara, the fearless': { setCode: 'avatar', isSupplementaryPreview: true },
+            'beta ray bill': { setCode: 'mrd', isSupplementaryPreview: true },
+            'doctor strange, master of magic': { setCode: 'mrd', isSupplementaryPreview: true }
         };
 
         const basicLandNames = new Set([
@@ -544,7 +529,7 @@
                         printings = printings.filter(p => p.set_type !== 'promo' && !p.promo);
                         if (printings.length === 0) printings = [cardData];
                         printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
-                        return await parseCardObject(printings[0], printings, "System (Starter)");
+                        return await parseCardObject(printings[0], printsData.data || printings, "System (Starter)");
                     }
                 }
             } catch (e) {
@@ -577,7 +562,7 @@
                         printings = printings.filter(p => p.set_type !== 'promo' && !p.promo);
                         if (printings.length === 0) printings = printsData.data || [cardData];
                         printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
-                        return await parseCardObject(printings[0], printings, "System (Starter)");
+                        return await parseCardObject(printings[0], printsData.data || printings, "System (Starter)");
                     }
                 }
             } catch (e) {
@@ -645,7 +630,7 @@
             history.push(startingCardObj);
             usedCardNames.add(startingCardObj.name.toLowerCase());
 
-            renderChainNode(startingCardObj, [], 0, false, false);
+            renderChainNode(startingCardObj, [], 0, false, false, 1.0);
             updateUI();
             cardInput.focus();
         }
@@ -705,20 +690,13 @@
                         printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
                         const firstPrint = printings[0];
 
-                        const candidateObj = await parseCardObject(firstPrint, printings, "Preview");
+                        const candidateObj = await parseCardObject(firstPrint, printsData.data || printings, "Preview");
                         currentPreviewCardObj = candidateObj;
                         submitBtnText.textContent = "Lock In";
 
                         const prevCard = history[history.length - 1];
                         const connections = evaluateConnections(prevCard, candidateObj);
-                        let dmg = connections.totalCount;
-                        if (connections.hasSharedExpansion) {
-                            if (connections.isExactSetMatch) {
-                                dmg *= 2;
-                            } else {
-                                dmg = Math.floor(dmg * 1.5);
-                            }
-                        }
+                        let dmg = Math.floor(connections.totalCount * connections.multiplier);
 
                         const isSpellingFixed = query.toLowerCase() !== candidateObj.name.toLowerCase();
                         showLivePreview(candidateObj.name, dmg, connections, isSpellingFixed);
@@ -758,10 +736,10 @@
                 row.innerHTML = `<span class="text-blue-200/80">${det.category}:</span> <span class="text-blue-400 font-mono">${det.match}</span>`;
                 previewDetails.appendChild(row);
             });
-            if (connections.hasSharedExpansion) {
+            if (connections.multiplier > 1.0) {
                 const bonusRow = document.createElement('div');
                 bonusRow.className = 'text-blue-300 font-bold text-right pt-0.5';
-                bonusRow.textContent = connections.isExactSetMatch ? '★ Exact Set Match: x2 Damage!' : '★ Set Group/Block/Associated Match: 1.5x Damage (Rounded Down)!';
+                bonusRow.textContent = connections.multiplier === 2.0 ? '★ Exact Set Match: x2 Multiplier' : '★ Supplementary/Preview Match: 1.5x Multiplier';
                 previewDetails.appendChild(bonusRow);
             }
 
@@ -832,19 +810,31 @@
             const legalities = canonicalCard.legalities || firstPrinting.legalities || {};
             const flavorText = firstPrinting.flavor_text || canonicalCard.flavor_text || '';
 
-            // Determine effective set code using wiki preview map override if applicable
-            let setCode = firstPrinting.set ? firstPrinting.set.toLowerCase() : '';
             const lowerName = actualCardName.toLowerCase();
+            let setCode = firstPrinting.set ? firstPrinting.set.toLowerCase() : '';
+            let isSupplementaryPreview = false;
+
             if (wikiPreviewSetMap[lowerName]) {
-                setCode = wikiPreviewSetMap[lowerName];
+                setCode = wikiPreviewSetMap[lowerName].setCode;
+                isSupplementaryPreview = wikiPreviewSetMap[lowerName].isSupplementaryPreview;
+            } else {
+                // Check if any printing in cardPrintings was released in a supplementary set (like duel decks, promo, box topper, etc.) prior to or as a preview
+                for (const p of cardPrintings) {
+                    if (p.set_type === 'duel_deck' || p.set_type === 'box_topper' || p.set_type === 'masterpiece' || p.promo) {
+                        // If the first printing is normal set, but there is a supplementary printing, check release dates
+                        if (p.released_at && firstPrinting.released_at && p.released_at < firstPrinting.released_at) {
+                            setCode = p.set;
+                            isSupplementaryPreview = true;
+                            break;
+                        }
+                    }
+                }
             }
 
             let setName = firstPrinting.set_name || firstPrinting.set || '';
-            if (wikiPreviewSetMap[lowerName]) {
-                const overrideMeta = setMetadataCache.get(setCode);
-                if (overrideMeta && overrideMeta.name) {
-                    setName = overrideMeta.name;
-                }
+            const overrideMeta = setMetadataCache.get(setCode);
+            if (overrideMeta && overrideMeta.name) {
+                setName = overrideMeta.name;
             }
 
             let fullTypes = "";
@@ -872,6 +862,7 @@
                 manaCost: manaCost,
                 setName: setName,
                 firstSetCode: setCode,
+                isSupplementaryPreview: isSupplementaryPreview,
                 artist: artist,
                 legalities: legalities,
                 flavorText: flavorText,
@@ -1040,15 +1031,7 @@
 
             stopTimer();
 
-            let baseDamage = connections.totalCount;
-            let damageDealt = baseDamage;
-            if (connections.hasSharedExpansion) {
-                if (connections.isExactSetMatch) {
-                    damageDealt *= 2;
-                } else {
-                    damageDealt = Math.floor(damageDealt * 1.5);
-                }
-            }
+            let damageDealt = Math.floor(connections.totalCount * connections.multiplier);
 
             if (currentTurn === 1) {
                 p2Life = Math.max(0, p2Life - damageDealt);
@@ -1061,7 +1044,7 @@
             history.push(cardObj);
             usedCardNames.add(lowerName);
 
-            renderChainNode(cardObj, connections.details, damageDealt, connections.hasSharedExpansion, connections.isExactSetMatch);
+            renderChainNode(cardObj, connections.details, damageDealt, connections.hasSharedExpansion, connections.isExactSetMatch, connections.multiplier);
 
             if (chainLengthEl) chainLengthEl.textContent = history.length;
             if (cardInputEl) {
@@ -1085,23 +1068,14 @@
 
         function extractFlavorSource(flavorText) {
             if (!flavorText) return null;
-            // Flavor text sources often appear in quotes or attribution lines at the end (e.g. —The Theriad, —Urza's Journal)
-            // Or explicit mentions of known sources like "The Theriad", "Urza", etc.
-            const lower = flavorText.toLowerCase();
-            if (lower.includes('theriad') || flavorText.includes('—The Theriad') || flavorText.includes('— “The Theriad')) return 'The Theriad';
-            if (lower.includes('urza') || lower.includes('gix') || lower.includes('tolaria')) {
-                // Check if it references Urza lore source
-                if (lower.includes('urza\'s') || lower.includes('urza notes') || lower.includes('urza')) return 'Urza Block Lore';
-            }
-            
-            // Check attribution after em-dash
-            const emDashIdx = flavorText.indexOf('—');
+            // Simply check the end of the flavor text after the em-dash (—) or hyphen (-)
+            const emDashIdx = flavorText.lastIndexOf('—');
             if (emDashIdx !== -1) {
                 return flavorText.substring(emDashIdx + 1).trim();
             }
-            const dashIdx = flavorText.indexOf('-');
-            if (dashIdx !== -1 && dashIdx > flavorText.length / 2) {
-                return flavorText.substring(dashIdx + 1).trim();
+            const dashIdx = flavorText.lastIndexOf(' - ');
+            if (dashIdx !== -1) {
+                return flavorText.substring(dashIdx + 3).trim();
             }
             return null;
         }
@@ -1110,6 +1084,7 @@
             let details = [];
             let hasSharedExpansion = false;
             let isExactSetMatch = false;
+            let multiplier = 1.0;
 
             if (cardA.fullTypes && cardB.fullTypes && cardA.fullTypes === cardB.fullTypes) {
                 details.push({ category: "Card Type / Supertype", match: cardA.fullTypes.charAt(0).toUpperCase() + cardA.fullTypes.slice(1) });
@@ -1141,7 +1116,7 @@
                 details.push({ category: "Artist", match: cardA.artist });
             }
 
-            // Flavor text source connection check
+            // Flavor text source connection check (checks if text after – or — is identical)
             const sourceA = extractFlavorSource(cardA.flavorText);
             const sourceB = extractFlavorSource(cardB.flavorText);
             if (sourceA && sourceB && sourceA.toLowerCase() === sourceB.toLowerCase()) {
@@ -1151,61 +1126,27 @@
             const codeA = cardA.firstSetCode;
             const codeB = cardB.firstSetCode;
 
-            const metaA = setMetadataCache.get(codeA);
-            const metaB = setMetadataCache.get(codeB);
-
-            let sharedSetLabel = null;
-            if (codeA === codeB) {
+            if (codeA && codeA === codeB) {
                 hasSharedExpansion = true;
-                isExactSetMatch = true;
-                sharedSetLabel = cardA.setName;
-            } else if (metaA && metaB) {
-                const isSpecialIsolated = (type) => ['core', 'conspiracy', 'planechase', 'archenemy', 'vanguard'].includes(type);
-                const isolatedA = isSpecialIsolated(metaA.setType);
-                const isolatedB = isSpecialIsolated(metaB.setType);
-
-                if (!(isolatedA || isolatedB)) {
-                    const effectiveA = metaA.parent_set_code || metaA.code;
-                    const effectiveB = metaB.parent_set_code || metaB.code;
-
-                    if (effectiveA === effectiveB) {
-                        hasSharedExpansion = true;
-                        if (metaA.parent_set_code || metaB.parent_set_code || metaA.setType === 'commander' || metaB.setType === 'commander') {
-                            isExactSetMatch = false;
-                            sharedSetLabel = `Associated Set Pairing (${cardA.setName} & ${cardB.setName})`;
-                        } else {
-                            isExactSetMatch = true;
-                            sharedSetLabel = cardA.setName;
-                        }
-                    } else if (metaA.block && metaA.block === metaB.block) {
-                        hasSharedExpansion = true;
-                        isExactSetMatch = false;
-                        sharedSetLabel = `${metaA.block.charAt(0).toUpperCase() + metaA.block.slice(1)} Block`;
-                    } else if (metaA.parent_set_code && metaA.parent_set_code === metaB.code) {
-                        hasSharedExpansion = true;
-                        isExactSetMatch = false;
-                        sharedSetLabel = `Associated Set Pairing`;
-                    } else if (metaB.parent_set_code && metaB.parent_set_code === metaA.code) {
-                        hasSharedExpansion = true;
-                        isExactSetMatch = false;
-                        sharedSetLabel = `Associated Set Pairing`;
-                    }
+                if (cardB.isSupplementaryPreview) {
+                    isExactSetMatch = false;
+                    multiplier = 1.5;
+                } else {
+                    isExactSetMatch = true;
+                    multiplier = 2.0;
                 }
-            }
-
-            if (hasSharedExpansion) {
-                details.push({ category: "Expansion / Set (First Printing)", match: sharedSetLabel || cardA.setName });
             }
 
             return {
                 totalCount: details.length,
                 details: details,
                 hasSharedExpansion: hasSharedExpansion,
-                isExactSetMatch: isExactSetMatch
+                isExactSetMatch: isExactSetMatch,
+                multiplier: multiplier
             };
         }
 
-        function renderChainNode(card, connectionDetails, damageDealt, hasSharedExpansion, isExactSetMatch) {
+        function renderChainNode(card, connectionDetails, damageDealt, hasSharedExpansion, isExactSetMatch, multiplier) {
             const wrapper = document.createElement('div');
             wrapper.className = 'w-full flex flex-col items-center animate-fade-in';
 
@@ -1279,9 +1220,9 @@
                 const connectorBox = document.createElement('div');
                 connectorBox.className = 'w-full max-w-sm bg-slate-950 border border-blue-500/40 rounded-xl p-3 shadow-lg flex flex-col items-center text-center';
 
-                let bonusText = isExactSetMatch ? 'Exact Set Match: x2 Damage!' : 'Set Group/Block/Associated Match: 1.5x Damage!';
+                let bonusText = isExactSetMatch ? 'Exact Set Match: x2 Multiplier' : (multiplier === 1.5 ? 'Supplementary/Preview Match: 1.5x Multiplier' : '');
                 let headerHtml = `<i class="fa-solid fa-fire text-blue-400 mr-1"></i> ${connectionDetails.length} Connections • Dealt <span class="text-blue-300 font-bold ml-1">${damageDealt} Damage</span>`;
-                if (hasSharedExpansion) {
+                if (multiplier > 1.0) {
                     headerHtml += ` <span class="text-blue-400 font-bold ml-1.5 block sm:inline">(${bonusText})</span>`;
                 }
 
