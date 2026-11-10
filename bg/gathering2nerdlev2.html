@@ -317,7 +317,7 @@
                 <p><strong>4. Strict Connection Criteria:</strong> Must share at least 2 connections. Subtypes and Supertypes/Types require <strong>exact matches</strong>.</p>
                 <p><strong>5. Mana Value Connection:</strong> Having the same mana value (e.g., 1GG and 2W both have 3 MV) counts as 1 connection.</p>
                 <p><strong>6. Flavor Text Source Connection:</strong> Cards can connect if their flavor text attribution (after the – dash) is identical.</p>
-                <p><strong>7. Set Multipliers (Non-additive):</strong> Exact set match gives x2 multiplier. Same set group match gives x1.5 multiplier. Core sets connect to other core sets (except specified exceptions), Commander sets connect to associated expansion/products (except Commander Avatar which does not connect to every commander set), and Archenemy/Planechase sets do not group with each other. Set connections do not contribute (+1) to the connection count.</p>
+                <p><strong>7. Set Multipliers (Non-additive):</strong> Exact set match gives x2 multiplier. Same set group match gives x1.5 multiplier (all core sets link to each other, all archenemy sets link to each other, all planechase sets link to each other, and blocks/associated products group together via metadata). Set connections do not contribute (+1) to the connection count.</p>
                 <p><strong>8. 45-Second Timer:</strong> You have 45 seconds per turn.</p>
             </div>
             <div class="mt-6 pt-3 border-t border-blue-900/60 flex justify-end">
@@ -1040,27 +1040,13 @@
             const typeA = metaA.setType;
             const typeB = metaB.setType;
 
-            // Archenemy and Planechase sets should not be a part of the same set either (do not group with each other or others)
-            if (typeA === 'archenemy' || typeB === 'archenemy' || typeA === 'planechase' || typeB === 'planechase') {
-                return { isExact: false, isSameGroup: false };
+            // Archenemy sets link to each other
+            if (typeA === 'archenemy' && typeB === 'archenemy') {
+                return { isExact: false, isSameGroup: true };
             }
 
-            // Exception: Commander Avatar (e.g. avatar or equivalent) should not be associated with every other commander set
-            if (codeA === 'avatar' || codeB === 'avatar') {
-                if (metaA.parent_set_code === codeB || metaB.parent_set_code === codeA) {
-                    return { isExact: false, isSameGroup: true };
-                }
-                return { isExact: false, isSameGroup: false };
-            }
-
-            // Core sets: By default every core set is connected to every other core set, with classic vs modern exception.
-            if (typeA === 'core' && typeB === 'core') {
-                const classicCore = ['1ed', '2ed', '3ed', '4ed', '5ed', 'sum'];
-                const isClassicA = classicCore.includes(codeA);
-                const isClassicB = classicCore.includes(codeB);
-                if (isClassicA !== isClassicB) {
-                    return { isExact: false, isSameGroup: false };
-                }
+            // Planechase sets link to each other
+            if (typeA === 'planechase' && typeB === 'planechase') {
                 return { isExact: false, isSameGroup: true };
             }
 
@@ -1072,7 +1058,7 @@
                 return { isExact: false, isSameGroup: true };
             }
 
-            // Commander deck with an associated set (parent_set_code)
+            // Parent set code / associated products (covers Commander decks, Avatar, Core sets, etc.)
             if (metaA.parent_set_code === codeB || metaB.parent_set_code === codeA) {
                 return { isExact: false, isSameGroup: true };
             }
