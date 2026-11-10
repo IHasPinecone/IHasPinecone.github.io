@@ -313,7 +313,7 @@
                 </p>
                 <p><strong>1. Starter Card:</strong> Random surprise starter or custom typed starting card.</p>
                 <p><strong>2. 40 Starting Life:</strong> Each player starts with 40 life points.</p>
-                <p><strong>3. Vintage Legal Cardpool (No Promos):</strong> Cards played must be legal in Vintage. Promo printings are excluded.</p>
+                <p><strong>3. Vintage Legal Cardpool (FNM Promos Excluded):</strong> Cards played must be legal in Vintage. Promo printings are allowed except for Friday Night Magic (FNM) promos.</p>
                 <p><strong>4. Strict Connection Criteria:</strong> Must share at least 2 connections. Subtypes and Supertypes/Types require <strong>exact matches</strong>.</p>
                 <p><strong>5. Mana Value Connection:</strong> Having the same mana value (e.g., 1GG and 2W both have 3 MV) counts as 1 connection.</p>
                 <p><strong>6. Flavor Text Source Connection:</strong> Cards can connect if their flavor text attribution (after the – dash) is identical.</p>
@@ -469,15 +469,15 @@
             setFetching(true);
             try {
                 const randomPage = Math.floor(Math.random() * 25) + 1;
-                const res = await fetch(`https://api.scryfall.com/cards/search?q=-type:basic+-type:land+is:first+f:vintage+-is:promo&page=${randomPage}`);
+                const res = await fetch(`https://api.scryfall.com/cards/search?q=-type:basic+-type:land+is:first+f:vintage+-set:fnm&page=${randomPage}`);
                 if (res.ok) {
                     const data = await res.json();
                     if (data && data.data && data.data.length > 0) {
                         const cardData = data.data[Math.floor(Math.random() * data.data.length)];
-                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '" -is:promo')}`);
+                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '" -set:fnm')}`);
                         const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
                         let printings = printsData.data || [cardData];
-                        printings = printings.filter(p => p.set_type !== 'promo' && !p.promo);
+                        printings = printings.filter(p => p.set !== 'fnm');
                         if (printings.length === 0) printings = [cardData];
                         printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
                         setFetching(false);
@@ -512,10 +512,10 @@
                             setFetching(false);
                             return await fetchRandomVintageStarter();
                         }
-                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '" -is:promo')}`);
+                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '" -set:fnm')}`);
                         const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
                         let printings = printsData.data || [cardData];
-                        printings = printings.filter(p => p.set_type !== 'promo' && !p.promo);
+                        printings = printings.filter(p => p.set !== 'fnm');
                         if (printings.length === 0) printings = printsData.data || [cardData];
                         printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
                         setFetching(false);
@@ -642,10 +642,10 @@
                             return;
                         }
 
-                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '" -is:promo')}`);
+                        const printsRes = await fetch(`https://api.scryfall.com/cards/search?unique=prints&q=${encodeURIComponent('name:"' + cardData.name + '" -set:fnm')}`);
                         const printsData = printsRes.ok ? await printsRes.json() : { data: [cardData] };
                         let printings = printsData.data || [cardData];
-                        printings = printings.filter(p => p.set_type !== 'promo' && !p.promo);
+                        printings = printings.filter(p => p.set !== 'fnm');
                         if (printings.length === 0) printings = [cardData];
                         printings.sort((a, b) => (a.released_at || '').localeCompare(b.released_at || ''));
                         const firstPrint = printings[0];
