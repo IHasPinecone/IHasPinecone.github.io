@@ -315,9 +315,10 @@
                 <p><strong>2. 40 Starting Life:</strong> Each player starts with 40 life points.</p>
                 <p><strong>3. Vintage Legal Cardpool (No Promos):</strong> Cards played must be legal in Vintage. Promo printings are excluded.</p>
                 <p><strong>4. Strict Connection Criteria:</strong> Must share at least 2 connections. Subtypes and Supertypes/Types require <strong>exact matches</strong>.</p>
-                <p><strong>5. Flavor Text Source Connection:</strong> Cards can connect if their flavor text attribution (after the – dash) is identical.</p>
-                <p><strong>6. Set Multipliers (Non-additive):</strong> Exact set match gives x2 damage multiplier. Partial/supplementary preview match (such as preview in a Duel Deck) gives 1.5x damage multiplier. Set matches do not contribute to the connection count (+1).</p>
-                <p><strong>7. 45-Second Timer:</strong> You have 45 seconds per turn.</p>
+                <p><strong>5. Mana Value Connection:</strong> Having the same mana value (e.g., 1GG and 2W both have 3 MV) counts as 1 connection.</p>
+                <p><strong>6. Flavor Text Source Connection:</strong> Cards can connect if their flavor text attribution (after the – dash) is identical.</p>
+                <p><strong>7. Set Multipliers (Non-additive):</strong> Exact set match gives x2 multiplier. Same set group match gives x1.5 multiplier. Core sets connect to other core sets (except specified exceptions), Commander sets connect to associated expansion/products (except Commander Avatar which does not connect to every commander set), and Archenemy/Planechase sets do not group with each other. Set connections do not contribute (+1) to the connection count.</p>
+                <p><strong>8. 45-Second Timer:</strong> You have 45 seconds per turn.</p>
             </div>
             <div class="mt-6 pt-3 border-t border-blue-900/60 flex justify-end">
                 <button onclick="closeRulesModal()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition shadow-md">
@@ -361,78 +362,6 @@
         // Scryfall set metadata map
         const setMetadataCache = new Map();
         let startingCardObj = null;
-
-        // Explicit preview card mapping overrides based on MTG Wiki preview list provided
-        const wikiPreviewSetMap = {
-            'bull elephant': { setCode: 'vis', isSupplementaryPreview: true },
-            'dark privilege': { setCode: 'vis', isSupplementaryPreview: true },
-            'king cheetah': { setCode: 'vis', isSupplementaryPreview: true },
-            'necrosavant': { setCode: 'vis', isSupplementaryPreview: true },
-            'ovinomancer': { setCode: 'vis', isSupplementaryPreview: true },
-            'peace talks': { setCode: 'vis', isSupplementaryPreview: true },
-            'urborg mindsucker': { setCode: 'vis', isSupplementaryPreview: true },
-            'vampirism': { setCode: 'vis', isSupplementaryPreview: true },
-            'viashino sandstalker': { setCode: 'vis', isSupplementaryPreview: true },
-            'wicked reward': { setCode: 'vis', isSupplementaryPreview: true },
-
-            'hellkite overlord': { setCode: 'ala', isSupplementaryPreview: true },
-
-            'beast hunt': { setCode: 'zen', isSupplementaryPreview: true },
-            'hideous end': { setCode: 'zen', isSupplementaryPreview: true },
-            'kor sanctifiers': { setCode: 'zen', isSupplementaryPreview: true },
-            'whiplash trap': { setCode: 'zen', isSupplementaryPreview: true },
-
-            'contagion clasp': { setCode: 'som', isSupplementaryPreview: true },
-            'kemba\'s skyguard': { setCode: 'som', isSupplementaryPreview: true },
-            'sword of body and mind': { setCode: 'som', isSupplementaryPreview: true },
-
-            'mikaeus, the lunarch': { setCode: 'isd', isSupplementaryPreview: true },
-
-            'dreg mangler': { setCode: 'rtr', isSupplementaryPreview: true },
-            'goblin electromancer': { setCode: 'rtr', isSupplementaryPreview: true },
-            'izzet charm': { setCode: 'rtr', isSupplementaryPreview: true },
-            'jarad, golgari lich lord': { setCode: 'rtr', isSupplementaryPreview: true },
-            'korozda guildmage': { setCode: 'rtr', isSupplementaryPreview: true },
-            'street spasm': { setCode: 'rtr', isSupplementaryPreview: true },
-
-            'anax and cymede': { setCode: 'ths', isSupplementaryPreview: true },
-            'cavalry pegasus': { setCode: 'ths', isSupplementaryPreview: true },
-            'destructive revelry': { setCode: 'ths', isSupplementaryPreview: true },
-            'ordeal of purphoros': { setCode: 'ths', isSupplementaryPreview: true },
-            'polukranos, world eater': { setCode: 'ths', isSupplementaryPreview: true },
-            'satyr hedonist': { setCode: 'ths', isSupplementaryPreview: true },
-
-            'magister of worth': { setCode: 'cns', isSupplementaryPreview: true },
-
-            'jeskai elder': { setCode: 'ktk', isSupplementaryPreview: true },
-            'mardu heart-piercer': { setCode: 'ktk', isSupplementaryPreview: true },
-            'mystic monastery': { setCode: 'ktk', isSupplementaryPreview: true },
-            'nomad outpost': { setCode: 'ktk', isSupplementaryPreview: true },
-            'thousand winds': { setCode: 'ktk', isSupplementaryPreview: true },
-            'zurgo helmsmasher': { setCode: 'ktk', isSupplementaryPreview: true },
-
-            'sheer drop': { setCode: 'bfz', isSupplementaryPreview: true },
-            'retreat to kazandu': { setCode: 'bfz', isSupplementaryPreview: true },
-            'veteran warleader': { setCode: 'bfz', isSupplementaryPreview: true },
-            'oblivion sower': { setCode: 'bfz', isSupplementaryPreview: true },
-            'dominator drone': { setCode: 'bfz', isSupplementaryPreview: true },
-            'forerunner of slaughter': { setCode: 'bfz', isSupplementaryPreview: true },
-
-            'topplegeist': { setCode: 'soi', isSupplementaryPreview: true },
-            'eerie interlude': { setCode: 'soi', isSupplementaryPreview: true },
-            'pore over the pages': { setCode: 'soi', isSupplementaryPreview: true },
-            'tooth collector': { setCode: 'soi', isSupplementaryPreview: true },
-            'mindwrack demon': { setCode: 'soi', isSupplementaryPreview: true },
-            'compelling deterrence': { setCode: 'soi', isSupplementaryPreview: true },
-
-            'zilortha, strength incarnate': { setCode: 'iko', isSupplementaryPreview: false },
-
-            'abundant harvest': { setCode: 'mh2', isSupplementaryPreview: true },
-
-            'katara, the fearless': { setCode: 'avatar', isSupplementaryPreview: true },
-            'beta ray bill': { setCode: 'mrd', isSupplementaryPreview: true },
-            'doctor strange, master of magic': { setCode: 'mrd', isSupplementaryPreview: true }
-        };
 
         const basicLandNames = new Set([
             'plains', 'island', 'swamp', 'mountain', 'forest', 'wastes',
@@ -514,7 +443,8 @@
                                 setType: setType,
                                 block: setObj.block ? setObj.block.toLowerCase() : null,
                                 block_code: setObj.block_code ? setObj.block_code.toLowerCase() : null,
-                                parent_set_code: effectiveParent
+                                parent_set_code: effectiveParent,
+                                released_at: setObj.released_at || ''
                             });
                         });
                     }
@@ -770,7 +700,7 @@
             if (connections.multiplier > 1.0) {
                 const bonusRow = document.createElement('div');
                 bonusRow.className = 'text-blue-300 font-bold text-right pt-0.5';
-                bonusRow.textContent = connections.multiplier === 2.0 ? '★ Exact Set Match: x2 Multiplier' : '★ Supplementary/Preview Match: 1.5x Multiplier';
+                bonusRow.textContent = connections.multiplier === 2.0 ? '★ Exact Set Match: x2 Multiplier' : '★ Same Set Group: x1.5 Multiplier';
                 previewDetails.appendChild(bonusRow);
             }
 
@@ -837,28 +767,13 @@
             const power = firstPrinting.power !== undefined ? String(firstPrinting.power) : null;
             const toughness = firstPrinting.toughness !== undefined ? String(firstPrinting.toughness) : null;
             const manaCost = firstPrinting.mana_cost || '';
+            const cmc = firstPrinting.cmc !== undefined ? firstPrinting.cmc : 0;
             const artist = firstPrinting.artist || '';
             const legalities = canonicalCard.legalities || firstPrinting.legalities || {};
             const flavorText = firstPrinting.flavor_text || canonicalCard.flavor_text || '';
 
             const lowerName = actualCardName.toLowerCase();
             let setCode = firstPrinting.set ? firstPrinting.set.toLowerCase() : '';
-            let isSupplementaryPreview = false;
-
-            if (wikiPreviewSetMap[lowerName]) {
-                setCode = wikiPreviewSetMap[lowerName].setCode;
-                isSupplementaryPreview = wikiPreviewSetMap[lowerName].isSupplementaryPreview;
-            } else {
-                for (const p of cardPrintings) {
-                    if (p.set_type === 'duel_deck' || p.set_type === 'box_topper' || p.set_type === 'masterpiece' || p.promo) {
-                        if (p.released_at && firstPrinting.released_at && p.released_at < firstPrinting.released_at) {
-                            setCode = p.set;
-                            isSupplementaryPreview = true;
-                            break;
-                        }
-                    }
-                }
-            }
 
             let setName = firstPrinting.set_name || firstPrinting.set || '';
             const overrideMeta = setMetadataCache.get(setCode);
@@ -889,9 +804,9 @@
                 power: power,
                 toughness: toughness,
                 manaCost: manaCost,
+                cmc: cmc,
                 setName: setName,
                 firstSetCode: setCode,
-                isSupplementaryPreview: isSupplementaryPreview,
                 artist: artist,
                 legalities: legalities,
                 flavorText: flavorText,
@@ -1074,7 +989,7 @@
             usedCardNames.add(lowerName);
 
             // Prepend new card to the top of the chain feed with connection bubble and scroll to new card top
-            renderChainNode(cardObj, connections.details, damageDealt, connections.hasSharedExpansion, connections.isExactSetMatch, connections.multiplier);
+            renderChainNode(cardObj, connections.details, damageDealt, connections.isExactSetMatch, connections.isSameGroupMatch, connections.multiplier);
 
             if (chainLengthEl) chainLengthEl.textContent = history.length;
             if (cardInputEl) {
@@ -1109,10 +1024,69 @@
             return null;
         }
 
+        function evaluateSetRelationship(setCodeA, setCode5) {
+            if (!setCodeA || !setCode5) return { isExact: false, isSameGroup: false };
+            const codeA = setCodeA.toLowerCase();
+            const codeB = setCode5.toLowerCase();
+
+            if (codeA === codeB) {
+                return { isExact: true, isSameGroup: true };
+            }
+
+            const metaA = setMetadataCache.get(codeA);
+            const metaB = setMetadataCache.get(codeB);
+            if (!metaA || !metaB) return { isExact: false, isSameGroup: false };
+
+            const typeA = metaA.setType;
+            const typeB = metaB.setType;
+
+            // Archenemy and Planechase sets should not be a part of the same set either (do not group with each other or others)
+            if (typeA === 'archenemy' || typeB === 'archenemy' || typeA === 'planechase' || typeB === 'planechase') {
+                return { isExact: false, isSameGroup: false };
+            }
+
+            // Exception: Commander Avatar (e.g. avatar or equivalent) should not be associated with every other commander set
+            if (codeA === 'avatar' || codeB === 'avatar') {
+                if (metaA.parent_set_code === codeB || metaB.parent_set_code === codeA) {
+                    return { isExact: false, isSameGroup: true };
+                }
+                return { isExact: false, isSameGroup: false };
+            }
+
+            // Core sets: By default every core set is connected to every other core set, with classic vs modern exception.
+            if (typeA === 'core' && typeB === 'core') {
+                const classicCore = ['1ed', '2ed', '3ed', '4ed', '5ed', 'sum'];
+                const isClassicA = classicCore.includes(codeA);
+                const isClassicB = classicCore.includes(codeB);
+                if (isClassicA !== isClassicB) {
+                    return { isExact: false, isSameGroup: false };
+                }
+                return { isExact: false, isSameGroup: true };
+            }
+
+            // Same block or block_code
+            if (metaA.block && metaB.block && metaA.block === metaB.block) {
+                return { isExact: false, isSameGroup: true };
+            }
+            if (metaA.block_code && metaB.block_code && metaA.block_code === metaB.block_code) {
+                return { isExact: false, isSameGroup: true };
+            }
+
+            // Commander deck with an associated set (parent_set_code)
+            if (metaA.parent_set_code === codeB || metaB.parent_set_code === codeA) {
+                return { isExact: false, isSameGroup: true };
+            }
+            if (metaA.parent_set_code && metaB.parent_set_code && metaA.parent_set_code === metaB.parent_set_code) {
+                return { isExact: false, isSameGroup: true };
+            }
+
+            return { isExact: false, isSameGroup: false };
+        }
+
         function evaluateConnections(cardA, cardB) {
             let details = [];
-            let hasSharedExpansion = false;
             let isExactSetMatch = false;
+            let isSameGroupMatch = false;
             let multiplier = 1.0;
 
             if (cardA.fullTypes && cardB.fullTypes && cardA.fullTypes === cardB.fullTypes) {
@@ -1125,6 +1099,10 @@
 
             if (cardA.power !== null && cardA.toughness !== null && cardA.power === cardB.power && cardA.toughness === cardB.toughness) {
                 details.push({ category: "Power / Toughness", match: `${cardA.power}/${cardA.toughness}` });
+            }
+
+            if (cardA.cmc === cardB.cmc) {
+                details.push({ category: "Mana Value", match: `${cardA.cmc} MV (${cardA.manaCost || '0'} / ${cardB.manaCost || '0'})` });
             }
 
             if (cardA.rarity === cardB.rarity) {
@@ -1154,27 +1132,26 @@
             const codeA = cardA.firstSetCode;
             const codeB = cardB.firstSetCode;
 
-            if (codeA && codeA === codeB) {
-                hasSharedExpansion = true;
-                if (cardB.isSupplementaryPreview) {
-                    isExactSetMatch = false;
-                    multiplier = 1.5;
-                } else {
-                    isExactSetMatch = true;
-                    multiplier = 2.0;
-                }
+            const setRel = evaluateSetRelationship(codeA, codeB);
+            if (setRel.isExact) {
+                isExactSetMatch = true;
+                isSameGroupMatch = true;
+                multiplier = 2.0;
+            } else if (setRel.isSameGroup) {
+                isSameGroupMatch = true;
+                multiplier = 1.5;
             }
 
             return {
                 totalCount: details.length,
                 details: details,
-                hasSharedExpansion: hasSharedExpansion,
                 isExactSetMatch: isExactSetMatch,
+                isSameGroupMatch: isSameGroupMatch,
                 multiplier: multiplier
             };
         }
 
-        function renderChainNode(card, connectionDetails, damageDealt, hasSharedExpansion, isExactSetMatch, multiplier) {
+        function renderChainNode(card, connectionDetails, damageDealt, isExactSetMatch, isSameGroupMatch, multiplier) {
             const wrapper = document.createElement('div');
             wrapper.className = 'w-full flex flex-col items-center animate-fade-in';
 
@@ -1250,7 +1227,7 @@
                 const connectorBox = document.createElement('div');
                 connectorBox.className = 'w-full max-w-sm bg-slate-950 border border-blue-500/40 rounded-xl p-3 shadow-lg flex flex-col items-center text-center';
 
-                let bonusText = isExactSetMatch ? 'Exact Set Match: x2 Multiplier' : (multiplier === 1.5 ? 'Supplementary/Preview Match: 1.5x Multiplier' : '');
+                let bonusText = isExactSetMatch ? 'Exact Set Match: x2 Multiplier' : (isSameGroupMatch ? 'Same Set Group: x1.5 Multiplier' : '');
                 let headerHtml = `<i class="fa-solid fa-fire text-blue-400 mr-1"></i> ${connectionDetails.length} Connections • Dealt <span class="text-blue-300 font-bold ml-1">${damageDealt} Damage</span>`;
                 if (multiplier > 1.0) {
                     headerHtml += ` <span class="text-blue-400 font-bold ml-1.5 block sm:inline">(${bonusText})</span>`;
@@ -1284,7 +1261,7 @@
 
         function openCardModal(imageUrl) {
             document.getElementById('modal-card-image').src = imageUrl;
-            document.getElementById('card-modal').classList.add('hidden');
+            document.getElementById('card-modal').classList.remove('hidden');
         }
 
         function closeCardModal() {
