@@ -24,7 +24,7 @@ def main():
         name = song.get('name')
         artist = song.get('artist')
         
-        # Check if fields are already manually specified
+        # Check if fields are already manually specified by you
         has_cover = bool(song.get('cover'))
         has_year = bool(song.get('release_year'))
         has_preview = bool(song.get('preview_url'))
@@ -33,7 +33,7 @@ def main():
             print(f"Skipping API fetch for {name} - {artist} (all fields manually provided)")
             continue
 
-        # Query iTunes Search API for missing fields
+        # Query iTunes Search API for missing fields (handles typos/best guess automatically)
         query = f"{name} {artist}"
         url = f"https://itunes.apple.com/search?term={requests.utils.quote(query)}&media=music&entity=song&limit=1"
         
@@ -44,7 +44,7 @@ def main():
             if data.get('resultCount', 0) > 0:
                 track = data['results'][0]
                 
-                # 1. Autofill Cover Art if missing
+                # 1. Autofill Cover Art into /songs/ if missing
                 if not has_cover:
                     artwork_url_100 = track.get('artworkUrl100')
                     if artwork_url_100:
