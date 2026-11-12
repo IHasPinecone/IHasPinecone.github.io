@@ -1,4 +1,4 @@
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -20,14 +20,12 @@ html_content = """<!DOCTYPE html>
       margin: 0 auto;
       padding: 24px;
       background: #140e08;
-      border: 5px ridge #5c3a21;
-      box-shadow: 0 0 30px rgba(0,0,0,0.9), inset 0 0 40px rgba(0,0,0,0.8);
+      box-shadow: 0 0 30px rgba(0,0,0,0.9);
     }
     header {
       text-align: center;
       margin-bottom: 25px;
-      border-bottom: 3px double #d4af37;
-      padding-bottom: 20px;
+      padding-bottom: 10px;
       background: radial-gradient(ellipse at center, #1f140a 0%, #140e08 100%);
     }
     header h1 {
@@ -36,18 +34,6 @@ html_content = """<!DOCTYPE html>
       color: #ffcc00;
       text-shadow: 0 0 10px #ff6600, 2px 2px #000;
       letter-spacing: 2px;
-    }
-    .dial-display {
-      font-family: "Courier New", Courier, monospace;
-      background: #000;
-      color: #00ff66;
-      border: 3px inset #333;
-      padding: 6px 15px;
-      display: inline-block;
-      font-size: 1.1rem;
-      margin-top: 8px;
-      box-shadow: inset 0 0 8px #00ff66;
-      letter-spacing: 3px;
     }
     .subtitle {
       color: #b0a080;
@@ -170,12 +156,6 @@ html_content = """<!DOCTYPE html>
       color: #e0e0e0;
       margin-bottom: 8px;
     }
-    .meta-row {
-      font-size: 0.85rem;
-      color: #b0a080;
-      margin-top: 6px;
-      font-family: "Courier New", Courier, monospace;
-    }
     .score-best {
       background: #103010;
       color: #66ff66;
@@ -201,39 +181,60 @@ html_content = """<!DOCTYPE html>
       font-family: "Courier New", Courier, monospace;
     }
 
-    /* Custom Analogue Radio Tuner Player */
+    /* Clean Analogue Player with Triangle Play Button & Normal Dot Scrubber */
     .analogue-player {
       margin-top: 14px;
       background: linear-gradient(180deg, #2c1e12 0%, #1a1109 100%);
       border: 3px ridge #6e4726;
-      padding: 10px 12px;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       box-shadow: inset 0 0 12px #000, 0 2px 5px rgba(0,0,0,0.8);
       font-family: "Courier New", Courier, monospace;
     }
 
-    .mech-btn {
+    .play-btn {
       background: linear-gradient(180deg, #d8d0c0 0%, #9e9482 100%);
-      color: #1a1109;
       border: 3px outset #e8e0d0;
-      padding: 8px 12px;
-      font-family: "Courier New", Courier, monospace;
-      font-weight: bold;
-      font-size: 0.8rem;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
       box-shadow: 0 3px 4px rgba(0,0,0,0.9);
-      text-transform: uppercase;
-      min-width: 78px;
-      text-align: center;
-      user-select: none;
+      flex-shrink: 0;
     }
-    .mech-btn:active, .mech-btn.engaged {
+    .play-btn:active, .play-btn.engaged {
       border-style: inset;
       background: linear-gradient(180deg, #8c8270 0%, #b5ab98 100%);
       transform: translateY(1px);
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+    }
+
+    /* Play/Pause Triangle Icon */
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 12px solid #1a1109;
+      margin-left: 2px;
+      transition: all 0.1s ease;
+    }
+    .play-btn.engaged .play-icon {
+      width: 4px;
+      height: 12px;
+      border: solid #1a1109;
+      border-width: 0 3px;
+      background: transparent;
+      border-top: none;
+      border-bottom: none;
+      border-left: none;
+      border-right: none;
+      box-shadow: 6px 0 0 #1a1109;
+      margin-left: -2px;
     }
 
     .pilot-lamp {
@@ -251,67 +252,42 @@ html_content = """<!DOCTYPE html>
       box-shadow: 0 0 8px #ff6600, 0 0 14px #ff3300, inset 0 0 4px #ffff99;
     }
 
-    .tuner-dial-window {
+    /* Normal Dot Scrubber Track */
+    .scrubber-track {
       flex-grow: 1;
-      height: 36px;
-      background: radial-gradient(ellipse at center, #3b280e 0%, #170e04 100%);
-      border: 3px inset #4a2e16;
+      height: 6px;
+      background: #090502;
+      border: 2px inset #3a2211;
       position: relative;
-      overflow: hidden;
       cursor: pointer;
-      box-shadow: inset 0 0 10px #000;
-    }
-    .analogue-player.playing .tuner-dial-window {
-      background: radial-gradient(ellipse at center, #664214 0%, #1f1305 100%);
-      box-shadow: inset 0 0 12px rgba(255, 170, 50, 0.35);
+      border-radius: 3px;
+      box-shadow: inset 0 0 4px #000;
     }
 
-    .tuner-scale {
-      position: absolute;
-      inset: 0;
-      background-image: repeating-linear-gradient(
-        90deg,
-        rgba(255, 215, 130, 0.45) 0px,
-        rgba(255, 215, 130, 0.45) 1px,
-        transparent 1px,
-        transparent 8px
-      );
-      background-size: 100% 10px;
-      background-position: bottom;
-      background-repeat: repeat-x;
-      pointer-events: none;
-    }
-
-    .tuner-numbers {
-      position: absolute;
-      top: 3px;
-      left: 6px;
-      right: 6px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.65rem;
-      color: rgba(255, 210, 120, 0.75);
-      letter-spacing: 1px;
-      pointer-events: none;
-      text-shadow: 0 0 3px rgba(255, 150, 0, 0.6);
-    }
-
-    .tuner-needle {
+    .scrubber-fill {
       position: absolute;
       top: 0;
+      left: 0;
       bottom: 0;
-      width: 2px;
-      background: #ff2a00;
-      box-shadow: 0 0 6px #ff2a00, 0 0 2px #fff;
-      left: 0%;
+      background: #d4af37;
+      border-radius: 2px 0 0 2px;
       pointer-events: none;
+      width: 0%;
+      box-shadow: 0 0 4px #ffcc00;
     }
 
-    .tuner-glass-glare {
+    .scrubber-dot {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 50%);
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(circle at 30% 30%, #fff 0%, #ffcc00 60%, #995500 100%);
+      border: 1px solid #5c3a21;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      left: 0%;
       pointer-events: none;
+      box-shadow: 0 0 5px #ff6600;
     }
 
     .tuner-readout {
@@ -337,8 +313,8 @@ html_content = """<!DOCTYPE html>
       .analogue-player {
         flex-wrap: wrap;
       }
-      .tuner-dial-window {
-        min-width: 160px;
+      .scrubber-track {
+        min-width: 140px;
       }
     }
   </style>
@@ -347,7 +323,6 @@ html_content = """<!DOCTYPE html>
   <div class="container">
     <header>
       <h1>CELESTIAL RADIO FREQUENCIES</h1>
-      <div class="dial-display">FM 88.5 MHz [ TUBE RECEIVER ACTIVE ]</div>
       <p class="subtitle">ROOFTOP IONOSPHERIC RELAY STATION LOGBOOK</p>
     </header>
 
@@ -416,7 +391,6 @@ html_content = """<!DOCTYPE html>
           content.className = 'week-content';
 
           weekSongs.forEach(song => {
-            const genreList = song.genres ? song.genres.split(',').map(g => g.trim()).filter(Boolean).join(', ') : '';
             const coverSrc = song.cover || 'https://via.placeholder.com/600';
             
             let scoreHtml = '';
@@ -429,15 +403,11 @@ html_content = """<!DOCTYPE html>
             const playerHtml = song.preview_url ? `
               <div class="analogue-player">
                 <audio crossorigin="anonymous" src="${song.preview_url}" preload="metadata"></audio>
-                <button type="button" class="mech-btn">TUNE IN</button>
+                <div class="play-btn" title="Play / Pause"><div class="play-icon"></div></div>
                 <div class="pilot-lamp" title="Vacuum Tube Power"></div>
-                <div class="tuner-dial-window" title="Click or drag dial to seek">
-                  <div class="tuner-numbers">
-                    <span>88</span><span>92</span><span>96</span><span>100</span><span>104</span><span>108</span>
-                  </div>
-                  <div class="tuner-scale"></div>
-                  <div class="tuner-needle"></div>
-                  <div class="tuner-glass-glare"></div>
+                <div class="scrubber-track" title="Click to seek">
+                  <div class="scrubber-fill"></div>
+                  <div class="scrubber-dot"></div>
                 </div>
                 <div class="tuner-readout">00:00</div>
               </div>
@@ -458,7 +428,6 @@ html_content = """<!DOCTYPE html>
                 <div class="song-artist">${song.artist}</div>
                 ${song.lyric ? `<div class="song-lyric">“${song.lyric}”</div>` : ''}
                 ${song.review ? `<div class="song-review">${song.review}</div>` : ''}
-                ${genreList ? `<div class="meta-row">Genres: ${genreList}</div>` : ''}
                 ${playerHtml}
               </div>
             `;
@@ -501,11 +470,10 @@ html_content = """<!DOCTYPE html>
         }
       }
 
-      // Synthesize a crisp mechanical toggle switch "click"
       function playMechanicalClick() {
         ensureAudioContext();
         const now = audioCtx.currentTime;
-        const clickLen = Math.floor(audioCtx.sampleRate * 0.025); // 25ms transient
+        const clickLen = Math.floor(audioCtx.sampleRate * 0.025);
         const clickBuf = audioCtx.createBuffer(1, clickLen, audioCtx.sampleRate);
         const data = clickBuf.getChannelData(0);
 
@@ -536,7 +504,6 @@ html_content = """<!DOCTYPE html>
         master.gain.value = 0;
         master.connect(ctx.destination);
 
-        // 1. Aggressive Pink Noise + Crackles (Only the static fluctuates)
         const bufferSize = ctx.sampleRate * 4;
         const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const output = noiseBuffer.getChannelData(0);
@@ -549,11 +516,11 @@ html_content = """<!DOCTYPE html>
           b3 = 0.86650 * b3 + white * 0.3104856;
           b4 = 0.55000 * b4 + white * 0.5329522;
           b5 = -0.7616 * b5 - white * 0.0168980;
-          let sample = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.06;
+          let sample = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.28;
           b6 = white * 0.115926;
 
-          if (Math.random() < 0.0025) {
-            sample += (Math.random() * 2 - 1) * 0.9;
+          if (Math.random() < 0.01) {
+            sample += (Math.random() * 2 - 1) * 2.5;
           }
           output[i] = sample;
         }
@@ -564,41 +531,39 @@ html_content = """<!DOCTYPE html>
 
         const noiseFilter = ctx.createBiquadFilter();
         noiseFilter.type = 'bandpass';
-        noiseFilter.frequency.value = 1400;
-        noiseFilter.Q.value = 0.65;
+        noiseFilter.frequency.value = 1500;
+        noiseFilter.Q.value = 0.7;
 
         noiseGainNode = ctx.createGain();
-        noiseGainNode.gain.value = 0.38;
+        noiseGainNode.gain.value = 1.45;
 
         noiseSource.connect(noiseFilter);
         noiseFilter.connect(noiseGainNode);
         noiseGainNode.connect(master);
         noiseSource.start(0);
 
-        // 2. Steady Transformer Hum (60Hz + 120Hz) - No fluctuation
         const humOsc = ctx.createOscillator();
         humOsc.type = 'sawtooth';
         humOsc.frequency.value = 60;
 
         const humFilter = ctx.createBiquadFilter();
         humFilter.type = 'lowpass';
-        humFilter.frequency.value = 150;
+        humFilter.frequency.value = 160;
 
         const humGain = ctx.createGain();
-        humGain.gain.value = 0.055;
+        humGain.gain.value = 0.12;
 
         humOsc.connect(humFilter);
         humFilter.connect(humGain);
         humGain.connect(master);
         humOsc.start(0);
 
-        // 3. Steady Carrier Tone - No fluctuation
         const carrierOsc = ctx.createOscillator();
         carrierOsc.type = 'sine';
         carrierOsc.frequency.value = 2400;
 
         const carrierGain = ctx.createGain();
-        carrierGain.gain.value = 0.004;
+        carrierGain.gain.value = 0.01;
 
         carrierOsc.connect(carrierGain);
         carrierGain.connect(master);
@@ -629,16 +594,17 @@ html_content = """<!DOCTYPE html>
 
       players.forEach(player => {
         const audio = player.querySelector('audio');
-        const btn = player.querySelector('.mech-btn');
-        const dialWindow = player.querySelector('.tuner-dial-window');
-        const needle = player.querySelector('.tuner-needle');
+        const playBtn = player.querySelector('.play-btn');
+        const track = player.querySelector('.scrubber-track');
+        const fill = player.querySelector('.scrubber-fill');
+        const dot = player.querySelector('.scrubber-dot');
         const readout = player.querySelector('.tuner-readout');
 
         let isConnected = false;
         let songGainNode = null;
         let isFadingOutEnd = false;
 
-        btn.addEventListener('click', () => {
+        playBtn.addEventListener('click', () => {
           playMechanicalClick();
           if (audio.paused) {
             audio.play();
@@ -647,10 +613,10 @@ html_content = """<!DOCTYPE html>
           }
         });
 
-        dialWindow.addEventListener('click', (e) => {
+        track.addEventListener('click', (e) => {
           if (!audio.duration) return;
           playMechanicalClick();
-          const rect = dialWindow.getBoundingClientRect();
+          const rect = track.getBoundingClientRect();
           const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
           audio.currentTime = pct * audio.duration;
           isFadingOutEnd = false;
@@ -663,10 +629,10 @@ html_content = """<!DOCTYPE html>
         audio.addEventListener('timeupdate', () => {
           if (!audio.duration) return;
           const pct = (audio.currentTime / audio.duration) * 100;
-          needle.style.left = `${pct}%`;
+          fill.style.width = `${pct}%`;
+          dot.style.left = `${pct}%`;
           readout.textContent = formatTime(audio.currentTime);
 
-          // 1-second smooth fade-out ONLY at the end of the 30-second clip
           const timeRemaining = audio.duration - audio.currentTime;
           if (timeRemaining <= 1.0 && !isFadingOutEnd && songGainNode && audioCtx) {
             isFadingOutEnd = true;
@@ -687,45 +653,40 @@ html_content = """<!DOCTYPE html>
           });
 
           player.classList.add('playing');
-          btn.classList.add('engaged');
-          btn.textContent = 'CUT OFF';
+          playBtn.classList.add('engaged');
           isFadingOutEnd = false;
 
           ensureAudioContext();
           const now = audioCtx.currentTime;
 
-          // 1-second power-on static burst
           if (ambienceMasterGain) {
             ambienceMasterGain.gain.cancelScheduledValues(now);
-            ambienceMasterGain.gain.setValueAtTime(0.85, now);
-            ambienceMasterGain.gain.linearRampToValueAtTime(0.35, now + 1.0);
+            ambienceMasterGain.gain.setValueAtTime(2.5, now);
+            ambienceMasterGain.gain.linearRampToValueAtTime(1.2, now + 1.0);
           }
 
-          // Static-only occasional fluctuations (0.5s to 1.5s)
           if (burstInterval) clearInterval(burstInterval);
           burstInterval = setInterval(() => {
             if (!audio.paused && noiseGainNode && audioCtx) {
               const burstTime = audioCtx.currentTime;
               const burstDuration = 0.5 + Math.random() * 1.0;
               noiseGainNode.gain.cancelScheduledValues(burstTime);
-              noiseGainNode.gain.setValueAtTime(0.38, burstTime);
-              noiseGainNode.gain.linearRampToValueAtTime(0.75, burstTime + 0.1);
-              noiseGainNode.gain.linearRampToValueAtTime(0.38, burstTime + burstDuration);
+              noiseGainNode.gain.setValueAtTime(1.45, burstTime);
+              noiseGainNode.gain.linearRampToValueAtTime(2.6, burstTime + 0.1);
+              noiseGainNode.gain.linearRampToValueAtTime(1.45, burstTime + burstDuration);
             } else {
               clearInterval(burstInterval);
             }
-          }, 3500);
+          }, 2500);
 
           if (!isConnected) {
             const source = audioCtx.createMediaElementSource(audio);
             
-            // Steady vintage bandpass filter (no LFO fluctuation)
             const filterNode = audioCtx.createBiquadFilter();
             filterNode.type = 'bandpass';
             filterNode.frequency.value = 1100;
             filterNode.Q.value = 1.0;
 
-            // Steady tube saturation (no fluctuation, zero clipping)
             const distortion = audioCtx.createWaveShaper();
             distortion.curve = makeCleanTubeCurve(18);
             distortion.oversample = '4x';
@@ -747,11 +708,9 @@ html_content = """<!DOCTYPE html>
 
         audio.addEventListener('pause', () => {
           player.classList.remove('playing');
-          btn.classList.remove('engaged');
-          btn.textContent = 'TUNE IN';
+          playBtn.classList.remove('engaged');
           if (burstInterval) clearInterval(burstInterval);
 
-          // Immediate stop on pause (no fade-out on pause)
           const anyPlaying = allAudios.some(el => !el.paused);
           if (!anyPlaying && ambienceMasterGain && audioCtx) {
             ambienceMasterGain.gain.cancelScheduledValues(audioCtx.currentTime);
@@ -761,9 +720,9 @@ html_content = """<!DOCTYPE html>
 
         audio.addEventListener('ended', () => {
           player.classList.remove('playing');
-          btn.classList.remove('engaged');
-          btn.textContent = 'TUNE IN';
-          needle.style.left = '0%';
+          playBtn.classList.remove('engaged');
+          fill.style.width = '0%';
+          dot.style.left = '0%';
           readout.textContent = '00:00';
           isFadingOutEnd = false;
           if (burstInterval) clearInterval(burstInterval);
@@ -780,9 +739,3 @@ html_content = """<!DOCTYPE html>
   </script>
 </body>
 </html>
-"""
-
-with open("songs.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-print("Successfully generated updated songs.html")
