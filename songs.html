@@ -181,7 +181,7 @@ html_content = """<!DOCTYPE html>
       font-family: "Courier New", Courier, monospace;
     }
 
-    /* Clean Analogue Player with Triangle Play Button & Normal Dot Scrubber */
+    /* Clean Analogue Player with Triangle Play Button, Normal Dot Scrubber & Volume Control */
     .analogue-player {
       margin-top: 14px;
       background: linear-gradient(180deg, #2c1e12 0%, #1a1109 100%);
@@ -189,7 +189,7 @@ html_content = """<!DOCTYPE html>
       padding: 10px 14px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       box-shadow: inset 0 0 12px #000, 0 2px 5px rgba(0,0,0,0.8);
       font-family: "Courier New", Courier, monospace;
     }
@@ -293,77 +293,60 @@ html_content = """<!DOCTYPE html>
     .tuner-readout {
       font-size: 0.75rem;
       color: #d4af37;
-      min-width: 44px;
+      min-width: 40px;
       text-align: right;
       font-weight: bold;
     }
 
-    /* Static Aggression Calibration Slider at Bottom */
-    .static-calibration-panel {
-      margin-top: 28px;
-      background: linear-gradient(180deg, #24180d 0%, #140d07 100%);
-      border: 2px outset #5c3a21;
-      padding: 14px 18px;
+    /* Volume Slider next to Player */
+    .volume-control {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      box-shadow: inset 0 0 10px #000;
+      gap: 6px;
+      padding-left: 8px;
+      border-left: 1px solid #4a2e16;
+      flex-shrink: 0;
     }
 
-    .static-calibration-panel label {
-      color: #ffcc00;
-      font-size: 0.85rem;
+    .volume-label {
+      font-size: 0.7rem;
+      color: #b0a080;
       font-weight: bold;
-      letter-spacing: 1px;
-      white-space: nowrap;
-      text-shadow: 1px 1px #000;
+      letter-spacing: 0.5px;
     }
 
-    .static-slider {
-      flex-grow: 1;
+    .volume-slider {
       -webkit-appearance: none;
       appearance: none;
-      height: 6px;
+      width: 60px;
+      height: 5px;
       background: #090502;
-      border: 2px inset #3a2211;
+      border: 1px inset #3a2211;
       border-radius: 3px;
       outline: none;
       cursor: pointer;
     }
 
-    .static-slider::-webkit-slider-thumb {
+    .volume-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 16px;
-      height: 16px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 30%, #fff 0%, #ffcc00 60%, #995500 100%);
       border: 1px solid #5c3a21;
       cursor: pointer;
-      box-shadow: 0 0 6px #ff6600;
+      box-shadow: 0 0 4px #ff6600;
     }
 
-    .static-slider::-moz-range-thumb {
-      width: 16px;
-      height: 16px;
+    .volume-slider::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 30%, #fff 0%, #ffcc00 60%, #995500 100%);
       border: 1px solid #5c3a21;
       cursor: pointer;
-      box-shadow: 0 0 6px #ff6600;
-    }
-
-    .static-value-display {
-      background: #000;
-      color: #00ff66;
-      border: 2px inset #333;
-      padding: 4px 10px;
-      font-size: 0.9rem;
-      font-weight: bold;
-      min-width: 54px;
-      text-align: center;
-      box-shadow: inset 0 0 6px rgba(0, 255, 102, 0.4);
+      box-shadow: 0 0 4px #ff6600;
     }
 
     @media (max-width: 600px) {
@@ -384,10 +367,11 @@ html_content = """<!DOCTYPE html>
       .scrubber-track {
         min-width: 140px;
       }
-      .static-calibration-panel {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
+      .volume-control {
+        border-left: none;
+        padding-left: 0;
+        width: 100%;
+        justify-content: flex-end;
       }
     }
   </style>
@@ -406,12 +390,6 @@ html_content = """<!DOCTYPE html>
 
     <div id="playlist-container">
       <p style="text-align: center; color: #ffcc00; font-family: 'Courier New';">WARMING UP VACUUM TUBES...</p>
-    </div>
-
-    <div class="static-calibration-panel">
-      <label for="static-strength-slider">STATIC INTERFERENCE GAIN:</label>
-      <input type="range" id="static-strength-slider" class="static-slider" min="0" max="4.0" step="0.05" value="1.45">
-      <div id="static-strength-value" class="static-value-display">1.45</div>
     </div>
   </div>
 
@@ -489,6 +467,10 @@ html_content = """<!DOCTYPE html>
                   <div class="scrubber-dot"></div>
                 </div>
                 <div class="tuner-readout">00:00</div>
+                <div class="volume-control" title="Receiver Volume">
+                  <span class="volume-label">VOL</span>
+                  <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.8">
+                </div>
               </div>
             ` : '';
 
@@ -538,19 +520,9 @@ html_content = """<!DOCTYPE html>
       let noiseGainNode;
       let burstInterval = null;
 
-      const staticSlider = document.getElementById('static-strength-slider');
-      const staticValueDisplay = document.getElementById('static-strength-value');
-      let baseStaticGain = parseFloat(staticSlider.value);
-
-      staticSlider.addEventListener('input', () => {
-        baseStaticGain = parseFloat(staticSlider.value);
-        staticValueDisplay.textContent = baseStaticGain.toFixed(2);
-        if (noiseGainNode && audioCtx) {
-          const now = audioCtx.currentTime;
-          noiseGainNode.gain.cancelScheduledValues(now);
-          noiseGainNode.gain.setValueAtTime(baseStaticGain, now);
-        }
-      });
+      // Calibrated static strength set to 0.15 per user specification
+      const BASE_STATIC_GAIN = 0.15;
+      let currentMasterVolume = 0.8;
 
       function ensureAudioContext() {
         if (!audioCtx) {
@@ -584,7 +556,7 @@ html_content = """<!DOCTYPE html>
         filter.Q.value = 1.5;
 
         const gain = audioCtx.createGain();
-        gain.gain.value = 0.75;
+        gain.gain.value = 0.75 * currentMasterVolume;
 
         src.connect(filter);
         filter.connect(gain);
@@ -628,7 +600,7 @@ html_content = """<!DOCTYPE html>
         noiseFilter.Q.value = 0.7;
 
         noiseGainNode = ctx.createGain();
-        noiseGainNode.gain.value = baseStaticGain;
+        noiseGainNode.gain.value = BASE_STATIC_GAIN;
 
         noiseSource.connect(noiseFilter);
         noiseFilter.connect(noiseGainNode);
@@ -644,7 +616,7 @@ html_content = """<!DOCTYPE html>
         humFilter.frequency.value = 160;
 
         const humGain = ctx.createGain();
-        humGain.gain.value = 0.12;
+        humGain.gain.value = 0.04;
 
         humOsc.connect(humFilter);
         humFilter.connect(humGain);
@@ -656,7 +628,7 @@ html_content = """<!DOCTYPE html>
         carrierOsc.frequency.value = 2400;
 
         const carrierGain = ctx.createGain();
-        carrierGain.gain.value = 0.01;
+        carrierGain.gain.value = 0.004;
 
         carrierOsc.connect(carrierGain);
         carrierGain.connect(master);
@@ -684,6 +656,7 @@ html_content = """<!DOCTYPE html>
 
       const players = document.querySelectorAll('.analogue-player');
       const allAudios = Array.from(document.querySelectorAll('.analogue-player audio'));
+      const allVolumeSliders = Array.from(document.querySelectorAll('.volume-slider'));
 
       players.forEach(player => {
         const audio = player.querySelector('audio');
@@ -692,10 +665,29 @@ html_content = """<!DOCTYPE html>
         const fill = player.querySelector('.scrubber-fill');
         const dot = player.querySelector('.scrubber-dot');
         const readout = player.querySelector('.tuner-readout');
+        const volSlider = player.querySelector('.volume-slider');
 
         let isConnected = false;
         let songGainNode = null;
         let isFadingOutEnd = false;
+
+        volSlider.addEventListener('input', () => {
+          currentMasterVolume = parseFloat(volSlider.value);
+          // Sync all volume sliders on the page so volume feels consistent across the receiver
+          allVolumeSliders.forEach(s => s.value = currentMasterVolume);
+
+          if (audioCtx) {
+            const now = audioCtx.currentTime;
+            if (songGainNode && !isFadingOutEnd) {
+              songGainNode.gain.cancelScheduledValues(now);
+              songGainNode.gain.setValueAtTime(0.65 * currentMasterVolume, now);
+            }
+            if (ambienceMasterGain && !audio.paused) {
+              ambienceMasterGain.gain.cancelScheduledValues(now);
+              ambienceMasterGain.gain.setValueAtTime(1.0 * currentMasterVolume, now);
+            }
+          }
+        });
 
         playBtn.addEventListener('click', () => {
           playMechanicalClick();
@@ -715,7 +707,7 @@ html_content = """<!DOCTYPE html>
           isFadingOutEnd = false;
           if (songGainNode && audioCtx) {
             songGainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-            songGainNode.gain.setValueAtTime(0.55, audioCtx.currentTime);
+            songGainNode.gain.setValueAtTime(0.65 * currentMasterVolume, audioCtx.currentTime);
           }
         });
 
@@ -748,19 +740,20 @@ html_content = """<!DOCTYPE html>
           player.classList.add('playing');
           playBtn.classList.add('engaged');
           isFadingOutEnd = false;
+          currentMasterVolume = parseFloat(volSlider.value);
 
           ensureAudioContext();
           const now = audioCtx.currentTime;
 
           if (noiseGainNode) {
             noiseGainNode.gain.cancelScheduledValues(now);
-            noiseGainNode.gain.setValueAtTime(baseStaticGain, now);
+            noiseGainNode.gain.setValueAtTime(BASE_STATIC_GAIN, now);
           }
 
           if (ambienceMasterGain) {
             ambienceMasterGain.gain.cancelScheduledValues(now);
-            ambienceMasterGain.gain.setValueAtTime(2.5, now);
-            ambienceMasterGain.gain.linearRampToValueAtTime(1.2, now + 1.0);
+            ambienceMasterGain.gain.setValueAtTime(1.8 * currentMasterVolume, now);
+            ambienceMasterGain.gain.linearRampToValueAtTime(1.0 * currentMasterVolume, now + 0.8);
           }
 
           if (burstInterval) clearInterval(burstInterval);
@@ -769,9 +762,9 @@ html_content = """<!DOCTYPE html>
               const burstTime = audioCtx.currentTime;
               const burstDuration = 0.5 + Math.random() * 1.0;
               noiseGainNode.gain.cancelScheduledValues(burstTime);
-              noiseGainNode.gain.setValueAtTime(baseStaticGain, burstTime);
-              noiseGainNode.gain.linearRampToValueAtTime(baseStaticGain * 1.8, burstTime + 0.1);
-              noiseGainNode.gain.linearRampToValueAtTime(baseStaticGain, burstTime + burstDuration);
+              noiseGainNode.gain.setValueAtTime(BASE_STATIC_GAIN, burstTime);
+              noiseGainNode.gain.linearRampToValueAtTime(BASE_STATIC_GAIN * 1.8, burstTime + 0.1);
+              noiseGainNode.gain.linearRampToValueAtTime(BASE_STATIC_GAIN, burstTime + burstDuration);
             } else {
               clearInterval(burstInterval);
             }
@@ -790,7 +783,7 @@ html_content = """<!DOCTYPE html>
             distortion.oversample = '4x';
 
             songGainNode = audioCtx.createGain();
-            songGainNode.gain.value = 0.55;
+            songGainNode.gain.value = 0.65 * currentMasterVolume;
 
             source.connect(filterNode);
             filterNode.connect(distortion);
@@ -800,7 +793,7 @@ html_content = """<!DOCTYPE html>
             isConnected = true;
           } else if (songGainNode) {
             songGainNode.gain.cancelScheduledValues(now);
-            songGainNode.gain.setValueAtTime(0.55, now);
+            songGainNode.gain.setValueAtTime(0.65 * currentMasterVolume, now);
           }
         });
 
@@ -839,7 +832,7 @@ html_content = """<!DOCTYPE html>
 </html>
 """
 
-with open("songs-v2.html", "w", encoding="utf-8") as f:
+with open("songs-v3.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print("Successfully generated songs-v2.html")
+print("Successfully generated songs-v3.html")
