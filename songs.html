@@ -1,9 +1,4 @@
-# Let's update index.html (or songs.html) with:
-# 1. A soft 1-second static "power-on" burst right at the beginning when play is clicked.
-# 2. More aggressive overall background static/hiss level.
-# 3. Occasional dynamic static bursts that flare up for 0.5 to 1.5 seconds at random intervals while the clip plays.
-
-index_html = """<!DOCTYPE html>
+html_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -205,12 +200,128 @@ index_html = """<!DOCTYPE html>
       font-size: 0.75rem;
       font-family: "Courier New", Courier, monospace;
     }
-    audio {
-      width: 100%;
-      height: 32px;
-      margin-top: 10px;
-      filter: sepia(0.8) contrast(1.2);
+
+    /* Custom Analogue Radio Tuner Player */
+    .analogue-player {
+      margin-top: 14px;
+      background: linear-gradient(180deg, #2c1e12 0%, #1a1109 100%);
+      border: 3px ridge #6e4726;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: inset 0 0 12px #000, 0 2px 5px rgba(0,0,0,0.8);
+      font-family: "Courier New", Courier, monospace;
     }
+
+    .mech-btn {
+      background: linear-gradient(180deg, #d8d0c0 0%, #9e9482 100%);
+      color: #1a1109;
+      border: 3px outset #e8e0d0;
+      padding: 8px 12px;
+      font-family: "Courier New", Courier, monospace;
+      font-weight: bold;
+      font-size: 0.8rem;
+      cursor: pointer;
+      box-shadow: 0 3px 4px rgba(0,0,0,0.9);
+      text-transform: uppercase;
+      min-width: 78px;
+      text-align: center;
+      user-select: none;
+    }
+    .mech-btn:active, .mech-btn.engaged {
+      border-style: inset;
+      background: linear-gradient(180deg, #8c8270 0%, #b5ab98 100%);
+      transform: translateY(1px);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+    }
+
+    .pilot-lamp {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #331100;
+      border: 2px inset #4a2e16;
+      box-shadow: inset 0 0 3px #000;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+    .analogue-player.playing .pilot-lamp {
+      background: #ff6600;
+      box-shadow: 0 0 8px #ff6600, 0 0 14px #ff3300, inset 0 0 4px #ffff99;
+    }
+
+    .tuner-dial-window {
+      flex-grow: 1;
+      height: 36px;
+      background: radial-gradient(ellipse at center, #3b280e 0%, #170e04 100%);
+      border: 3px inset #4a2e16;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: inset 0 0 10px #000;
+    }
+    .analogue-player.playing .tuner-dial-window {
+      background: radial-gradient(ellipse at center, #664214 0%, #1f1305 100%);
+      box-shadow: inset 0 0 12px rgba(255, 170, 50, 0.35);
+    }
+
+    .tuner-scale {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        90deg,
+        rgba(255, 215, 130, 0.45) 0px,
+        rgba(255, 215, 130, 0.45) 1px,
+        transparent 1px,
+        transparent 8px
+      );
+      background-size: 100% 10px;
+      background-position: bottom;
+      background-repeat: repeat-x;
+      pointer-events: none;
+    }
+
+    .tuner-numbers {
+      position: absolute;
+      top: 3px;
+      left: 6px;
+      right: 6px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      color: rgba(255, 210, 120, 0.75);
+      letter-spacing: 1px;
+      pointer-events: none;
+      text-shadow: 0 0 3px rgba(255, 150, 0, 0.6);
+    }
+
+    .tuner-needle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #ff2a00;
+      box-shadow: 0 0 6px #ff2a00, 0 0 2px #fff;
+      left: 0%;
+      pointer-events: none;
+    }
+
+    .tuner-glass-glare {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 50%);
+      pointer-events: none;
+    }
+
+    .tuner-readout {
+      font-size: 0.75rem;
+      color: #d4af37;
+      min-width: 44px;
+      text-align: right;
+      font-weight: bold;
+    }
+
     @media (max-width: 600px) {
       .song-card {
         flex-direction: column;
@@ -222,6 +333,12 @@ index_html = """<!DOCTYPE html>
       .song-cover {
         width: 100%;
         height: 200px;
+      }
+      .analogue-player {
+        flex-wrap: wrap;
+      }
+      .tuner-dial-window {
+        min-width: 160px;
       }
     }
   </style>
@@ -309,6 +426,23 @@ index_html = """<!DOCTYPE html>
               scoreHtml = '<div class="score-worst">Worst Song Ever</div>';
             }
 
+            const playerHtml = song.preview_url ? `
+              <div class="analogue-player">
+                <audio crossorigin="anonymous" src="${song.preview_url}" preload="metadata"></audio>
+                <button type="button" class="mech-btn">TUNE IN</button>
+                <div class="pilot-lamp" title="Vacuum Tube Power"></div>
+                <div class="tuner-dial-window" title="Click or drag dial to seek">
+                  <div class="tuner-numbers">
+                    <span>88</span><span>92</span><span>96</span><span>100</span><span>104</span><span>108</span>
+                  </div>
+                  <div class="tuner-scale"></div>
+                  <div class="tuner-needle"></div>
+                  <div class="tuner-glass-glare"></div>
+                </div>
+                <div class="tuner-readout">00:00</div>
+              </div>
+            ` : '';
+
             const card = document.createElement('div');
             card.className = 'song-card';
             card.innerHTML = `
@@ -325,7 +459,7 @@ index_html = """<!DOCTYPE html>
                 ${song.lyric ? `<div class="song-lyric">“${song.lyric}”</div>` : ''}
                 ${song.review ? `<div class="song-review">${song.review}</div>` : ''}
                 ${genreList ? `<div class="meta-row">Genres: ${genreList}</div>` : ''}
-                ${song.preview_url ? `<audio controls crossorigin="anonymous" src="${song.preview_url}"></audio>` : ''}
+                ${playerHtml}
               </div>
             `;
             content.appendChild(card);
@@ -342,7 +476,7 @@ index_html = """<!DOCTYPE html>
           container.appendChild(accordion);
         });
 
-        attachRadioEffect();
+        setupAnaloguePlayers();
 
       } catch (err) {
         console.error('Failed to load songs.json', err);
@@ -350,19 +484,59 @@ index_html = """<!DOCTYPE html>
       }
     }
 
-    // Advanced Tube Receiver with 1s Power-On Static Burst, Aggressive Hiss, and Occasional Bursts
-    function attachRadioEffect() {
+    function setupAnaloguePlayers() {
       let audioCtx;
       let ambienceMasterGain;
-      let noiseGainNode, filterNode;
+      let noiseGainNode;
       let burstInterval = null;
+
+      function ensureAudioContext() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+          ambienceMasterGain = startRadioAmbience(audioCtx);
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      // Synthesize a crisp mechanical toggle switch "click"
+      function playMechanicalClick() {
+        ensureAudioContext();
+        const now = audioCtx.currentTime;
+        const clickLen = Math.floor(audioCtx.sampleRate * 0.025); // 25ms transient
+        const clickBuf = audioCtx.createBuffer(1, clickLen, audioCtx.sampleRate);
+        const data = clickBuf.getChannelData(0);
+
+        for (let i = 0; i < clickLen; i++) {
+          const env = Math.exp(-i / (audioCtx.sampleRate * 0.004));
+          data[i] = (Math.random() * 2 - 1) * env;
+        }
+
+        const src = audioCtx.createBufferSource();
+        src.buffer = clickBuf;
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.value = 1800;
+        filter.Q.value = 1.5;
+
+        const gain = audioCtx.createGain();
+        gain.gain.value = 0.75;
+
+        src.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+        src.start(now);
+      }
 
       function startRadioAmbience(ctx) {
         const master = ctx.createGain();
         master.gain.value = 0;
         master.connect(ctx.destination);
 
-        // 1. Aggressive Pink Noise + Crackles
+        // 1. Aggressive Pink Noise + Crackles (Only the static fluctuates)
         const bufferSize = ctx.sampleRate * 4;
         const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const output = noiseBuffer.getChannelData(0);
@@ -379,7 +553,7 @@ index_html = """<!DOCTYPE html>
           b6 = white * 0.115926;
 
           if (Math.random() < 0.0025) {
-            sample += (Math.random() * 2 - 1) * 0.9; // heavier crackle
+            sample += (Math.random() * 2 - 1) * 0.9;
           }
           output[i] = sample;
         }
@@ -394,14 +568,14 @@ index_html = """<!DOCTYPE html>
         noiseFilter.Q.value = 0.65;
 
         noiseGainNode = ctx.createGain();
-        noiseGainNode.gain.value = 0.38; // Noticeably more aggressive background static hiss
+        noiseGainNode.gain.value = 0.38;
 
         noiseSource.connect(noiseFilter);
         noiseFilter.connect(noiseGainNode);
         noiseGainNode.connect(master);
         noiseSource.start(0);
 
-        // 2. Transformer Hum (60Hz + 120Hz)
+        // 2. Steady Transformer Hum (60Hz + 120Hz) - No fluctuation
         const humOsc = ctx.createOscillator();
         humOsc.type = 'sawtooth';
         humOsc.frequency.value = 60;
@@ -418,27 +592,16 @@ index_html = """<!DOCTYPE html>
         humGain.connect(master);
         humOsc.start(0);
 
-        // 3. Carrier Whistle
+        // 3. Steady Carrier Tone - No fluctuation
         const carrierOsc = ctx.createOscillator();
         carrierOsc.type = 'sine';
         carrierOsc.frequency.value = 2400;
 
-        const carrierLfo = ctx.createOscillator();
-        carrierLfo.type = 'sine';
-        carrierLfo.frequency.value = 0.3;
-
-        const carrierLfoGain = ctx.createGain();
-        carrierLfoGain.gain.value = 65;
-
         const carrierGain = ctx.createGain();
-        carrierGain.gain.value = 0.005;
+        carrierGain.gain.value = 0.004;
 
-        carrierLfo.connect(carrierLfoGain);
-        carrierLfoGain.connect(carrierOsc.frequency);
         carrierOsc.connect(carrierGain);
         carrierGain.connect(master);
-
-        carrierLfo.start(0);
         carrierOsc.start(0);
 
         return master;
@@ -454,72 +617,115 @@ index_html = """<!DOCTYPE html>
         return curve;
       }
 
-      const audioElements = document.querySelectorAll('audio');
+      function formatTime(sec) {
+        if (isNaN(sec)) return '00:00';
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      }
 
-      audioElements.forEach(audio => {
+      const players = document.querySelectorAll('.analogue-player');
+      const allAudios = Array.from(document.querySelectorAll('.analogue-player audio'));
+
+      players.forEach(player => {
+        const audio = player.querySelector('audio');
+        const btn = player.querySelector('.mech-btn');
+        const dialWindow = player.querySelector('.tuner-dial-window');
+        const needle = player.querySelector('.tuner-needle');
+        const readout = player.querySelector('.tuner-readout');
+
         let isConnected = false;
         let songGainNode = null;
+        let isFadingOutEnd = false;
+
+        btn.addEventListener('click', () => {
+          playMechanicalClick();
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
+        });
+
+        dialWindow.addEventListener('click', (e) => {
+          if (!audio.duration) return;
+          playMechanicalClick();
+          const rect = dialWindow.getBoundingClientRect();
+          const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+          audio.currentTime = pct * audio.duration;
+          isFadingOutEnd = false;
+          if (songGainNode && audioCtx) {
+            songGainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+            songGainNode.gain.setValueAtTime(0.55, audioCtx.currentTime);
+          }
+        });
+
+        audio.addEventListener('timeupdate', () => {
+          if (!audio.duration) return;
+          const pct = (audio.currentTime / audio.duration) * 100;
+          needle.style.left = `${pct}%`;
+          readout.textContent = formatTime(audio.currentTime);
+
+          // 1-second smooth fade-out ONLY at the end of the 30-second clip
+          const timeRemaining = audio.duration - audio.currentTime;
+          if (timeRemaining <= 1.0 && !isFadingOutEnd && songGainNode && audioCtx) {
+            isFadingOutEnd = true;
+            const now = audioCtx.currentTime;
+            songGainNode.gain.cancelScheduledValues(now);
+            songGainNode.gain.setValueAtTime(songGainNode.gain.value, now);
+            songGainNode.gain.linearRampToValueAtTime(0.0001, now + Math.max(0.05, timeRemaining));
+          } else if (timeRemaining > 1.0 && isFadingOutEnd) {
+            isFadingOutEnd = false;
+          }
+        });
 
         audio.addEventListener('play', () => {
-          audioElements.forEach(other => {
-            if (other !== audio) {
+          allAudios.forEach(other => {
+            if (other !== audio && !other.paused) {
               other.pause();
             }
           });
 
-          if (!audioCtx) {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            audioCtx = new AudioContext();
-            ambienceMasterGain = startRadioAmbience(audioCtx);
-          }
+          player.classList.add('playing');
+          btn.classList.add('engaged');
+          btn.textContent = 'CUT OFF';
+          isFadingOutEnd = false;
 
-          if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-          }
-
+          ensureAudioContext();
           const now = audioCtx.currentTime;
 
-          // POWER-ON STATIC BURST: Soft 1-second static burst when turning on / playing
+          // 1-second power-on static burst
           if (ambienceMasterGain) {
             ambienceMasterGain.gain.cancelScheduledValues(now);
-            ambienceMasterGain.gain.setValueAtTime(0.85, now); // Loud power-on static
-            ambienceMasterGain.gain.linearRampToValueAtTime(0.35, now + 1.0); // settles into aggressive background hiss
+            ambienceMasterGain.gain.setValueAtTime(0.85, now);
+            ambienceMasterGain.gain.linearRampToValueAtTime(0.35, now + 1.0);
           }
 
-          // OCCASIONAL AGGRESSIVE STATIC FLARES: Flaring up for 0.5 to 1.5 seconds at random intervals
+          // Static-only occasional fluctuations (0.5s to 1.5s)
           if (burstInterval) clearInterval(burstInterval);
           burstInterval = setInterval(() => {
             if (!audio.paused && noiseGainNode && audioCtx) {
               const burstTime = audioCtx.currentTime;
-              const burstDuration = 0.5 + Math.random() * 1.0; // 0.5s to 1.5s
+              const burstDuration = 0.5 + Math.random() * 1.0;
               noiseGainNode.gain.cancelScheduledValues(burstTime);
               noiseGainNode.gain.setValueAtTime(0.38, burstTime);
-              noiseGainNode.gain.linearRampToValueAtTime(0.75, burstTime + 0.1); // jump to aggressive static
-              noiseGainNode.gain.linearRampToValueAtTime(0.38, burstTime + burstDuration); // return after 0.5s - 1.5s
+              noiseGainNode.gain.linearRampToValueAtTime(0.75, burstTime + 0.1);
+              noiseGainNode.gain.linearRampToValueAtTime(0.38, burstTime + burstDuration);
             } else {
               clearInterval(burstInterval);
             }
-          }, 3500); // Check/trigger roughly every 3.5 seconds
+          }, 3500);
 
           if (!isConnected) {
             const source = audioCtx.createMediaElementSource(audio);
             
-            filterNode = audioCtx.createBiquadFilter();
+            // Steady vintage bandpass filter (no LFO fluctuation)
+            const filterNode = audioCtx.createBiquadFilter();
             filterNode.type = 'bandpass';
             filterNode.frequency.value = 1100;
             filterNode.Q.value = 1.0;
 
-            const signalLfo = audioCtx.createOscillator();
-            signalLfo.type = 'sine';
-            signalLfo.frequency.value = 0.4;
-
-            const lfoGainNode = audioCtx.createGain();
-            lfoGainNode.gain.value = 280;
-
-            signalLfo.connect(lfoGainNode);
-            lfoGainNode.connect(filterNode.frequency);
-            signalLfo.start(0);
-
+            // Steady tube saturation (no fluctuation, zero clipping)
             const distortion = audioCtx.createWaveShaper();
             distortion.curve = makeCleanTubeCurve(18);
             distortion.oversample = '4x';
@@ -532,37 +738,42 @@ index_html = """<!DOCTYPE html>
             distortion.connect(songGainNode);
             songGainNode.connect(audioCtx.destination);
 
-            audio._songGainNode = songGainNode;
             isConnected = true;
-          } else if (audio._songGainNode) {
-            audio._songGainNode.gain.setValueAtTime(0.55, now);
+          } else if (songGainNode) {
+            songGainNode.gain.cancelScheduledValues(now);
+            songGainNode.gain.setValueAtTime(0.55, now);
           }
         });
 
         audio.addEventListener('pause', () => {
-          handleFadeOut(audio);
+          player.classList.remove('playing');
+          btn.classList.remove('engaged');
+          btn.textContent = 'TUNE IN';
+          if (burstInterval) clearInterval(burstInterval);
+
+          // Immediate stop on pause (no fade-out on pause)
+          const anyPlaying = allAudios.some(el => !el.paused);
+          if (!anyPlaying && ambienceMasterGain && audioCtx) {
+            ambienceMasterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+            ambienceMasterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+          }
         });
 
         audio.addEventListener('ended', () => {
-          handleFadeOut(audio);
+          player.classList.remove('playing');
+          btn.classList.remove('engaged');
+          btn.textContent = 'TUNE IN';
+          needle.style.left = '0%';
+          readout.textContent = '00:00';
+          isFadingOutEnd = false;
+          if (burstInterval) clearInterval(burstInterval);
+
+          const anyPlaying = allAudios.some(el => !el.paused);
+          if (!anyPlaying && ambienceMasterGain && audioCtx) {
+            ambienceMasterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
+          }
         });
       });
-
-      function handleFadeOut(audio) {
-        if (burstInterval) clearInterval(burstInterval);
-        
-        if (audio._songGainNode && audioCtx) {
-          const gainNode = audio._songGainNode;
-          const currentTime = audioCtx.currentTime;
-          gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
-          gainNode.gain.linearRampToValueAtTime(0.0001, currentTime + 1.0); // 1s fade out
-        }
-
-        const anyPlaying = Array.from(audioElements).some(el => !el.paused);
-        if (!anyPlaying && ambienceMasterGain && audioCtx) {
-          ambienceMasterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.5);
-        }
-      }
     }
 
     loadPlaylist();
@@ -572,6 +783,6 @@ index_html = """<!DOCTYPE html>
 """
 
 with open("songs.html", "w", encoding="utf-8") as f:
-    f.write(index_html)
+    f.write(html_content)
 
-print("Successfully updated songs.html with 1s power-on static burst, aggressive background hiss, and occasional flare-ups lasting 0.5s to 1.5s.")
+print("Successfully generated updated songs.html")
