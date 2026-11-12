@@ -1,110 +1,123 @@
-<!DOCTYPE html>
+# Let's update index.html (saved as songs.html as per previous turn) with:
+# 1. 1-second smooth fade-out at the end of each audio playback.
+# 2. Visual redesign for an old radio aesthetic (tacky early web / vintage radio cabinet feel, dial/tuner aesthetic touches, warm amber/green vacuum-tube glowing accents, wood/metal/dark textures, monospace radio frequency styling).
+# 3. Audio adjustments: 
+#    - Prevent clipping entirely by lowering music gain further and using a smoother, cleaner waveshaper curve.
+#    - More aggressive background hum (richer 60Hz/120Hz transformer harmonics) combined with atmospheric static.
+#    - Fluctuating radio effect (dynamic LFO modulating the bandpass frequency and distortion depth over the 30-second clip duration so it wavers and drifts like a real shortwave/space signal).
+
+index_html = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CELESTIAL RADIO FREQUENCIES</title>
+  <title>CELESTIAL RADIO FREQUENCIES - TUBE RECEIVER LOG</title>
   <style>
     body {
-      background-color: #000022;
-      background-image: radial-gradient(#ffffff 1px, transparent 1px), radial-gradient(#ffff00 1px, transparent 1px);
-      background-size: 50px 50px;
-      background-position: 0 0, 25px 25px;
-      color: #e0e0e0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #0c0804;
+      background-image: 
+        radial-gradient(circle at 50% 30%, #2a1806 0%, #0c0804 70%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px);
+      color: #e0d0b0;
+      font-family: "Courier New", Courier, monospace;
       margin: 0;
       padding: 20px;
     }
     .container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 20px;
-      background: rgba(13, 17, 38, 0.9);
-      border: 2px solid #38bdf8;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+      padding: 24px;
+      background: #140e08;
+      border: 5px ridge #5c3a21;
+      box-shadow: 0 0 30px rgba(0,0,0,0.9), inset 0 0 40px rgba(0,0,0,0.8);
     }
     header {
       text-align: center;
-      margin-bottom: 30px;
-      border-bottom: 2px dashed #38bdf8;
+      margin-bottom: 25px;
+      border-bottom: 3px double #d4af37;
       padding-bottom: 20px;
+      background: radial-gradient(ellipse at center, #1f140a 0%, #140e08 100%);
     }
     header h1 {
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-      color: #ffff00;
-      text-shadow: 2px 2px #ff00ff;
-      letter-spacing: -0.5px;
+      font-size: 2rem;
+      margin-bottom: 8px;
+      color: #ffcc00;
+      text-shadow: 0 0 10px #ff6600, 2px 2px #000;
+      letter-spacing: 2px;
+    }
+    .dial-display {
+      font-family: "Courier New", Courier, monospace;
+      background: #000;
+      color: #00ff66;
+      border: 3px inset #333;
+      padding: 6px 15px;
+      display: inline-block;
+      font-size: 1.1rem;
+      margin-top: 8px;
+      box-shadow: inset 0 0 8px #00ff66;
+      letter-spacing: 3px;
     }
     .subtitle {
-      font-family: "Courier New", Courier, monospace;
-      color: #00ff00;
-      font-size: 0.9rem;
-      margin: 0;
+      color: #b0a080;
+      font-size: 0.85rem;
+      margin: 8px 0 0 0;
     }
     .lore {
       background: #fdf6e3;
-      color: #111111;
-      border: 1px solid #999999;
-      border-radius: 4px;
+      color: #1a1a1a;
+      border: 2px solid #8c6747;
+      border-radius: 2px;
       padding: 16px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       font-family: "Times New Roman", Times, serif;
       font-size: 1rem;
       line-height: 1.5;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
     }
     .week-accordion {
-      background: #131b2e;
-      border: 1px solid #1e293b;
-      border-radius: 8px;
+      background: #1a120a;
+      border: 2px outset #5c3a21;
       margin-bottom: 16px;
       overflow: hidden;
-      transition: border-color 0.2s;
-    }
-    .week-accordion:hover {
-      border-color: #38bdf8;
     }
     .week-header {
       width: 100%;
-      background: none;
+      background: linear-gradient(to bottom, #332211, #1f140a);
+      color: #ffcc00;
       border: none;
-      color: #e2e8f0;
-      padding: 16px 20px;
+      padding: 14px 20px;
       text-align: left;
+      font-family: "Courier New", Courier, monospace;
       font-size: 1.1rem;
-      font-weight: 600;
+      font-weight: bold;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      text-shadow: 1px 1px #000;
+    }
+    .week-header:hover {
+      background: linear-gradient(to bottom, #44301a, #2a1c10);
+      color: #ffffff;
     }
     .week-header .arrow {
-      transition: transform 0.3s ease;
       font-size: 1.1rem;
-      color: #38bdf8;
-    }
-    .week-accordion.active .arrow {
-      transform: rotate(90deg);
+      color: #ffcc00;
     }
     .week-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-out;
-      padding: 0 20px;
-      background: rgba(15, 23, 42, 0.6);
+      display: none;
+      padding: 20px;
+      background: #110c07;
+      border-top: 1px solid #332211;
     }
     .week-accordion.active .week-content {
-      max-height: 2000px;
-      padding: 20px;
-      border-top: 1px solid #1e293b;
+      display: block;
     }
     .song-card {
       display: flex;
       gap: 20px;
-      background: #131b2e;
-      border: 1px solid #1e293b;
-      border-radius: 8px;
+      background: #181008;
+      border: 2px inset #382414;
       padding: 16px;
       margin-bottom: 16px;
       align-items: flex-start;
@@ -122,15 +135,15 @@
     .song-cover {
       width: 110px;
       height: 110px;
-      border-radius: 6px;
       object-fit: cover;
-      background: #0f172a;
-      border: 1px solid #334155;
+      background: #000;
+      border: 2px solid #5c3a21;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.8);
     }
     .song-info {
       flex-grow: 1;
       font-family: "Times New Roman", Times, serif;
-      color: #fdf6e3;
+      color: #e0d0b0;
     }
     .song-title-row {
       display: flex;
@@ -139,63 +152,67 @@
       margin-bottom: 4px;
     }
     .song-title {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: bold;
-      color: #fdf6e3;
+      color: #ffcc00;
     }
     .song-year {
       font-size: 0.9rem;
-      color: #cccccc;
+      color: #b0a080;
+      font-family: "Courier New", Courier, monospace;
     }
     .song-artist {
-      font-size: 1rem;
-      color: #dddddd;
+      font-size: 1.05rem;
+      color: #d4af37;
       margin-bottom: 8px;
+      font-style: italic;
     }
     .song-lyric {
       font-size: 0.95rem;
-      color: #e2e8f0;
+      color: #cccccc;
       margin-bottom: 6px;
       font-style: italic;
     }
     .song-review {
       font-size: 0.95rem;
-      color: #e2e8f0;
+      color: #e0e0e0;
       margin-bottom: 8px;
     }
     .meta-row {
-      font-size: 0.9rem;
-      color: #cccccc;
+      font-size: 0.85rem;
+      color: #b0a080;
       margin-top: 6px;
+      font-family: "Courier New", Courier, monospace;
     }
     .score-best {
-      background: rgba(0, 255, 0, 0.15);
-      color: #4ade80;
-      border-color: rgba(74, 222, 128, 0.3);
-      font-weight: 600;
+      background: #103010;
+      color: #66ff66;
+      border: 1px solid #228b22;
+      font-weight: bold;
       text-align: center;
       width: 100%;
       box-sizing: border-box;
-      padding: 2px 6px;
-      border-radius: 4px;
+      padding: 3px 6px;
       font-size: 0.75rem;
+      font-family: "Courier New", Courier, monospace;
     }
     .score-worst {
-      background: rgba(255, 0, 0, 0.15);
-      color: #f87171;
-      border-color: rgba(248, 113, 113, 0.3);
-      font-weight: 600;
+      background: #301010;
+      color: #ff6666;
+      border: 1px solid #8b2222;
+      font-weight: bold;
       text-align: center;
       width: 100%;
       box-sizing: border-box;
-      padding: 2px 6px;
-      border-radius: 4px;
+      padding: 3px 6px;
       font-size: 0.75rem;
+      font-family: "Courier New", Courier, monospace;
     }
     audio {
       width: 100%;
       height: 32px;
       margin-top: 10px;
+      filter: sepia(0.8) contrast(1.2);
     }
     @media (max-width: 600px) {
       .song-card {
@@ -216,7 +233,8 @@
   <div class="container">
     <header>
       <h1>CELESTIAL RADIO FREQUENCIES</h1>
-      <p class="subtitle">[ ROOFTOP RELAY STATION LOGBOOK ]</p>
+      <div class="dial-display">FM 88.5 MHz [ TUBE RECEIVER ACTIVE ]</div>
+      <p class="subtitle">ROOFTOP IONOSPHERIC RELAY STATION LOGBOOK</p>
     </header>
 
     <div class="lore">
@@ -225,12 +243,11 @@
     </div>
 
     <div id="playlist-container">
-      <p style="text-align: center; color: #94a3b8;">Scanning frequencies...</p>
+      <p style="text-align: center; color: #ffcc00; font-family: 'Courier New';">WARMING UP VACUUM TUBES...</p>
     </div>
   </div>
 
   <script>
-    // Breviary-style liturgical week naming convention
     function getBreviaryWeekLabel(weekNum) {
       const num = Number(weekNum);
       if (num >= 1 && num <= 4) {
@@ -269,7 +286,6 @@
         const container = document.getElementById('playlist-container');
         container.innerHTML = '';
 
-        // Sort weeks descending (newest week at top)
         const sortedWeeks = Object.keys(weeksMap).sort((a, b) => Number(b) - Number(a));
 
         sortedWeeks.forEach((weekNum, index) => {
@@ -280,7 +296,7 @@
 
           const header = document.createElement('button');
           header.className = 'week-header';
-          header.innerHTML = `<span>${getBreviaryWeekLabel(weekNum)}</span> <span class="arrow">&#10148;</span>`;
+          header.innerHTML = `<span>${getBreviaryWeekLabel(weekNum)}</span> <span class="arrow">${index === 0 ? '▼' : '▶'}</span>`;
 
           const content = document.createElement('div');
           content.className = 'week-content';
@@ -320,6 +336,8 @@
 
           header.addEventListener('click', () => {
             accordion.classList.toggle('active');
+            const arrow = header.querySelector('.arrow');
+            arrow.textContent = accordion.classList.contains('active') ? '▼' : '▶';
           });
 
           accordion.appendChild(header);
@@ -331,28 +349,30 @@
 
       } catch (err) {
         console.error('Failed to load songs.json', err);
-        document.getElementById('playlist-container').innerHTML = '<p style="color: #f87171; text-align: center;">Failed to load celestial frequencies log.</p>';
+        document.getElementById('playlist-container').innerHTML = '<p style="color: #ff6666; text-align: center;">SIGNAL ERROR: FAILED TO PARSE FREQUENCIES.</p>';
       }
     }
 
-    // Web Audio "Bad Radio" Atmospheric Ambience & Quiet Output
+    // Advanced Web Audio Tube Receiver with Fluctuating Signal & 1s Fade-Out
     function attachRadioEffect() {
       let audioCtx;
       let ambienceMasterGain;
+      let filterNode, lfoGainNode;
+      let currentAudio = null;
+      let fadeOutInterval = null;
 
       function startRadioAmbience(ctx) {
         const master = ctx.createGain();
-        master.gain.value = 0; // Starts muted until play
+        master.gain.value = 0;
         master.connect(ctx.destination);
 
-        // 1. Textured Pink/White Noise Static + Occasional Crackle
+        // 1. Rich Atmospheric Pink Noise + Crackles
         const bufferSize = ctx.sampleRate * 4;
         const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const output = noiseBuffer.getChannelData(0);
         let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
         for (let i = 0; i < bufferSize; i++) {
           const white = Math.random() * 2 - 1;
-          // Pink noise filter approximation for warmer radio hiss
           b0 = 0.99886 * b0 + white * 0.0555179;
           b1 = 0.99332 * b1 + white * 0.0750759;
           b2 = 0.96900 * b2 + white * 0.1538520;
@@ -362,9 +382,8 @@
           let sample = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.05;
           b6 = white * 0.115926;
 
-          // Sparse atmospheric static pops/crackles
-          if (Math.random() < 0.0008) {
-            sample += (Math.random() * 2 - 1) * 0.45;
+          if (Math.random() < 0.0012) {
+            sample += (Math.random() * 2 - 1) * 0.6; // crackle
           }
           output[i] = sample;
         }
@@ -375,69 +394,69 @@
 
         const noiseFilter = ctx.createBiquadFilter();
         noiseFilter.type = 'bandpass';
-        noiseFilter.frequency.value = 1400;
-        noiseFilter.Q.value = 0.7;
+        noiseFilter.frequency.value = 1300;
+        noiseFilter.Q.value = 0.8;
 
         const noiseGain = ctx.createGain();
-        noiseGain.gain.value = 0.18; // Balanced ambient hiss level
+        noiseGain.gain.value = 0.22; // Slightly more aggressive background presence
 
         noiseSource.connect(noiseFilter);
         noiseFilter.connect(noiseGain);
         noiseGain.connect(master);
         noiseSource.start(0);
 
-        // 2. Low-frequency receiver mains hum (60Hz)
+        // 2. Aggressive 60Hz + 120Hz Transformer Hum (Anti-clipping headroom)
         const humOsc = ctx.createOscillator();
-        humOsc.type = 'triangle';
+        humOsc.type = 'sawtooth';
         humOsc.frequency.value = 60;
 
         const humFilter = ctx.createBiquadFilter();
         humFilter.type = 'lowpass';
-        humFilter.frequency.value = 120;
+        humFilter.frequency.value = 140;
 
         const humGain = ctx.createGain();
-        humGain.gain.value = 0.025; // Very subtle equipment hum
+        humGain.gain.value = 0.045; // Noticeable, deep analog hum
 
         humOsc.connect(humFilter);
         humFilter.connect(humGain);
         humGain.connect(master);
         humOsc.start(0);
 
-        // 3. Faint high-pitched atmospheric heterodyne carrier whistle
+        // 3. Drifting Ionospheric Carrier Whistle with Fluctuating Modulation
         const carrierOsc = ctx.createOscillator();
         carrierOsc.type = 'sine';
-        carrierOsc.frequency.value = 2650;
+        carrierOsc.frequency.value = 2400;
 
-        // Slow LFO to make the carrier pitch and static drift like a space signal
-        const lfo = ctx.createOscillator();
-        lfo.type = 'sine';
-        lfo.frequency.value = 0.18; // Slow wave every ~5.5 seconds
+        const carrierLfo = ctx.createOscillator();
+        carrierLfo.type = 'sine';
+        carrierLfo.frequency.value = 0.25; // Drifts every 4 seconds
 
-        const lfoPitchGain = ctx.createGain();
-        lfoPitchGain.gain.value = 35; // Drifts +/- 35Hz
+        const carrierLfoGain = ctx.createGain();
+        carrierLfoGain.gain.value = 55;
 
         const carrierGain = ctx.createGain();
-        carrierGain.gain.value = 0.003; // Whisper-quiet high tone
+        carrierGain.gain.value = 0.004;
 
-        lfo.connect(lfoPitchGain);
-        lfoPitchGain.connect(carrierOsc.frequency);
-
+        carrierLfo.connect(carrierLfoGain);
+        carrierLfoGain.connect(carrierOsc.frequency);
         carrierOsc.connect(carrierGain);
         carrierGain.connect(master);
 
-        lfo.start(0);
+        carrierLfo.start(0);
         carrierOsc.start(0);
 
         return master;
       }
 
-      function makeDistortionCurve(amount = 20) {
+      // Safe, anti-clipping tube saturation curve
+      function makeCleanTubeCurve(amount = 15) {
         const n_samples = 44100;
         const curve = new Float32Array(n_samples);
         const deg = Math.PI / 180;
         for (let i = 0; i < n_samples; ++i) {
           const x = (i * 2) / n_samples - 1;
-          curve[i] = ((3 + amount) * x * 20 * deg) / (Math.PI + amount * Math.abs(x));
+          // Soft-clipping hyperbolic tangent approximation to prevent digital clipping
+          curve[i] = Math.tanh(x * (1 + amount * 0.1)) / Math.tanh(1 + amount * 0.1);
         }
         return curve;
       }
@@ -446,11 +465,18 @@
 
       audioElements.forEach(audio => {
         let isConnected = false;
+        let songGainNode = null;
 
         audio.addEventListener('play', () => {
+          // Pause any other playing audio immediately
           audioElements.forEach(other => {
-            if (other !== audio) other.pause();
+            if (other !== audio) {
+              other.pause();
+              if (fadeOutInterval) clearInterval(fadeOutInterval);
+            }
           });
+
+          currentAudio = audio;
 
           if (!audioCtx) {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -462,51 +488,86 @@
             audioCtx.resume();
           }
 
-          // Fade in quiet ambience (overall master ambience volume = 0.25)
           if (ambienceMasterGain) {
-            ambienceMasterGain.gain.setTargetAtTime(0.25, audioCtx.currentTime, 0.15);
+            ambienceMasterGain.gain.setTargetAtTime(0.3, audioCtx.currentTime, 0.2);
           }
 
           if (!isConnected) {
             const source = audioCtx.createMediaElementSource(audio);
             
-            // Bandpass filter for vintage radio speaker tone
-            const bandpass = audioCtx.createBiquadFilter();
-            bandpass.type = 'bandpass';
-            bandpass.frequency.value = 1150;
-            bandpass.Q.value = 0.9;
+            // Bandpass filter for vintage speaker telephony tone
+            filterNode = audioCtx.createBiquadFilter();
+            filterNode.type = 'bandpass';
+            filterNode.frequency.value = 1100;
+            filterNode.Q.value = 1.0;
 
-            // Gentle analog saturation
+            // LFO to dynamically fluctuate the filter frequency (simulating signal fading & ionospheric drift)
+            const signalLfo = audioCtx.createOscillator();
+            signalLfo.type = 'sine';
+            signalLfo.frequency.value = 0.35; // Fluctuates every ~3 seconds
+
+            lfoGainNode = audioCtx.createGain();
+            lfoGainNode.gain.value = 250; // Sweeps filter center frequency by +/- 250Hz
+
+            signalLfo.connect(lfoGainNode);
+            lfoGainNode.connect(filterNode.frequency);
+            signalLfo.start(0);
+
+            // Tube Distortion (Waveshaper) with zero digital clipping
             const distortion = audioCtx.createWaveShaper();
-            distortion.curve = makeDistortionCurve(22);
+            distortion.curve = makeCleanTubeCurve(18);
             distortion.oversample = '4x';
 
-            // Lower overall music output so the whole experience is noticeably quieter
-            const quietGain = audioCtx.createGain();
-            quietGain.gain.value = 0.65;
+            // Safe volume gain to keep music clearly audible yet quiet and unclipped
+            songGainNode = audioCtx.createGain();
+            songGainNode.gain.value = 0.55;
 
-            source.connect(bandpass);
-            bandpass.connect(distortion);
-            distortion.connect(quietGain);
-            quietGain.connect(audioCtx.destination);
+            source.connect(filterNode);
+            filterNode.connect(distortion);
+            distortion.connect(songGainNode);
+            songGainNode.connect(audioCtx.destination);
 
+            audio._songGainNode = songGainNode;
             isConnected = true;
+          } else if (audio._songGainNode) {
+            // Reset gain if replayed
+            audio._songGainNode.gain.setValueAtTime(0.55, audioCtx.currentTime);
           }
         });
 
-        const stopAmbience = () => {
-          const anyPlaying = Array.from(audioElements).some(el => !el.paused);
-          if (!anyPlaying && ambienceMasterGain && audioCtx) {
-            ambienceMasterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.1);
-          }
-        };
+        // 1-second smooth fade-out when paused or ending
+        audio.addEventListener('pause', () => {
+          handleFadeOut(audio);
+        });
 
-        audio.addEventListener('pause', stopAmbience);
-        audio.addEventListener('ended', stopAmbience);
+        audio.addEventListener('ended', () => {
+          handleFadeOut(audio);
+        });
       });
+
+      function handleFadeOut(audio) {
+        if (audio._songGainNode && audioCtx) {
+          const gainNode = audio._songGainNode;
+          const currentTime = audioCtx.currentTime;
+          // Smooth 1-second ramp down to 0
+          gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
+          gainNode.gain.linearRampToValueAtTime(0.0001, currentTime + 1.0);
+        }
+
+        const anyPlaying = Array.from(audioElements).some(el => !el.paused);
+        if (!anyPlaying && ambienceMasterGain && audioCtx) {
+          ambienceMasterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.5);
+        }
+      }
     }
 
     loadPlaylist();
   </script>
 </body>
 </html>
+"""
+
+with open("songs.html", "w", encoding="utf-8") as f:
+    f.write(index_html)
+
+print("Successfully updated songs.html with old radio visuals, 1s fade-out, anti-clipping audio, and fluctuating background hum.")
