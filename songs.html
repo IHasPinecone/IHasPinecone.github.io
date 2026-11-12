@@ -269,6 +269,7 @@
         const container = document.getElementById('playlist-container');
         container.innerHTML = '';
 
+        // Sort weeks descending (newest week at top)
         const sortedWeeks = Object.keys(weeksMap).sort((a, b) => Number(b) - Number(a));
 
         sortedWeeks.forEach((weekNum, index) => {
@@ -285,7 +286,6 @@
           content.className = 'week-content';
 
           weekSongs.forEach(song => {
-            // Genres list joined by commas
             const genreList = song.genres ? song.genres.split(',').map(g => g.trim()).filter(Boolean).join(', ') : '';
             const coverSrc = song.cover || 'https://via.placeholder.com/600';
             
@@ -312,7 +312,7 @@
                 ${song.lyric ? `<div class="song-lyric">“${song.lyric}”</div>` : ''}
                 ${song.review ? `<div class="song-review">${song.review}</div>` : ''}
                 ${genreList ? `<div class="meta-row">Genres: ${genreList}</div>` : ''}
-                ${song.preview_url ? `<audio controls src="${song.preview_url}"></audio>` : ''}
+                ${song.preview_url ? `<audio controls crossorigin="anonymous" src="${song.preview_url}"></audio>` : ''}
               </div>
             `;
             content.appendChild(card);
@@ -327,10 +327,111 @@
           container.appendChild(accordion);
         });
 
+        attachRadioEffect();
+
       } catch (err) {
         console.error('Failed to load songs.json', err);
         document.getElementById('playlist-container').innerHTML = '<p style="color: #f87171; text-align: center;">Failed to load celestial frequencies log.</p>';
       }
+    }
+
+    // Web Audio "Bad Radio" Static & Distortion Effect
+    function attachRadioEffect() {
+      let audioCtx;
+      let staticNode;
+
+      function startRadioStatic(ctx) {
+        const bufferSize = ctx.sampleRate * 2;
+        const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = Math.random() * 2 - 1;
+        }
+
+        const whiteNoise = ctx.createBufferSource();
+        whiteNoise.buffer = noiseBuffer;
+        whiteNoise.loop = true;
+
+        const staticFilter = ctx.createBiquadFilter();
+        staticFilter.type = 'bandpass';
+        staticFilter.frequency.value = 1800;
+
+        const staticGain = ctx.createGain();
+        staticGain.gain.value = 0.015;
+
+        whiteNoise.connect(staticFilter);
+        staticFilter.connect(staticGain);
+        staticGain.connect(ctx.destination);
+        whiteNoise.start(0);
+        return staticGain;
+      }
+
+      function makeDistortionCurve(amount = 25) {
+        const n_samples = 44100;
+        const curve = new Float32Array(n_samples);
+        const deg = Math.PI / 180;
+        for (let i = 0; i < n_samples; ++i) {
+          const x = (i * 2) / n_samples - 1;
+          curve[i] = ((3 + amount) * x * 20 * deg) / (Math.PI + amount * Math.abs(x));
+        }
+        return curve;
+      }
+
+      const audioElements = document.querySelectorAll('audio');
+
+      audioElements.forEach(audio => {
+        let isConnected = false;
+
+        audio.addEventListener('play', () => {
+          audioElements.forEach(other => {
+            if (other !== audio) other.pause();
+          });
+
+          if (!audioCtx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioContext();
+            staticNode = startRadioStatic(audioCtx);
+          }
+
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+
+          if (staticNode) staticNode.gain.value = 0.015;
+
+          if (!isConnected) {
+            const source = audioCtx.createMediaElementSource(audio);
+            const bandpass = audioCtx.createBiquadFilter();
+            bandpass.type = 'bandpass';
+            bandpass.frequency.value = 1200;
+            bandpass.Q.value = 0.85;
+
+            const distortion = audioCtx.createWaveShaper();
+            distortion.curve = makeDistortionCurve(30);
+            distortion.oversample = '4x';
+
+            const makeupGain = audioCtx.createGain();
+            makeupGain.gain.value = 1.8;
+
+            source.connect(bandpass);
+            bandpass.connect(distortion);
+            distortion.connect(makeupGain);
+            makeupGain.connect(audioCtx.destination);
+
+            isConnected = true;
+          }
+        });
+
+        const stopStatic = () => {
+          const anyPlaying = Array.from(audioElements).some(el => !el.paused);
+          if (!anyPlaying && staticNode) {
+            staticNode.gain.value = 0;
+          }
+        };
+
+        audio.addEventListener('pause', stopStatic);
+        audio.addEventListener('ended', stopStatic);
+      });
     }
 
     loadPlaylist();
