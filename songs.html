@@ -1,10 +1,7 @@
-# Let's update index.html (saved as songs.html as per previous turn) with:
-# 1. 1-second smooth fade-out at the end of each audio playback.
-# 2. Visual redesign for an old radio aesthetic (tacky early web / vintage radio cabinet feel, dial/tuner aesthetic touches, warm amber/green vacuum-tube glowing accents, wood/metal/dark textures, monospace radio frequency styling).
-# 3. Audio adjustments: 
-#    - Prevent clipping entirely by lowering music gain further and using a smoother, cleaner waveshaper curve.
-#    - More aggressive background hum (richer 60Hz/120Hz transformer harmonics) combined with atmospheric static.
-#    - Fluctuating radio effect (dynamic LFO modulating the bandpass frequency and distortion depth over the 30-second clip duration so it wavers and drifts like a real shortwave/space signal).
+# Let's update index.html (or songs.html) with:
+# 1. A soft 1-second static "power-on" burst right at the beginning when play is clicked.
+# 2. More aggressive overall background static/hiss level.
+# 3. Occasional dynamic static bursts that flare up for 0.5 to 1.5 seconds at random intervals while the clip plays.
 
 index_html = """<!DOCTYPE html>
 <html lang="en">
@@ -353,20 +350,19 @@ index_html = """<!DOCTYPE html>
       }
     }
 
-    // Advanced Web Audio Tube Receiver with Fluctuating Signal & 1s Fade-Out
+    // Advanced Tube Receiver with 1s Power-On Static Burst, Aggressive Hiss, and Occasional Bursts
     function attachRadioEffect() {
       let audioCtx;
       let ambienceMasterGain;
-      let filterNode, lfoGainNode;
-      let currentAudio = null;
-      let fadeOutInterval = null;
+      let noiseGainNode, filterNode;
+      let burstInterval = null;
 
       function startRadioAmbience(ctx) {
         const master = ctx.createGain();
         master.gain.value = 0;
         master.connect(ctx.destination);
 
-        // 1. Rich Atmospheric Pink Noise + Crackles
+        // 1. Aggressive Pink Noise + Crackles
         const bufferSize = ctx.sampleRate * 4;
         const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const output = noiseBuffer.getChannelData(0);
@@ -379,11 +375,11 @@ index_html = """<!DOCTYPE html>
           b3 = 0.86650 * b3 + white * 0.3104856;
           b4 = 0.55000 * b4 + white * 0.5329522;
           b5 = -0.7616 * b5 - white * 0.0168980;
-          let sample = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.05;
+          let sample = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.06;
           b6 = white * 0.115926;
 
-          if (Math.random() < 0.0012) {
-            sample += (Math.random() * 2 - 1) * 0.6; // crackle
+          if (Math.random() < 0.0025) {
+            sample += (Math.random() * 2 - 1) * 0.9; // heavier crackle
           }
           output[i] = sample;
         }
@@ -394,48 +390,48 @@ index_html = """<!DOCTYPE html>
 
         const noiseFilter = ctx.createBiquadFilter();
         noiseFilter.type = 'bandpass';
-        noiseFilter.frequency.value = 1300;
-        noiseFilter.Q.value = 0.8;
+        noiseFilter.frequency.value = 1400;
+        noiseFilter.Q.value = 0.65;
 
-        const noiseGain = ctx.createGain();
-        noiseGain.gain.value = 0.22; // Slightly more aggressive background presence
+        noiseGainNode = ctx.createGain();
+        noiseGainNode.gain.value = 0.38; // Noticeably more aggressive background static hiss
 
         noiseSource.connect(noiseFilter);
-        noiseFilter.connect(noiseGain);
-        noiseGain.connect(master);
+        noiseFilter.connect(noiseGainNode);
+        noiseGainNode.connect(master);
         noiseSource.start(0);
 
-        // 2. Aggressive 60Hz + 120Hz Transformer Hum (Anti-clipping headroom)
+        // 2. Transformer Hum (60Hz + 120Hz)
         const humOsc = ctx.createOscillator();
         humOsc.type = 'sawtooth';
         humOsc.frequency.value = 60;
 
         const humFilter = ctx.createBiquadFilter();
         humFilter.type = 'lowpass';
-        humFilter.frequency.value = 140;
+        humFilter.frequency.value = 150;
 
         const humGain = ctx.createGain();
-        humGain.gain.value = 0.045; // Noticeable, deep analog hum
+        humGain.gain.value = 0.055;
 
         humOsc.connect(humFilter);
         humFilter.connect(humGain);
         humGain.connect(master);
         humOsc.start(0);
 
-        // 3. Drifting Ionospheric Carrier Whistle with Fluctuating Modulation
+        // 3. Carrier Whistle
         const carrierOsc = ctx.createOscillator();
         carrierOsc.type = 'sine';
         carrierOsc.frequency.value = 2400;
 
         const carrierLfo = ctx.createOscillator();
         carrierLfo.type = 'sine';
-        carrierLfo.frequency.value = 0.25; // Drifts every 4 seconds
+        carrierLfo.frequency.value = 0.3;
 
         const carrierLfoGain = ctx.createGain();
-        carrierLfoGain.gain.value = 55;
+        carrierLfoGain.gain.value = 65;
 
         const carrierGain = ctx.createGain();
-        carrierGain.gain.value = 0.004;
+        carrierGain.gain.value = 0.005;
 
         carrierLfo.connect(carrierLfoGain);
         carrierLfoGain.connect(carrierOsc.frequency);
@@ -448,14 +444,11 @@ index_html = """<!DOCTYPE html>
         return master;
       }
 
-      // Safe, anti-clipping tube saturation curve
       function makeCleanTubeCurve(amount = 15) {
         const n_samples = 44100;
         const curve = new Float32Array(n_samples);
-        const deg = Math.PI / 180;
         for (let i = 0; i < n_samples; ++i) {
           const x = (i * 2) / n_samples - 1;
-          // Soft-clipping hyperbolic tangent approximation to prevent digital clipping
           curve[i] = Math.tanh(x * (1 + amount * 0.1)) / Math.tanh(1 + amount * 0.1);
         }
         return curve;
@@ -468,15 +461,11 @@ index_html = """<!DOCTYPE html>
         let songGainNode = null;
 
         audio.addEventListener('play', () => {
-          // Pause any other playing audio immediately
           audioElements.forEach(other => {
             if (other !== audio) {
               other.pause();
-              if (fadeOutInterval) clearInterval(fadeOutInterval);
             }
           });
-
-          currentAudio = audio;
 
           if (!audioCtx) {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -488,37 +477,53 @@ index_html = """<!DOCTYPE html>
             audioCtx.resume();
           }
 
+          const now = audioCtx.currentTime;
+
+          // POWER-ON STATIC BURST: Soft 1-second static burst when turning on / playing
           if (ambienceMasterGain) {
-            ambienceMasterGain.gain.setTargetAtTime(0.3, audioCtx.currentTime, 0.2);
+            ambienceMasterGain.gain.cancelScheduledValues(now);
+            ambienceMasterGain.gain.setValueAtTime(0.85, now); // Loud power-on static
+            ambienceMasterGain.gain.linearRampToValueAtTime(0.35, now + 1.0); // settles into aggressive background hiss
           }
+
+          // OCCASIONAL AGGRESSIVE STATIC FLARES: Flaring up for 0.5 to 1.5 seconds at random intervals
+          if (burstInterval) clearInterval(burstInterval);
+          burstInterval = setInterval(() => {
+            if (!audio.paused && noiseGainNode && audioCtx) {
+              const burstTime = audioCtx.currentTime;
+              const burstDuration = 0.5 + Math.random() * 1.0; // 0.5s to 1.5s
+              noiseGainNode.gain.cancelScheduledValues(burstTime);
+              noiseGainNode.gain.setValueAtTime(0.38, burstTime);
+              noiseGainNode.gain.linearRampToValueAtTime(0.75, burstTime + 0.1); // jump to aggressive static
+              noiseGainNode.gain.linearRampToValueAtTime(0.38, burstTime + burstDuration); // return after 0.5s - 1.5s
+            } else {
+              clearInterval(burstInterval);
+            }
+          }, 3500); // Check/trigger roughly every 3.5 seconds
 
           if (!isConnected) {
             const source = audioCtx.createMediaElementSource(audio);
             
-            // Bandpass filter for vintage speaker telephony tone
             filterNode = audioCtx.createBiquadFilter();
             filterNode.type = 'bandpass';
             filterNode.frequency.value = 1100;
             filterNode.Q.value = 1.0;
 
-            // LFO to dynamically fluctuate the filter frequency (simulating signal fading & ionospheric drift)
             const signalLfo = audioCtx.createOscillator();
             signalLfo.type = 'sine';
-            signalLfo.frequency.value = 0.35; // Fluctuates every ~3 seconds
+            signalLfo.frequency.value = 0.4;
 
-            lfoGainNode = audioCtx.createGain();
-            lfoGainNode.gain.value = 250; // Sweeps filter center frequency by +/- 250Hz
+            const lfoGainNode = audioCtx.createGain();
+            lfoGainNode.gain.value = 280;
 
             signalLfo.connect(lfoGainNode);
             lfoGainNode.connect(filterNode.frequency);
             signalLfo.start(0);
 
-            // Tube Distortion (Waveshaper) with zero digital clipping
             const distortion = audioCtx.createWaveShaper();
             distortion.curve = makeCleanTubeCurve(18);
             distortion.oversample = '4x';
 
-            // Safe volume gain to keep music clearly audible yet quiet and unclipped
             songGainNode = audioCtx.createGain();
             songGainNode.gain.value = 0.55;
 
@@ -530,12 +535,10 @@ index_html = """<!DOCTYPE html>
             audio._songGainNode = songGainNode;
             isConnected = true;
           } else if (audio._songGainNode) {
-            // Reset gain if replayed
-            audio._songGainNode.gain.setValueAtTime(0.55, audioCtx.currentTime);
+            audio._songGainNode.gain.setValueAtTime(0.55, now);
           }
         });
 
-        // 1-second smooth fade-out when paused or ending
         audio.addEventListener('pause', () => {
           handleFadeOut(audio);
         });
@@ -546,12 +549,13 @@ index_html = """<!DOCTYPE html>
       });
 
       function handleFadeOut(audio) {
+        if (burstInterval) clearInterval(burstInterval);
+        
         if (audio._songGainNode && audioCtx) {
           const gainNode = audio._songGainNode;
           const currentTime = audioCtx.currentTime;
-          // Smooth 1-second ramp down to 0
           gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
-          gainNode.gain.linearRampToValueAtTime(0.0001, currentTime + 1.0);
+          gainNode.gain.linearRampToValueAtTime(0.0001, currentTime + 1.0); // 1s fade out
         }
 
         const anyPlaying = Array.from(audioElements).some(el => !el.paused);
@@ -570,4 +574,4 @@ index_html = """<!DOCTYPE html>
 with open("songs.html", "w", encoding="utf-8") as f:
     f.write(index_html)
 
-print("Successfully updated songs.html with old radio visuals, 1s fade-out, anti-clipping audio, and fluctuating background hum.")
+print("Successfully updated songs.html with 1s power-on static burst, aggressive background hiss, and occasional flare-ups lasting 0.5s to 1.5s.")
