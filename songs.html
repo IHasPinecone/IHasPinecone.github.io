@@ -1,3 +1,11 @@
+# Let's inspect the user's home page color scheme from the screenshot:
+# Background: Dusty pink / pastel pink (#f2bcbc or #f0b5b5 approx)
+# Sidebar / secondary container background: Warm tan / peach / yellow-orange (#f5c282 or similar)
+# Borders / text headers: Rich maroon / reddish brown (#7a2e2e or #6e2626)
+# Main content text color: Dark brown / black
+# Header background / card fill: Cream / parchment (#fdf6e3 or #fbf3dc)
+# Accent / buttons: Matching tan/peach with brown borders
+
 html_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +14,8 @@ html_content = """<!DOCTYPE html>
   <title>CELESTIAL RADIO FREQUENCIES - TUBE RECEIVER LOG</title>
   <style>
     body {
-      background-color: #0c0804;
-      background-image: 
-        radial-gradient(circle at 50% 30%, #2a1806 0%, #0c0804 70%),
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px);
-      color: #e0d0b0;
+      background-color: #f2bcbc; /* Matching user's home page pastel pink background */
+      color: #3b1d1d;
       font-family: "Courier New", Courier, monospace;
       margin: 0;
       padding: 20px;
@@ -19,49 +24,55 @@ html_content = """<!DOCTYPE html>
       max-width: 800px;
       margin: 0 auto;
       padding: 24px;
-      background: #140e08;
-      box-shadow: 0 0 30px rgba(0,0,0,0.9);
+      background: #fbf3dc; /* Parchment cream matching home card style */
+      border: 4px solid #7a2e2e; /* Rich maroon border matching home layout */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
     header {
       text-align: center;
       margin-bottom: 25px;
-      padding-bottom: 10px;
-      background: radial-gradient(ellipse at center, #1f140a 0%, #140e08 100%);
+      padding-bottom: 12px;
+      border-bottom: 3px double #7a2e2e;
+      background: #f5c282; /* Warm tan matching home sidebar accent */
+      border: 2px solid #7a2e2e;
+      padding: 15px;
     }
     header h1 {
-      font-size: 2rem;
-      margin-bottom: 8px;
-      color: #ffcc00;
-      text-shadow: 0 0 10px #ff6600, 2px 2px #000;
-      letter-spacing: 2px;
+      font-size: 1.8rem;
+      margin: 0 0 8px 0;
+      color: #7a2e2e;
+      text-shadow: 1px 1px #fff;
+      letter-spacing: 1px;
     }
     .subtitle {
-      color: #b0a080;
+      color: #5c2424;
       font-size: 0.85rem;
-      margin: 8px 0 0 0;
+      margin: 0;
+      font-weight: bold;
     }
     .lore {
-      background: #fdf6e3;
-      color: #1a1a1a;
-      border: 2px solid #8c6747;
+      background: #fefdf6;
+      color: #2b1515;
+      border: 2px solid #7a2e2e;
       border-radius: 2px;
       padding: 16px;
       margin-bottom: 25px;
       font-family: "Times New Roman", Times, serif;
       font-size: 1rem;
       line-height: 1.5;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: inset 0 0 8px rgba(122,46,46,0.1);
     }
     .week-accordion {
-      background: #1a120a;
-      border: 2px outset #5c3a21;
+      background: #f5c282; /* Warm tan matching sidebar */
+      border: 3px solid #7a2e2e;
       margin-bottom: 16px;
       overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .week-header {
       width: 100%;
-      background: linear-gradient(to bottom, #332211, #1f140a);
-      color: #ffcc00;
+      background: #f5c282;
+      color: #7a2e2e;
       border: none;
       padding: 14px 20px;
       text-align: left;
@@ -72,21 +83,21 @@ html_content = """<!DOCTYPE html>
       display: flex;
       justify-content: space-between;
       align-items: center;
-      text-shadow: 1px 1px #000;
+      text-shadow: 1px 1px #fff;
     }
     .week-header:hover {
-      background: linear-gradient(to bottom, #44301a, #2a1c10);
-      color: #ffffff;
+      background: #f0b26b;
+      color: #531f1f;
     }
     .week-header .arrow {
       font-size: 1.1rem;
-      color: #ffcc00;
+      color: #7a2e2e;
     }
     .week-content {
       display: none;
       padding: 20px;
-      background: #110c07;
-      border-top: 1px solid #332211;
+      background: #fbf3dc;
+      border-top: 2px solid #7a2e2e;
     }
     .week-accordion.active .week-content {
       display: block;
@@ -94,11 +105,12 @@ html_content = """<!DOCTYPE html>
     .song-card {
       display: flex;
       gap: 20px;
-      background: #181008;
-      border: 2px inset #382414;
+      background: #fefdf6;
+      border: 3px solid #7a2e2e;
       padding: 16px;
       margin-bottom: 16px;
       align-items: flex-start;
+      box-shadow: 2px 2px 6px rgba(122,46,46,0.15);
     }
     .song-card:last-child {
       margin-bottom: 0;
@@ -115,13 +127,13 @@ html_content = """<!DOCTYPE html>
       height: 110px;
       object-fit: cover;
       background: #000;
-      border: 2px solid #5c3a21;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+      border: 2px solid #7a2e2e;
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
     .song-info {
       flex-grow: 1;
       font-family: "Times New Roman", Times, serif;
-      color: #e0d0b0;
+      color: #3b1d1d;
     }
     .song-title-row {
       display: flex;
@@ -132,34 +144,35 @@ html_content = """<!DOCTYPE html>
     .song-title {
       font-size: 1.2rem;
       font-weight: bold;
-      color: #ffcc00;
+      color: #7a2e2e;
     }
     .song-year {
       font-size: 0.9rem;
-      color: #b0a080;
+      color: #6e4428;
       font-family: "Courier New", Courier, monospace;
     }
     .song-artist {
       font-size: 1.05rem;
-      color: #d4af37;
+      color: #8c3f1e;
       margin-bottom: 8px;
       font-style: italic;
+      font-weight: bold;
     }
     .song-lyric {
       font-size: 0.95rem;
-      color: #cccccc;
+      color: #4a2810;
       margin-bottom: 6px;
       font-style: italic;
     }
     .song-review {
       font-size: 0.95rem;
-      color: #e0e0e0;
+      color: #3b1d1d;
       margin-bottom: 8px;
     }
     .score-best {
-      background: #103010;
-      color: #66ff66;
-      border: 1px solid #228b22;
+      background: #2e6b30;
+      color: #ffffff;
+      border: 1px solid #1a3d1b;
       font-weight: bold;
       text-align: center;
       width: 100%;
@@ -169,9 +182,9 @@ html_content = """<!DOCTYPE html>
       font-family: "Courier New", Courier, monospace;
     }
     .score-worst {
-      background: #301010;
-      color: #ff6666;
-      border: 1px solid #8b2222;
+      background: #8c2828;
+      color: #ffffff;
+      border: 1px solid #4a1515;
       font-weight: bold;
       text-align: center;
       width: 100%;
@@ -181,87 +194,84 @@ html_content = """<!DOCTYPE html>
       font-family: "Courier New", Courier, monospace;
     }
 
-    /* Clean Analogue Player with Triangle Play Button, Normal Dot Scrubber & Volume Control */
+    /* Clean Retro Player matching the Maroon/Tan aesthetic */
     .analogue-player {
       margin-top: 14px;
-      background: linear-gradient(180deg, #2c1e12 0%, #1a1109 100%);
-      border: 3px ridge #6e4726;
+      background: #f5c282;
+      border: 3px solid #7a2e2e;
       padding: 10px 14px;
       display: flex;
       align-items: center;
       gap: 12px;
-      box-shadow: inset 0 0 12px #000, 0 2px 5px rgba(0,0,0,0.8);
+      box-shadow: inset 0 0 8px rgba(122,46,46,0.2), 0 2px 4px rgba(0,0,0,0.1);
       font-family: "Courier New", Courier, monospace;
     }
 
     .play-btn {
-      background: linear-gradient(180deg, #d8d0c0 0%, #9e9482 100%);
-      border: 3px outset #e8e0d0;
-      width: 38px;
-      height: 38px;
+      background: #fefdf6;
+      border: 2px solid #7a2e2e;
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 3px 4px rgba(0,0,0,0.9);
+      box-shadow: 0 2px 3px rgba(0,0,0,0.2);
       flex-shrink: 0;
     }
     .play-btn:active, .play-btn.engaged {
+      background: #e6b070;
       border-style: inset;
-      background: linear-gradient(180deg, #8c8270 0%, #b5ab98 100%);
       transform: translateY(1px);
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
     }
 
     /* Play/Pause Triangle Icon */
     .play-icon {
       width: 0;
       height: 0;
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-      border-left: 12px solid #1a1109;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 10px solid #7a2e2e;
       margin-left: 2px;
       transition: all 0.1s ease;
     }
     .play-btn.engaged .play-icon {
-      width: 4px;
-      height: 12px;
-      border: solid #1a1109;
-      border-width: 0 3px;
+      width: 3px;
+      height: 10px;
+      border: solid #7a2e2e;
+      border-width: 0 2.5px;
       background: transparent;
       border-top: none;
       border-bottom: none;
       border-left: none;
       border-right: none;
-      box-shadow: 6px 0 0 #1a1109;
+      box-shadow: 5px 0 0 #7a2e2e;
       margin-left: -2px;
     }
 
     .pilot-lamp {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: #331100;
-      border: 2px inset #4a2e16;
-      box-shadow: inset 0 0 3px #000;
+      background: #531f1f;
+      border: 2px solid #7a2e2e;
       flex-shrink: 0;
       transition: all 0.15s ease;
     }
     .analogue-player.playing .pilot-lamp {
-      background: #ff6600;
-      box-shadow: 0 0 8px #ff6600, 0 0 14px #ff3300, inset 0 0 4px #ffff99;
+      background: #e65c00;
+      box-shadow: 0 0 6px #ff6600, 0 0 10px #ff3300;
     }
 
     /* Normal Dot Scrubber Track */
     .scrubber-track {
       flex-grow: 1;
       height: 6px;
-      background: #090502;
-      border: 2px inset #3a2211;
+      background: #fbf3dc;
+      border: 2px solid #7a2e2e;
       position: relative;
       cursor: pointer;
       border-radius: 3px;
-      box-shadow: inset 0 0 4px #000;
     }
 
     .scrubber-fill {
@@ -269,59 +279,56 @@ html_content = """<!DOCTYPE html>
       top: 0;
       left: 0;
       bottom: 0;
-      background: #d4af37;
-      border-radius: 2px 0 0 2px;
+      background: #7a2e2e;
+      border-radius: 1px 0 0 1px;
       pointer-events: none;
       width: 0%;
-      box-shadow: 0 0 4px #ffcc00;
     }
 
     .scrubber-dot {
       position: absolute;
       top: 50%;
-      width: 12px;
-      height: 12px;
-      background: radial-gradient(circle at 30% 30%, #fff 0%, #ffcc00 60%, #995500 100%);
-      border: 1px solid #5c3a21;
+      width: 10px;
+      height: 10px;
+      background: #7a2e2e;
+      border: 1px solid #fbf3dc;
       border-radius: 50%;
       transform: translate(-50%, -50%);
       left: 0%;
       pointer-events: none;
-      box-shadow: 0 0 5px #ff6600;
     }
 
     .tuner-readout {
       font-size: 0.75rem;
-      color: #d4af37;
+      color: #7a2e2e;
       min-width: 40px;
       text-align: right;
       font-weight: bold;
     }
 
-    /* Volume Slider next to Player */
+    /* Volume Slider */
     .volume-control {
       display: flex;
       align-items: center;
       gap: 6px;
       padding-left: 8px;
-      border-left: 1px solid #4a2e16;
+      border-left: 1px solid #7a2e2e;
       flex-shrink: 0;
     }
 
     .volume-label {
       font-size: 0.7rem;
-      color: #b0a080;
+      color: #7a2e2e;
       font-weight: bold;
-      letter-spacing: 0.5px;
     }
 
     .volume-slider {
       -webkit-appearance: none;
       appearance: none;
-      width: 60px;
+      width: 55px;
       height: 5px;
-      background: #090502;
-      border: 1px inset #3a2211;
+      background: #fbf3dc;
+      border: 1px solid #7a2e2e;
       border-radius: 3px;
       outline: none;
       cursor: pointer;
@@ -330,23 +337,19 @@ html_content = """<!DOCTYPE html>
     .volume-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #fff 0%, #ffcc00 60%, #995500 100%);
-      border: 1px solid #5c3a21;
+      background: #7a2e2e;
       cursor: pointer;
-      box-shadow: 0 0 4px #ff6600;
     }
 
     .volume-slider::-moz-range-thumb {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #fff 0%, #ffcc00 60%, #995500 100%);
-      border: 1px solid #5c3a21;
+      background: #7a2e2e;
       cursor: pointer;
-      box-shadow: 0 0 4px #ff6600;
     }
 
     @media (max-width: 600px) {
@@ -389,7 +392,7 @@ html_content = """<!DOCTYPE html>
     </div>
 
     <div id="playlist-container">
-      <p style="text-align: center; color: #ffcc00; font-family: 'Courier New';">WARMING UP VACUUM TUBES...</p>
+      <p style="text-align: center; color: #7a2e2e; font-family: 'Courier New';">WARMING UP VACUUM TUBES...</p>
     </div>
   </div>
 
@@ -510,7 +513,7 @@ html_content = """<!DOCTYPE html>
 
       } catch (err) {
         console.error('Failed to load songs.json', err);
-        document.getElementById('playlist-container').innerHTML = '<p style="color: #ff6666; text-align: center;">SIGNAL ERROR: FAILED TO PARSE FREQUENCIES.</p>';
+        document.getElementById('playlist-container').innerHTML = '<p style="color: #8c2828; text-align: center;">SIGNAL ERROR: FAILED TO PARSE FREQUENCIES.</p>';
       }
     }
 
@@ -520,7 +523,6 @@ html_content = """<!DOCTYPE html>
       let noiseGainNode;
       let burstInterval = null;
 
-      // Calibrated static strength set to 0.15 per user specification
       const BASE_STATIC_GAIN = 0.15;
       let currentMasterVolume = 0.8;
 
@@ -673,7 +675,6 @@ html_content = """<!DOCTYPE html>
 
         volSlider.addEventListener('input', () => {
           currentMasterVolume = parseFloat(volSlider.value);
-          // Sync all volume sliders on the page so volume feels consistent across the receiver
           allVolumeSliders.forEach(s => s.value = currentMasterVolume);
 
           if (audioCtx) {
@@ -832,7 +833,7 @@ html_content = """<!DOCTYPE html>
 </html>
 """
 
-with open("songs-v3.html", "w", encoding="utf-8") as f:
+with open("songs.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print("Successfully generated songs-v3.html")
+print("Successfully updated songs.html to match the home page color scheme.")
