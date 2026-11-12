@@ -254,7 +254,7 @@
 
     async function loadPlaylist() {
       try {
-        const response = await fetch('songs.json');
+        const response = await fetch('./songs.json');
         const songs = await response.json();
 
         const weeksMap = {};
@@ -335,38 +335,103 @@
       }
     }
 
-    // Web Audio "Bad Radio" Static & Distortion Effect
+    // Web Audio "Bad Radio" Atmospheric Ambience & Quiet Output
     function attachRadioEffect() {
       let audioCtx;
-      let staticNode;
+      let ambienceMasterGain;
 
-      function startRadioStatic(ctx) {
-        const bufferSize = ctx.sampleRate * 2;
+      function startRadioAmbience(ctx) {
+        const master = ctx.createGain();
+        master.gain.value = 0; // Starts muted until play
+        master.connect(ctx.destination);
+
+        // 1. Textured Pink/White Noise Static + Occasional Crackle
+        const bufferSize = ctx.sampleRate * 4;
         const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const output = noiseBuffer.getChannelData(0);
+        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
         for (let i = 0; i < bufferSize; i++) {
-          output[i] = Math.random() * 2 - 1;
+          const white = Math.random() * 2 - 1;
+          // Pink noise filter approximation for warmer radio hiss
+          b0 = 0.99886 * b0 + white * 0.0555179;
+          b1 = 0.99332 * b1 + white * 0.0750759;
+          b2 = 0.96900 * b2 + white * 0.1538520;
+          b3 = 0.86650 * b3 + white * 0.3104856;
+          b4 = 0.55000 * b4 + white * 0.5329522;
+          b5 = -0.7616 * b5 - white * 0.0168980;
+          let sample = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.05;
+          b6 = white * 0.115926;
+
+          // Sparse atmospheric static pops/crackles
+          if (Math.random() < 0.0008) {
+            sample += (Math.random() * 2 - 1) * 0.45;
+          }
+          output[i] = sample;
         }
 
-        const whiteNoise = ctx.createBufferSource();
-        whiteNoise.buffer = noiseBuffer;
-        whiteNoise.loop = true;
+        const noiseSource = ctx.createBufferSource();
+        noiseSource.buffer = noiseBuffer;
+        noiseSource.loop = true;
 
-        const staticFilter = ctx.createBiquadFilter();
-        staticFilter.type = 'bandpass';
-        staticFilter.frequency.value = 1800;
+        const noiseFilter = ctx.createBiquadFilter();
+        noiseFilter.type = 'bandpass';
+        noiseFilter.frequency.value = 1400;
+        noiseFilter.Q.value = 0.7;
 
-        const staticGain = ctx.createGain();
-        staticGain.gain.value = 0.015;
+        const noiseGain = ctx.createGain();
+        noiseGain.gain.value = 0.18; // Balanced ambient hiss level
 
-        whiteNoise.connect(staticFilter);
-        staticFilter.connect(staticGain);
-        staticGain.connect(ctx.destination);
-        whiteNoise.start(0);
-        return staticGain;
+        noiseSource.connect(noiseFilter);
+        noiseFilter.connect(noiseGain);
+        noiseGain.connect(master);
+        noiseSource.start(0);
+
+        // 2. Low-frequency receiver mains hum (60Hz)
+        const humOsc = ctx.createOscillator();
+        humOsc.type = 'triangle';
+        humOsc.frequency.value = 60;
+
+        const humFilter = ctx.createBiquadFilter();
+        humFilter.type = 'lowpass';
+        humFilter.frequency.value = 120;
+
+        const humGain = ctx.createGain();
+        humGain.gain.value = 0.025; // Very subtle equipment hum
+
+        humOsc.connect(humFilter);
+        humFilter.connect(humGain);
+        humGain.connect(master);
+        humOsc.start(0);
+
+        // 3. Faint high-pitched atmospheric heterodyne carrier whistle
+        const carrierOsc = ctx.createOscillator();
+        carrierOsc.type = 'sine';
+        carrierOsc.frequency.value = 2650;
+
+        // Slow LFO to make the carrier pitch and static drift like a space signal
+        const lfo = ctx.createOscillator();
+        lfo.type = 'sine';
+        lfo.frequency.value = 0.18; // Slow wave every ~5.5 seconds
+
+        const lfoPitchGain = ctx.createGain();
+        lfoPitchGain.gain.value = 35; // Drifts +/- 35Hz
+
+        const carrierGain = ctx.createGain();
+        carrierGain.gain.value = 0.003; // Whisper-quiet high tone
+
+        lfo.connect(lfoPitchGain);
+        lfoPitchGain.connect(carrierOsc.frequency);
+
+        carrierOsc.connect(carrierGain);
+        carrierGain.connect(master);
+
+        lfo.start(0);
+        carrierOsc.start(0);
+
+        return master;
       }
 
-      function makeDistortionCurve(amount = 25) {
+      function makeDistortionCurve(amount = 20) {
         const n_samples = 44100;
         const curve = new Float32Array(n_samples);
         const deg = Math.PI / 180;
@@ -390,47 +455,54 @@
           if (!audioCtx) {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             audioCtx = new AudioContext();
-            staticNode = startRadioStatic(audioCtx);
+            ambienceMasterGain = startRadioAmbience(audioCtx);
           }
 
           if (audioCtx.state === 'suspended') {
             audioCtx.resume();
           }
 
-          if (staticNode) staticNode.gain.value = 0.015;
+          // Fade in quiet ambience (overall master ambience volume = 0.25)
+          if (ambienceMasterGain) {
+            ambienceMasterGain.gain.setTargetAtTime(0.25, audioCtx.currentTime, 0.15);
+          }
 
           if (!isConnected) {
             const source = audioCtx.createMediaElementSource(audio);
+            
+            // Bandpass filter for vintage radio speaker tone
             const bandpass = audioCtx.createBiquadFilter();
             bandpass.type = 'bandpass';
-            bandpass.frequency.value = 1200;
-            bandpass.Q.value = 0.85;
+            bandpass.frequency.value = 1150;
+            bandpass.Q.value = 0.9;
 
+            // Gentle analog saturation
             const distortion = audioCtx.createWaveShaper();
-            distortion.curve = makeDistortionCurve(30);
+            distortion.curve = makeDistortionCurve(22);
             distortion.oversample = '4x';
 
-            const makeupGain = audioCtx.createGain();
-            makeupGain.gain.value = 1.8;
+            // Lower overall music output so the whole experience is noticeably quieter
+            const quietGain = audioCtx.createGain();
+            quietGain.gain.value = 0.65;
 
             source.connect(bandpass);
             bandpass.connect(distortion);
-            distortion.connect(makeupGain);
-            makeupGain.connect(audioCtx.destination);
+            distortion.connect(quietGain);
+            quietGain.connect(audioCtx.destination);
 
             isConnected = true;
           }
         });
 
-        const stopStatic = () => {
+        const stopAmbience = () => {
           const anyPlaying = Array.from(audioElements).some(el => !el.paused);
-          if (!anyPlaying && staticNode) {
-            staticNode.gain.value = 0;
+          if (!anyPlaying && ambienceMasterGain && audioCtx) {
+            ambienceMasterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.1);
           }
         };
 
-        audio.addEventListener('pause', stopStatic);
-        audio.addEventListener('ended', stopStatic);
+        audio.addEventListener('pause', stopAmbience);
+        audio.addEventListener('ended', stopAmbience);
       });
     }
 
