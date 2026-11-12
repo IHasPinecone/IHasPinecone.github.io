@@ -1,0 +1,83 @@
+[
+  {
+    "name": "The Great Beyond",
+    "artist": "R.E.M.",
+    "week": 1,
+    "review": "I'm breaking those damn spoons baby!",
+    "score": 1,
+    "genres": "Alternative Rock, Indie Rock",
+    "cover": "songs/the-great-beyond.jpg"
+  },
+  {
+    "name": "Space Oddity",
+    "artist": "David Bowie",
+    "week": 1,
+    "review": "Ground control to Major Tom, floating in a most peculiar way.",
+    "score": 1,
+    "genres": "Classic Rock, Space Rock, Art Rock"
+  },
+  {
+    "name": "Clocks",
+    "artist": "Coldplay",
+    "week": 2,
+    "review": "Those hypnotic piano chords echoed all the way from the ionosphere.",
+    "score": 0,
+    "genres": "Alternative Rock, Pop Rock, Piano Rock"
+  },
+  {
+    "name": "Starlight",
+    "artist": "Muse",
+    "week": 2,
+    "review": "Far away, holding on to a dream of cosmic energy.",
+    "score": 1,
+    "genres": "Space Rock, Alternative Rock, Symphonic Rock"
+  },
+  {
+    "name": "Walking on the Moon",
+    "artist": "The Police",
+    "week": 3,
+    "review": "Giant leaps made effortless by zero gravity basslines.",
+    "score": 0,
+    "genres": "New Wave, Reggae Rock, Dub"
+  },
+  {
+    "name": "Supermassive Black Hole",
+    "artist": "Muse",
+    "week": 3,
+    "review": "Glaciers melting in the dead of night, pulling me in.",
+    "score": 1,
+    "genres": "Alternative Rock, Space Rock, Electronic Rock"
+  },
+  {
+    "name": "Starman",
+    "artist": "David Bowie",
+    "week": 4,
+    "review": "He'd like to come and meet us, but he thinks he'd blow our minds.",
+    "score": 1,
+    "genres": "Glam Rock, Classic Rock, Pop Rock"
+  },
+  {
+    "name": "Subterranean Homesick Alien",
+    "artist": "Radiohead",
+    "week": 4,
+    "review": "The Tourist trap of celestial observation decoded in guitar delay.",
+    "score": 1,
+    "genres": "Alternative Rock, Art Rock, Experimental"
+  },
+  {
+    "name": "Rocket Man",
+    "artist": "Elton John",
+    "week": 5,
+    "review": "Burning out his fuse up here alone.",
+    "score": 1,
+    "genres": "Soft Rock, Pop Rock, Classic Rock"
+  },
+  {
+    "name": "Black Hole Sun",
+    "artist": "Soundgarden",
+    "week": 5,
+    "review": "In my eyes, indisposed, in disguises no one knows.",
+    "score": 0,
+    "genres": "Grunge, Alternative Rock, Hard Rock"
+  }
+]
