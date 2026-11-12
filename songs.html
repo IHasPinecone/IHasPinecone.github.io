@@ -129,6 +129,8 @@
     }
     .song-info {
       flex-grow: 1;
+      font-family: "Times New Roman", Times, serif;
+      color: #fdf6e3;
     }
     .song-title-row {
       display: flex;
@@ -137,47 +139,34 @@
       margin-bottom: 4px;
     }
     .song-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #f8fafc;
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #fdf6e3;
     }
     .song-year {
-      font-size: 0.85rem;
-      color: #94a3b8;
+      font-size: 0.9rem;
+      color: #cccccc;
     }
     .song-artist {
-      font-size: 0.95rem;
-      color: #38bdf8;
+      font-size: 1rem;
+      color: #dddddd;
       margin-bottom: 8px;
-      font-weight: 500;
     }
     .song-lyric {
-      font-size: 0.9rem;
-      color: #cbd5e1;
+      font-size: 0.95rem;
+      color: #e2e8f0;
       margin-bottom: 6px;
       font-style: italic;
-      border-left: 3px solid #38bdf8;
-      padding-left: 8px;
     }
     .song-review {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #e2e8f0;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      margin-top: 8px;
-    }
-    .badge {
-      background: #1e293b;
-      border: 1px solid #334155;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      color: #94a3b8;
+      font-size: 0.9rem;
+      color: #cccccc;
+      margin-top: 6px;
     }
     .score-best {
       background: rgba(0, 255, 0, 0.15);
@@ -187,6 +176,9 @@
       text-align: center;
       width: 100%;
       box-sizing: border-box;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
     }
     .score-worst {
       background: rgba(255, 0, 0, 0.15);
@@ -196,6 +188,9 @@
       text-align: center;
       width: 100%;
       box-sizing: border-box;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
     }
     audio {
       width: 100%;
@@ -235,26 +230,31 @@
   </div>
 
   <script>
-    function getLiturgicalWeekLabel(weekNum) {
+    // Breviary-style liturgical week naming convention
+    function getBreviaryWeekLabel(weekNum) {
       const num = Number(weekNum);
       if (num >= 1 && num <= 4) {
-        return `Week ${num} of Advent`;
+        return `${num}${num === 1 ? 'st' : num === 2 ? 'nd' : num === 3 ? 'rd' : 'th'} Week of Advent`;
       } else if (num === 5) {
-        return `Christmas Season / Holy Family`;
+        return `Christmas Season`;
       } else if (num >= 6 && num <= 10) {
-        return `Ordinary Time (Early 2027)`;
+        const ordNum = num - 5;
+        return `${ordNum}${ordNum === 1 ? 'st' : ordNum === 2 ? 'nd' : ordNum === 3 ? 'rd' : 'th'} Week of Ordinary Time`;
       } else if (num >= 11 && num <= 16) {
-        return `Lent Season (2027)`;
+        const lentNum = num - 10;
+        return `${lentNum}${lentNum === 1 ? 'st' : lentNum === 2 ? 'nd' : lentNum === 3 ? 'rd' : 'th'} Week of Lent`;
       } else if (num >= 17 && num <= 23) {
-        return `Easter Season (2027)`;
+        const easterNum = num - 16;
+        return `${easterNum}${easterNum === 1 ? 'st' : easterNum === 2 ? 'nd' : easterNum === 3 ? 'rd' : 'th'} Week of Easter`;
       } else {
-        return `Ordinary Time (Week ${num})`;
+        const ordNum = num - 23;
+        return `${ordNum}${ordNum === 1 ? 'st' : ordNum === 2 ? 'nd' : ordNum === 3 ? 'rd' : 'th'} Week of Ordinary Time`;
       }
     }
 
     async function loadPlaylist() {
       try {
-        const response = await fetch('./songs.json');
+        const response = await fetch('songs.json');
         const songs = await response.json();
 
         const weeksMap = {};
@@ -279,20 +279,21 @@
 
           const header = document.createElement('button');
           header.className = 'week-header';
-          header.innerHTML = `<span>${getLiturgicalWeekLabel(weekNum)}</span> <span class="arrow">&#10148;</span>`;
+          header.innerHTML = `<span>${getBreviaryWeekLabel(weekNum)}</span> <span class="arrow">&#10148;</span>`;
 
           const content = document.createElement('div');
           content.className = 'week-content';
 
           weekSongs.forEach(song => {
-            const genreList = song.genres ? song.genres.split(',').map(g => g.trim()).filter(Boolean) : [];
+            // Genres list joined by commas
+            const genreList = song.genres ? song.genres.split(',').map(g => g.trim()).filter(Boolean).join(', ') : '';
             const coverSrc = song.cover || 'https://via.placeholder.com/600';
             
             let scoreHtml = '';
             if (song.score === 1) {
-              scoreHtml = '<div class="badge score-best">Best Song Ever</div>';
+              scoreHtml = '<div class="score-best">Best Song Ever</div>';
             } else if (song.score === 0) {
-              scoreHtml = '<div class="badge score-worst">Worst Song Ever</div>';
+              scoreHtml = '<div class="score-worst">Worst Song Ever</div>';
             }
 
             const card = document.createElement('div');
@@ -310,9 +311,7 @@
                 <div class="song-artist">${song.artist}</div>
                 ${song.lyric ? `<div class="song-lyric">“${song.lyric}”</div>` : ''}
                 ${song.review ? `<div class="song-review">${song.review}</div>` : ''}
-                <div class="meta-row">
-                  ${genreList.map(g => `<span class="badge">${g}</span>`).join('')}
-                </div>
+                ${genreList ? `<div class="meta-row">Genres: ${genreList}</div>` : ''}
                 ${song.preview_url ? `<audio controls src="${song.preview_url}"></audio>` : ''}
               </div>
             `;
