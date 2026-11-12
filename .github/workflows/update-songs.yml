@@ -27,7 +27,7 @@ jobs:
           pip install requests
 
       - name: Run Song Metadata Updater
-        run: python scripts/update_songs.py
+        run: songs/update_songs.py
 
       - name: Commit and push changes if any
         run: |
