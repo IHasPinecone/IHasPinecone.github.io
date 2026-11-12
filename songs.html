@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celestial Radio Frequencies</title>
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: #131b2e;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --border: #1e293b;
+      --badge-bg: #1e293b;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 30px;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      color: #f8fafc;
+      letter-spacing: -0.5px;
+    }
+    .lore {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 40px;
+      font-style: italic;
+      color: var(--text-muted);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+    .week-accordion {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .week-accordion:hover {
+      border-color: var(--accent);
+    }
+    .week-header {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      padding: 18px 24px;
+      text-align: left;
+      font-size: 1.15rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .week-header .arrow {
+      transition: transform 0.3s ease;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+    .week-accordion.active .arrow {
+      transform: rotate(90deg);
+    }
+    .week-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding: 0 24px;
+      background: rgba(15, 23, 42, 0.4);
+    }
+    .week-accordion.active .week-content {
+      max-height: 2000px;
+      padding: 20px 24px 24px 24px;
+      border-top: 1px solid var(--border);
+    }
+    .song-card {
+      display: flex;
+      gap: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+    .song-card:last-child {
+      margin-bottom: 0;
+    }
+    .song-cover {
+      width: 100px;
+      height: 100px;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #0f172a;
+    }
+    .song-info {
+      flex-grow: 1;
+    }
+    .song-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .song-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .song-year {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .song-artist {
+      font-size: 0.95rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .song-review {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .badge {
+      background: var(--badge-bg);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .score-badge {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent);
+      border-color: rgba(56, 189, 248, 0.2);
+      font-weight: 600;
+    }
+    audio {
+      width: 100%;
+      height: 32px;
+      margin-top: 10px;
+    }
+    @media (max-width: 600px) {
+      .song-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .song-cover {
+        width: 100%;
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Celestial Radio Frequencies</h1>
+      <p style="color: var(--text-muted); margin: 0;">A weekly log of audio signals bounced back from deep space.</p>
+    </header>
+
+    <div class="lore">
+      "I have a relay set up on my roof to catch radio frequencies from space. Radio frequencies tend to bounce around space for a while and sometimes they are reflected in such a way that they are directed right back at earth. Through this I get exposed to music in a weird order.<br><br>
+      Every Sunday I sit down and listen to what frequencies I happened to pick up returning from space this week. Starting the first week of advent, return every Sunday to learn what radio frequencies I heard back."
+    </div>
+
+    <div id="playlist-container">
+      <p style="text-align: center; color: var(--text-muted);">Scanning frequencies...</p>
+    </div>
+  </div>
+
+  <script>
+    async function loadPlaylist() {
+      try {
+        const response = await fetch('./songs.json');
+        const songs = await response.json();
+
+        // Group songs by week
+        const weeksMap = {};
+        songs.forEach(song => {
+          const w = song.week || 1;
+          if (!weeksMap[w]) {
+            weeksMap[w] = [];
+          }
+          weeksMap[w].push(song);
+        });
+
+        const container = document.getElementById('playlist-container');
+        container.innerHTML = '';
+
+        const sortedWeeks = Object.keys(weeksMap).sort((a, b) => Number(a) - Number(b));
+
+        sortedWeeks.forEach((weekNum, index) => {
+          const weekSongs = weeksMap[weekNum];
+          
+          const accordion = document.createElement('div');
+          accordion.className = `week-accordion ${index === 0 ? 'active' : ''}`;
+
+          const header = document.createElement('button');
+          header.className = 'week-header';
+          header.innerHTML = `<span>Week ${weekNum} of Advent</span> <span class="arrow">&#10148;</span>`;
+
+          const content = document.createElement('div');
+          content.className = 'week-content';
+
+          weekSongs.forEach(song => {
+            const genreList = song.genres ? song.genres.split(',').map(g => g.trim()).filter(Boolean) : [];
+            const coverSrc = song.cover || 'https://via.placeholder.com/600';
+            
+            // Score handling: 1 = Best Song Ever, 0 = Worst Song Ever
+            let scoreText = 'N/A';
+            if (song.score === 1) {
+              scoreText = '⭐ Best Song Ever';
+            } else if (song.score === 0) {
+              scoreText = '💀 Worst Song Ever';
+            }
+
+            const card = document.createElement('div');
+            card.className = 'song-card';
+            card.innerHTML = `
+              <img class="song-cover" src="${coverSrc}" alt="${song.name}" onerror="this.src='https://via.placeholder.com/600'">
+              <div class="song-info">
+                <div class="song-title-row">
+                  <span class="song-title">${song.name}</span>
+                  <span class="song-year">${song.release_year || ''}</span>
+                </div>
+                <div class="song-artist">${song.artist}</div>
+                ${song.review ? `<div class="song-review">“${song.review}”</div>` : ''}
+                <div class="meta-row">
+                  <span class="badge score-badge">${scoreText}</span>
+                  ${genreList.map(g => `<span class="badge">${g}</span>`).join('')}
+                </div>
+                ${song.preview_url ? `<audio controls src="${song.preview_url}"></audio>` : ''}
+              </div>
+            `;
+            content.appendChild(card);
+          });
+
+          header.addEventListener('click', () => {
+            accordion.classList.toggle('active');
+          });
+
+          accordion.appendChild(header);
+          accordion.appendChild(content);
+          container.appendChild(accordion);
+        });
+
+      } catch (err) {
+        console.error('Failed to load songs.json', err);
+        document.getElementById('playlist-container').innerHTML = '<p style="color: #f87171; text-align: center;">Failed to load celestial frequencies log.</p>';
+      }
+    }
+
+    loadPlaylist();
+  </script>
+</body>
+</html>
