@@ -4,6 +4,7 @@
     "artist": "R.E.M.",
     "week": 1,
     "review": "I'm breaking those damn spoons baby!",
+    "lyric": "I'm breaking those damn spoons baby!",
     "score": 1,
     "genres": "Alternative Rock, Indie Rock",
     "cover": "songs/the-great-beyond.jpg"
@@ -13,6 +14,7 @@
     "artist": "David Bowie",
     "week": 1,
     "review": "Ground control to Major Tom, floating in a most peculiar way.",
+    "lyric": "I'm breaking those damn spoons baby!",
     "score": 1,
     "genres": "Classic Rock, Space Rock, Art Rock"
   },
@@ -21,6 +23,7 @@
     "artist": "Coldplay",
     "week": 2,
     "review": "Those hypnotic piano chords echoed all the way from the ionosphere.",
+    "lyric": "I'm breaking those damn spoons baby!",
     "score": 0,
     "genres": "Alternative Rock, Pop Rock, Piano Rock"
   },
@@ -29,6 +32,7 @@
     "artist": "Muse",
     "week": 2,
     "review": "Far away, holding on to a dream of cosmic energy.",
+    "lyric": "I'm breaking those damn spoons baby!",
     "score": 1,
     "genres": "Space Rock, Alternative Rock, Symphonic Rock"
   },
@@ -37,6 +41,7 @@
     "artist": "The Police",
     "week": 3,
     "review": "Giant leaps made effortless by zero gravity basslines.",
+    "lyric": "I'm breaking those damn spoons baby!",
     "score": 0,
     "genres": "New Wave, Reggae Rock, Dub"
   },
@@ -45,6 +50,7 @@
     "artist": "Muse",
     "week": 3,
     "review": "Glaciers melting in the dead of night, pulling me in.",
+    "lyric": "I'm breaking those damn spoons baby!",
     "score": 1,
     "genres": "Alternative Rock, Space Rock, Electronic Rock"
   },
@@ -53,6 +59,7 @@
     "artist": "David Bowie",
     "week": 4,
     "review": "He'd like to come and meet us, but he thinks he'd blow our minds.",
+    "lyric": "I'm breaking those damn spoons baby!",
     "score": 1,
     "genres": "Glam Rock, Classic Rock, Pop Rock"
   },
@@ -61,6 +68,7 @@
     "artist": "Radiohead",
     "week": 4,
     "review": "The Tourist trap of celestial observation decoded in guitar delay.",
+    "lyric": "I'm breaking those damn spoons baby!",
     "score": 1,
     "genres": "Alternative Rock, Art Rock, Experimental"
   },
@@ -69,6 +77,7 @@
     "artist": "Elton John",
     "week": 5,
     "review": "Burning out his fuse up here alone.",
+    "lyric": "I'm breaking those damn spoons baby!",
     "score": 1,
     "genres": "Soft Rock, Pop Rock, Classic Rock"
   },
@@ -77,6 +86,7 @@
     "artist": "Soundgarden",
     "week": 5,
     "review": "In my eyes, indisposed, in disguises no one knows.",
+    "lyric": "I'm breaking those damn spoons baby!",
     "score": 0,
     "genres": "Grunge, Alternative Rock, Hard Rock"
   }
