@@ -130,3 +130,201 @@
 
     .song-details {
       flex-grow: 1;
+      color: #000000;
+    }
+
+    .song-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #000080;
+      margin: 0 0 2px 0;
+    }
+
+    .song-artist {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #333333;
+      margin: 0 0 8px 0;
+    }
+
+    .song-review {
+      background-color: #ffffcc;
+      border: 1px dashed #999900;
+      padding: 6px 10px;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .tag-list {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+
+    .score-best {
+      background-color: #00ff00;
+      color: #000000;
+      font-weight: bold;
+      padding: 2px 6px;
+      border: 1px solid #000000;
+    }
+
+    .score-worst {
+      background-color: #ff0000;
+      color: #ffffff;
+      font-weight: bold;
+      padding: 2px 6px;
+      border: 1px solid #000000;
+    }
+
+    .genre-tag {
+      background-color: #e0e0e0;
+      border: 1px solid #666666;
+      padding: 1px 5px;
+      margin-left: 4px;
+      display: inline-block;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 300px;
+      height: 30px;
+      margin-top: 5px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 25px;
+      padding-top: 12px;
+      border-top: 3px double #ffff00;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.85rem;
+      color: #9999ff;
+    }
+
+    @media (max-width: 550px) {
+      .song-row {
+        flex-direction: column;
+      }
+      .song-cover {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>~*~ CELESTIAL RADIO FREQUENCIES ~*~</h1>
+      <p class="subtitle">[ ROOFTOP RELAY STATION LOGBOOK - EST. ADVENT ]</p>
+    </header>
+
+    <marquee scrollamount="4">*** RECEIVING BOUNCED TRANSMISSIONS FROM DEEP SPACE *** CHECK BACK EVERY SUNDAY FOR NEW INTERCEPTED SIGNALS ***</marquee>
+
+    <div class="lore">
+      I have a relay set up on my roof to catch radio frequencies from space. Radio frequencies tend to bounce around space for a while and sometimes they are reflected in such a way that they are directed right back at earth. Through this I get exposed to music in a weird order.<br><br>
+      Every Sunday I sit down and listen to what frequencies I happened to pick up returning from space this week. Starting the first week of advent, return every Sunday to learn what radio frequencies I heard back.
+    </div>
+
+    <div id="playlist-container">
+      <p style="text-align: center; font-family: 'Courier New', monospace; color: #00ff00;">TUNING ANTENNA... PLEASE WAIT...</p>
+    </div>
+
+    <footer>
+      Best viewed in Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution.
+    </footer>
+  </div>
+
+  <script>
+    async function loadPlaylist() {
+      try {
+        const response = await fetch('./songs.json');
+        const songs = await response.json();
+
+        // Group songs by week
+        const weeksMap = {};
+        songs.forEach(song => {
+          const w = song.week || 1;
+          if (!weeksMap[w]) {
+            weeksMap[w] = [];
+          }
+          weeksMap[w].push(song);
+        });
+
+        const container = document.getElementById('playlist-container');
+        container.innerHTML = '';
+
+        // Sort weeks descending (newest week at the top)
+        const sortedWeeks = Object.keys(weeksMap).sort((a, b) => Number(b) - Number(a));
+
+        sortedWeeks.forEach((weekNum, index) => {
+          // Reverse songs within the week so the newest added song in that week is also on top
+          const weekSongs = [...weeksMap[weekNum]].reverse();
+
+          const box = document.createElement('div');
+          box.className = `week-box ${index === 0 ? 'active' : ''}`;
+
+          const header = document.createElement('button');
+          header.className = 'week-header';
+          const arrowChar = index === 0 ? 'v' : '>';
+          header.innerHTML = `<span>Week ${weekNum} of Advent</span> <span class="arrow">${arrowChar}</span>`;
+
+          const content = document.createElement('div');
+          content.className = 'week-content';
+
+          weekSongs.forEach(song => {
+            const genreList = song.genres
+              ? song.genres.split(',').map(g => g.trim()).filter(Boolean)
+              : [];
+            const coverSrc = song.cover || 'https://via.placeholder.com/600?text=NO+SIGNAL';
+
+            let scoreHtml = '';
+            if (song.score === 1) {
+              scoreHtml = '<span class="score-best">Best Song Ever</span>';
+            } else if (song.score === 0) {
+              scoreHtml = '<span class="score-worst">Worst Song Ever</span>';
+            }
+
+            const yearText = song.release_year ? ` (${song.release_year})` : '';
+
+            const row = document.createElement('div');
+            row.className = 'song-row';
+            row.innerHTML = `
+              <img class="song-cover" src="${coverSrc}" alt="${song.name}" onerror="this.src='https://via.placeholder.com/600?text=NO+SIGNAL'">
+              <div class="song-details">
+                <div class="song-title">${song.name}${yearText}</div>
+                <div class="song-artist">Artist: ${song.artist}</div>
+                ${song.review ? `<div class="song-review">"${song.review}"</div>` : ''}
+                <div class="tag-list">
+                  ${scoreHtml}
+                  ${genreList.map(g => `<span class="genre-tag">${g}</span>`).join('')}
+                </div>
+                ${song.preview_url ? `<audio controls src="${song.preview_url}"></audio>` : ''}
+              </div>
+            `;
+            content.appendChild(row);
+          });
+
+          header.addEventListener('click', () => {
+            box.classList.toggle('active');
+            const arrow = header.querySelector('.arrow');
+            arrow.textContent = box.classList.contains('active') ? 'v' : '>';
+          });
+
+          box.appendChild(header);
+          box.appendChild(content);
+          container.appendChild(box);
+        });
+
+      } catch (err) {
+        console.error('Failed to load songs.json', err);
+        document.getElementById('playlist-container').innerHTML =
+          '<p style="color: #ff0000; font-family: monospace; text-align: center;">ERROR 404: RELAY SIGNAL LOST.</p>';
+      }
+    }
+
+    loadPlaylist();
+  </script>
+</body>
+</html>
