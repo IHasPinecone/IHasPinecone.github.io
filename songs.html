@@ -1,4 +1,4 @@
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,10 +6,7 @@ html_content = """<!DOCTYPE html>
   <title>CELESTIAL RADIO FREQUENCIES - TUBE RECEIVER LOG</title>
   <style>
     body {
-      background-color: #f2bcbc;
-      background-image: 
-        radial-gradient(circle at 50% 30%, #2a1806 0%, #0c0804 70%),
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px);
+      background-color: #f2bcbc; /* Kept home page pastel pink background */
       color: #e0d0b0;
       font-family: "Courier New", Courier, monospace;
       margin: 0;
@@ -127,23 +124,28 @@ html_content = """<!DOCTYPE html>
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 4px;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .song-title-group {
+      font-size: 1.05rem;
+      line-height: 1.3;
     }
     .song-title {
-      font-size: 1.2rem;
+      font-size: 1.05rem;
       font-weight: bold;
       color: #ffcc00;
     }
+    .song-artist {
+      font-size: 1.0rem;
+      color: #d4af37;
+      font-style: italic;
+    }
     .song-year {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #b0a080;
       font-family: "Courier New", Courier, monospace;
-    }
-    .song-artist {
-      font-size: 1.05rem;
-      color: #d4af37;
-      margin-bottom: 8px;
-      font-style: italic;
+      flex-shrink: 0;
     }
     .song-lyric {
       font-size: 0.95rem;
@@ -152,7 +154,8 @@ html_content = """<!DOCTYPE html>
       font-style: italic;
     }
     .song-review {
-      font-size: 0.95rem;
+      font-size: 1.0rem;
+      line-height: 1.45;
       color: #e0e0e0;
       margin-bottom: 8px;
     }
@@ -483,10 +486,11 @@ html_content = """<!DOCTYPE html>
               </div>
               <div class="song-info">
                 <div class="song-title-row">
-                  <span class="song-title">${song.name}</span>
+                  <div class="song-title-group">
+                    <span class="song-title">${song.name}</span> <span class="song-artist">— ${song.artist}</span>
+                  </div>
                   <span class="song-year">${song.release_year || ''}</span>
                 </div>
-                <div class="song-artist">${song.artist}</div>
                 ${song.lyric ? `<div class="song-lyric">“${song.lyric}”</div>` : ''}
                 ${song.review ? `<div class="song-review">${song.review}</div>` : ''}
                 ${playerHtml}
@@ -520,7 +524,6 @@ html_content = """<!DOCTYPE html>
       let noiseGainNode;
       let burstInterval = null;
 
-      // Calibrated static strength set to 0.15 per user specification
       const BASE_STATIC_GAIN = 0.15;
       let currentMasterVolume = 0.8;
 
@@ -673,7 +676,6 @@ html_content = """<!DOCTYPE html>
 
         volSlider.addEventListener('input', () => {
           currentMasterVolume = parseFloat(volSlider.value);
-          // Sync all volume sliders on the page so volume feels consistent across the receiver
           allVolumeSliders.forEach(s => s.value = currentMasterVolume);
 
           if (audioCtx) {
@@ -768,7 +770,7 @@ html_content = """<!DOCTYPE html>
             } else {
               clearInterval(burstInterval);
             }
-          }, 4500);
+          }, 4000);
 
           if (!isConnected) {
             const source = audioCtx.createMediaElementSource(audio);
@@ -830,9 +832,3 @@ html_content = """<!DOCTYPE html>
   </script>
 </body>
 </html>
-"""
-
-with open("songs-v3.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-print("Successfully generated songs-v3.html")
