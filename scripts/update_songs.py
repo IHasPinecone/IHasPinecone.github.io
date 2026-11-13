@@ -58,3 +58,5 @@ try:
             if preview_url:
                 song['preview_url'] = preview_url
                 updated = True
+except Exception as e:
+    print(f"An error occurred: {e}")
