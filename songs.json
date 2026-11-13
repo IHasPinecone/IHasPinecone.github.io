@@ -1,11 +1,14 @@
 [
-    {
+  {
     "name": "Demon Lover",
     "artist": "Steeleye Span",
     "week": 1,
     "review": "<a href='https://www.slipcue.com/music/international/celtic/artists/steeleye.html#:~:text=One%20of%20her%20best.%20Steeleye%20Span%20%22Hark!%2Cears%2C%20but%20also%20creative%20and%20challenging.%20Recommended!' target='_blank'>This guy</a> may not like this album, but I'm a sucker for sad songs and songs about elves.",
     "lyric": "She set her foot upon the ship. No mariners could behold, the sails were of the shining silk, the masts of beaten gold.",
-    "score": 1
+    "score": 1,
+    "cover": "songs/steeleye-span-demon-lover.jpg",
+    "release_year": "1975",
+    "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/29/a1/c8/29a1c88e-97bd-2bfa-cd23-661385f2617c/mzaf_6053584334043949517.plus.aac.p.m4a"
   },
   {
     "name": "Cam ye o'er frae France",
@@ -13,7 +16,10 @@
     "week": 1,
     "review": "I love folk songs, and I also love electric guitar.",
     "lyric": "Mony a sword and lance swings at Highland hurdie",
-    "score": 1
+    "score": 1,
+    "cover": "songs/steeleye-span-cam-ye-oer-frae-france.jpg",
+    "release_year": "1973",
+    "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/47/e4/76/47e4760c-21a9-4d1d-03f8-e82ef1d4e021/mzaf_15234123875635732044.plus.aac.p.m4a"
   },
   {
     "name": "Twelve Witches",
@@ -21,7 +27,10 @@
     "week": 1,
     "review": "One witch charms people with her lyre into burning themselves alive, while another is vegetarian. Clearly we should hold the witches all in dread, but maybe some more than others. I wonder if this this some at some point was about a group of real people.",
     "lyric": "Rowan tree, red thread; hold the witches all in dread.",
-    "score": 1
+    "score": 1,
+    "cover": "songs/steeleye-span-twelve-witches.jpg",
+    "release_year": "1976",
+    "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/c6/7a/8d/c67a8d9d-530f-5ee5-552b-054dab95db17/mzaf_11166408267805242008.plus.aac.p.m4a"
   },
   {
     "name": "Sir James the Rose",
@@ -29,6 +38,9 @@
     "week": 1,
     "review": "Steeleye Span may be the perfect band for me because I love songs with a narrative but never vibed with King Gizz.",
     "lyric": "Where shall I go for to hide me? For I have killed a gallant squire, and they're seeking for to slay me.",
-    "score": 1
+    "score": 1,
+    "cover": "songs/steeleye-span-sir-james-the-rose.jpg",
+    "release_year": "1976",
+    "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/48/a9/33/48a933d0-4995-ffd1-a186-60d2bf9651cd/mzaf_12455893852602992426.plus.aac.p.m4a"
   }
 ]
