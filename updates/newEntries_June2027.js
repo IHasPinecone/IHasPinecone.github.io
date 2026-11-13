@@ -57,4 +57,8 @@ window.extraTables_June2027 = {
     "WALUIGI",
     "WALUIGI"
     ]
+
+  window.extraCases_June2027 = [
+    { text: "Lost a bet about (topic)" }
+  ]
 }
