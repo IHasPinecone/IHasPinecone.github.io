@@ -438,7 +438,7 @@
         const sortedWeeks = Object.keys(weeksMap).sort((a, b) => Number(b) - Number(a));
 
         sortedWeeks.forEach((weekNum, index) => {
-          const weekSongs = [...weeksMap[weekNum]]();
+          const weekSongs = weeksMap[weekNum];
           
           const accordion = document.createElement('div');
           accordion.className = `week-accordion ${index === 0 ? 'active' : ''}`;
