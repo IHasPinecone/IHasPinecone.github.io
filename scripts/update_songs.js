@@ -1,21 +1,22 @@
 const fs = require('fs');
 const path = require('path');
 
-// Simple slugify helper function
 function slugify(text) {
     return text
         .toString()
         .toLowerCase()
         .trim()
-        .replace(/\s+/g, '-')     // Replace spaces with -
-        .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-        .replace(/\-\-+/g, '-');  // Replace multiple - with single -
+        .replace(/\s+/g, '-')     
+        .replace(/[^\w\-]+/g, '') 
+        .replace(/\-\-+/g, '-');  
 }
 
 async function updateSongs() {
-    const jsonPath = path.join(__dirname, '..', 'songs.json');
+    const rootDir = process.cwd();
+    const jsonPath = path.join(rootDir, 'songs.json');
+    
     if (!fs.existsSync(jsonPath)) {
-        console.log('songs.json not found.');
+        console.log('songs.json not found at:', jsonPath);
         return;
     }
 
@@ -29,7 +30,7 @@ async function updateSongs() {
         const name = song.name;
         const artist = song.artist;
         
-        const hasCover = Boolean(song.cover && fs.existsSync(path.join(__dirname, '..', song.cover)));
+        const hasCover = Boolean(song.cover && fs.existsSync(path.join(rootDir, song.cover)));
         const hasYear = Boolean(song.release_year);
         const hasPreview = Boolean(song.preview_url);
 
@@ -48,7 +49,6 @@ async function updateSongs() {
             if (data.resultCount > 0) {
                 let selectedTrack = null;
 
-                // Find the first non-compilation studio album
                 for (const track of data.results) {
                     const albumName = (track.collectionName || '').toLowerCase();
                     const isCompilation = skipKeywords.some(keyword => albumName.includes(keyword));
@@ -59,7 +59,6 @@ async function updateSongs() {
                     }
                 }
 
-                // Fallback to first result if all are compilations
                 if (!selectedTrack) {
                     selectedTrack = data.results[0];
                 }
@@ -70,7 +69,7 @@ async function updateSongs() {
                     if (artworkUrl100) {
                         const artworkUrl600 = artworkUrl100.replace('100x100bb', '600x600bb');
                         const slug = `${slugify(artist)}-{slugify(name)}.jpg`.replace('{slugify(name)}', slugify(name));
-                        const coverDir = path.join(__dirname, '..', 'songs');
+                        const coverDir = path.join(rootDir, 'songs');
                         if (!fs.existsSync(coverDir)) {
                             fs.mkdirSync(coverDir, { recursive: true });
                         }
