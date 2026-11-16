@@ -49,7 +49,10 @@
     "week": 2,
     "review": "I previously had two Future Islands songs I liked: this song and Give me the Ghost Back. Now I only have one because I learned this is a Guided by Voices song; my bad.",
     "lyric": "But I'm losing sight of the clues for which I search and choose to abuse to just unlock my mind.",
-    "score": 1
+    "score": 1,
+    "cover": "songs/guided-by-voices-i-am-a-scientist.jpg",
+    "release_year": "1994",
+    "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/63/5f/19/635f19ca-d0f0-60ce-5e28-c7c16b7e6973/mzaf_30451997816575296.plus.aac.p.m4a"
   },
   {
     "name": "You're Not an Airplane",
@@ -57,7 +60,10 @@
     "week": 2,
     "review": "Someone please take this guy's binaural audio machine away.",
     "lyric": "Rusty and Divided Steel",
-    "score": 0
+    "score": 0,
+    "cover": "songs/guided-by-voices-youre-not-an-airplane.jpg",
+    "release_year": "1994",
+    "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/87/89/5b/87895b98-c1e4-2aab-a738-dda1227563af/mzaf_15892551234997890445.plus.aac.p.m4a"
   },
   {
     "name": "Awake",
@@ -73,7 +79,10 @@
     "week": 3,
     "review": "I'm the kind of guy to go to a punk show and afterward talk about all the cool instrumentation I saw. I love when people use punk to make cool new sound. I don't have an ear for noise I guess.",
     "lyric": "",
-    "score": 0
+    "score": 0,
+    "cover": "songs/black-country-new-road-sunglasses.jpg",
+    "release_year": "2019",
+    "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/93/9d/1b/939d1bfb-9de1-fbce-ecd4-3f5a1cd30296/mzaf_9412094926026192834.plus.aac.p.m4a"
   },
   {
     "name": "Science Fair",
@@ -81,7 +90,10 @@
     "week": 3,
     "review": "",
     "lyric": "The least punk song on the album is my favorite. (4:43) or like 10 seconds after.",
-    "score": 1
+    "score": 1,
+    "cover": "songs/black-country-new-road-science-fair.jpg",
+    "release_year": "2022",
+    "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e9/d7/d9/e9d7d9e8-225c-58aa-9ec6-95f33bb750f5/mzaf_13145788767456884640.plus.aac.p.m4a"
   },
   {
     "name": "C.E.O.",
@@ -89,7 +101,10 @@
     "week": 4,
     "review": "Damn I love that line ^<br>Anyway, this goes into the worst song of the album.",
     "lyric": "I've got to keep this rocket in the sky",
-    "score": 1
+    "score": 1,
+    "cover": "songs/weezer-ceo.jpg",
+    "release_year": "2026",
+    "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/af/de/19/afde1946-6158-1ef6-8079-8b0fd6cb41f6/mzaf_5576551895875200290.plus.aac.p.m4a"
   },
   {
     "name": "Hoops",
@@ -97,7 +112,10 @@
     "week": 4,
     "review": "As good as 'I've got to keep this rocket in the sky' is, 'Hoops' is really bad.",
     "lyric": "Hoops! Jump jump jumping through hoops",
-    "score": 0
+    "score": 0,
+    "cover": "songs/weezer-hoops.jpg",
+    "release_year": "2026",
+    "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d7/8b/1a/d78b1ae3-b263-71c4-2e13-6298a6b6070f/mzaf_9762150707475107075.plus.aac.p.m4a"
   },
   {
     "name": "The Show Must Go On",
@@ -105,7 +123,10 @@
     "week": 4,
     "review": "Remember: you need to pray to God before you go to bed",
     "lyric": "This is big time football, in case you hadn't heard.",
-    "score": 1
+    "score": 1,
+    "cover": "songs/weezer-the-show-must-go-on.jpg",
+    "release_year": "2026",
+    "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/cd/ed/b5/cdedb5e7-246c-6463-8f8a-930f7b9d44c8/mzaf_16673091579802902360.plus.aac.p.m4a"
   },
   {
     "name": "",
