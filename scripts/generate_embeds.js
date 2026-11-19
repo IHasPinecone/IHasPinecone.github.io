@@ -58,7 +58,7 @@ for (const [weekNum, weekSongs] of Object.entries(weeks)) {
 
   for (const s of weekSongs) {
     const reviewClean = stripHtml(s.review);
-    let entry = `${badge} ${s.name} by ${s.artist}`;
+    let entry = `${s.name} by ${s.artist}`;
     if (reviewClean) entry += `: ${reviewClean}`;
     lines.push(entry);
 
