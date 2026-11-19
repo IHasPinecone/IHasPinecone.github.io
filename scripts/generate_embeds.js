@@ -51,15 +51,14 @@ for (const song of songs) {
 
 for (const [weekNum, weekSongs] of Object.entries(weeks)) {
   const weekLabel = getBreviaryWeekLabel(weekNum);
-  const title = `Songs from Space Log — ${weekLabel}`;
+  const title = `Songs from ${weekLabel}`;
 
   const lines = [];
   let coverUrl = '';
 
   for (const s of weekSongs) {
-    const badge = s.score === 1 ? '★' : s.score === 0 ? '✕' : '•';
     const reviewClean = stripHtml(s.review);
-    let entry = `${badge} ${s.name} — ${s.artist}`;
+    let entry = `${badge} ${s.name} by ${s.artist}`;
     if (reviewClean) entry += `: ${reviewClean}`;
     lines.push(entry);
 
@@ -81,7 +80,7 @@ for (const [weekNum, weekSongs] of Object.entries(weeks)) {
   <meta charset="UTF-8">
   <title>${escapeHtml(title)}</title>
   <meta name="theme-color" content="#ffcc00">
-  <meta property="og:site_name" content="Songs from Space Log">
+  <meta property="og:site_name" content="Music from Beyond">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
