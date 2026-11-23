@@ -166,7 +166,7 @@ window.extraTables_November2026 = {
     { text: "FMK: (topic), (topic), (topic)." },
     { text: "Debated the exact definition of (topic) with (person)" },
     { text: "Sketched a proof-of-concept for (topic)." },
-    { text: "Thought about a poetic interpretation of (topic)" },
+    { text: "Thought about a poetic interpretation of (topic)." },
     { text: "Had a difficult conversation with (person)." },
     { text: "Talked with (person) about a lack of standards with (topic)." },
     { text: "Bullied (person) because of their thoughts on (topic)." },
