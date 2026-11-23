@@ -1,6 +1,36 @@
 (() => {
   if (document.querySelector(".site-header")) return;
 
+  function parseRgb(colorStr) {
+    const match = colorStr && colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+    if (!match) return null;
+    const r = Number(match[1]);
+    const g = Number(match[2]);
+    const b = Number(match[3]);
+    const a = match[4] !== undefined ? Number(match[4]) : 1;
+    return { r, g, b, a };
+  }
+
+  function getEffectiveBackgroundColor() {
+    for (const el of [document.body, document.documentElement]) {
+      if (!el) continue;
+      const rgb = parseRgb(getComputedStyle(el).backgroundColor);
+      if (rgb && rgb.a > 0) return rgb;
+    }
+    return { r: 255, g: 255, b: 255, a: 1 };
+  }
+
+  function isLightColor({ r, g, b }) {
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness >= 128;
+  }
+
+  function updateHeaderContrast(header) {
+    if (!header) return;
+    const bg = getEffectiveBackgroundColor();
+    header.style.color = isLightColor(bg) ? "#000000" : "#ffffff";
+  }
+
   function injectLayout() {
     if (document.querySelector(".site-header")) return;
 
@@ -78,6 +108,17 @@
       </nav>
     `;
     document.body.prepend(header);
+
+    updateHeaderContrast(header);
+    window.addEventListener("load", () => updateHeaderContrast(header));
+
+    const themeLink = document.getElementById("theme");
+    if (themeLink) {
+      themeLink.addEventListener("load", () => updateHeaderContrast(header));
+      new MutationObserver(() => {
+        setTimeout(() => updateHeaderContrast(header), 50);
+      }).observe(themeLink, { attributes: true, attributeFilter: ["href"] });
+    }
 
     // Remove legacy back.gif links on existing pages to avoid duplicates
     document.querySelectorAll('a[href$="index.html"] img[src*="back.gif"]').forEach((img) => {
