@@ -56,7 +56,7 @@
       }
 
       .site-footer-gifs img {
-        max-height: 64px;
+        max-height: 200px;
         width: auto;
         border: 0;
       }
