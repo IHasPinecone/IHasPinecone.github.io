@@ -20,15 +20,78 @@
     return { r: 255, g: 255, b: 255, a: 1 };
   }
 
+  function getBackgroundImageUrl() {
+    for (const el of [document.body, document.documentElement]) {
+      if (!el) continue;
+      const bgImg = getComputedStyle(el).backgroundImage;
+      if (bgImg && bgImg !== "none") {
+        const match = bgImg.match(/url\(["']?([^"')]+)["']?\)/);
+        if (match) return match[1];
+      }
+    }
+    return null;
+  }
+
   function isLightColor({ r, g, b }) {
     const brightness = (r * 299 + g * 587 + b * 114) / 1000;
     return brightness >= 128;
   }
 
+  function isAccessibilityMode() {
+    const themeLink = document.getElementById("theme");
+    return Boolean(
+      themeLink && (themeLink.getAttribute("href") || "").includes("readable.css")
+    );
+  }
+
+  function getImageBrightness(url, fallbackBg, callback) {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      try {
+        const canvas = document.createElement("canvas");
+        const w = Math.min(img.naturalWidth || 64, 64);
+        const h = Math.min(img.naturalHeight || 64, 64);
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = `rgb(${fallbackBg.r}, ${fallbackBg.g}, ${fallbackBg.b})`;
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
+        const data = ctx.getImageData(0, 0, w, h).data;
+        let total = 0;
+        const count = data.length / 4;
+        for (let i = 0; i < data.length; i += 4) {
+          total += (data[i] * 299 + data[i + 1] * 587 + data[i + 2] * 114) / 1000;
+        }
+        callback(total / count >= 128);
+      } catch {
+        callback(isLightColor(fallbackBg));
+      }
+    };
+    img.onerror = () => callback(isLightColor(fallbackBg));
+    img.src = url;
+  }
+
   function updateHeaderContrast(header) {
     if (!header) return;
-    const bg = getEffectiveBackgroundColor();
-    header.style.color = isLightColor(bg) ? "#000000" : "#ffffff";
+    if (isAccessibilityMode()) {
+      header.style.color = "#000000";
+      return;
+    }
+
+    const bgColor = getEffectiveBackgroundColor();
+    const bgUrl = getBackgroundImageUrl();
+
+    if (bgUrl) {
+      getImageBrightness(bgUrl, bgColor, (isLight) => {
+        if (!isAccessibilityMode()) {
+          header.style.color = isLight ? "#000000" : "#ffffff";
+        }
+      });
+    } else {
+      header.style.color = isLightColor(bgColor) ? "#000000" : "#ffffff";
+    }
   }
 
   function injectLayout() {
