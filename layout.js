@@ -163,6 +163,8 @@
       <nav aria-label="Site navigation">
         <a href="/index.html">Homepage</a>
         <span aria-hidden="true">·</span>
+        <a href="/m/all-posts.html">All Posts</a>
+        <span aria-hidden="true">·</span>
         <a href="https://www.ultraguest.com/view/pinecone-rodeo">Guestbook</a>
         <span aria-hidden="true">·</span>
         <a href="/updates.html">Updates</a>
